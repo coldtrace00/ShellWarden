@@ -94,6 +94,11 @@ for p in 2222 1080 8888 8766 8388 8389 8390 8391 8392 8393 8394; do
     done
     [ $ok = 1 ] || { echo "port $p is not listening" >&2; exit 1; }
 done
-n=$(pgrep -fc "ss-server -s 127.0.0.1 -p 838" || true)
-[ "$n" = 3 ] || { echo "expected 3 test ss-server processes, found $n" >&2; ps aux | grep ss-server >&2; exit 1; }
+ours=$(ps -eo args= | grep -c '^ss-server .*-k Test-SS-Pass-1' || true)
+other=$(ps -eo args= | grep '^ss-server' | grep -vc 'Test-SS-Pass-1' || true)
+if [ "$ours" != 3 ] || [ "$other" != 0 ]; then
+    echo "ss-server: $ours test processes, $other others (want 3 and 0)" >&2
+    ps -eo pid,args | grep '[s]s-server' >&2
+    exit 1
+fi
 echo "test servers are up (logs in $W)"
