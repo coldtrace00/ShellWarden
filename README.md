@@ -8,6 +8,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 
 **Connections**
 - **Hosts**: cards with colour and avatar, groups, search, quick connect `user@host:port`.
+- **Online dot** on each card (green / red, with the response time): while the host list is open, one short connection per host every 5 minutes, through the host's own proxy. Hosts via Tor, Cloudflare or a jump host, and direct ones while the kill switch is on, are not checked.
 - **Tabs**:
   - drag to reorder;
   - status and host colour;
@@ -21,11 +22,14 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **SFTP panel** (works during the SSH session, over the same connection):
   - navigation; address bar with **Tab** completion;
   - permissions, owner, exact size of the selected file;
-  - upload and download, drag & drop;
+  - **two panes "This computer ⇄ server"**: drag files from one side to the other or use the arrows; Explorer drag & drop still works;
+  - clear buttons: **To server…** and **Save to this PC…**;
+  - **resume**: a broken transfer continues from where it stopped when you start it again (download → `.part` next to the file, upload → `<name>.swpart` on the server, renamed at the end, permissions kept);
   - rename, delete, new folder;
   - transfer queue with cancel;
   - **edit files in place** (up to 5 MB, Ctrl+S, file permissions are kept) with syntax highlighting and line/column display.
 - **Serial (COM)**: baud rate, data bits, parity, flow control.
+- **Command history per host** (Ctrl+Shift+H or the clock button): search the commands you ran on this server, put one into the prompt or run it again. Stored encrypted in the vault; a command typed with a space in front is not remembered (like bash's `ignorespace`).
 - **Snippets**: saved commands and **.sh scripts** (import from file), newest first. Stored encrypted in the vault. A script is sent as one block and run by the interpreter from its `#!` line. Send to the current session or to all of them.
 - **Server monitor** under the terminal: CPU, RAM, disk, uptime, network (one persistent channel, no extra logins).
 
@@ -44,6 +48,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - `.pub` is stored as **one OpenSSH line** (`ssh-ed25519 AAAA… comment`). RFC 4716 is available as a separate export.
 - Private keys are exported in OpenSSH format with permissions for the current user only.
 - **Deploy to servers**: public keys are added to `~/.ssh/authorized_keys` on many servers at once — one key for all or one per server; afterwards the host logs in with the key.
+- **Replace a key on servers** (Keychain → On servers → *Replace an old key*): in two safe steps per server — log in as now and add the new key, then log in with only the new key and remove the old one. Where the new key does not work, the old one stays, so you cannot lock yourself out. Afterwards the hosts log in with the new key.
 - **SSH agent**: Pageant, the Windows "OpenSSH Authentication Agent" service, ssh-agent, KeePassXC, YubiKey. Agent key login and **agent forwarding** (`ssh -A`) are enabled per host.
 
 **Security**
@@ -224,6 +229,7 @@ A wrong password or a single changed byte gives FAILED.
 | Ctrl+Tab, Ctrl+Shift+Tab | switch tabs |
 | Ctrl+Shift+W | close tab |
 | Ctrl+Shift+D | split view |
+| Ctrl+Shift+H | command history of this host |
 | Ctrl+Shift+B | hide / show the sidebar |
 | Ctrl+Shift+T | hosts |
 | Ctrl+Shift+L | lock the vault |

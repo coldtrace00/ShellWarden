@@ -421,6 +421,68 @@ void TerminalEmulator::resize(int rows, int cols)
     emit damaged();
 }
 
+QString TerminalEmulator::cursorLineText() const
+{
+    int start = m_cursor.row;
+    while (start > 0 && isContinuation(start))
+        --start;
+    QString out;
+    for (int r = start; r <= m_cursor.row && r < m_rows; ++r) {
+        for (int c = 0; c < m_cols; ++c) {
+            VTermScreenCell cell;
+            if (!vterm_screen_get_cell(m_screen, VTermPos{r, c}, &cell))
+                continue;
+            if (cell.chars[0] == kWideContinuation)
+                continue;
+            if (cell.chars[0] == 0) {
+                out += QLatin1Char(' ');
+                continue;
+            }
+            for (int i = 0; i < VTERM_MAX_CHARS_PER_CELL && cell.chars[i]; ++i) {
+                const char32_t cp = cell.chars[i];
+                out += QString::fromUcs4(&cp, 1);
+            }
+        }
+    }
+    while (out.endsWith(QLatin1Char(' ')))
+        out.chop(1);
+    return out;
+}
+
+QString TerminalEmulator::lineText(int absLine, bool *full) const
+{
+    QString out;
+    bool last = false;
+    for (int c = 0; c < m_cols; ++c) {
+        VTermScreenCell cell;
+        if (!cellAt(absLine, c, &cell) || cell.chars[0] == kWideContinuation)
+            continue;
+        if (cell.chars[0] == 0) {
+            out += QLatin1Char(' ');
+            last = false;
+            continue;
+        }
+        for (int i = 0; i < VTERM_MAX_CHARS_PER_CELL && cell.chars[i]; ++i) {
+            const char32_t cp = cell.chars[i];
+            out += QString::fromUcs4(&cp, 1);
+        }
+        last = c == m_cols - 1 && cell.chars[0] != ' ';
+    }
+    if (full)
+        *full = last;
+    while (out.endsWith(QLatin1Char(' ')))
+        out.chop(1);
+    return out;
+}
+
+int TerminalEmulator::cursorLineStart() const
+{
+    int start = m_cursor.row;
+    while (start > 0 && isContinuation(start))
+        --start;
+    return scrollbackSize() + start;
+}
+
 bool TerminalEmulator::isContinuation(int row) const
 {
     const VTermLineInfo *li = vterm_state_get_lineinfo(vterm_obtain_state(m_vt), row);

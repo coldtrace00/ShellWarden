@@ -18,6 +18,8 @@
 #include <QPointer>
 #include <QSet>
 #include <QSettings>
+#include <QHash>
+#include <QThreadPool>
 #include <QTimer>
 #include <QTranslator>
 #include <QUrl>
@@ -45,6 +47,8 @@ class AppController : public QObject
     Q_PROPERTY(QObject *updater READ updater CONSTANT)
     Q_PROPERTY(QVariantMap settings READ settings NOTIFY settingsChanged)
     Q_PROPERTY(QVariantMap directIp READ directIp NOTIFY directIpChanged)
+    // host id -> {state: online|offline|skip, ms, note}; see probeHosts()
+    Q_PROPERTY(QVariantMap hostStatus READ hostStatus NOTIFY hostStatusChanged)
     Q_PROPERTY(QVariantList knownHosts READ knownHosts NOTIFY knownHostsChanged)
     Q_PROPERTY(QString knownHostsPath READ knownHostsPath CONSTANT)
     Q_PROPERTY(QString version READ version CONSTANT)
@@ -78,6 +82,7 @@ public:
     QObject *updater() { return &m_updater; }
     QVariantMap settings() const;
     QVariantMap directIp() const { return m_directIp; }
+    QVariantMap hostStatus() const { return m_hostStatus; }
     QVariantList knownHosts() const { return m_knownHosts; }
     QString knownHostsPath() const { return m_knownHostsPath; }
     QString version() const;
@@ -149,6 +154,11 @@ public:
     Q_INVOKABLE QString publicKeyLine(const QString &id) const;
     Q_INVOKABLE QUrl suggestedFile(const QString &fileName) const; // ~/.ssh/<name> when it exists
     Q_INVOKABLE QUrl homeFolder() const;
+    // Files of this computer for the two-pane SFTP view.
+    // listLocal: {path, parent, entries: [{name, isDir, size, mtime, path}], error}
+    Q_INVOKABLE QVariantMap listLocal(const QString &path) const;
+    Q_INVOKABLE QVariantList localPlaces() const;       // [{name, path}]: home, Downloads, Desktop, drives
+    Q_INVOKABLE QUrl localUrl(const QString &path) const { return QUrl::fromLocalFile(path); }
 
     // Proxies
     Q_INVOKABLE QVariantMap proxy(const QString &id) const;
@@ -181,12 +191,20 @@ public:
     Q_INVOKABLE QString runOnHosts(const QVariantList &hostIds, const QString &command, const QString &masterPassword = QString());
     Q_INVOKABLE bool hostIsProtected(const QString &hostId) const;
     // batch runs: keys whose passphrase is not saved ([{keyId, name}]), and the ones typed for this run
-    Q_INVOKABLE QVariantList batchKeyNeeds(const QVariantList &hostIds) const;
+    Q_INVOKABLE QVariantList batchKeyNeeds(const QVariantList &hostIds, const QVariantList &extraKeyIds = {}) const;
     Q_INVOKABLE QString setBatchPassphrases(const QVariantMap &map);   // "" or an error
     Q_INVOKABLE QString hostNotes(const QString &hostId) const;
     Q_INVOKABLE QString setHostNotes(const QString &hostId, const QString &notes);
     // [{hostId, keyId}]: append each public key to the host's authorized_keys (results in App.batch)
     Q_INVOKABLE QString installKeys(const QVariantList &pairs, const QString &masterPassword, bool useForHost);
+    // Replace oldKeyId with newKeyId on the servers, safely in two steps:
+    // 1. log in as now and add the new key; 2. log in with ONLY the new key and,
+    // when that works, remove the old one. A server where the new key does not
+    // work keeps the old key, so nobody is locked out.
+    Q_INVOKABLE QString rotateKey(const QString &oldKeyId, const QString &newKeyId, const QVariantList &hostIds,
+                                  const QString &masterPassword);
+    Q_PROPERTY(QString rotatePhase READ rotatePhase NOTIFY rotateChanged)   // "" | adding | removing | done
+    QString rotatePhase() const { return m_rotatePhase; }
     Q_PROPERTY(QObject *batch READ batchObject CONSTANT)
     QObject *batchObject() { return &m_batch; }
     // Compare a config file between two hosts; both files arrive in App.diffRunner.results
@@ -216,6 +234,13 @@ public:
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void skipUpdate(const QString &version);   // no pop-up for this version
     Q_INVOKABLE void showUpdateDetails();                   // the update window for the last check
+    // "Is it up?" for the host cards: TCP + SSH banner, over the host's own route.
+    Q_INVOKABLE void probeHosts();
+
+    // Command history per host (encrypted in the vault): newest first.
+    Q_INVOKABLE QStringList commandHistory(const QString &hostId) const;
+    Q_INVOKABLE void forgetCommand(const QString &hostId, const QString &command);
+    Q_INVOKABLE void clearCommandHistory(const QString &hostId);
     QString updateRepo() const;
     Q_INVOKABLE QString formatBytes(qint64 bytes) const;
     Q_INVOKABLE void beep() const;
@@ -233,6 +258,8 @@ signals:
     void busyChanged();
     void settingsChanged();
     void directIpChanged();
+    void hostStatusChanged();
+    void rotateChanged();
     void knownHostsChanged();
     void proxyDraftChecked(const QVariantMap &result);
     void notify(const QString &message, bool isError);
@@ -268,6 +295,11 @@ private:
     BatchRunner::Job batchJob(const QString &hostId, bool protectedOk = false) const;
     void onBatchFinished();
     QHash<QString, QString> m_keyAssign;
+    QString m_rotatePhase, m_rotateOld, m_rotateNew, m_rotateNewPass;
+    bool m_rotateUnlocked = false;
+    QHash<QString, QString> m_rotateFailed;   // hostId -> why the new key could not be added
+    void rotateSecondStep();
+    void rotateFinish();
     QHash<QString, QString> m_batchPass;     // keyId -> passphrase for the next batch run only   // hostId -> keyId to set after a key install
     QString effectiveProxyId(const QJsonObject &host) const;
     void runProbe();          // every 3 s: is each used proxy alive?
@@ -303,6 +335,16 @@ private:
     QVariantMap m_directIp;
     QVariantList m_knownHosts;
     QTimer m_probeTimer;
+    QThreadPool m_hostProbePool;
+    QVariantMap m_hostStatus;
+    quint64 m_hostProbeGen = 0;
+    qint64 m_lastHostProbe = 0;
+    void rememberCommand(const QString &hostId, const QString &command);
+    QHash<QString, QStringList> m_history;   // loaded from the vault on unlock
+    bool m_historyDirty = false;
+    QTimer m_historySave;
+    void loadHistory();
+    void flushHistory();
     SystemLockWatcher m_systemLock;
     mutable TorManager m_tor;
     CloudflaredManager m_cf;

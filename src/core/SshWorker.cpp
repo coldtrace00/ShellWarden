@@ -792,10 +792,7 @@ void SshWorker::cleanup()
         if (t.remoteFile)
             sftp_close(t.remoteFile);
         if (t.localFile) {
-            const QString part = t.localFile->fileName();
-            delete t.localFile;
-            if (!t.upload)
-                QFile::remove(part);   // unfinished download
+            delete t.localFile;   // an unfinished download keeps its ".part": the next try resumes
         }
     }
     m_transfers.clear();

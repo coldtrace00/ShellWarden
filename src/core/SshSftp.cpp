@@ -160,6 +160,10 @@ void SshWorker::sftpCancel(int transferId)
             continue;
         if (t.remoteFile)
             sftp_close(t.remoteFile);
+        if (t.upload && t.started && !t.remoteTemp.isEmpty() && m_sftp) {
+            const QByteArray tmp = t.remoteTemp.toUtf8();
+            sftp_unlink(m_sftp, tmp.constData());   // cancelled on purpose: nothing to resume
+        }
         if (t.localFile) {
             const QString name = t.localFile->fileName();
             delete t.localFile;
@@ -188,17 +192,26 @@ void SshWorker::pumpTransfers()
             done.localFile->close();
             delete done.localFile;
         }
-        if (!done.upload && !partName.isEmpty()) {
-            if (state == TransferDone) {
-                QFile::remove(done.local);
-                if (!QFile::rename(partName, done.local)) {
-                    QFile::remove(partName);
-                    state = TransferFailed;
-                    emit sftpProgress(done.id, done.done, done.total, TransferFailed, tr("Cannot write %1").arg(done.local));
+        if (!done.upload && !partName.isEmpty() && state == TransferDone) {
+            QFile::remove(done.local);
+            if (!QFile::rename(partName, done.local)) {
+                QFile::remove(partName);
+                emit sftpProgress(done.id, done.done, done.total, TransferFailed, tr("Cannot write %1").arg(done.local));
+                return;
+            }
+        }
+        // a failed download keeps its ".part" file and a failed upload its "<name>.swpart"
+        // on the server: starting the same transfer again continues from there
+        if (done.upload && state == TransferDone && !done.remoteTemp.isEmpty()) {
+            const QByteArray tmp = done.remoteTemp.toUtf8(), target = done.remote.toUtf8();
+            if (done.remoteMode >= 0)
+                sftp_chmod(m_sftp, tmp.constData(), mode_t(done.remoteMode));
+            if (sftp_rename(m_sftp, tmp.constData(), target.constData()) != SSH_OK) {
+                sftp_unlink(m_sftp, target.constData());   // SFTP v3 does not rename over a file
+                if (sftp_rename(m_sftp, tmp.constData(), target.constData()) != SSH_OK) {
+                    emit sftpProgress(done.id, done.done, done.total, TransferFailed, sftpErrorText());
                     return;
                 }
-            } else {
-                QFile::remove(partName);
             }
         }
         emit sftpProgress(done.id, done.done, done.total, state, err);
@@ -212,8 +225,28 @@ void SshWorker::pumpTransfers()
         if (t.upload) {
             t.localFile = new QFile(t.local);
             if (!t.localFile->open(QIODevice::ReadOnly)) { finish(TransferFailed, t.localFile->errorString()); return; }
-            t.remoteFile = sftp_open(m_sftp, rp.constData(), O_WRONLY | O_CREAT | O_TRUNC, 0644);
+            t.remoteTemp = t.remote + QStringLiteral(".swpart");
+            const QByteArray tp = t.remoteTemp.toUtf8();
+            if (sftp_attributes a = sftp_stat(m_sftp, rp.constData())) {   // keep the old file's permissions
+                t.remoteMode = int(a->permissions & 07777);
+                sftp_attributes_free(a);
+            }
+            // a piece left by an earlier, broken upload of this file: continue after it
+            qint64 offset = 0;
+            if (sftp_attributes a = sftp_stat(m_sftp, tp.constData())) {
+                if (qint64(a->size) > 0 && qint64(a->size) < t.localFile->size())
+                    offset = qint64(a->size);
+                sftp_attributes_free(a);
+            }
+            t.remoteFile = sftp_open(m_sftp, tp.constData(), O_WRONLY | O_CREAT | (offset ? 0 : O_TRUNC), 0644);
             if (!t.remoteFile) { finish(TransferFailed, sftpErrorText()); return; }
+            if (offset > 0 && (sftp_seek64(t.remoteFile, quint64(offset)) != 0 || !t.localFile->seek(offset))) {
+                finish(TransferFailed, sftpErrorText());
+                return;
+            }
+            t.done = offset;
+            if (offset > 0)
+                emit sftpResumed(t.id, offset);
         } else {
             t.remoteFile = sftp_open(m_sftp, rp.constData(), O_RDONLY, 0);
             if (!t.remoteFile) { finish(TransferFailed, sftpErrorText()); return; }
@@ -223,8 +256,20 @@ void SshWorker::pumpTransfers()
             }
             QDir().mkpath(QFileInfo(t.local).absolutePath());
             t.localFile = new QFile(t.local + QStringLiteral(".part"));
-            if (!t.localFile->open(QIODevice::WriteOnly | QIODevice::Truncate)) { finish(TransferFailed, t.localFile->errorString()); return; }
+            // ".part" from an earlier, broken download of this file: continue after it
+            const qint64 have = t.localFile->exists() ? t.localFile->size() : 0;
+            const bool resume = have > 0 && t.total > 0 && have < t.total;
+            if (!t.localFile->open(resume ? QIODevice::Append : (QIODevice::WriteOnly | QIODevice::Truncate))) {
+                finish(TransferFailed, t.localFile->errorString());
+                return;
+            }
+            if (resume) {
+                if (sftp_seek64(t.remoteFile, quint64(have)) != 0) { finish(TransferFailed, sftpErrorText()); return; }
+                t.done = have;
+                emit sftpResumed(t.id, have);
+            }
         }
+        emit sftpProgress(t.id, t.done, t.total, TransferRunning, QString());
     }
 
     char buf[kChunk];

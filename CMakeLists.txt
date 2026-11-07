@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(ShellWarden VERSION 0.3.2 LANGUAGES C CXX)
+project(ShellWarden VERSION 0.3.3 LANGUAGES C CXX)
 
 # ---- branding: change the product name in ONE place --------------------
 set(APP_NAME        "ShellWarden"  CACHE STRING "Product name (window, data folder, installer)")
@@ -123,6 +123,7 @@ qt_add_qml_module(ShellWardenApp
         qml/pages/SettingsPage.qml
         qml/pages/TerminalPage.qml
         qml/pages/SftpPanel.qml
+        qml/pages/LocalFilesPane.qml
         qml/pages/TunnelsPanel.qml
         qml/pages/SnippetsPage.qml
         qml/pages/LogPage.qml

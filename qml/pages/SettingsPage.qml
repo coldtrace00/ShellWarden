@@ -404,6 +404,10 @@ Item {
                     AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.sshfpCheck; onToggled: App.setSetting("sshfpCheck", checked) }
                 }
                 Row_ {
+                    SettingLabel { label: qsTr("Show which hosts are online"); hint: qsTr("While the host list is open, every 5 minutes one short connection to each host (through its own proxy) shows a green or red dot on its card. Hosts via Tor, Cloudflare or a jump host, and direct ones while the kill switch is on, are not checked.") }
+                    AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.hostProbe; onToggled: { App.setSetting("hostProbe", checked); App.probeHosts() } }
+                }
+                Row_ {
                     SettingLabel { label: qsTr("Lock together with the computer"); hint: qsTr("When you lock Windows (Win+L) or the computer goes to sleep, the vault locks too.") }
                     AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.lockOnSystemLock; onToggled: App.setSetting("lockOnSystemLock", checked) }
                 }

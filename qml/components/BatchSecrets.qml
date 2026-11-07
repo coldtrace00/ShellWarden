@@ -10,8 +10,9 @@ import ShellWarden
 ColumnLayout {
     id: root
     property var hostIds: []
+    property var extraKeyIds: []          // keys used besides the hosts' own (the new key of a replacement)
     property bool needMaster: false
-    readonly property var keyNeeds: { App.keys.count; return App.batchKeyNeeds(hostIds) }
+    readonly property var keyNeeds: { App.keys.count; return App.batchKeyNeeds(hostIds, extraKeyIds) }
     readonly property bool needed: needMaster || keyNeeds.length > 0
     property string masterPassword: masterField.text
     signal submit()

@@ -409,6 +409,15 @@ sw_socket_t connectDirect(const QString &host, int port, int timeoutMs, QString 
     return sw_socket_t(s);
 }
 
+int readSome(sw_socket_t s, char *buf, int len, int timeoutMs)
+{
+    const auto deadline = Clock::now() + std::chrono::milliseconds(timeoutMs);
+    if (!waitFor(native_socket(s), false, deadline))
+        return 0;
+    const int n = int(::recv(native_socket(s), buf, len, 0));
+    return n < 0 ? -1 : n;
+}
+
 sw_socket_t open(const ProxyConfig &proxy, const QString &targetHost, int targetPort,
                  int timeoutMs, QString *error)
 {

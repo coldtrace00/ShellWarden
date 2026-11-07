@@ -6,6 +6,10 @@ import ShellWarden
 Item {
     id: root
     property string filter: ""
+    // refresh the online dots when the page is shown (the controller limits how often)
+    onVisibleChanged: if (visible) App.probeHosts()
+    Component.onCompleted: App.probeHosts()
+    Timer { interval: 60000; repeat: true; running: root.visible; onTriggered: App.probeHosts() }
 
     function matches(m) {
         if (root.filter === "") return true
@@ -149,6 +153,21 @@ Item {
                                         color: model.color ? model.color : Theme.avatarColor(model.label)
                                         font.pixelSize: 15
                                         font.weight: Font.Bold
+                                    }
+                                    // online / offline (background check over the host's own route)
+                                    Rectangle {
+                                        readonly property var st: App.hostStatus[model.id]
+                                        visible: !!st && st.state !== "skip"
+                                        width: 13; height: 13; radius: 6.5
+                                        anchors.right: parent.right; anchors.bottom: parent.bottom
+                                        anchors.rightMargin: -3; anchors.bottomMargin: -3
+                                        color: st && st.state === "online" ? Theme.ok : Theme.danger
+                                        border.color: card.color; border.width: 2
+                                        HoverHandler { id: dotHover }
+                                        ToolTip.visible: dotHover.hovered
+                                        ToolTip.text: !st ? "" : st.state === "online"
+                                            ? (st.proxy ? qsTr("Online · %1 ms via proxy") : qsTr("Online · %1 ms")).arg(st.ms)
+                                            : qsTr("Not reachable") + (st.note ? ": " + st.note : "")
                                     }
                                 }
 

@@ -3,6 +3,7 @@
 #include "core/SshWorker.h"
 #include "terminal/TerminalEmulator.h"
 
+#include <QElapsedTimer>
 #include <QObject>
 #include <QUrl>
 #include <QPointer>
@@ -84,6 +85,7 @@ public:
     ~TerminalSession() override;
 
     TerminalEmulator *emulator() { return &m_emu; }
+    static QString commandFromLine(const QString &line);   // "user@h:~$ ls" -> "ls"
 
     QString hostId() const { return m_hostId; }
     // route chosen for this tab only (right-click "Connect via"): "direct", a proxy id, or "" = the host's own
@@ -201,6 +203,7 @@ public:
     QString recordingPath() const { return m_recordPath; }
 
 signals:
+    void commandEntered(const QString &command);   // a shell line the user ran (see write())
     void recordingChanged();
     void reconnectChanged();
     void broadcastChanged();
@@ -296,7 +299,11 @@ private:
         QString error;
         qint64 startedMs = 0;
         double speed = 0;    // bytes/s
+        qint64 base = -1;    // bytes already there when it started (a resumed transfer)
     };
+    void noteCommand(const QString &line);
+    int m_cmdLine = -1;          // line of a command whose Enter is not echoed yet
+    QElapsedTimer m_cmdSince;
     QVector<TransferInfo> m_transfers;
     int m_nextReq = 1;
 

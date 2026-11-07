@@ -4,94 +4,94 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/app/AppController.cpp" line="187" />
+        <location filename="../src/app/AppController.cpp" line="210" />
         <source>Vault locked after inactivity.</source>
         <translation>Хранилище заблокировано из-за бездействия.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="428" />
+        <location filename="../src/app/AppController.cpp" line="454" />
         <source>Passwords do not match.</source>
         <translation>Пароли не совпадают.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="514" />
+        <location filename="../src/app/AppController.cpp" line="542" />
         <source>New passwords do not match.</source>
         <translation>Новые пароли не совпадают.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="743" />
-        <location filename="../src/app/AppController.cpp" line="894" />
-        <location filename="../src/app/AppController.cpp" line="1018" />
-        <location filename="../src/app/AppController.cpp" line="1061" />
-        <location filename="../src/app/AppController.cpp" line="1300" />
-        <location filename="../src/app/AppController.cpp" line="1654" />
-        <location filename="../src/app/AppController.cpp" line="2513" />
-        <location filename="../src/app/AppController.cpp" line="2589" />
-        <location filename="../src/app/AppController.cpp" line="2688" />
+        <location filename="../src/app/AppController.cpp" line="823" />
+        <location filename="../src/app/AppController.cpp" line="974" />
+        <location filename="../src/app/AppController.cpp" line="1098" />
+        <location filename="../src/app/AppController.cpp" line="1141" />
+        <location filename="../src/app/AppController.cpp" line="1380" />
+        <location filename="../src/app/AppController.cpp" line="1734" />
+        <location filename="../src/app/AppController.cpp" line="2769" />
+        <location filename="../src/app/AppController.cpp" line="2845" />
+        <location filename="../src/app/AppController.cpp" line="2944" />
         <source>The vault is locked.</source>
         <translation>Хранилище заблокировано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="764" />
+        <location filename="../src/app/AppController.cpp" line="844" />
         <source>Enter a host name or IP address.</source>
         <translation>Введите имя хоста или IP-адрес.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="769" />
+        <location filename="../src/app/AppController.cpp" line="849" />
         <source>The host name must not contain spaces.</source>
         <translation>Имя хоста не должно содержать пробелов.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="772" />
-        <location filename="../src/app/AppController.cpp" line="1324" />
+        <location filename="../src/app/AppController.cpp" line="852" />
+        <location filename="../src/app/AppController.cpp" line="1404" />
         <source>Port must be between 1 and 65535.</source>
         <translation>Порт должен быть от 1 до 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="553" />
-        <location filename="../src/app/AppController.cpp" line="757" />
-        <location filename="../src/app/AppController.cpp" line="802" />
-        <location filename="../src/app/AppController.cpp" line="1049" />
-        <location filename="../src/app/AppController.cpp" line="1107" />
-        <location filename="../src/app/AppController.cpp" line="1185" />
-        <location filename="../src/app/AppController.cpp" line="1350" />
-        <location filename="../src/app/AppController.cpp" line="1660" />
-        <location filename="../src/app/AppController.cpp" line="2778" />
+        <location filename="../src/app/AppController.cpp" line="581" />
+        <location filename="../src/app/AppController.cpp" line="837" />
+        <location filename="../src/app/AppController.cpp" line="882" />
+        <location filename="../src/app/AppController.cpp" line="1129" />
+        <location filename="../src/app/AppController.cpp" line="1187" />
+        <location filename="../src/app/AppController.cpp" line="1265" />
+        <location filename="../src/app/AppController.cpp" line="1430" />
+        <location filename="../src/app/AppController.cpp" line="1740" />
+        <location filename="../src/app/AppController.cpp" line="3150" />
         <source>Could not save the vault.</source>
         <translation>Не удалось сохранить хранилище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="199" />
+        <location filename="../src/app/AppController.cpp" line="222" />
         <source>Vault locked: the computer went to sleep</source>
         <translation>Хранилище заблокировано: компьютер уснул</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="200" />
+        <location filename="../src/app/AppController.cpp" line="223" />
         <source>Vault locked: the computer was locked</source>
         <translation>Хранилище заблокировано: компьютер заблокирован</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="213" />
+        <location filename="../src/app/AppController.cpp" line="236" />
         <source>%1 %2 started</source>
         <translation>%1 %2 запущен</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="214" />
+        <location filename="../src/app/AppController.cpp" line="237" />
         <source>portable mode · %1</source>
         <translation>портативный режим · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="303" />
+        <location filename="../src/app/AppController.cpp" line="329" />
         <source>My theme</source>
         <translation>Моя тема</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="313" />
+        <location filename="../src/app/AppController.cpp" line="339" />
         <source>Image not found: %1</source>
         <translation>Изображение не найдено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="315" />
+        <location filename="../src/app/AppController.cpp" line="341" />
         <source>The image is too large (max 25 MB).</source>
         <translation>Изображение слишком большое (максимум 25 МБ).</translation>
     </message>
@@ -100,205 +100,265 @@
         <translation>Этот файл не является изображением.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="320" />
+        <location filename="../src/app/AppController.cpp" line="346" />
         <source>Cannot copy the image to %1</source>
         <translation>Не удаётся скопировать изображение в %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="441" />
+        <location filename="../src/app/AppController.cpp" line="467" />
         <source>Vault created</source>
         <translation>Хранилище создано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="456" />
+        <location filename="../src/app/AppController.cpp" line="482" />
         <source>Failed unlock attempt</source>
         <translation>Неудачная попытка разблокировки</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="460" />
+        <location filename="../src/app/AppController.cpp" line="486" />
         <source>Vault unlocked</source>
         <translation>Хранилище разблокировано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="501" />
+        <location filename="../src/app/AppController.cpp" line="529" />
         <source>Vault locked</source>
         <translation>Хранилище заблокировано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="516" />
+        <location filename="../src/app/AppController.cpp" line="544" />
         <source>The master password must be at least 8 characters.</source>
         <translation>Мастер-пароль должен содержать не менее 8 символов.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="519" />
+        <location filename="../src/app/AppController.cpp" line="547" />
         <source>Master password change failed</source>
         <translation>Не удалось сменить мастер-пароль</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="522" />
+        <location filename="../src/app/AppController.cpp" line="550" />
         <source>Master password changed</source>
         <translation>Мастер-пароль изменён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="628" />
+        <location filename="../src/app/AppController.cpp" line="656" />
         <source>Choose a file.</source>
         <translation>Выберите файл.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="631" />
+        <location filename="../src/app/AppController.cpp" line="659" />
         <source>Cannot write %1</source>
         <translation>Не удаётся записать %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="632" />
+        <location filename="../src/app/AppController.cpp" line="660" />
         <source>Vault backup saved</source>
         <translation>Резервная копия хранилища сохранена</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="639" />
+        <location filename="../src/app/AppController.cpp" line="667" />
         <source>Lock the vault first.</source>
         <translation>Сначала заблокируйте хранилище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="646" />
+        <location filename="../src/app/AppController.cpp" line="674" />
         <source>Cannot move the old vault: %1</source>
         <translation>Не удаётся переместить старое хранилище: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="651" />
+        <location filename="../src/app/AppController.cpp" line="679" />
         <source>Started over with a new vault</source>
         <translation>Начато заново с новым хранилищем</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="652" />
+        <location filename="../src/app/AppController.cpp" line="680" />
         <source>Old vault kept as %1</source>
         <translation>Старое хранилище сохранено как %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="674" />
+        <location filename="../src/app/AppController.cpp" line="702" />
         <source>Cannot replace the vault file.</source>
         <translation>Не удаётся заменить файл хранилища.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="682" />
+        <location filename="../src/app/AppController.cpp" line="710" />
         <source>Vault restored from backup</source>
         <translation>Хранилище восстановлено из резервной копии</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="701" />
+        <location filename="../src/app/AppController.cpp" line="729" />
         <source>shorter than 19 characters</source>
         <translation>короче 19 символов</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="702" />
+        <location filename="../src/app/AppController.cpp" line="730" />
         <source>contains a very common password</source>
         <translation>содержит очень распространённый пароль</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="703" />
+        <location filename="../src/app/AppController.cpp" line="731" />
         <source>keyboard or alphabet sequence</source>
         <translation>последовательность клавиш или букв алфавита</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="704" />
+        <location filename="../src/app/AppController.cpp" line="732" />
         <source>too many repeated characters</source>
         <translation>слишком много повторяющихся символов</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="705" />
+        <location filename="../src/app/AppController.cpp" line="733" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>сочетайте заглавные и строчные буквы, цифры и символы</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="707" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Very weak</source>
         <translation>Очень слабый</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="707" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Weak</source>
         <translation>Слабый</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="707" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Fair</source>
         <translation>Средний</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="708" />
+        <location filename="../src/app/AppController.cpp" line="736" />
         <source>Good</source>
         <translation>Хороший</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="708" />
+        <location filename="../src/app/AppController.cpp" line="736" />
         <source>Strong</source>
         <translation>Надёжный</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="749" />
-        <location filename="../src/app/AppController.cpp" line="1901" />
+        <location filename="../src/app/AppController.cpp" line="757" />
+        <source>Folder not found: %1</source>
+        <translation>Папка не найдена: %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="762" />
+        <source>No access to %1</source>
+        <translation>Нет доступа к %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="792" />
+        <source>Home</source>
+        <translation>Домашняя папка</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="793" />
+        <source>Downloads</source>
+        <translation>Загрузки</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="794" />
+        <source>Desktop</source>
+        <translation>Рабочий стол</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="795" />
+        <source>Documents</source>
+        <translation>Документы</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="829" />
+        <location filename="../src/app/AppController.cpp" line="1982" />
         <source>Choose a serial port.</source>
         <translation>Выберите последовательный порт.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="758" />
-        <location filename="../src/app/AppController.cpp" line="808" />
+        <location filename="../src/app/AppController.cpp" line="838" />
+        <location filename="../src/app/AppController.cpp" line="888" />
         <source>Host added</source>
         <translation>Хост добавлен</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="758" />
-        <location filename="../src/app/AppController.cpp" line="808" />
+        <location filename="../src/app/AppController.cpp" line="838" />
+        <location filename="../src/app/AppController.cpp" line="888" />
         <source>Host changed</source>
         <translation>Хост изменён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="767" />
+        <location filename="../src/app/AppController.cpp" line="847" />
         <source>A host cannot be its own jump host.</source>
         <translation>Хост не может быть собственным jump-хостом.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="805" />
+        <location filename="../src/app/AppController.cpp" line="885" />
         <source>Master password on connect enabled for host</source>
         <translation>Мастер-пароль при подключении включён для хоста</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="806" />
+        <location filename="../src/app/AppController.cpp" line="886" />
         <source>Master password on connect disabled for host</source>
         <translation>Мастер-пароль при подключении отключён для хоста</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1784" />
+        <location filename="../src/app/AppController.cpp" line="1865" />
         <source>Connection check passed (master password)</source>
         <translation>Проверка перед подключением пройдена (мастер-пароль)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1798" />
+        <location filename="../src/app/AppController.cpp" line="1879" />
         <source>Connection cancelled: the master password was not entered.</source>
         <translation>Подключение отменено: мастер-пароль не введён.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1822" />
+        <location filename="../src/app/AppController.cpp" line="1903" />
         <source>This proxy no longer exists.</source>
         <translation>Этого прокси больше нет.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1828" />
+        <location filename="../src/app/AppController.cpp" line="1909" />
         <source>direct</source>
         <translation>напрямую</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1829" />
+        <location filename="../src/app/AppController.cpp" line="1910" />
         <source>Route of the host changed: %1</source>
         <translation>Маршрут хоста изменён: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1831" />
+        <location filename="../src/app/AppController.cpp" line="1912" />
         <source>%1 now connects: %2</source>
         <translation>%1 теперь подключается: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2559" />
+        <location filename="../src/app/AppController.cpp" line="2309" />
+        <source>Behind a jump host: checked only when you connect.</source>
+        <translation>Через jump-хост: проверяется только при подключении.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2322" />
+        <source>Kill switch is on: not checked directly.</source>
+        <translation>Kill switch включён: напрямую не проверяется.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2329" />
+        <source>Via Tor: not checked in the background.</source>
+        <translation>Через Tor: в фоне не проверяется.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2330" />
+        <source>Via Cloudflare Tunnel: checked only when you connect.</source>
+        <translation>Через Cloudflare Tunnel: проверяется только при подключении.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2335" />
+        <source>The proxy of this host is not complete.</source>
+        <translation>Прокси этого хоста настроен не полностью.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2360" />
+        <source>The port is open, but no SSH server answered.</source>
+        <translation>Порт открыт, но SSH-сервер не ответил.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2815" />
         <source>Asks for the master password: enter it to include this host.</source>
         <translation>Запрашивает мастер-пароль: введите его, чтобы включить этот хост.</translation>
     </message>
@@ -315,81 +375,81 @@
         <translation>2FA отключена для хоста</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="860" />
+        <location filename="../src/app/AppController.cpp" line="940" />
         <source>Tunnels updated in %n open session(s) — no reconnect needed.</source>
         <translation><numerusform>Туннели обновлены в %n открытой сессии — переподключаться не нужно.</numerusform><numerusform>Туннели обновлены в %n открытых сессиях — переподключаться не нужно.</numerusform><numerusform>Туннели обновлены в %n открытых сессиях — переподключаться не нужно.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="968" />
+        <location filename="../src/app/AppController.cpp" line="1048" />
         <source>Hosts imported</source>
         <translation>Хосты импортированы</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="968" />
+        <location filename="../src/app/AppController.cpp" line="1048" />
         <source>%1 hosts, %2 keys</source>
         <translation>хостов: %1, ключей: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="969" />
+        <location filename="../src/app/AppController.cpp" line="1049" />
         <source>Imported %1 host(s) and %2 key(s).</source>
         <translation>Импортировано хостов: %1, ключей: %2.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="971" />
+        <location filename="../src/app/AppController.cpp" line="1051" />
         <source>Keys with a passphrase were not imported — add them in Keychain → Import: %1</source>
         <translation>Ключи с паролем не импортированы — добавьте их в «Ключи» → «Импорт»: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="977" />
+        <location filename="../src/app/AppController.cpp" line="1057" />
         <source>Host deleted</source>
         <translation>Хост удалён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1003" />
+        <location filename="../src/app/AppController.cpp" line="1083" />
         <source> (copy)</source>
         <translation> (копия)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1020" />
+        <location filename="../src/app/AppController.cpp" line="1100" />
         <source>Passphrases do not match.</source>
         <translation>Пароли ключа не совпадают.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1050" />
+        <location filename="../src/app/AppController.cpp" line="1130" />
         <source>Key generated</source>
         <translation>Ключ создан</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1051" />
+        <location filename="../src/app/AppController.cpp" line="1131" />
         <source> · no passphrase</source>
         <translation> · без пароля</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1070" />
+        <location filename="../src/app/AppController.cpp" line="1150" />
         <source>This key is protected. Enter its passphrase.</source>
         <translation>Ключ защищён. Введите его пароль.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1074" />
-        <location filename="../src/app/AppController.cpp" line="1181" />
+        <location filename="../src/app/AppController.cpp" line="1154" />
+        <location filename="../src/app/AppController.cpp" line="1261" />
         <source>Wrong passphrase.</source>
         <translation>Неверный пароль ключа.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1085" />
+        <location filename="../src/app/AppController.cpp" line="1165" />
         <source>This key is already in the keychain ("%1").</source>
         <translation>Этот ключ уже есть в связке ключей («%1»).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1111" />
+        <location filename="../src/app/AppController.cpp" line="1191" />
         <source>Key imported</source>
         <translation>Ключ импортирован</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1139" />
-        <location filename="../src/app/AppController.cpp" line="1151" />
-        <location filename="../src/app/AppController.cpp" line="1162" />
-        <location filename="../src/app/AppController.cpp" line="1187" />
+        <location filename="../src/app/AppController.cpp" line="1219" />
+        <location filename="../src/app/AppController.cpp" line="1231" />
+        <location filename="../src/app/AppController.cpp" line="1242" />
+        <location filename="../src/app/AppController.cpp" line="1267" />
         <source>Key not found.</source>
         <translation>Ключ не найден.</translation>
     </message>
@@ -398,99 +458,99 @@
         <translation>Этот ключ защищён OpenPGP. Сначала снимите защиту (будет запрос PIN).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1168" />
+        <location filename="../src/app/AppController.cpp" line="1248" />
         <source>Private key exported</source>
         <translation>Приватный ключ экспортирован</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1224" />
+        <location filename="../src/app/AppController.cpp" line="1304" />
         <source>Key deleted</source>
         <translation>Ключ удалён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1322" />
+        <location filename="../src/app/AppController.cpp" line="1402" />
         <source>Enter the proxy address.</source>
         <translation>Введите адрес прокси.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1351" />
+        <location filename="../src/app/AppController.cpp" line="1431" />
         <source>Proxy changed</source>
         <translation>Прокси изменён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1351" />
+        <location filename="../src/app/AppController.cpp" line="1431" />
         <source>Proxy added</source>
         <translation>Прокси добавлен</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1360" />
+        <location filename="../src/app/AppController.cpp" line="1440" />
         <source>Proxy deleted</source>
         <translation>Прокси удалён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1434" />
+        <location filename="../src/app/AppController.cpp" line="1514" />
         <source>cloudflared was not found. Install it (winget install Cloudflare.cloudflared) or choose cloudflared.exe.</source>
         <translation>cloudflared не найден. Установите его (winget install Cloudflare.cloudflared) или выберите cloudflared.exe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1436" />
+        <location filename="../src/app/AppController.cpp" line="1516" />
         <source>%1 does not run.</source>
         <translation>%1 не запускается.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1438" />
+        <location filename="../src/app/AppController.cpp" line="1518" />
         <source>via Cloudflare · %1</source>
         <translation>через Cloudflare · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1480" />
+        <location filename="../src/app/AppController.cpp" line="1560" />
         <source>Enter the proxy address and port.</source>
         <translation>Введите адрес и порт прокси.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1525" />
+        <location filename="../src/app/AppController.cpp" line="1605" />
         <source>Kill switch fired</source>
         <translation>Сработал kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1565" />
-        <location filename="../src/app/AppController.cpp" line="1594" />
+        <location filename="../src/app/AppController.cpp" line="1645" />
+        <location filename="../src/app/AppController.cpp" line="1674" />
         <source>Kill switch: proxy "%1" stopped responding (%2). Session closed.</source>
         <translation>Kill switch: прокси «%1» перестал отвечать (%2). Сессия закрыта.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1566" />
+        <location filename="../src/app/AppController.cpp" line="1646" />
         <source>no answer</source>
         <translation>нет ответа</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1598" />
+        <location filename="../src/app/AppController.cpp" line="1678" />
         <source>Kill switch: proxy "%1" now exits from your real IP. Session closed.</source>
         <translation>Kill switch: прокси «%1» теперь выходит с вашего реального IP. Сессия закрыта.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1618" />
+        <location filename="../src/app/AppController.cpp" line="1698" />
         <source>Firewall lock failed</source>
         <translation>Не удалось включить блокировку брандмауэром</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1625" />
+        <location filename="../src/app/AppController.cpp" line="1705" />
         <source>Firewall lock enabled</source>
         <translation>Блокировка брандмауэром включена</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1638" />
+        <location filename="../src/app/AppController.cpp" line="1718" />
         <source>Firewall lock removed</source>
         <translation>Блокировка брандмауэром снята</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1657" />
-        <location filename="../src/app/AppController.cpp" line="2515" />
+        <location filename="../src/app/AppController.cpp" line="1737" />
+        <location filename="../src/app/AppController.cpp" line="2771" />
         <source>Enter a command.</source>
         <translation>Введите команду.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="1719" />
+        <location filename="../src/app/AppController.cpp" line="1799" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Сниппет отправлен в %n сессию</numerusform><numerusform>Сниппет отправлен в %n сессии</numerusform><numerusform>Сниппет отправлен в %n сессий</numerusform></translation>
     </message>
@@ -503,22 +563,22 @@
         <translation>сервер</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1764" />
-        <location filename="../src/app/AppController.cpp" line="1834" />
-        <location filename="../src/app/AppController.cpp" line="1858" />
-        <location filename="../src/app/AppController.cpp" line="2782" />
+        <location filename="../src/app/AppController.cpp" line="1845" />
+        <location filename="../src/app/AppController.cpp" line="1915" />
+        <location filename="../src/app/AppController.cpp" line="1939" />
+        <location filename="../src/app/AppController.cpp" line="3154" />
         <source>This host no longer exists.</source>
         <translation>Этого хоста больше не существует.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1767" />
+        <location filename="../src/app/AppController.cpp" line="1848" />
         <source>Too many wrong attempts. Try again in %1 s.</source>
         <translation>Слишком много неудачных попыток. Повторите через %1 с.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1772" />
-        <location filename="../src/app/AppController.cpp" line="2521" />
-        <location filename="../src/app/AppController.cpp" line="2693" />
+        <location filename="../src/app/AppController.cpp" line="1853" />
+        <location filename="../src/app/AppController.cpp" line="2777" />
+        <location filename="../src/app/AppController.cpp" line="2949" />
         <source>Wrong master password.</source>
         <translation>Неверный мастер-пароль.</translation>
     </message>
@@ -527,7 +587,7 @@
         <translation>Неверный или просроченный код 2FA.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1780" />
+        <location filename="../src/app/AppController.cpp" line="1861" />
         <source>Connection check failed</source>
         <translation>Проверка перед подключением не пройдена</translation>
     </message>
@@ -540,7 +600,7 @@
         <translation>Подключение отменено: проверка 2FA / мастер-пароля не завершена.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1858" />
+        <location filename="../src/app/AppController.cpp" line="1939" />
         <source>Unlock the vault to reconnect.</source>
         <translation>Разблокируйте хранилище, чтобы переподключиться.</translation>
     </message>
@@ -549,68 +609,68 @@
         <translation>Жду PIN OpenPGP (Kleopatra)…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1876" />
+        <location filename="../src/app/AppController.cpp" line="1957" />
         <source>Use the form user@host or user@host:port</source>
         <translation>Формат: user@host или user@host:port</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1882" />
+        <location filename="../src/app/AppController.cpp" line="1963" />
         <source>Invalid port.</source>
         <translation>Неверный порт.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1988" />
+        <location filename="../src/app/AppController.cpp" line="2069" />
         <source>Serial</source>
         <translation>Serial</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2005" />
+        <location filename="../src/app/AppController.cpp" line="2086" />
         <source>Blocked by kill switch</source>
         <translation>Заблокировано kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2006" />
+        <location filename="../src/app/AppController.cpp" line="2087" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch включён: у этого хоста нет прокси, и прокси по умолчанию не задан. Прямое соединение заблокировано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2015" />
+        <location filename="../src/app/AppController.cpp" line="2096" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>Маршрут Cloudflare Tunnel — для SSH-хостов.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2021" />
+        <location filename="../src/app/AppController.cpp" line="2102" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor запускается — через мгновение нажмите «Переподключиться».</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2025" />
+        <location filename="../src/app/AppController.cpp" line="2106" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · напрямую · без шифрования</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2026" />
+        <location filename="../src/app/AppController.cpp" line="2107" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · без шифрования</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2038" />
+        <location filename="../src/app/AppController.cpp" line="2119" />
         <source>Starting Tor…</source>
         <translation>Запуск Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2045" />
+        <location filename="../src/app/AppController.cpp" line="2126" />
         <source>Tor: %1</source>
         <translation>Tor: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2059" />
+        <location filename="../src/app/AppController.cpp" line="2140" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Запуск cloudflared… (в первый раз браузер может попросить войти в Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2072" />
-        <location filename="../src/app/AppController.cpp" line="2078" />
+        <location filename="../src/app/AppController.cpp" line="2153" />
+        <location filename="../src/app/AppController.cpp" line="2159" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel: %1</translation>
     </message>
@@ -619,124 +679,124 @@
         <translation>SSH-ключ защищён OpenPGP: нажмите «Переподключиться» и введите PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2104" />
+        <location filename="../src/app/AppController.cpp" line="2185" />
         <source> → jump %1</source>
         <translation> → через %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2107" />
+        <location filename="../src/app/AppController.cpp" line="2188" />
         <source>Direct</source>
         <translation>Напрямую</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2108" />
+        <location filename="../src/app/AppController.cpp" line="2189" />
         <source>Connecting…</source>
         <translation>Подключение…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2109" />
-        <location filename="../src/app/AppController.cpp" line="2144" />
+        <location filename="../src/app/AppController.cpp" line="2190" />
+        <location filename="../src/app/AppController.cpp" line="2225" />
         <source>checking…</source>
         <translation>проверка…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2117" />
+        <location filename="../src/app/AppController.cpp" line="2198" />
         <source>unknown</source>
         <translation>неизвестно</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2128" />
+        <location filename="../src/app/AppController.cpp" line="2209" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel: cloudflared не запущен. Нажмите «Переподключиться».</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2135" />
+        <location filename="../src/app/AppController.cpp" line="2216" />
         <source>Connecting through Cloudflare…</source>
         <translation>Подключение через Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2143" />
+        <location filename="../src/app/AppController.cpp" line="2224" />
         <source>Checking proxy…</source>
         <translation>Проверка прокси…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2167" />
+        <location filename="../src/app/AppController.cpp" line="2248" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch: прокси выходит с вашего реального IP (%1). Соединение заблокировано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2171" />
+        <location filename="../src/app/AppController.cpp" line="2252" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch: проверка прокси не пройдена (%1). Соединение заблокировано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2175" />
+        <location filename="../src/app/AppController.cpp" line="2256" />
         <source>proxy check failed: %1</source>
         <translation>проверка прокси не пройдена: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2220" />
+        <location filename="../src/app/AppController.cpp" line="2472" />
         <source>Password saved to the vault.</source>
         <translation>Пароль сохранён в хранилище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2234" />
+        <location filename="../src/app/AppController.cpp" line="2486" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Пароль ключа сохранён в хранилище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2385" />
+        <location filename="../src/app/AppController.cpp" line="2641" />
         <source>Kill switch enabled</source>
         <translation>Kill switch включён</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2385" />
+        <location filename="../src/app/AppController.cpp" line="2641" />
         <source>Kill switch disabled</source>
         <translation>Kill switch выключен</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2392" />
+        <location filename="../src/app/AppController.cpp" line="2648" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch включён: прямая сессия закрыта.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2397" />
+        <location filename="../src/app/AppController.cpp" line="2653" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>Kill switch закрыл прямых сессий: %1.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2500" />
+        <location filename="../src/app/AppController.cpp" line="2756" />
         <source>Tor: new identity</source>
         <translation>Tor: новая личность</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2503" />
+        <location filename="../src/app/AppController.cpp" line="2759" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Новая личность Tor: новые подключения пойдут через другой выход. Открытые сессии сохраняют маршрут до переподключения.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2517" />
-        <location filename="../src/app/AppController.cpp" line="2690" />
+        <location filename="../src/app/AppController.cpp" line="2773" />
+        <location filename="../src/app/AppController.cpp" line="2946" />
         <source>Choose at least one host.</source>
         <translation>Выберите хотя бы один хост.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2523" />
+        <location filename="../src/app/AppController.cpp" line="2779" />
         <source>Protected hosts unlocked with the master password for a batch run</source>
         <translation>Защищённые хосты открыты мастер-паролем для группового запуска</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2536" />
+        <location filename="../src/app/AppController.cpp" line="2792" />
         <source>Command run on %n host(s)</source>
         <translation><numerusform>Команда выполнена на %n сервере</numerusform><numerusform>Команда выполнена на %n серверах</numerusform><numerusform>Команда выполнена на %n серверах</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2555" />
+        <location filename="../src/app/AppController.cpp" line="2811" />
         <source>Serial connection: not supported here.</source>
         <translation>Последовательный порт: здесь не поддерживается.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2557" />
+        <location filename="../src/app/AppController.cpp" line="2813" />
         <source>Telnet host: commands can only be run over SSH.</source>
         <translation>Telnet-хост: команды можно выполнять только через SSH.</translation>
     </message>
@@ -745,22 +805,67 @@
         <translation>Защищён 2FA / мастер-паролем: введите мастер-пароль, чтобы включить его.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2707" />
+        <location filename="../src/app/AppController.cpp" line="2963" />
         <source>Choose a key.</source>
         <translation>Выберите ключ.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2726" />
+        <location filename="../src/app/AppController.cpp" line="2982" />
         <source>Public keys sent to %n server(s)</source>
         <translation><numerusform>Публичные ключи отправлены на %n сервер</numerusform><numerusform>Публичные ключи отправлены на %n сервера</numerusform><numerusform>Публичные ключи отправлены на %n серверов</numerusform></translation>
     </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2991" />
+        <source>Another run is still going.</source>
+        <translation>Ещё идёт предыдущий запуск.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2994" />
+        <source>Choose the old and the new key.</source>
+        <translation>Выберите старый и новый ключ.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2998" />
+        <source>The new key must be a different key.</source>
+        <translation>Новый ключ должен быть другим ключом.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="3000" />
+        <source>Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.</source>
+        <translation>В хранилище только публичная часть нового ключа, поэтому ShellWarden не может им войти. Выберите ключ вместе с приватной частью.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="3006" />
+        <source>Enter the passphrase of the new key: it is needed to check that the new key works.</source>
+        <translation>Введите пароль нового ключа: он нужен, чтобы проверить, что новый ключ работает.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="3021" />
+        <source>Key replacement started</source>
+        <translation>Начата замена ключа</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="3047" />
+        <source>The new key could not be added, nothing changed: %1</source>
+        <translation>Новый ключ не удалось добавить, ничего не изменено: %1</translation>
+    </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2757" />
+        <location filename="../src/app/AppController.cpp" line="3088" />
+        <source>Key replaced on %n server(s)</source>
+        <translation><numerusform>Ключ заменён на %n сервере</numerusform><numerusform>Ключ заменён на %n серверах</numerusform><numerusform>Ключ заменён на %n серверах</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="3089" />
+        <source>%1 of %2 servers</source>
+        <translation>%1 из %2 серверов</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/app/AppController.cpp" line="3129" />
         <source>The key is now used to log in on %n server(s).</source>
         <translation><numerusform>Теперь ключ используется для входа на %n сервер.</numerusform><numerusform>Теперь ключ используется для входа на %n сервера.</numerusform><numerusform>Теперь ключ используется для входа на %n серверов.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2819" />
+        <location filename="../src/app/AppController.cpp" line="3200" />
         <source>Wrong passphrase for the key "%1".</source>
         <translation>Неверный пароль ключа «%1».</translation>
     </message>
@@ -773,47 +878,47 @@
         <translation>Ключ защищён OpenPGP: откройте хост во вкладке.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2561" />
+        <location filename="../src/app/AppController.cpp" line="2817" />
         <source>Kill switch: this host has no proxy.</source>
         <translation>Kill switch: у этого хоста нет прокси.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2576" />
+        <location filename="../src/app/AppController.cpp" line="2832" />
         <source>Cloudflare Tunnel is not started: open this host in a tab once.</source>
         <translation>Cloudflare Tunnel не запущен: один раз откройте этот хост во вкладке.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2591" />
+        <location filename="../src/app/AppController.cpp" line="2847" />
         <source>Enter the file path.</source>
         <translation>Укажите путь к файлу.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2595" />
+        <location filename="../src/app/AppController.cpp" line="2851" />
         <source>Choose two hosts.</source>
         <translation>Выберите два хоста.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2618" />
+        <location filename="../src/app/AppController.cpp" line="2874" />
         <source>Command Prompt (cmd)</source>
         <translation>Командная строка (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2627" />
+        <location filename="../src/app/AppController.cpp" line="2883" />
         <source>Default shell (%1)</source>
         <translation>Оболочка по умолчанию (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2641" />
+        <location filename="../src/app/AppController.cpp" line="2897" />
         <source>No shell found on this computer.</source>
         <translation>На этом компьютере не найдена оболочка.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2653" />
+        <location filename="../src/app/AppController.cpp" line="2909" />
         <source>this computer</source>
         <translation>этот компьютер</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2656" />
+        <location filename="../src/app/AppController.cpp" line="2912" />
         <source>Local terminal opened</source>
         <translation>Открыт локальный терминал</translation>
     </message>
@@ -830,7 +935,7 @@
         <translation>SSH-ключ разблокирован через OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2670" />
+        <location filename="../src/app/AppController.cpp" line="2926" />
         <source>The agent did not answer.</source>
         <translation>Агент не ответил.</translation>
     </message>
@@ -1116,7 +1221,7 @@
         <translation>У некоторых выбранных серверов есть 2FA: введите мастер-пароль один раз.</translation>
     </message>
     <message>
-        <location filename="../qml/components/BatchSecrets.qml" line="40" />
+        <location filename="../qml/components/BatchSecrets.qml" line="41" />
         <source>Needed once for this run (not saved):</source>
         <translation>Нужно один раз для этого запуска (не сохраняется):</translation>
     </message>
@@ -1125,22 +1230,22 @@
         <translation>Мастер-пароль (у некоторых серверов есть 2FA)</translation>
     </message>
     <message>
-        <location filename="../qml/components/BatchSecrets.qml" line="24" />
+        <location filename="../qml/components/BatchSecrets.qml" line="25" />
         <source>Some chosen servers ask for the master password: enter it once.</source>
         <translation>Некоторые выбранные серверы запрашивают мастер-пароль: введите его один раз.</translation>
     </message>
     <message>
-        <location filename="../qml/components/BatchSecrets.qml" line="47" />
+        <location filename="../qml/components/BatchSecrets.qml" line="48" />
         <source>Master password (some servers ask for it)</source>
         <translation>Мастер-пароль (некоторые серверы его запрашивают)</translation>
     </message>
     <message>
-        <location filename="../qml/components/BatchSecrets.qml" line="56" />
+        <location filename="../qml/components/BatchSecrets.qml" line="57" />
         <source>Passphrase of the key "%1"</source>
         <translation>Пароль ключа «%1»</translation>
     </message>
     <message>
-        <location filename="../qml/components/BatchSecrets.qml" line="57" />
+        <location filename="../qml/components/BatchSecrets.qml" line="58" />
         <source>leave empty to skip servers that use this key</source>
         <translation>оставьте пустым, чтобы пропустить серверы с этим ключом</translation>
     </message>
@@ -1871,62 +1976,77 @@
 <context>
     <name>HostsPage</name>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="30" />
+        <location filename="../qml/pages/HostsPage.qml" line="34" />
         <source>Hosts</source>
         <translation>Хосты</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="31" />
+        <location filename="../qml/pages/HostsPage.qml" line="35" />
         <source>Click a host to connect</source>
         <translation>Нажмите на хост, чтобы подключиться</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="40" />
+        <location filename="../qml/pages/HostsPage.qml" line="44" />
         <source>Search hosts</source>
         <translation>Поиск хостов</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="59" />
+        <location filename="../qml/pages/HostsPage.qml" line="63" />
         <source>Run on hosts</source>
         <translation>Выполнить на серверах</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="62" />
+        <location filename="../qml/pages/HostsPage.qml" line="66" />
         <source>Run a command on several hosts at once</source>
         <translation>Выполнить команду на нескольких серверах сразу</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="69" />
+        <location filename="../qml/pages/HostsPage.qml" line="73" />
         <source>Compare a config file on two servers</source>
         <translation>Сравнить файл конфигурации на двух серверах</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="72" />
+        <location filename="../qml/pages/HostsPage.qml" line="76" />
         <source>Import</source>
         <translation>Импорт</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="75" />
+        <location filename="../qml/pages/HostsPage.qml" line="79" />
         <source>Import hosts from ~/.ssh/config or PuTTY</source>
         <translation>Импортировать хосты из ~/.ssh/config или PuTTY</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="79" />
+        <location filename="../qml/pages/HostsPage.qml" line="83" />
         <source>Serial</source>
         <translation>Serial</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="82" />
+        <location filename="../qml/pages/HostsPage.qml" line="86" />
         <source>New serial (COM) connection</source>
         <translation>Новое последовательное (COM) подключение</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="85" />
+        <location filename="../qml/pages/HostsPage.qml" line="89" />
         <source>New host</source>
         <translation>Новый хост</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="185" />
+        <location filename="../qml/pages/HostsPage.qml" line="169" />
+        <source>Online · %1 ms via proxy</source>
+        <translation>Онлайн · %1 мс через прокси</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="169" />
+        <source>Online · %1 ms</source>
+        <translation>Онлайн · %1 мс</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="170" />
+        <source>Not reachable</source>
+        <translation>Недоступен</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="204" />
         <source>The master password is asked before connecting</source>
         <translation>Перед подключением запрашивается мастер-пароль</translation>
     </message>
@@ -1935,77 +2055,77 @@
         <translation>Перед подключением спрашивается код 2FA</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="207" />
-        <location filename="../qml/pages/HostsPage.qml" line="302" />
+        <location filename="../qml/pages/HostsPage.qml" line="226" />
+        <location filename="../qml/pages/HostsPage.qml" line="321" />
         <source>Edit</source>
         <translation>Изменить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="226" />
+        <location filename="../qml/pages/HostsPage.qml" line="245" />
         <source>No hosts yet</source>
         <translation>Хостов пока нет</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="229" />
+        <location filename="../qml/pages/HostsPage.qml" line="248" />
         <source>Add a server or use quick connect at the top.</source>
         <translation>Добавьте сервер или воспользуйтесь быстрым подключением вверху.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="235" />
+        <location filename="../qml/pages/HostsPage.qml" line="254" />
         <source>Import from ~/.ssh/config or PuTTY</source>
         <translation>Импорт из ~/.ssh/config или PuTTY</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="236" />
+        <location filename="../qml/pages/HostsPage.qml" line="255" />
         <source>Add your first host</source>
         <translation>Добавить первый хост</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="249" />
-        <location filename="../qml/pages/HostsPage.qml" line="254" />
-        <location filename="../qml/pages/HostsPage.qml" line="263" />
-        <location filename="../qml/pages/HostsPage.qml" line="285" />
+        <location filename="../qml/pages/HostsPage.qml" line="268" />
+        <location filename="../qml/pages/HostsPage.qml" line="273" />
+        <location filename="../qml/pages/HostsPage.qml" line="282" />
+        <location filename="../qml/pages/HostsPage.qml" line="304" />
         <source>Direct</source>
         <translation>Напрямую</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="256" />
+        <location filename="../qml/pages/HostsPage.qml" line="275" />
         <source>Connect</source>
         <translation>Подключиться</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="260" />
+        <location filename="../qml/pages/HostsPage.qml" line="279" />
         <source>Connect via</source>
         <translation>Подключиться через</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="263" />
-        <location filename="../qml/pages/HostsPage.qml" line="270" />
+        <location filename="../qml/pages/HostsPage.qml" line="282" />
+        <location filename="../qml/pages/HostsPage.qml" line="289" />
         <source>saved</source>
         <translation>сохранено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="282" />
+        <location filename="../qml/pages/HostsPage.qml" line="301" />
         <source>Route: %1</source>
         <translation>Маршрут: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="303" />
+        <location filename="../qml/pages/HostsPage.qml" line="322" />
         <source>Duplicate</source>
         <translation>Дублировать</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="304" />
+        <location filename="../qml/pages/HostsPage.qml" line="323" />
         <source>Run a command…</source>
         <translation>Выполнить команду…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="305" />
+        <location filename="../qml/pages/HostsPage.qml" line="324" />
         <source>Compare a file with another server…</source>
         <translation>Сравнить файл с другим сервером…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="307" />
+        <location filename="../qml/pages/HostsPage.qml" line="326" />
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
@@ -2071,107 +2191,168 @@
 <context>
     <name>KeyDeployDialog</name>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="58" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="57" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="78" />
         <source>Tick at least one server.</source>
         <translation>Отметьте хотя бы один сервер.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="85" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="58" />
+        <source>The new key must be a different key.</source>
+        <translation>Новый ключ должен быть другим ключом.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="105" />
         <source>Install keys on servers</source>
         <translation>Установить ключи на серверы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="90" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="105" />
+        <source>Replace a key on servers</source>
+        <translation>Замена ключа на серверах</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="111" />
+        <source>Two safe steps on each server: 1) log in as now and add the new key; 2) log in with only the new key and, if that works, remove the old one. Where the new key does not work, the old key stays — you cannot lock yourself out. Then the hosts log in with the new key.</source>
+        <translation>Два безопасных шага на каждом сервере: 1) вход как сейчас и добавление нового ключа; 2) вход только новым ключом и, если он сработал, удаление старого. Где новый ключ не работает, старый остаётся — заблокировать себя невозможно. После этого хосты входят новым ключом.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="112" />
         <source>The public key is added to ~/.ssh/authorized_keys on each server — no copying by hand. To get in this one time, each server uses what it already has (password or another key).</source>
         <translation>Публичный ключ добавляется в ~/.ssh/authorized_keys на каждом сервере — без ручного копирования. Чтобы войти в этот раз, используется то, что уже есть (пароль или другой ключ).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="106" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="128" />
         <source>Keys:</source>
         <translation>Ключи:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="107" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="129" />
         <source>One key for all servers</source>
         <translation>Один ключ для всех серверов</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="108" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="130" />
         <source>A different key per server</source>
         <translation>Свой ключ для каждого сервера</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="120" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="131" />
+        <source>Replace an old key</source>
+        <translation>Заменить старый ключ</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="153" />
+        <source>Old key:</source>
+        <translation>Старый ключ:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="161" />
+        <source>New key:</source>
+        <translation>Новый ключ:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="173" />
+        <source>You need two keys: create the new key first (Keychain → Generate).</source>
+        <translation>Нужны два ключа: сначала создайте новый (Ключи → Создать ключ).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="178" />
         <source>The keychain is empty: create or import a key first.</source>
         <translation>Связка ключей пуста: сначала создайте или импортируйте ключ.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="126" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="184" />
         <source>Servers (%1 chosen)</source>
         <translation>Серверы (выбрано %1)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="127" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="185" />
         <source>All</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="128" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="186" />
         <source>None</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="186" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="245" />
         <source>After it works, log in to these servers with the key (instead of the password)</source>
         <translation>После успеха входить на эти серверы ключом (вместо пароля)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="199" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="259" />
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="201" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="261" />
         <source>Install on %n server(s)</source>
         <translation><numerusform>Установить на %n сервер</numerusform><numerusform>Установить на %n сервера</numerusform><numerusform>Установить на %n серверов</numerusform></translation>
     </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="261" />
+        <source>Replace on %n server(s)</source>
+        <translation><numerusform>Заменить на %n сервере</numerusform><numerusform>Заменить на %n серверах</numerusform><numerusform>Заменить на %n серверах</numerusform></translation>
+    </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="217" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="278" />
+        <source>Step 1 of 2: adding the new key… %1 of %2</source>
+        <translation>Шаг 1 из 2: добавляем новый ключ… %1 из %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="279" />
+        <source>Step 2 of 2: logging in with the new key, removing the old one… %1 of %2</source>
+        <translation>Шаг 2 из 2: входим новым ключом, удаляем старый… %1 из %2</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="280" />
         <source>Installing… %1 of %2 done</source>
         <translation>Установка… готово %1 из %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="217" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="280" />
         <source>Finished</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="263" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="326" />
         <source>The key was already there</source>
         <translation>Ключ уже был</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="264" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="327" />
+        <source>The new key works, the old key was removed</source>
+        <translation>Новый ключ работает, старый удалён</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="328" />
+        <source>The new key works (the old key was not on this server)</source>
+        <translation>Новый ключ работает (старого на этом сервере не было)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="329" />
         <source>Key added</source>
         <translation>Ключ добавлен</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="265" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="330" />
         <source>waiting…</source>
         <translation>в очереди…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="265" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="330" />
         <source>running…</source>
         <translation>выполняется…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="274" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="339" />
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="276" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="342" />
         <source>Done</source>
         <translation>Готово</translation>
     </message>
@@ -2705,6 +2886,39 @@
         <location filename="../qml/pages/KnownHostsPage.qml" line="78" />
         <source>Keys are added here after you confirm a server's fingerprint.</source>
         <translation>Ключи появляются здесь после подтверждения отпечатка сервера.</translation>
+    </message>
+</context>
+<context>
+    <name>LocalFilesPane</name>
+    <message>
+        <location filename="../qml/pages/LocalFilesPane.qml" line="59" />
+        <source>This computer</source>
+        <translation>Этот ПК</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/LocalFilesPane.qml" line="65" />
+        <source>Places</source>
+        <translation>Места</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/LocalFilesPane.qml" line="74" />
+        <source>Up one folder</source>
+        <translation>На уровень выше</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/LocalFilesPane.qml" line="128" />
+        <source>%n files</source>
+        <translation><numerusform>%n файл</numerusform><numerusform>%n файла</numerusform><numerusform>%n файлов</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/LocalFilesPane.qml" line="151" />
+        <source>Empty folder</source>
+        <translation>Пустая папка</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/LocalFilesPane.qml" line="176" />
+        <source>Drop to save to this PC in %1</source>
+        <translation>Отпустите, чтобы сохранить на этот ПК в %1</translation>
     </message>
 </context>
 <context>
@@ -4070,7 +4284,7 @@
         <translation>Не удаётся создать локальный сокет.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="428" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="437" />
         <source>Proxy handshake timed out.</source>
         <translation>Время ожидания рукопожатия с прокси истекло.</translation>
     </message>
@@ -4629,7 +4843,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="349" />
-        <location filename="../qml/pages/SettingsPage.qml" line="617" />
+        <location filename="../qml/pages/SettingsPage.qml" line="621" />
         <source>Restore</source>
         <translation>Восстановить</translation>
     </message>
@@ -4670,111 +4884,121 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="407" />
+        <source>Show which hosts are online</source>
+        <translation>Показывать, какие хосты онлайн</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="407" />
+        <source>While the host list is open, every 5 minutes one short connection to each host (through its own proxy) shows a green or red dot on its card. Hosts via Tor, Cloudflare or a jump host, and direct ones while the kill switch is on, are not checked.</source>
+        <translation>Пока открыт список хостов, раз в 5 минут одно короткое соединение с каждым хостом (через его же прокси) показывает зелёную или красную точку на карточке. Хосты через Tor, Cloudflare или jump-хост, а также прямые при включённом kill switch не проверяются.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="411" />
         <source>Lock together with the computer</source>
         <translation>Блокировать вместе с компьютером</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="407" />
+        <location filename="../qml/pages/SettingsPage.qml" line="411" />
         <source>When you lock Windows (Win+L) or the computer goes to sleep, the vault locks too.</source>
         <translation>Когда вы блокируете Windows (Win+L) или компьютер засыпает, хранилище тоже блокируется.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="414" />
+        <location filename="../qml/pages/SettingsPage.qml" line="418" />
         <source>Current master password</source>
         <translation>Текущий мастер-пароль</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="420" />
+        <location filename="../qml/pages/SettingsPage.qml" line="424" />
         <source>New master password</source>
         <translation>Новый мастер-пароль</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="421" />
+        <location filename="../qml/pages/SettingsPage.qml" line="425" />
         <source>19+ characters, or press Generate</source>
         <translation>19+ символов или нажмите «Сгенерировать»</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="508" />
+        <location filename="../qml/pages/SettingsPage.qml" line="512" />
         <source>What's new</source>
         <translation>Что нового</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="520" />
+        <location filename="../qml/pages/SettingsPage.qml" line="524" />
         <source>Keyboard shortcuts</source>
         <translation>Горячие клавиши</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="527" />
+        <location filename="../qml/pages/SettingsPage.qml" line="531" />
         <source>They use Ctrl+Shift, so plain Ctrl+C, Ctrl+K and the like still go to the server.</source>
         <translation>Они используют Ctrl+Shift, поэтому обычные Ctrl+C, Ctrl+K и т. п. по-прежнему уходят на сервер.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="537" />
+        <location filename="../qml/pages/SettingsPage.qml" line="541" />
         <source>Quick search: hosts, tabs, snippets, pages</source>
         <translation>Быстрый поиск: хосты, вкладки, сниппеты, страницы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="538" />
+        <location filename="../qml/pages/SettingsPage.qml" line="542" />
         <source>Find text in the terminal</source>
         <translation>Найти текст в терминале</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="539" />
+        <location filename="../qml/pages/SettingsPage.qml" line="543" />
         <source>Next tab</source>
         <translation>Следующая вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="540" />
+        <location filename="../qml/pages/SettingsPage.qml" line="544" />
         <source>Previous tab</source>
         <translation>Предыдущая вкладка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="541" />
+        <location filename="../qml/pages/SettingsPage.qml" line="545" />
         <source>Close the tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="542" />
+        <location filename="../qml/pages/SettingsPage.qml" line="546" />
         <source>Back to the vault (hosts)</source>
         <translation>Назад к хранилищу (хосты)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="543" />
+        <location filename="../qml/pages/SettingsPage.qml" line="547" />
         <source>Split view</source>
         <translation>Разделённый экран</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="544" />
+        <location filename="../qml/pages/SettingsPage.qml" line="548" />
         <source>Collapse / expand the side menu</source>
         <translation>Свернуть / развернуть боковое меню</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="545" />
+        <location filename="../qml/pages/SettingsPage.qml" line="549" />
         <source>Copy</source>
         <translation>Копировать</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="546" />
+        <location filename="../qml/pages/SettingsPage.qml" line="550" />
         <source>Paste</source>
         <translation>Вставить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="547" />
+        <location filename="../qml/pages/SettingsPage.qml" line="551" />
         <source>Scroll up</source>
         <translation>Прокрутить вверх</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="548" />
+        <location filename="../qml/pages/SettingsPage.qml" line="552" />
         <source>Scroll down</source>
         <translation>Прокрутить вниз</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="549" />
+        <location filename="../qml/pages/SettingsPage.qml" line="553" />
         <source>Lock the vault</source>
         <translation>Заблокировать хранилище</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="592" />
+        <location filename="../qml/pages/SettingsPage.qml" line="596" />
         <source>Open-source SSH client · MIT licence</source>
         <translation>SSH-клиент с открытым кодом · лицензия MIT</translation>
     </message>
@@ -4783,27 +5007,27 @@
         <translation>Горячие клавиши: Ctrl+Shift+T хранилище, Ctrl+Tab следующая вкладка, Ctrl+Shift+W закрыть вкладку, Ctrl+Shift+D разделённый экран, Ctrl+Shift+B боковое меню, Ctrl+Shift+C / Ctrl+Shift+V копировать / вставить, Shift+PgUp/PgDn прокрутка, Ctrl+Shift+L заблокировать хранилище.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="605" />
+        <location filename="../qml/pages/SettingsPage.qml" line="609" />
         <source>Restore vault from backup</source>
         <translation>Восстановить хранилище из копии</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="606" />
+        <location filename="../qml/pages/SettingsPage.qml" line="610" />
         <source>The current vault is kept in the backups folder first. Enter the master password of the backup.</source>
         <translation>Текущее хранилище сначала будет сохранено в папке копий. Введите мастер-пароль копии.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="609" />
+        <location filename="../qml/pages/SettingsPage.qml" line="613" />
         <source>Master password of the backup</source>
         <translation>Мастер-пароль копии</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="614" />
+        <location filename="../qml/pages/SettingsPage.qml" line="618" />
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="622" />
+        <location filename="../qml/pages/SettingsPage.qml" line="626" />
         <source>Vault restored.</source>
         <translation>Хранилище восстановлено.</translation>
     </message>
@@ -4820,7 +5044,7 @@
         <translation>0 = никогда. Открытые сессии работают и при заблокированном хранилище.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="413" />
+        <location filename="../qml/pages/SettingsPage.qml" line="417" />
         <source>Change master password</source>
         <translation>Сменить мастер-пароль</translation>
     </message>
@@ -4837,102 +5061,102 @@
         <translation>Повторите новый</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="427" />
+        <location filename="../qml/pages/SettingsPage.qml" line="431" />
         <source>Change password</source>
         <translation>Сменить пароль</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="432" />
+        <location filename="../qml/pages/SettingsPage.qml" line="436" />
         <source>Master password changed.</source>
         <translation>Мастер-пароль изменён.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="441" />
+        <location filename="../qml/pages/SettingsPage.qml" line="445" />
         <source>Activity log</source>
         <translation>Журнал событий</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="444" />
+        <location filename="../qml/pages/SettingsPage.qml" line="448" />
         <source>Keep an activity log</source>
         <translation>Вести журнал событий</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="444" />
+        <location filename="../qml/pages/SettingsPage.qml" line="448" />
         <source>Connections, routes, IP seen by servers, vault and key changes, kill switch events. Never passwords or keys. 12 months are kept.</source>
         <translation>Подключения, маршруты, IP, который видят серверы, изменения хранилища и ключей, события kill switch. Никогда пароли и ключи. Хранится 12 месяцев.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="451" />
+        <location filename="../qml/pages/SettingsPage.qml" line="455" />
         <source>Updates</source>
         <translation>Обновления</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="455" />
+        <location filename="../qml/pages/SettingsPage.qml" line="459" />
         <source>GitHub repository</source>
         <translation>Репозиторий GitHub</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="455" />
+        <location filename="../qml/pages/SettingsPage.qml" line="459" />
         <source>owner/name of the project. Releases must contain SHA256SUMS — downloads are verified before installing.</source>
         <translation>владелец/имя проекта. Релизы должны содержать SHA256SUMS — загрузки проверяются перед установкой.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="468" />
+        <location filename="../qml/pages/SettingsPage.qml" line="472" />
         <source>Check for updates on start</source>
         <translation>Проверять обновления при запуске</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="493" />
+        <location filename="../qml/pages/SettingsPage.qml" line="497" />
         <source>Checking…</source>
         <translation>Проверка…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="494" />
+        <location filename="../qml/pages/SettingsPage.qml" line="498" />
         <source>You have the latest version (%1).</source>
         <translation>У вас последняя версия (%1).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="495" />
+        <location filename="../qml/pages/SettingsPage.qml" line="499" />
         <source>Version %1 is available (you have %2).</source>
         <translation>Доступна версия %1 (у вас %2).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="496" />
+        <location filename="../qml/pages/SettingsPage.qml" line="500" />
         <source>Downloading… %1%</source>
         <translation>Загрузка… %1%</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="497" />
+        <location filename="../qml/pages/SettingsPage.qml" line="501" />
         <source>Downloaded and verified (SHA-256 matches).</source>
         <translation>Загружено и проверено (SHA-256 совпадает).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="499" />
+        <location filename="../qml/pages/SettingsPage.qml" line="503" />
         <source>Current version: %1</source>
         <translation>Текущая версия: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="503" />
+        <location filename="../qml/pages/SettingsPage.qml" line="507" />
         <source>Check now</source>
         <translation>Проверить сейчас</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="504" />
+        <location filename="../qml/pages/SettingsPage.qml" line="508" />
         <source>Download</source>
         <translation>Скачать</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="505" />
+        <location filename="../qml/pages/SettingsPage.qml" line="509" />
         <source>Install</source>
         <translation>Установить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="511" />
+        <location filename="../qml/pages/SettingsPage.qml" line="515" />
         <source>Release page</source>
         <translation>Страница релиза</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="584" />
+        <location filename="../qml/pages/SettingsPage.qml" line="588" />
         <source>About</source>
         <translation>О программе</translation>
     </message>
@@ -4950,155 +5174,224 @@ libssh · libvterm · libsodium · Qt
 <context>
     <name>SftpPanel</name>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="115" />
         <source>Upload files</source>
         <translation>Загрузить файлы на сервер</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="125" />
         <source>Download to…</source>
         <translation>Скачать в…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="142" />
         <source>Files</source>
         <translation>Файлы</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="143" />
         <source>Upload</source>
         <translation>Загрузить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="145" />
-        <location filename="../qml/pages/SftpPanel.qml" line="444" />
+        <location filename="../qml/pages/SftpPanel.qml" line="190" />
+        <location filename="../qml/pages/SftpPanel.qml" line="566" />
         <source>New folder</source>
         <translation>Новая папка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="175" />
+        <location filename="../qml/pages/SftpPanel.qml" line="279" />
         <source>Type a path; Tab completes folder and file names, Enter opens.</source>
         <translation>Введите путь; Tab дополняет имена папок и файлов, Enter открывает.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="287" />
+        <location filename="../qml/pages/SftpPanel.qml" line="401" />
         <source>Empty folder</source>
         <translation>Пустая папка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="313" />
         <source>Drop to upload to %1</source>
         <translation>Отпустите, чтобы загрузить в %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="342" />
+        <location filename="../qml/pages/SftpPanel.qml" line="147" />
+        <source>Send to the server — choose files</source>
+        <translation>Отправить на сервер — выберите файлы</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="157" />
+        <source>Save to this PC — choose a folder</source>
+        <translation>Сохранить на этот ПК — выберите папку</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="174" />
+        <source>This computer ⇄ server</source>
+        <translation>Этот ПК ⇄ сервер</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="174" />
+        <source>Files on the server</source>
+        <translation>Файлы на сервере</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="178" />
+        <source>PC ⇄ server</source>
+        <translation>ПК ⇄ сервер</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="181" />
+        <source>Back to the server files only</source>
+        <translation>Назад: только файлы сервера</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="181" />
+        <source>Show this computer's files next to the server's: drag files between them or use the arrows</source>
+        <translation>Показать файлы этого ПК рядом с файлами сервера: перетаскивайте между ними или используйте стрелки</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="185" />
+        <source>To server…</source>
+        <translation>На сервер…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="187" />
+        <source>Choose files on this computer and send them to the server, into %1</source>
+        <translation>Выбрать файлы на этом ПК и отправить на сервер, в %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="226" />
+        <source>Send the files selected on the left to the server (into %1)</source>
+        <translation>Отправить файлы, выбранные слева, на сервер (в %1)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="235" />
+        <source>Save the file selected on the right to this PC (into %1)</source>
+        <translation>Сохранить файл, выбранный справа, на этот ПК (в %1)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="251" />
+        <source>Server</source>
+        <translation>Сервер</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="432" />
+        <source>Drop to send to the server, into %1</source>
+        <translation>Отпустите, чтобы отправить на сервер в %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="461" />
         <source>Folder</source>
         <translation>Папка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="342" />
+        <location filename="../qml/pages/SftpPanel.qml" line="461" />
         <source>%1 (%2 bytes)</source>
         <translation>%1 (%2 байт)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="344" />
+        <location filename="../qml/pages/SftpPanel.qml" line="463" />
         <source>owner %1</source>
         <translation>владелец %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="346" />
+        <location filename="../qml/pages/SftpPanel.qml" line="465" />
         <source>symbolic link</source>
         <translation>символическая ссылка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="369" />
+        <location filename="../qml/pages/SftpPanel.qml" line="491" />
         <source>Transfers</source>
         <translation>Передачи</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="370" />
+        <location filename="../qml/pages/SftpPanel.qml" line="492" />
         <source>Clear finished</source>
         <translation>Убрать завершённые</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="385" />
+        <location filename="../qml/pages/SftpPanel.qml" line="507" />
         <source>done</source>
         <translation>готово</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="385" />
+        <location filename="../qml/pages/SftpPanel.qml" line="507" />
         <source>cancelled</source>
         <translation>отменено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="385" />
+        <location filename="../qml/pages/SftpPanel.qml" line="507" />
         <source>failed</source>
         <translation>ошибка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="424" />
+        <location filename="../qml/pages/SftpPanel.qml" line="546" />
         <source>Edit here</source>
         <translation>Редактировать здесь</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="428" />
+        <location filename="../qml/pages/SftpPanel.qml" line="550" />
         <source>Open</source>
         <translation>Открыть</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="428" />
+        <location filename="../qml/pages/SftpPanel.qml" line="550" />
+        <source>Save to this PC</source>
+        <translation>Сохранить на этот ПК</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="550" />
+        <source>Save to this PC…</source>
+        <translation>Сохранить на этот ПК…</translation>
+    </message>
+    <message>
         <source>Download…</source>
         <translation>Скачать…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="435" />
+        <location filename="../qml/pages/SftpPanel.qml" line="557" />
         <source>Copy path</source>
         <translation>Копировать путь</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="436" />
+        <location filename="../qml/pages/SftpPanel.qml" line="558" />
         <source>Rename…</source>
         <translation>Переименовать…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="438" />
-        <location filename="../qml/pages/SftpPanel.qml" line="473" />
+        <location filename="../qml/pages/SftpPanel.qml" line="560" />
+        <location filename="../qml/pages/SftpPanel.qml" line="595" />
         <source>Delete</source>
         <translation>Удалить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="444" />
+        <location filename="../qml/pages/SftpPanel.qml" line="566" />
         <source>Rename</source>
         <translation>Переименовать</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="446" />
+        <location filename="../qml/pages/SftpPanel.qml" line="568" />
         <source>Name</source>
         <translation>Название</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="450" />
-        <location filename="../qml/pages/SftpPanel.qml" line="471" />
+        <location filename="../qml/pages/SftpPanel.qml" line="572" />
+        <location filename="../qml/pages/SftpPanel.qml" line="593" />
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="453" />
+        <location filename="../qml/pages/SftpPanel.qml" line="575" />
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="466" />
+        <location filename="../qml/pages/SftpPanel.qml" line="588" />
         <source>Delete "%1" on the server?</source>
         <translation>Удалить «%1» на сервере?</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="467" />
+        <location filename="../qml/pages/SftpPanel.qml" line="589" />
         <source>Only empty folders can be deleted.</source>
         <translation>Удалять можно только пустые папки.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="467" />
+        <location filename="../qml/pages/SftpPanel.qml" line="589" />
         <source>This cannot be undone.</source>
         <translation>Это нельзя отменить.</translation>
     </message>
@@ -5451,17 +5744,17 @@ libssh · libvterm · libsodium · Qt
         <translation>Отключено.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="944" />
+        <location filename="../src/core/SshWorker.cpp" line="941" />
         <source>The monitor stopped on the server.</source>
         <translation>Монитор остановился на сервере.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="954" />
+        <location filename="../src/core/SshWorker.cpp" line="951" />
         <source>Cannot open a channel.</source>
         <translation>Не удалось открыть канал.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="976" />
+        <location filename="../src/core/SshWorker.cpp" line="973" />
         <source>No answer in %1 s.</source>
         <translation>Нет ответа за %1 с.</translation>
     </message>
@@ -5491,17 +5784,17 @@ libssh · libvterm · libsodium · Qt
         <translation>Сервер отклонил операцию.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshSftp.cpp" line="263" />
+        <location filename="../src/core/SshSftp.cpp" line="308" />
         <source>This is a folder.</source>
         <translation>Это папка.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshSftp.cpp" line="264" />
+        <location filename="../src/core/SshSftp.cpp" line="309" />
         <source>The file is larger than 5 MB: download it instead.</source>
         <translation>Файл больше 5 МБ: скачайте его.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="876" />
+        <location filename="../src/core/SshWorker.cpp" line="873" />
         <location filename="../src/core/SshSftp.cpp" line="37" />
         <source>Not connected.</source>
         <translation>Не подключено.</translation>
@@ -5512,7 +5805,7 @@ libssh · libvterm · libsodium · Qt
         <translation>Сервер не предоставляет SFTP: %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshSftp.cpp" line="197" />
+        <location filename="../src/core/SshSftp.cpp" line="199" />
         <source>Cannot write %1</source>
         <translation>Не удаётся записать %1</translation>
     </message>
@@ -5555,7 +5848,7 @@ libssh · libvterm · libsodium · Qt
 <context>
     <name>TerminalPage</name>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="65" />
+        <location filename="../qml/pages/TerminalPage.qml" line="180" />
         <source>Text files (*.log *.txt)</source>
         <translation>Текстовые файлы (*.log *.txt)</translation>
     </message>
@@ -5564,328 +5857,379 @@ libssh · libvterm · libsodium · Qt
         <translation>Поиск в терминале…  (Ctrl+Shift+F)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="76" />
+        <location filename="../qml/pages/TerminalPage.qml" line="191" />
         <source>Find in the terminal…</source>
         <translation>Поиск в терминале…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="80" />
+        <location filename="../qml/pages/TerminalPage.qml" line="195" />
         <source>Stop saving the session</source>
         <translation>Остановить запись сессии</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="80" />
+        <location filename="../qml/pages/TerminalPage.qml" line="195" />
         <source>Save the session to a file…</source>
         <translation>Записывать сессию в файл…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="87" />
+        <location filename="../qml/pages/TerminalPage.qml" line="202" />
         <source>Broadcast: type into all tabs that have this on</source>
         <translation>Трансляция: вводить во все вкладки, где это включено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="91" />
+        <location filename="../qml/pages/TerminalPage.qml" line="206" />
         <source>Clear scrollback</source>
         <translation>Очистить историю</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="196" />
+        <location filename="../qml/pages/TerminalPage.qml" line="311" />
         <source>Server sees you as</source>
         <translation>Сервер видит вас как</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="196" />
+        <location filename="../qml/pages/TerminalPage.qml" line="311" />
         <source>Expected exit IP</source>
         <translation>Ожидаемый выходной IP</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="241" />
+        <location filename="../qml/pages/TerminalPage.qml" line="356" />
         <source>Read from $SSH_CONNECTION on the server — this is the address in its auth log:
 %1 port %2 → server %3</source>
         <translation>Считано из $SSH_CONNECTION на сервере — именно этот адрес в его журнале авторизации:
 %1 порт %2 → сервер %3</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="244" />
+        <location filename="../qml/pages/TerminalPage.qml" line="359" />
         <source>Route exit IP (checked before connecting): %1</source>
         <translation>Выходной IP маршрута (проверен перед подключением): %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="247" />
+        <location filename="../qml/pages/TerminalPage.qml" line="362" />
         <source>Via jump host %1: the server sees the jump host's address.</source>
         <translation>Через jump-хост %1: сервер видит адрес jump-хоста.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="249" />
+        <location filename="../qml/pages/TerminalPage.qml" line="364" />
         <source>The two differ: the proxy may use a different exit for SSH than for HTTPS.</source>
         <translation>Адреса различаются: у прокси может быть другой выход для SSH, чем для HTTPS.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="262" />
+        <location filename="../qml/pages/TerminalPage.qml" line="377" />
         <source>Files (SFTP)</source>
         <translation>Файлы (SFTP)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="273" />
+        <location filename="../qml/pages/TerminalPage.qml" line="388" />
         <source>Tunnels (port forwarding)</source>
         <translation>Туннели (перенаправление портов)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="292" />
+        <location filename="../qml/pages/TerminalPage.qml" line="407" />
         <source>Snippets</source>
         <translation>Сниппеты</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="301" />
+        <location filename="../qml/pages/TerminalPage.qml" line="414" />
+        <source>Command history (Ctrl+Shift+H)</source>
+        <translation>История команд (Ctrl+Shift+H)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="423" />
         <source>Saving the session to %1 — click to stop</source>
         <translation>Сессия записывается в %1 — щёлкните, чтобы остановить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="309" />
+        <location filename="../qml/pages/TerminalPage.qml" line="431" />
         <source>Broadcast is on — click to turn it off</source>
         <translation>Трансляция включена — щёлкните, чтобы выключить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="315" />
+        <location filename="../qml/pages/TerminalPage.qml" line="437" />
         <source>Find in the terminal (Ctrl+Shift+F)</source>
         <translation>Поиск в терминале (Ctrl+Shift+F)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="325" />
+        <location filename="../qml/pages/TerminalPage.qml" line="447" />
         <source>Notes for this host</source>
         <translation>Заметки к этому хосту</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="325" />
+        <location filename="../qml/pages/TerminalPage.qml" line="447" />
         <source>Add notes for this host</source>
         <translation>Добавить заметки к хосту</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="330" />
-        <location filename="../qml/pages/TerminalPage.qml" line="883" />
+        <location filename="../qml/pages/TerminalPage.qml" line="452" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1009" />
         <source>Colour theme for this tab</source>
         <translation>Цветовая тема этой вкладки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="336" />
+        <location filename="../qml/pages/TerminalPage.qml" line="458" />
         <source>More</source>
         <translation>Ещё</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="341" />
+        <location filename="../qml/pages/TerminalPage.qml" line="463" />
         <source>Back to the main window</source>
         <translation>Вернуть в главное окно</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="341" />
+        <location filename="../qml/pages/TerminalPage.qml" line="463" />
         <source>Open in a separate window</source>
         <translation>Открыть в отдельном окне</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="348" />
+        <location filename="../qml/pages/TerminalPage.qml" line="470" />
         <source>Disconnect</source>
         <translation>Отключиться</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="354" />
-        <location filename="../qml/pages/TerminalPage.qml" line="739" />
+        <location filename="../qml/pages/TerminalPage.qml" line="476" />
+        <location filename="../qml/pages/TerminalPage.qml" line="861" />
         <source>Reconnect</source>
         <translation>Переподключиться</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="431" />
+        <location filename="../qml/pages/TerminalPage.qml" line="553" />
         <source>Find…</source>
         <translation>Найти…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="443" />
+        <location filename="../qml/pages/TerminalPage.qml" line="565" />
         <source>no matches</source>
         <translation>нет совпадений</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="452" />
+        <location filename="../qml/pages/TerminalPage.qml" line="574" />
         <source>Match case</source>
         <translation>С учётом регистра</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="458" />
+        <location filename="../qml/pages/TerminalPage.qml" line="580" />
         <source>Older (Enter)</source>
         <translation>Старее (Enter)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="459" />
+        <location filename="../qml/pages/TerminalPage.qml" line="581" />
         <source>Newer (Shift+Enter)</source>
         <translation>Новее (Shift+Enter)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="460" />
+        <location filename="../qml/pages/TerminalPage.qml" line="582" />
         <source>Close (Esc)</source>
         <translation>Закрыть (Esc)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="482" />
+        <location filename="../qml/pages/TerminalPage.qml" line="604" />
         <source>Broadcast: typing goes to %1 tab(s)</source>
         <translation>Трансляция: ввод идёт во вкладки: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="521" />
+        <location filename="../qml/pages/TerminalPage.qml" line="643" />
         <source>Exit IP: %1  %2</source>
         <translation>Выходной IP: %1  %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="529" />
-        <location filename="../qml/pages/TerminalPage.qml" line="634" />
-        <location filename="../qml/pages/TerminalPage.qml" line="701" />
+        <location filename="../qml/pages/TerminalPage.qml" line="651" />
+        <location filename="../qml/pages/TerminalPage.qml" line="756" />
+        <location filename="../qml/pages/TerminalPage.qml" line="823" />
         <source>Cancel</source>
         <translation>Отмена</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="566" />
+        <location filename="../qml/pages/TerminalPage.qml" line="688" />
         <source>First connection to this server</source>
         <translation>Первое подключение к этому серверу</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="567" />
+        <location filename="../qml/pages/TerminalPage.qml" line="689" />
         <source>WARNING: the server's host key has CHANGED</source>
         <translation>ВНИМАНИЕ: ключ хоста сервера ИЗМЕНИЛСЯ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="576" />
+        <location filename="../qml/pages/TerminalPage.qml" line="698" />
         <source>Compare the fingerprint with the one shown by the server admin (ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub) before trusting it.</source>
         <translation>Прежде чем доверять, сверьте отпечаток с тем, что показывает администратор сервера (ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="577" />
+        <location filename="../qml/pages/TerminalPage.qml" line="699" />
         <source>Someone could be intercepting the connection (man-in-the-middle), or the server was reinstalled. Only continue if you know why the key changed.</source>
         <translation>Кто-то может перехватывать соединение (атака «человек посередине»), или сервер переустановили. Продолжайте, только если знаете, почему изменился ключ.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="622" />
+        <location filename="../qml/pages/TerminalPage.qml" line="744" />
         <source>Checking DNS (SSHFP)…</source>
         <translation>Проверяю DNS (SSHFP)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="624" />
+        <location filename="../qml/pages/TerminalPage.qml" line="746" />
         <source>DNS confirms this key (SSHFP, signed with DNSSEC). It is safe to trust it.</source>
         <translation>DNS подтверждает этот ключ (SSHFP, подписано DNSSEC). Ему можно доверять.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="625" />
+        <location filename="../qml/pages/TerminalPage.qml" line="747" />
         <source>DNS has the same key (SSHFP), but the domain is not signed with DNSSEC, so this is only a hint.</source>
         <translation>В DNS тот же ключ (SSHFP), но домен не подписан DNSSEC, так что это лишь подсказка.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="626" />
+        <location filename="../qml/pages/TerminalPage.qml" line="748" />
         <source>DNS (SSHFP) lists a DIFFERENT key for this server. Do not connect unless you know why.</source>
         <translation>В DNS (SSHFP) для этого сервера ДРУГОЙ ключ. Не подключайтесь, если не знаете почему.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="627" />
+        <location filename="../qml/pages/TerminalPage.qml" line="749" />
         <source>This domain publishes no SSHFP records — compare the fingerprint another way.</source>
         <translation>Этот домен не публикует записей SSHFP — сверьте отпечаток другим способом.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="628" />
+        <location filename="../qml/pages/TerminalPage.qml" line="750" />
         <source>Could not check DNS (SSHFP).</source>
         <translation>Не удалось проверить DNS (SSHFP).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="636" />
+        <location filename="../qml/pages/TerminalPage.qml" line="758" />
         <source>Replace key and connect</source>
         <translation>Заменить ключ и подключиться</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="636" />
+        <location filename="../qml/pages/TerminalPage.qml" line="758" />
         <source>Trust and connect</source>
         <translation>Доверять и подключиться</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="668" />
+        <location filename="../qml/pages/TerminalPage.qml" line="790" />
         <source>Key passphrase</source>
         <translation>Пароль ключа</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="670" />
+        <location filename="../qml/pages/TerminalPage.qml" line="792" />
         <source>Server asks</source>
         <translation>Сервер спрашивает</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="670" />
+        <location filename="../qml/pages/TerminalPage.qml" line="792" />
         <source>Server 2FA code</source>
         <translation>Код 2FA сервера</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="671" />
+        <location filename="../qml/pages/TerminalPage.qml" line="793" />
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="694" />
+        <location filename="../qml/pages/TerminalPage.qml" line="816" />
         <source>Save passphrase in the vault</source>
         <translation>Сохранить пароль ключа в хранилище</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="694" />
+        <location filename="../qml/pages/TerminalPage.qml" line="816" />
         <source>Save password in the vault</source>
         <translation>Сохранить пароль в хранилище</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="696" />
+        <location filename="../qml/pages/TerminalPage.qml" line="818" />
         <source>Saved only after the server accepts it.</source>
         <translation>Сохраняется только после того, как сервер его примет.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="702" />
+        <location filename="../qml/pages/TerminalPage.qml" line="824" />
         <source>Continue</source>
         <translation>Продолжить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="733" />
+        <location filename="../qml/pages/TerminalPage.qml" line="855" />
         <source>Reconnecting in %1 s (attempt %2 of %3)…</source>
         <translation>Переподключение через %1 с (попытка %2 из %3)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="738" />
+        <location filename="../qml/pages/TerminalPage.qml" line="860" />
         <source>Stop</source>
         <translation>Остановить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="740" />
+        <location filename="../qml/pages/TerminalPage.qml" line="862" />
         <source>Close tab</source>
         <translation>Закрыть вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="794" />
+        <location filename="../qml/pages/TerminalPage.qml" line="920" />
         <source>No snippets yet — add them in the Snippets page</source>
         <translation>Сниппетов пока нет — добавьте их на странице «Сниппеты»</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="824" />
+        <location filename="../qml/pages/TerminalPage.qml" line="950" />
         <source>Notes · %1</source>
         <translation>Заметки · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="826" />
+        <location filename="../qml/pages/TerminalPage.qml" line="952" />
         <source>encrypted</source>
         <translation>зашифровано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="843" />
+        <location filename="../qml/pages/TerminalPage.qml" line="969" />
         <source>What runs here, who to call, where the backups are…</source>
         <translation>Что тут работает, кому звонить, где бэкапы…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="853" />
+        <location filename="../qml/pages/TerminalPage.qml" line="163" />
+        <location filename="../qml/pages/TerminalPage.qml" line="979" />
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="855" />
+        <location filename="../qml/pages/TerminalPage.qml" line="76" />
+        <source>Command history · %1</source>
+        <translation>История команд · %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="77" />
+        <source>Enter puts the command into the terminal, Ctrl+Enter runs it. A command typed with a space in front is not remembered.</source>
+        <translation>Enter вставляет команду в терминал, Ctrl+Enter выполняет её. Команда, набранная с пробелом в начале, не запоминается.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="96" />
+        <source>Search…</source>
+        <translation>Поиск…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="139" />
+        <source>Forget this command</source>
+        <translation>Забыть эту команду</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="150" />
+        <source>No commands yet. Commands you run on this host will appear here.</source>
+        <translation>Команд пока нет. Здесь появятся команды, которые вы выполняете на этом хосте.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="150" />
+        <source>Nothing found.</source>
+        <translation>Ничего не найдено.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="158" />
+        <source>Clear history</source>
+        <translation>Очистить историю</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="165" />
+        <source>Insert</source>
+        <translation>Вставить</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="170" />
+        <source>Run</source>
+        <translation>Выполнить</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="981" />
         <source>Save</source>
         <translation>Сохранить</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="884" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1010" />
         <source>Create your own</source>
         <translation>Создать свою</translation>
     </message>
@@ -5893,261 +6237,261 @@ libssh · libvterm · libsodium · Qt
 <context>
     <name>TerminalSession</name>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="181" />
+        <location filename="../src/app/TerminalSession.cpp" line="182" />
         <source>Server host key CHANGED</source>
         <translation>Ключ хоста сервера ИЗМЕНИЛСЯ</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="183" />
+        <location filename="../src/app/TerminalSession.cpp" line="184" />
         <source>Verify the server's host key</source>
         <translation>Проверьте ключ хоста сервера</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="191" />
+        <location filename="../src/app/TerminalSession.cpp" line="192" />
         <source>Authentication rejected, asking again</source>
         <translation>Аутентификация отклонена, повторный запрос</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="201" />
-        <location filename="../src/app/TerminalSession.cpp" line="206" />
-        <location filename="../src/app/TerminalSession.cpp" line="378" />
-        <location filename="../src/app/TerminalSession.cpp" line="968" />
-        <location filename="../src/app/TerminalSession.cpp" line="1157" />
+        <location filename="../src/app/TerminalSession.cpp" line="202" />
+        <location filename="../src/app/TerminalSession.cpp" line="207" />
+        <location filename="../src/app/TerminalSession.cpp" line="389" />
+        <location filename="../src/app/TerminalSession.cpp" line="1026" />
+        <location filename="../src/app/TerminalSession.cpp" line="1215" />
         <source>Connected</source>
         <translation>Подключено</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="230" />
+        <location filename="../src/app/TerminalSession.cpp" line="231" />
         <source>Server sees the client as %1</source>
         <translation>Сервер видит клиента как %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="231" />
+        <location filename="../src/app/TerminalSession.cpp" line="232" />
         <source>port %1 → server %2</source>
         <translation>порт %1 → сервер %2</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="250" />
-        <location filename="../src/app/TerminalSession.cpp" line="983" />
+        <location filename="../src/app/TerminalSession.cpp" line="251" />
+        <location filename="../src/app/TerminalSession.cpp" line="1041" />
         <source>Connection failed / lost</source>
         <translation>Соединение не удалось / потеряно</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="250" />
-        <location filename="../src/app/TerminalSession.cpp" line="983" />
+        <location filename="../src/app/TerminalSession.cpp" line="251" />
+        <location filename="../src/app/TerminalSession.cpp" line="1041" />
         <source>Disconnected</source>
         <translation>Отключено</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="271" />
+        <location filename="../src/app/TerminalSession.cpp" line="272" />
         <source>Reconnecting (attempt %1 of %2)</source>
         <translation>Переподключение (попытка %1 из %2)</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="302" />
+        <location filename="../src/app/TerminalSession.cpp" line="313" />
         <source>Uploaded %1</source>
         <translation>Загружено на сервер %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="302" />
+        <location filename="../src/app/TerminalSession.cpp" line="313" />
         <source>Downloaded %1</source>
         <translation>Скачано %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="306" />
+        <location filename="../src/app/TerminalSession.cpp" line="317" />
         <source>Transfer failed: %1</source>
         <translation>Передача не удалась: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="322" />
+        <location filename="../src/app/TerminalSession.cpp" line="333" />
         <source>Tunnel opened</source>
         <translation>Туннель открыт</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="322" />
+        <location filename="../src/app/TerminalSession.cpp" line="333" />
         <source>Tunnel error</source>
         <translation>Ошибка туннеля</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="326" />
+        <location filename="../src/app/TerminalSession.cpp" line="337" />
         <source>Connecting…</source>
         <translation>Подключение…</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="327" />
+        <location filename="../src/app/TerminalSession.cpp" line="338" />
         <source>Connecting to %1</source>
         <translation>Подключение к %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="355" />
+        <location filename="../src/app/TerminalSession.cpp" line="366" />
         <source>Serial · %1 · %2 baud</source>
         <translation>Serial · %1 · %2 бод</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="360" />
+        <location filename="../src/app/TerminalSession.cpp" line="371" />
         <source>Cannot open %1: %2</source>
         <translation>Не удаётся открыть %1: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="361" />
+        <location filename="../src/app/TerminalSession.cpp" line="372" />
         <source>Serial port error</source>
         <translation>Ошибка последовательного порта</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="375" />
+        <location filename="../src/app/TerminalSession.cpp" line="386" />
         <source>Serial port closed: %1</source>
         <translation>Последовательный порт закрыт: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="379" />
+        <location filename="../src/app/TerminalSession.cpp" line="390" />
         <source>Serial port opened</source>
         <translation>Последовательный порт открыт</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="383" />
+        <location filename="../src/app/TerminalSession.cpp" line="394" />
         <source>This build has no serial port support.</source>
         <translation>Эта сборка не поддерживает последовательные порты.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="441" />
+        <location filename="../src/app/TerminalSession.cpp" line="452" />
         <source>Connection blocked</source>
         <translation>Соединение заблокировано</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="455" />
+        <location filename="../src/app/TerminalSession.cpp" line="466" />
         <source>Session closed by the kill switch</source>
         <translation>Сессия закрыта kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="514" />
+        <location filename="../src/app/TerminalSession.cpp" line="558" />
         <source>Host key accepted</source>
         <translation>Ключ хоста принят</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="514" />
-        <location filename="../src/app/TerminalSession.cpp" line="517" />
+        <location filename="../src/app/TerminalSession.cpp" line="558" />
+        <location filename="../src/app/TerminalSession.cpp" line="561" />
         <source>Host key rejected</source>
         <translation>Ключ хоста отклонён</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="516" />
+        <location filename="../src/app/TerminalSession.cpp" line="560" />
         <source>New host key trusted</source>
         <translation>Новый ключ хоста доверен</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="516" />
+        <location filename="../src/app/TerminalSession.cpp" line="560" />
         <source>Changed host key accepted</source>
         <translation>Изменённый ключ хоста принят</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="528" />
+        <location filename="../src/app/TerminalSession.cpp" line="572" />
         <source>Authenticating…</source>
         <translation>Аутентификация…</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="593" />
+        <location filename="../src/app/TerminalSession.cpp" line="637" />
         <source>Disconnected.</source>
         <translation>Отключено.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="596" />
+        <location filename="../src/app/TerminalSession.cpp" line="640" />
         <source>Disconnected by user</source>
         <translation>Отключено пользователем</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="612" />
-        <location filename="../src/app/TerminalSession.cpp" line="623" />
-        <location filename="../src/app/TerminalSession.cpp" line="635" />
+        <location filename="../src/app/TerminalSession.cpp" line="656" />
+        <location filename="../src/app/TerminalSession.cpp" line="667" />
+        <location filename="../src/app/TerminalSession.cpp" line="679" />
         <source>Not connected.</source>
         <translation>Не подключено.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="646" />
+        <location filename="../src/app/TerminalSession.cpp" line="690" />
         <source>Created folder</source>
         <translation>Создана папка</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="654" />
+        <location filename="../src/app/TerminalSession.cpp" line="698" />
         <source>Deleted on server</source>
         <translation>Удалено на сервере</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="662" />
+        <location filename="../src/app/TerminalSession.cpp" line="706" />
         <source>Renamed</source>
         <translation>Переименовано</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="787" />
+        <location filename="../src/app/TerminalSession.cpp" line="845" />
         <source>Cannot write %1: %2</source>
         <translation>Не удаётся записать %1: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="794" />
+        <location filename="../src/app/TerminalSession.cpp" line="852" />
         <source>Session log started</source>
         <translation>Запись сессии начата</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="807" />
+        <location filename="../src/app/TerminalSession.cpp" line="865" />
         <source>Session log saved</source>
         <translation>Запись сессии сохранена</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="828" />
+        <location filename="../src/app/TerminalSession.cpp" line="886" />
         <source>Tunnel closed</source>
         <translation>Туннель закрыт</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="929" />
+        <location filename="../src/app/TerminalSession.cpp" line="987" />
         <source>This server does not report its load (Linux /proc is needed).</source>
         <translation>Этот сервер не показывает нагрузку (нужен Linux /proc).</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="965" />
+        <location filename="../src/app/TerminalSession.cpp" line="1023" />
         <source>Connecting to %1:%2…</source>
         <translation>Подключение к %1:%2…</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="969" />
+        <location filename="../src/app/TerminalSession.cpp" line="1027" />
         <source>Telnet connected (not encrypted)</source>
         <translation>Telnet подключён (без шифрования)</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="980" />
+        <location filename="../src/app/TerminalSession.cpp" line="1038" />
         <source>Session ended.</source>
         <translation>Сессия завершена.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="981" />
+        <location filename="../src/app/TerminalSession.cpp" line="1039" />
         <source>Connection lost: %1</source>
         <translation>Соединение потеряно: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="981" />
+        <location filename="../src/app/TerminalSession.cpp" line="1039" />
         <source>Cannot connect: %1</source>
         <translation>Не удалось подключиться: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1117" />
+        <location filename="../src/app/TerminalSession.cpp" line="1175" />
         <source>SSHFP: the host key matches DNS</source>
         <translation>SSHFP: ключ сервера совпадает с DNS</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1117" />
+        <location filename="../src/app/TerminalSession.cpp" line="1175" />
         <source>SSHFP: the host key does NOT match DNS</source>
         <translation>SSHFP: ключ сервера НЕ совпадает с DNS</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1117" />
+        <location filename="../src/app/TerminalSession.cpp" line="1175" />
         <source>SSHFP: no records in DNS</source>
         <translation>SSHFP: записей в DNS нет</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1137" />
+        <location filename="../src/app/TerminalSession.cpp" line="1195" />
         <source>This computer · %1</source>
         <translation>Этот компьютер · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1154" />
+        <location filename="../src/app/TerminalSession.cpp" line="1212" />
         <source>The shell ended (exit code %1).</source>
         <translation>Оболочка завершена (код выхода %1).</translation>
     </message>

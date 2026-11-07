@@ -23,6 +23,8 @@
 #include <QClipboard>
 #include <QCoreApplication>
 #include <QDateTime>
+#include <QElapsedTimer>
+#include <QSet>
 #include <QEvent>
 #include <QFile>
 #include <memory>
@@ -74,6 +76,10 @@ const QVariantMap &settingDefaults()
         {QStringLiteral("sidebarCollapsed"), false},
         {QStringLiteral("updateRepo"), QStringLiteral(APP_GITHUB_REPO)},
         {QStringLiteral("autoCheckUpdates"), true},
+        {QStringLiteral("hostProbe"), true},                      // online dot on the host cards
+        {QStringLiteral("sftpLocalFolder"), QString()},           // left half of the two-pane SFTP view
+        {QStringLiteral("sftpTwoPane"), false},
+        {QStringLiteral("commandHistory"), true},                 // remember commands per host (in the vault)
         {QStringLiteral("logEnabled"), true},
         {QStringLiteral("killSwitchInterval"), 3},
         {QStringLiteral("firewallLock"), false},
@@ -152,6 +158,23 @@ AppController::AppController(QObject *parent)
     m_firewallActive = firewalllock::supported() && m_settings.value(QStringLiteral("firewallLock"), false).toBool()
                        && firewalllock::isActive();
     connect(&m_updater, &UpdateChecker::quitRequested, qApp, &QCoreApplication::quit, Qt::QueuedConnection);
+    m_hostProbePool.setMaxThreadCount(8);
+    // command history is written to the vault in batches, not on every Enter
+    m_historySave.setSingleShot(true);
+    m_historySave.setInterval(20000);
+    connect(&m_historySave, &QTimer::timeout, this, &AppController::flushHistory);
+    connect(qApp, &QCoreApplication::aboutToQuit, this, &AppController::flushHistory);
+    connect(this, &AppController::vaultStateChanged, this, [this] {
+        if (m_vault.isUnlocked()) {
+            loadHistory();
+            QTimer::singleShot(500, this, &AppController::probeHosts);
+        } else {
+            ++m_hostProbeGen;
+            m_lastHostProbe = 0;
+            m_hostStatus.clear();
+            emit hostStatusChanged();
+        }
+    });
     connect(&m_updater, &UpdateChecker::changed, this, [this] {
         const QString st = m_updater.state();
         if (st == m_updaterState)
@@ -219,6 +242,9 @@ AppController::AppController(QObject *parent)
 AppController::~AppController()
 {
     qApp->removeEventFilter(this);
+    ++m_hostProbeGen;
+    m_hostProbePool.clear();
+    m_hostProbePool.waitForDone(7000);
     const auto items = m_sessions.items();
     for (TerminalSession *s : items)
         delete s;
@@ -497,6 +523,8 @@ void AppController::migrateRemovedFeatures()
 
 void AppController::lockVault()
 {
+    flushHistory();
+    m_history.clear();
     if (m_vault.isUnlocked())
         logEvent(ActivityLog::Info, QStringLiteral("vault"), tr("Vault locked"));
     m_vault.lock();
@@ -716,6 +744,58 @@ QVariantMap AppController::evaluatePassword(const QString &password) const
 QUrl AppController::homeFolder() const
 {
     return QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
+}
+
+QVariantMap AppController::listLocal(const QString &requested) const
+{
+    QString path = requested.trimmed();
+    if (path.isEmpty())
+        path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
+    const QFileInfo fi(path);
+    QVariantMap out;
+    if (!fi.exists() || !fi.isDir()) {
+        out.insert(QStringLiteral("error"), tr("Folder not found: %1").arg(QDir::toNativeSeparators(path)));
+        return out;
+    }
+    QDir dir(fi.absoluteFilePath());
+    if (!dir.isReadable()) {
+        out.insert(QStringLiteral("error"), tr("No access to %1").arg(QDir::toNativeSeparators(dir.absolutePath())));
+        return out;
+    }
+    QVariantList entries;
+    // folders first, then files, by name; hidden files too (like the server side)
+    const QFileInfoList list = dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System,
+                                                 QDir::DirsFirst | QDir::Name | QDir::IgnoreCase);
+    for (const QFileInfo &e : list) {
+        entries << QVariantMap{{QStringLiteral("name"), e.fileName()},
+                               {QStringLiteral("isDir"), e.isDir()},
+                               {QStringLiteral("size"), e.isDir() ? 0 : e.size()},
+                               {QStringLiteral("mtime"), e.lastModified().toString(QStringLiteral("yyyy-MM-dd HH:mm"))},
+                               {QStringLiteral("path"), e.absoluteFilePath()}};
+    }
+    QDir up(dir);
+    const bool hasParent = up.cdUp();
+    out.insert(QStringLiteral("path"), dir.absolutePath());
+    out.insert(QStringLiteral("display"), QDir::toNativeSeparators(dir.absolutePath()));
+    out.insert(QStringLiteral("parent"), hasParent ? up.absolutePath() : QString());
+    out.insert(QStringLiteral("entries"), entries);
+    return out;
+}
+
+QVariantList AppController::localPlaces() const
+{
+    QVariantList out;
+    auto add = [&out](const QString &name, const QString &path) {
+        if (!path.isEmpty() && QFileInfo(path).isDir())
+            out << QVariantMap{{QStringLiteral("name"), name}, {QStringLiteral("path"), path}};
+    };
+    add(tr("Home"), QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
+    add(tr("Downloads"), QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
+    add(tr("Desktop"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
+    add(tr("Documents"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
+    for (const QFileInfo &d : QDir::drives())
+        add(QDir::toNativeSeparators(d.absoluteFilePath()), d.absoluteFilePath());
+    return out;
 }
 
 QStringList AppController::serialPorts() const
@@ -1734,6 +1814,7 @@ TerminalSession *AppController::createSession(const QString &hostId, const QStri
             [this, s](int level, const QString &cat, const QString &msg, const QString &detail) {
                 logEvent(level, cat, msg, detail, s->label());
             });
+    connect(s, &TerminalSession::commandEntered, this, [this, s](const QString &cmd) { rememberCommand(s->hostId(), cmd); });
     m_sessions.append(s);
     emit sessionOpened(m_sessions.count() - 1);
     return s;
@@ -2190,6 +2271,177 @@ void AppController::checkForUpdates()
     m_updater.check(updateRepo());
 }
 
+void AppController::probeHosts()
+{
+    if (!m_vault.isUnlocked() || !m_settings.value(QStringLiteral("hostProbe"), true).toBool()) {
+        if (!m_hostStatus.isEmpty()) {
+            m_hostStatus.clear();
+            emit hostStatusChanged();
+        }
+        return;
+    }
+    // At most every 5 minutes, and only while the host list is on screen (the page
+    // asks). Every check is one short connection that the server writes to its log;
+    // this rate stays far below what fail2ban & co. count as an attack.
+    const qint64 now = QDateTime::currentMSecsSinceEpoch();
+    if (m_lastHostProbe && now - m_lastHostProbe < 5 * 60 * 1000)
+        return;
+    m_lastHostProbe = now;
+    const quint64 gen = ++m_hostProbeGen;
+    const bool killSwitch = m_settings.value(QStringLiteral("killSwitch"), false).toBool();
+
+    struct Job { QString id, host; int port = 22; bool ssh = true; ProxyConfig pc; };
+    QVector<Job> jobs;
+    QVariantMap status = m_hostStatus;
+    auto skip = [&status](const QString &id, const QString &note) {
+        status.insert(id, QVariantMap{{QStringLiteral("state"), QStringLiteral("skip")}, {QStringLiteral("note"), note}});
+    };
+    const QJsonArray hosts = section(kHosts);
+    QSet<QString> ids;
+    for (const QJsonValue &v : hosts) {
+        const QJsonObject h = v.toObject();
+        const QString id = h.value(QStringLiteral("id")).toString();
+        const QString type = h.value(QStringLiteral("type")).toString(QStringLiteral("ssh"));
+        ids.insert(id);
+        if (type == QLatin1String("serial"))
+            continue;
+        if (!h.value(QStringLiteral("jumpHostId")).toString().isEmpty()) {
+            skip(id, tr("Behind a jump host: checked only when you connect."));
+            continue;
+        }
+        const QString proxyId = effectiveProxyId(h);
+        Job j;
+        j.id = id;
+        j.host = h.value(QStringLiteral("hostname")).toString().trimmed();
+        j.ssh = type != QLatin1String("telnet");
+        j.port = h.value(QStringLiteral("port")).toInt(j.ssh ? 22 : 23);
+        if (j.host.isEmpty())
+            continue;
+        if (proxyId.isEmpty()) {
+            if (killSwitch) {   // never a direct packet while the kill switch is on
+                skip(id, tr("Kill switch is on: not checked directly."));
+                continue;
+            }
+        } else {
+            const QJsonObject px = findIn(kProxies, proxyId);
+            const QString ptype = px.value(QStringLiteral("type")).toString();
+            if (ptype == QLatin1String("tor") || ptype == QLatin1String("cloudflare")) {
+                skip(id, ptype == QLatin1String("tor") ? tr("Via Tor: not checked in the background.")
+                                                       : tr("Via Cloudflare Tunnel: checked only when you connect."));
+                continue;
+            }
+            j.pc = proxyConfig(px);
+            if (!j.pc.isSet()) {
+                skip(id, tr("The proxy of this host is not complete."));
+                continue;
+            }
+        }
+        jobs.append(j);
+    }
+    for (auto it = status.begin(); it != status.end();)   // deleted hosts
+        it = ids.contains(it.key()) ? std::next(it) : status.erase(it);
+    m_hostStatus = status;
+    emit hostStatusChanged();
+
+    for (const Job &job : std::as_const(jobs)) {
+        m_hostProbePool.start([this, gen, job] {
+            QElapsedTimer t;
+            t.start();
+            QString err;
+            const sw_socket_t s = job.pc.isSet() ? proxytunnel::open(job.pc, job.host, job.port, 8000, &err)
+                                                 : proxytunnel::connectDirect(job.host, job.port, 5000, &err);
+            const int ms = int(t.elapsed());
+            bool ok = s != kInvalidSocket;
+            if (ok && job.ssh) {
+                char buf[64];
+                const int n = proxytunnel::readSome(s, buf, sizeof buf, 4000);
+                ok = n >= 4 && QByteArray(buf, n).startsWith("SSH-");
+                if (!ok)
+                    err = tr("The port is open, but no SSH server answered.");
+            }
+            if (s != kInvalidSocket)
+                proxytunnel::closeSocket(s);
+            const bool viaProxy = job.pc.isSet();
+            QMetaObject::invokeMethod(this, [this, gen, id = job.id, ok, ms, err, viaProxy] {
+                if (gen != m_hostProbeGen)
+                    return;
+                m_hostStatus.insert(id, QVariantMap{{QStringLiteral("state"), ok ? QStringLiteral("online") : QStringLiteral("offline")},
+                                                    {QStringLiteral("ms"), ms},
+                                                    {QStringLiteral("proxy"), viaProxy},
+                                                    {QStringLiteral("note"), ok ? QString() : err}});
+                emit hostStatusChanged();
+            }, Qt::QueuedConnection);
+        });
+    }
+}
+
+static const QString kHistory = QStringLiteral("history");
+static constexpr int kHistoryMax = 300;
+
+void AppController::loadHistory()
+{
+    m_history.clear();
+    for (const QJsonValue &v : section(kHistory)) {
+        const QJsonObject o = v.toObject();
+        QStringList cmds;
+        for (const QJsonValue &c : o.value(QStringLiteral("commands")).toArray())
+            cmds << c.toString();
+        m_history.insert(o.value(QStringLiteral("hostId")).toString(), cmds);
+    }
+    m_historyDirty = false;
+}
+
+void AppController::flushHistory()
+{
+    m_historySave.stop();
+    if (!m_historyDirty || !m_vault.isUnlocked())
+        return;
+    QJsonArray arr;
+    for (auto it = m_history.cbegin(); it != m_history.cend(); ++it) {
+        if (it.value().isEmpty() || findIn(kHosts, it.key()).isEmpty())
+            continue;   // deleted hosts take their history with them
+        arr.append(QJsonObject{{QStringLiteral("hostId"), it.key()},
+                               {QStringLiteral("commands"), QJsonArray::fromStringList(it.value())}});
+    }
+    setSection(kHistory, arr);
+    m_historyDirty = false;
+    persist();
+}
+
+void AppController::rememberCommand(const QString &hostId, const QString &command)
+{
+    if (hostId.isEmpty() || !m_vault.isUnlocked() || !m_settings.value(QStringLiteral("commandHistory"), true).toBool())
+        return;
+    QStringList &list = m_history[hostId];
+    list.removeAll(command);          // the same command again moves to the top
+    list.prepend(command);
+    while (list.size() > kHistoryMax)
+        list.removeLast();
+    m_historyDirty = true;
+    if (!m_historySave.isActive())
+        m_historySave.start();
+}
+
+QStringList AppController::commandHistory(const QString &hostId) const
+{
+    return m_history.value(hostId);
+}
+
+void AppController::forgetCommand(const QString &hostId, const QString &command)
+{
+    if (m_history[hostId].removeAll(command) > 0) {
+        m_historyDirty = true;
+        flushHistory();
+    }
+}
+
+void AppController::clearCommandHistory(const QString &hostId)
+{
+    m_history.remove(hostId);
+    m_historyDirty = true;
+    flushHistory();
+}
+
 void AppController::skipUpdate(const QString &version)
 {
     m_settings.setValue(QStringLiteral("skippedUpdate"), version);
@@ -2364,6 +2616,10 @@ void AppController::setSetting(const QString &key, const QVariant &value)
 
     if (key == QLatin1String("autoLockMinutes"))
         restartAutoLock();
+    if (key == QLatin1String("hostProbe") || key == QLatin1String("killSwitch") || key == QLatin1String("defaultProxyId")) {
+        m_lastHostProbe = 0;   // the route rules changed: check again now
+        QTimer::singleShot(0, this, &AppController::probeHosts);
+    }
     if (key == QLatin1String("logEnabled"))
         m_log.setEnabled(value.toBool());
     if (key == QLatin1String("monitorEnabled") || key == QLatin1String("monitorInterval")) {
@@ -2728,8 +2984,124 @@ QString AppController::installKeys(const QVariantList &pairs, const QString &mas
     return {};
 }
 
+QString AppController::rotateKey(const QString &oldKeyId, const QString &newKeyId, const QVariantList &hostIds,
+                                 const QString &masterPassword)
+{
+    if (m_batch.running())
+        return tr("Another run is still going.");
+    const QJsonObject oldKey = findIn(kKeys, oldKeyId), newKey = findIn(kKeys, newKeyId);
+    if (oldKey.isEmpty() || newKey.isEmpty())
+        return tr("Choose the old and the new key.");
+    const QString oldBlob = publicKeyLine(oldKeyId).section(QLatin1Char(' '), 1, 1);
+    const QString newBlob = publicKeyLine(newKeyId).section(QLatin1Char(' '), 1, 1);
+    if (oldKeyId == newKeyId || oldBlob.isEmpty() || oldBlob == newBlob)
+        return tr("The new key must be a different key.");
+    if (newKey.value(QStringLiteral("privateKey")).toString().isEmpty())
+        return tr("Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.");
+    // the new key's passphrase is needed again in step 2, after installKeys() forgets the typed ones
+    m_rotateNewPass = m_batchPass.value(newKeyId);
+    if (m_rotateNewPass.isEmpty())
+        m_rotateNewPass = newKey.value(QStringLiteral("passphrase")).toString();
+    if (newKey.value(QStringLiteral("encrypted")).toBool() && m_rotateNewPass.isEmpty())
+        return tr("Enter the passphrase of the new key: it is needed to check that the new key works.");
+    QVariantList pairs;
+    for (const QVariant &h : hostIds)
+        pairs << QVariantMap{{QStringLiteral("hostId"), h.toString()}, {QStringLiteral("keyId"), newKeyId}};
+    const QString err = installKeys(pairs, masterPassword, false);
+    if (!err.isEmpty()) {
+        secure::wipe(m_rotateNewPass);
+        return err;
+    }
+    m_rotateOld = oldKeyId;
+    m_rotateNew = newKeyId;
+    m_rotateUnlocked = !masterPassword.isEmpty();
+    m_rotateFailed.clear();
+    m_rotatePhase = QStringLiteral("adding");
+    emit rotateChanged();
+    logEvent(ActivityLog::Security, QStringLiteral("key"), tr("Key replacement started"),
+             oldKey.value(QStringLiteral("name")).toString() + QStringLiteral(" → ") + newKey.value(QStringLiteral("name")).toString());
+    return {};
+}
+
+void AppController::rotateSecondStep()
+{
+    const QJsonObject newKey = findIn(kKeys, m_rotateNew);
+    const QString oldBlob = publicKeyLine(m_rotateOld).section(QLatin1Char(' '), 1, 1);
+    const QString newBlob = publicKeyLine(m_rotateNew).section(QLatin1Char(' '), 1, 1);
+    // removes the old key only when the new one is there (we just logged in with it)
+    const QString script = QStringLiteral(
+        "umask 077\n"
+        "f=~/.ssh/authorized_keys\n"
+        "grep -qF '%1' \"$f\" || { echo 'the new key is missing, the old key was kept'; exit 1; }\n"
+        "if grep -qF '%2' \"$f\"; then grep -vF '%2' \"$f\" > \"$f.sw\" && cat \"$f.sw\" > \"$f\" && rm -f \"$f.sw\" && echo 'old key removed'; "
+        "else echo 'the old key was not there'; fi\n").arg(newBlob, oldBlob);
+    const QString command = QStringLiteral("echo %1 | base64 -d | sh").arg(QString::fromLatin1(script.toUtf8().toBase64()));
+    QVector<BatchRunner::Job> jobs;
+    for (const QVariant &r : m_batch.results()) {
+        const QVariantMap m = r.toMap();
+        const QString hostId = m.value(QStringLiteral("hostId")).toString();
+        BatchRunner::Job j = batchJob(hostId, m_rotateUnlocked);
+        if (j.hostId.isEmpty())
+            continue;
+        if (m.value(QStringLiteral("state")).toString() != QLatin1String("ok")) {
+            j.skipReason = tr("The new key could not be added, nothing changed: %1")
+                               .arg(m.value(QStringLiteral("error")).toString());
+        } else if (j.skipReason.isEmpty()) {
+            // log in with the new key only: no password, no agent, no old key
+            j.params.privateKey = newKey.value(QStringLiteral("privateKey")).toString().toUtf8();
+            j.params.keyPassphrase = m_rotateNewPass;
+            secure::wipe(j.params.password);
+            j.params.useAgent = false;
+            j.params.agentForward = false;
+            j.command = command;
+        }
+        jobs << j;
+    }
+    m_rotatePhase = QStringLiteral("removing");
+    emit rotateChanged();
+    m_batch.run(jobs, QString());
+}
+
+void AppController::rotateFinish()
+{
+    QJsonArray hosts = section(kHosts);
+    int changed = 0;
+    for (const QVariant &r : m_batch.results()) {
+        const QVariantMap m = r.toMap();
+        if (m.value(QStringLiteral("state")).toString() != QLatin1String("ok"))
+            continue;
+        const QString hostId = m.value(QStringLiteral("hostId")).toString();
+        for (int i = 0; i < hosts.size(); ++i) {
+            QJsonObject o = hosts.at(i).toObject();
+            if (o.value(QStringLiteral("id")).toString() == hostId) {
+                o.insert(QStringLiteral("keyId"), m_rotateNew);   // log in with the new key from now on
+                hosts.replace(i, o);
+                ++changed;
+            }
+        }
+    }
+    if (changed) {
+        setSection(kHosts, hosts);
+        persist();
+        m_hosts.reset(section(kHosts));
+    }
+    logEvent(ActivityLog::Security, QStringLiteral("key"), tr("Key replaced on %n server(s)", nullptr, changed),
+             tr("%1 of %2 servers").arg(changed).arg(m_batch.results().size()));
+    secure::wipe(m_rotateNewPass);
+    m_rotatePhase = QStringLiteral("done");
+    emit rotateChanged();
+}
+
 void AppController::onBatchFinished()
 {
+    if (m_rotatePhase == QLatin1String("adding")) {
+        QTimer::singleShot(0, this, &AppController::rotateSecondStep);   // not from inside the runner's signal
+        return;
+    }
+    if (m_rotatePhase == QLatin1String("removing")) {
+        rotateFinish();
+        return;
+    }
     if (m_keyAssign.isEmpty())
         return;
     // after a successful key install: let the host log in with that key from now on
@@ -2784,10 +3156,19 @@ QString AppController::setHostNotes(const QString &hostId, const QString &notes)
 
 // Keys of these hosts that need a passphrase which is not saved in the vault:
 // the batch window asks for each of them once.
-QVariantList AppController::batchKeyNeeds(const QVariantList &hostIds) const
+QVariantList AppController::batchKeyNeeds(const QVariantList &hostIds, const QVariantList &extraKeyIds) const
 {
     QVariantList out;
     QSet<QString> seen;
+    for (const QVariant &v : extraKeyIds) {   // e.g. the new key of a key replacement
+        const QJsonObject k = findIn(kKeys, v.toString());
+        if (k.isEmpty() || seen.contains(v.toString()))
+            continue;
+        if (k.value(QStringLiteral("encrypted")).toBool() && k.value(QStringLiteral("passphrase")).toString().isEmpty()) {
+            seen.insert(v.toString());
+            out << QVariantMap{{QStringLiteral("keyId"), v.toString()}, {QStringLiteral("name"), k.value(QStringLiteral("name")).toString()}};
+        }
+    }
     for (const QVariant &v : hostIds) {
         const QJsonObject h = findIn(kHosts, v.toString());
         const QString keyId = h.value(QStringLiteral("keyId")).toString();

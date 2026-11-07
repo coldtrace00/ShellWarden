@@ -50,6 +50,10 @@ bool loopbackPair(sw_socket_t *a, sw_socket_t *b, QString *error);
 // Direct TCP connection (used only for hosts without proxy).
 sw_socket_t connectDirect(const QString &host, int port, int timeoutMs, QString *error);
 
+// Reads what arrives within timeoutMs (at most len bytes). Returns the byte
+// count, 0 when nothing came or the peer closed, -1 on error.
+int readSome(sw_socket_t s, char *buf, int len, int timeoutMs);
+
 // Call once per process before using sockets (WSAStartup on Windows).
 void initSockets();
 

@@ -133,6 +133,7 @@ signals:
     void connected();
     // What the server sees as our address (from $SSH_CONNECTION on the server).
     void clientAddressSeen(const QString &ip, const QString &port, const QString &serverIp);
+    void sftpResumed(int transferId, qint64 offset);   // continues an earlier, broken transfer
     void dataReceived(const QByteArray &data);
     void finished(const QString &reason, bool isError);
 
@@ -231,6 +232,8 @@ private:
         qint64 done = 0, total = 0;
         qint64 lastReportMs = 0;
         bool started = false;
+        QString remoteTemp;       // uploads go to "<name>.swpart" and are renamed at the end
+        int remoteMode = -1;      // permissions of the file that is replaced
     };
     QVector<Transfer> m_transfers;
     QElapsedTimer m_clock;

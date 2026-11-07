@@ -81,6 +81,11 @@ public:
     VTermPos cursor() const { return m_cursor; }
     bool cursorVisible() const { return m_cursorVisible; }
     bool altScreen() const { return m_altScreen; }
+    // Text of the logical line under the cursor (wrapped rows joined), trailing spaces cut.
+    QString cursorLineText() const;
+    // Same for any line (absLine as in cellAt); full = the last column is used (a wrapped row).
+    QString lineText(int absLine, bool *full = nullptr) const;
+    int cursorLineStart() const;   // absLine where the cursor's logical line begins
     int mouseMode() const { return m_mouseMode; }
     QString title() const { return m_title; }
     void reset();

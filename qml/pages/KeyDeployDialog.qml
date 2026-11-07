@@ -20,6 +20,8 @@ Popup {
     background: Rectangle { radius: 14; color: Theme.surface; border.color: Theme.border }
 
     property bool perHost: false          // false = one key for all servers
+    property bool replaceMode: false      // replace oldKeyId with keyId (two safe steps)
+    property string oldKeyId: ""
     property string keyId: ""             // the key in "one key" mode
     property var picked: ({})             // hostId -> true
     property var hostKey: ({})            // hostId -> keyId in "different keys" mode
@@ -44,9 +46,27 @@ Popup {
     function keyIndex(id) { return Math.max(0, keys.findIndex(k => k.id === id)) }
     function keyFor(hostId) { return perHost ? (hostKey[hostId] || (keys.length ? keys[0].id : "")) : keyId }
 
+    function pickUsersOf(kid) {           // the servers that log in with this key now
+        const p = {}
+        for (const h of hosts) if (h.keyId === kid) p[h.id] = true
+        picked = p
+    }
+    function rotate() {
+        error = ""
+        const ids = hosts.filter(h => picked[h.id]).map(h => h.id)
+        if (ids.length === 0) { error = qsTr("Tick at least one server."); return }
+        if (oldKeyId === keyId) { error = qsTr("The new key must be a different key."); return }
+        error = secrets.prepare()
+        if (error !== "") return
+        error = App.rotateKey(oldKeyId, keyId, ids, needMaster ? secrets.masterPassword : "")
+        secrets.clear()
+        if (error === "") showResults = true
+    }
     function openFor(id) {
         keyId = id || (keys.length ? keys[0].id : "")
         perHost = false
+        replaceMode = false
+        oldKeyId = keys.length ? keys[0].id : ""
         picked = ({}); hostKey = ({})
         showResults = false; error = ""
         secrets.clear()
@@ -82,12 +102,14 @@ Popup {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 1
-                Text { text: qsTr("Install keys on servers"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
+                Text { text: root.replaceMode ? qsTr("Replace a key on servers") : qsTr("Install keys on servers"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
                 Text {
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.textDim; font.pixelSize: 12
-                    text: qsTr("The public key is added to ~/.ssh/authorized_keys on each server — no copying by hand. To get in this one time, each server uses what it already has (password or another key).")
+                    text: root.replaceMode
+                          ? qsTr("Two safe steps on each server: 1) log in as now and add the new key; 2) log in with only the new key and, if that works, remove the old one. Where the new key does not work, the old key stays — you cannot lock yourself out. Then the hosts log in with the new key.")
+                          : qsTr("The public key is added to ~/.ssh/authorized_keys on each server — no copying by hand. To get in this one time, each server uses what it already has (password or another key).")
                 }
             }
             AppButton { glyph: Theme.iconClose; variant: "ghost"; compact: true; onClicked: root.close() }
@@ -104,16 +126,52 @@ Popup {
                 Layout.fillWidth: true
                 spacing: 8
                 Text { text: qsTr("Keys:"); color: Theme.textDim; font.pixelSize: 12 }
-                Chip { text: qsTr("One key for all servers"); on: !root.perHost; onClicked: root.perHost = false }
-                Chip { text: qsTr("A different key per server"); on: root.perHost; onClicked: root.perHost = true }
+                Chip { text: qsTr("One key for all servers"); on: !root.perHost && !root.replaceMode; onClicked: { root.perHost = false; root.replaceMode = false } }
+                Chip { text: qsTr("A different key per server"); on: root.perHost && !root.replaceMode; onClicked: { root.perHost = true; root.replaceMode = false } }
+                Chip { text: qsTr("Replace an old key"); on: root.replaceMode
+                       onClicked: {
+                           root.replaceMode = true; root.perHost = false
+                           if (root.keyId === root.oldKeyId) {   // start with two different keys
+                               const other = root.keys.find(k => k.id !== root.oldKeyId)
+                               if (other) root.keyId = other.id
+                           }
+                           root.pickUsersOf(root.oldKeyId)
+                       } }
                 Item { Layout.fillWidth: true }
                 AppCombo {
-                    visible: !root.perHost
+                    visible: !root.perHost && !root.replaceMode
                     Layout.preferredWidth: 260
                     model: root.keys.map(k => k.name + "  ·  " + k.type)
                     currentIndex: root.keyIndex(root.keyId)
                     onActivated: (i) => root.keyId = root.keys[i].id
                 }
+            }
+            RowLayout {
+                visible: root.replaceMode
+                Layout.fillWidth: true
+                spacing: 8
+                Text { text: qsTr("Old key:"); color: Theme.textDim; font.pixelSize: 12 }
+                AppCombo {
+                    Layout.fillWidth: true
+                    model: root.keys.map(k => k.name + "  ·  " + k.type)
+                    currentIndex: root.keyIndex(root.oldKeyId)
+                    onActivated: (i) => { root.oldKeyId = root.keys[i].id; root.pickUsersOf(root.oldKeyId) }
+                }
+                IconLabel { glyph: Theme.iconArrowRight; size: 16; color: Theme.accent }
+                Text { text: qsTr("New key:"); color: Theme.textDim; font.pixelSize: 12 }
+                AppCombo {
+                    Layout.fillWidth: true
+                    model: root.keys.map(k => k.name + "  ·  " + k.type)
+                    currentIndex: root.keyIndex(root.keyId)
+                    onActivated: (i) => root.keyId = root.keys[i].id
+                }
+            }
+            Text {
+                visible: root.replaceMode && root.keys.length < 2
+                Layout.fillWidth: true
+                wrapMode: Text.WordWrap
+                text: qsTr("You need two keys: create the new key first (Keychain → Generate).")
+                color: Theme.warn; font.pixelSize: 12
             }
             Text {
                 visible: root.keys.length === 0
@@ -182,6 +240,7 @@ Popup {
             }
             AppCheckBox {
                 id: useNow
+                visible: !root.replaceMode
                 checked: true
                 text: qsTr("After it works, log in to these servers with the key (instead of the password)")
             }
@@ -189,6 +248,7 @@ Popup {
                 id: secrets
                 Layout.fillWidth: true
                 hostIds: root.hosts.filter(h => root.picked[h.id]).map(h => h.id)
+                extraKeyIds: root.replaceMode ? [root.keyId] : []
                 needMaster: root.needMaster
                 onSubmit: root.install()
             }
@@ -198,9 +258,10 @@ Popup {
                 Item { Layout.fillWidth: true }
                 AppButton { text: qsTr("Close"); variant: "ghost"; onClicked: root.close() }
                 AppButton {
-                    text: qsTr("Install on %n server(s)", "", root.pickedCount); variant: "primary"; glyph: Theme.iconKey
-                    enabled: root.pickedCount > 0 && root.keys.length > 0
-                    onClicked: root.install()
+                    text: root.replaceMode ? qsTr("Replace on %n server(s)", "", root.pickedCount) : qsTr("Install on %n server(s)", "", root.pickedCount)
+                    variant: "primary"; glyph: Theme.iconKey
+                    enabled: root.pickedCount > 0 && root.keys.length > (root.replaceMode ? 1 : 0)
+                    onClicked: root.replaceMode ? root.rotate() : root.install()
                 }
             }
         }
@@ -214,7 +275,9 @@ Popup {
             RowLayout {
                 spacing: 14
                 BusyIndicator { visible: root.batch.running; running: visible; implicitWidth: 22; implicitHeight: 22 }
-                Text { text: root.batch.running ? qsTr("Installing… %1 of %2 done").arg(root.batch.doneCount).arg(root.batch.results.length) : qsTr("Finished")
+                Text { text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 2: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                           : root.replaceMode && App.rotatePhase === "removing" ? qsTr("Step 2 of 2: logging in with the new key, removing the old one… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                           : root.batch.running ? qsTr("Installing… %1 of %2 done").arg(root.batch.doneCount).arg(root.batch.results.length) : qsTr("Finished")
                        color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
                 Text { text: "✓ " + root.batch.okCount; color: Theme.ok; font.pixelSize: 13; font.weight: Font.DemiBold }
                 Text { text: "✗ " + root.batch.failCount; color: root.batch.failCount > 0 ? Theme.danger : Theme.textFaint; font.pixelSize: 13; font.weight: Font.DemiBold }
@@ -261,6 +324,8 @@ Popup {
                                     font.pixelSize: 11
                                     color: modelData.state === "ok" ? Theme.textDim : parent.parent.parent.tint
                                     text: modelData.state === "ok" ? (modelData.output.trim() === "the key was already there" ? qsTr("The key was already there")
+                                                                      : modelData.output.trim() === "old key removed" ? qsTr("The new key works, the old key was removed")
+                                                                      : modelData.output.trim() === "the old key was not there" ? qsTr("The new key works (the old key was not on this server)")
                                                                       : qsTr("Key added"))
                                           : modelData.state === "queued" ? qsTr("waiting…") : modelData.state === "running" ? qsTr("running…") : modelData.error
                                 }
@@ -271,9 +336,10 @@ Popup {
             }
             RowLayout {
                 Layout.fillWidth: true
-                AppButton { text: qsTr("Back"); glyph: Theme.iconBack; variant: "ghost"; enabled: !root.batch.running; onClicked: root.showResults = false }
+                AppButton { text: qsTr("Back"); glyph: Theme.iconBack; variant: "ghost"
+                            enabled: !root.batch.running && !(root.replaceMode && App.rotatePhase === "adding"); onClicked: root.showResults = false }
                 Item { Layout.fillWidth: true }
-                AppButton { visible: !root.batch.running; text: qsTr("Done"); variant: "primary"; onClicked: root.close() }
+                AppButton { visible: !root.batch.running && !(root.replaceMode && (App.rotatePhase === "adding" || App.rotatePhase === "removing")); text: qsTr("Done"); variant: "primary"; onClicked: root.close() }
             }
         }
     }

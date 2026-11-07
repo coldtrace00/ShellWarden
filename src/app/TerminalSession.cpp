@@ -1,4 +1,5 @@
 #include "TerminalSession.h"
+#include <QRegularExpression>
 #include "LocalPty.h"
 #include "core/ActivityLog.h"
 #include "core/SecureBytes.h"
@@ -285,6 +286,16 @@ void TerminalSession::begin(const ConnectParams &params)
         const bool binary = data.contains('\0');
         emit sftpFileRead(id, path, binary ? QString() : QString::fromUtf8(data), binary, err);
     });
+    connect(worker, &SshWorker::sftpResumed, this, [this](int id, qint64 offset) {
+        for (TransferInfo &t : m_transfers) {
+            if (t.id == id) {   // these bytes were already there: the speed counts from now
+                t.base = offset;
+                t.done = offset;
+                t.startedMs = QDateTime::currentMSecsSinceEpoch();
+            }
+        }
+        emit transfersChanged();
+    });
     connect(worker, &SshWorker::sftpProgress, this,
             [this](int id, qint64 done, qint64 total, int state, const QString &err) {
                 for (TransferInfo &t : m_transfers) {
@@ -292,7 +303,7 @@ void TerminalSession::begin(const ConnectParams &params)
                         continue;
                     const qint64 now = QDateTime::currentMSecsSinceEpoch();
                     const double secs = std::max(0.001, (now - t.startedMs) / 1000.0);
-                    t.speed = done / secs;
+                    t.speed = (done - std::max<qint64>(0, t.base)) / secs;
                     t.done = done;
                     if (total > 0)
                         t.total = total;
@@ -455,6 +466,31 @@ void TerminalSession::kill(const QString &reason)
     emit logEvent(ActivityLog::Security, QStringLiteral("killswitch"), tr("Session closed by the kill switch"), reason);
 }
 
+QString TerminalSession::commandFromLine(const QString &line)
+{
+    // The prompt ends at the first "$ ", "# ", "% " or "> " (user@host:~$ ls -la);
+    // prompts of zsh themes end with "❯", "➜" or "»".
+    static const QRegularExpression shell(QStringLiteral("^.*?[$#%>] "));
+    static const QRegularExpression fancy(QStringLiteral("^.*?[\u276F\u279C\u00BB]\\s+"));
+    QRegularExpressionMatch m = shell.match(line);
+    if (!m.hasMatch())
+        m = fancy.match(line);
+    if (!m.hasMatch())
+        return {};                  // no prompt: a password or a program asking something
+    const QString rest = line.mid(m.capturedEnd());
+    if (rest.trimmed().isEmpty() || rest.startsWith(QLatin1Char(' ')))
+        return {};                  // " command" = do not remember (like bash's ignorespace)
+    return rest.trimmed();
+}
+
+void TerminalSession::noteCommand(const QString &line)
+{
+    const QString cmd = commandFromLine(line);
+    if (cmd.isEmpty() || cmd.size() > 2000)
+        return;
+    emit commandEntered(cmd);
+}
+
 void TerminalSession::write(const QByteArray &data)
 {
     if (m_inputDepth > 0 && m_broadcast) {
@@ -464,6 +500,14 @@ void TerminalSession::write(const QByteArray &data)
     }
     if (m_state != Connected || data.isEmpty())
         return;
+    // Command history: on a plain Enter at a shell prompt remember where the line
+    // starts; it is read once the server echoes the Enter (see incoming()), so even
+    // over a slow link the line holds everything that was typed, after editing and
+    // Tab completion.
+    if (data == "\r" && !m_hostId.isEmpty() && !m_emu.altScreen()) {
+        m_cmdLine = m_emu.cursorLineStart();
+        m_cmdSince.start();
+    }
     if (m_pty) {
         m_pty->write(data);
         return;
@@ -727,6 +771,7 @@ QVariantList TerminalSession::transfers() const
             {QStringLiteral("sizeText"), formatBytes(t.done) + QStringLiteral(" / ") + formatBytes(t.total)},
             {QStringLiteral("speedText"), formatBytes(qint64(t.speed)) + QStringLiteral("/s")},
             {QStringLiteral("local"), t.local},
+            {QStringLiteral("resumed"), t.base > 0},
         };
     }
     return out;
@@ -739,6 +784,19 @@ QVariantList TerminalSession::transfers() const
 void TerminalSession::incoming(const QByteArray &data)
 {
     m_emu.feed(data);
+    if (m_cmdLine >= 0) {
+        const int cursorAbs = m_emu.scrollbackSize() + m_emu.cursor().row;
+        if (m_cmdSince.elapsed() > 5000 || cursorAbs < m_cmdLine) {
+            m_cmdLine = -1;                       // no echo, or the screen was cleared
+        } else if (cursorAbs > m_cmdLine) {       // the Enter came back: the line is complete
+            bool full = false;
+            QString line = m_emu.lineText(m_cmdLine, &full);
+            for (int l = m_cmdLine + 1; full && l < cursorAbs; ++l)   // a long command wraps
+                line += m_emu.lineText(l, &full);
+            m_cmdLine = -1;
+            noteCommand(line);
+        }
+    }
     if (!m_record)
         return;
     // Plain text for the log: drop escape sequences (colours, cursor moves,

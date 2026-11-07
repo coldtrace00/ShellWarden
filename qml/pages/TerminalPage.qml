@@ -58,6 +58,121 @@ Rectangle {
         enabled: root.visible && (term.activeFocus || searchField.activeFocus)
         onActivated: root.openSearch()
     }
+    Shortcut {
+        sequence: "Ctrl+Shift+H"
+        enabled: root.visible && term.activeFocus && root.session && root.session.hostId !== ""
+        onActivated: historyPopup.show()
+    }
+
+    // Commands run on this host earlier: search, put one into the prompt or run it.
+    Modal {
+        id: historyPopup
+        property var all: []
+        readonly property var shown: {
+            const q = histSearch.text.trim().toLowerCase()
+            return q === "" ? all : all.filter(c => c.toLowerCase().indexOf(q) >= 0)
+        }
+        property int current: 0
+        title: qsTr("Command history · %1").arg(root.session ? root.session.label : "")
+        subtitle: qsTr("Enter puts the command into the terminal, Ctrl+Enter runs it. A command typed with a space in front is not remembered.")
+        width: Math.min(640, (parent ? parent.width : 640) - 40)
+        function show() {
+            all = App.commandHistory(root.session.hostId)
+            histSearch.text = ""
+            current = 0
+            open()
+            histSearch.field.forceActiveFocus()
+        }
+        function use(cmd, run) {
+            close()
+            root.session.sendText(cmd + (run ? "\r" : ""))
+            term.forceActiveFocus()
+        }
+        onClosed: term.forceActiveFocus()
+
+        AppField {
+            id: histSearch
+            Layout.fillWidth: true
+            placeholder: qsTr("Search…")
+            onTextChanged: historyPopup.current = 0
+            field.Keys.onDownPressed: historyPopup.current = Math.min(historyPopup.current + 1, historyPopup.shown.length - 1)
+            field.Keys.onUpPressed: historyPopup.current = Math.max(historyPopup.current - 1, 0)
+            field.Keys.onReturnPressed: (e) => {
+                if (historyPopup.shown.length > 0)
+                    historyPopup.use(historyPopup.shown[historyPopup.current], (e.modifiers & Qt.ControlModifier) !== 0)
+            }
+        }
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: 300
+            radius: 8
+            color: Theme.bg
+            border.color: Theme.border
+            ListView {
+                id: histList
+                anchors.fill: parent
+                anchors.margins: 1
+                clip: true
+                model: historyPopup.shown
+                currentIndex: historyPopup.current
+                onCurrentIndexChanged: positionViewAtIndex(currentIndex, ListView.Contain)
+                ScrollBar.vertical: ScrollBar {}
+                delegate: Rectangle {
+                    width: histList.width
+                    height: 30
+                    color: index === historyPopup.current ? Theme.surface2 : (hh.hovered ? Theme.surfaceHover : "transparent")
+                    HoverHandler { id: hh }
+                    TapHandler {
+                        onTapped: historyPopup.current = index
+                        onDoubleTapped: historyPopup.use(modelData, false)
+                    }
+                    RowLayout {
+                        anchors.fill: parent
+                        anchors.leftMargin: 10; anchors.rightMargin: 6
+                        spacing: 6
+                        Text { Layout.fillWidth: true; text: modelData; color: Theme.text; font.family: Theme.monoFont; font.pixelSize: 12; elide: Text.ElideRight }
+                        AbstractButton {
+                            visible: hh.hovered
+                            width: 22; height: 22
+                            onClicked: { App.forgetCommand(root.session.hostId, modelData); historyPopup.all = App.commandHistory(root.session.hostId) }
+                            contentItem: Item { IconLabel { anchors.centerIn: parent; glyph: Theme.iconDelete; size: 12; color: Theme.textDim } }
+                            ToolTip.visible: hovered; ToolTip.text: qsTr("Forget this command")
+                        }
+                    }
+                }
+            }
+            Text {
+                anchors.centerIn: parent
+                visible: historyPopup.shown.length === 0
+                width: parent.width - 40
+                horizontalAlignment: Text.AlignHCenter
+                wrapMode: Text.WordWrap
+                text: historyPopup.all.length === 0 ? qsTr("No commands yet. Commands you run on this host will appear here.") : qsTr("Nothing found.")
+                color: Theme.textFaint
+            }
+        }
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+            AppButton {
+                text: qsTr("Clear history"); variant: "ghost"; compact: true
+                enabled: historyPopup.all.length > 0
+                onClicked: { App.clearCommandHistory(root.session.hostId); historyPopup.all = [] }
+            }
+            Item { Layout.fillWidth: true }
+            AppButton { text: qsTr("Close"); variant: "ghost"; onClicked: historyPopup.close() }
+            AppButton {
+                text: qsTr("Insert"); variant: "ghost"
+                enabled: historyPopup.shown.length > 0
+                onClicked: historyPopup.use(historyPopup.shown[historyPopup.current], false)
+            }
+            AppButton {
+                text: qsTr("Run"); variant: "primary"; glyph: Theme.iconTerminal
+                enabled: historyPopup.shown.length > 0
+                onClicked: historyPopup.use(historyPopup.shown[historyPopup.current], true)
+            }
+        }
+    }
 
     FileDialog {
         id: recordDlg
@@ -291,6 +406,13 @@ Rectangle {
                     enabled: root.session && root.session.state === root.sConnected && App.vaultUnlocked
                     tip: qsTr("Snippets")
                     onClicked: snippetMenu.popup()
+                }
+                ToolBtn {
+                    visible: root.session && root.session.hostId !== "" && App.settings.commandHistory
+                    glyph: Theme.iconClock
+                    enabled: root.session && root.session.state === root.sConnected && App.vaultUnlocked
+                    tip: qsTr("Command history (Ctrl+Shift+H)")
+                    onClicked: historyPopup.show()
                 }
                 ToolBtn {
                     visible: root.session && root.session.recording
@@ -745,7 +867,9 @@ Rectangle {
         // side panel
         Rectangle {
             Layout.fillHeight: true
-            Layout.preferredWidth: root.panel !== "" ? Math.min(420, root.width * 0.45) : 0
+            Layout.preferredWidth: root.panel === "" ? 0
+                                 : root.panel === "sftp" && App.settings.sftpTwoPane ? Math.min(1100, root.width * 0.8)
+                                 : Math.min(420, root.width * 0.45)
             visible: Layout.preferredWidth > 1
             color: Theme.surface
             clip: true
@@ -767,7 +891,9 @@ Rectangle {
         }
     }
 
-    Component { id: sftpComp; SftpPanel { session: root.session; onCloseRequested: root.panel = "" } }
+    Component { id: sftpComp; SftpPanel { session: root.session; wide: App.settings.sftpTwoPane
+                                          onWideToggled: App.setSetting("sftpTwoPane", !App.settings.sftpTwoPane)
+                                          onCloseRequested: root.panel = "" } }
     Component { id: tunnelsComp; TunnelsPanel { session: root.session; onCloseRequested: root.panel = "" } }
 
     AppMenu {
