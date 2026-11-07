@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(ShellWarden VERSION 0.4.0 LANGUAGES C CXX)
+project(ShellWarden VERSION 0.4.1 LANGUAGES C CXX)
 
 # ---- branding: change the product name in ONE place --------------------
 set(APP_NAME        "ShellWarden"  CACHE STRING "Product name (window, data folder, installer)")
@@ -51,6 +51,8 @@ qt_add_executable(ShellWardenApp WIN32
     src/core/Vault.h            src/core/Vault.cpp
     src/core/Minisign.h         src/core/Minisign.cpp
     src/core/Shadowsocks.h      src/core/Shadowsocks.cpp
+    src/core/BackgroundThreads.h src/core/BackgroundThreads.cpp
+    src/core/SafeText.h
     src/core/KeyTools.h         src/core/KeyTools.cpp
     src/core/KnownHosts.h       src/core/KnownHosts.cpp
     src/core/SshWorker.h        src/core/SshWorker.cpp
@@ -77,6 +79,7 @@ qt_add_executable(ShellWardenApp WIN32
     src/app/SessionListModel.h  src/app/SessionListModel.cpp
     src/app/ProxyChecker.h      src/app/ProxyChecker.cpp
     src/app/UpdateChecker.h     src/app/UpdateChecker.cpp
+    src/app/QmlSafety.h         src/app/QmlSafety.cpp
     src/app/SystemLockWatcher.h src/app/SystemLockWatcher.cpp
     src/app/TorManager.h        src/app/TorManager.cpp
     src/app/DarkTitleBar.h      src/app/DarkTitleBar.cpp
@@ -87,6 +90,12 @@ qt_add_executable(ShellWardenApp WIN32
     src/app/TerminalSession.h   src/app/TerminalSession.cpp
     src/app/AppController.h     src/app/AppController.cpp
     src/app/AppControllerProtect.cpp
+    src/app/AppControllerPrivate.h
+    src/app/AppControllerHosts.cpp
+    src/app/AppControllerKeys.cpp
+    src/app/AppControllerProxies.cpp
+    src/app/AppControllerSessions.cpp
+    src/app/AppControllerBatch.cpp
 )
 
 set_source_files_properties(qml/Theme.qml qml/Icons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
@@ -105,6 +114,7 @@ qt_add_qml_module(ShellWardenApp
         qml/components/SessionTabButton.qml
         qml/components/Modal.qml
         qml/components/MasterPrompt.qml
+        qml/components/PlainToolTips.qml
         qml/components/AppSwitch.qml
         qml/components/PasswordField.qml
         qml/components/Logo.qml

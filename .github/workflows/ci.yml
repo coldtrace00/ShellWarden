@@ -25,15 +25,21 @@ jobs:
             qt6-base-dev qt6-base-dev-tools qt6-declarative-dev qt6-declarative-dev-tools \
             qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-serialport-dev libgl-dev \
             libssh-dev libsodium-dev libvterm-dev libssl-dev \
-            openssh-server openssh-client tinyproxy shadowsocks-libev putty-tools python3
+            openssh-server openssh-client tinyproxy shadowsocks-libev putty-tools python3 \
+            qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-templates \
+            qml6-module-qtquick-window qml6-module-qtqml-workerscript qml6-module-qtquick-layouts
       - name: Library versions
         run: pkg-config --modversion libssh libsodium libcrypto vterm
       - name: Configure
         run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DSHELLWARDEN_BUILD_TESTS=ON
       - name: Build (app + tests)
         run: cmake --build build
+      - name: QML shows text from servers as plain text only
+        run: python3 tests/check_qml_text.py
       - name: Unit tests
         run: ./build/tests/unit_tests
+      - name: Interface loads nothing from the network
+        run: QT_QPA_PLATFORM=offscreen ./build/tests/qml_safety_tests
       - name: Test servers (sshd, proxies, Shadowsocks)
         run: sudo tests/integration/setup.sh
       - name: Integration tests
@@ -52,7 +58,9 @@ jobs:
             qt6-base-dev qt6-base-dev-tools qt6-declarative-dev qt6-declarative-dev-tools \
             qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-serialport-dev libgl-dev \
             libssh-dev libsodium-dev libvterm-dev libssl-dev \
-            openssh-server openssh-client tinyproxy shadowsocks-libev putty-tools python3
+            openssh-server openssh-client tinyproxy shadowsocks-libev putty-tools python3 \
+            qml6-module-qtquick qml6-module-qtquick-controls qml6-module-qtquick-templates \
+            qml6-module-qtquick-window qml6-module-qtqml-workerscript qml6-module-qtquick-layouts
       - name: Configure (clang, sanitizers)
         run: |
           cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSHELLWARDEN_BUILD_TESTS=ON \
@@ -61,9 +69,11 @@ jobs:
             "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined" \
             "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
       - name: Build tests
-        run: cmake --build build --target unit_tests integration_tests
+        run: cmake --build build --target unit_tests integration_tests qml_safety_tests
       - name: Unit tests
         run: ./build/tests/unit_tests
+      - name: Interface loads nothing from the network
+        run: QT_QPA_PLATFORM=offscreen ASAN_OPTIONS=detect_leaks=0 ./build/tests/qml_safety_tests
       - name: Test servers
         run: sudo tests/integration/setup.sh
       - name: Integration tests
@@ -135,3 +145,5 @@ jobs:
         run: cmake --build build
       - name: Unit tests
         run: ./build/tests/unit_tests.exe
+      - name: Interface loads nothing from the network (Qt of the releases)
+        run: QT_QPA_PLATFORM=offscreen ./build/tests/qml_safety_tests.exe

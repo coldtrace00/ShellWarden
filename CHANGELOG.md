@@ -5,6 +5,41 @@ While the major version is 0, a new MINOR may change behaviour; PATCH releases
 only fix things. Pre-releases are marked as such on GitHub and are not offered
 by the in-app updater.
 
+## 0.4.1 — 2026-11-07
+
+Fixes from the second review.
+
+### Security
+- **Tooltips could load from a Windows share.** The shared tooltip of the Qt
+  style shows text as rich text, and the "online" dot's tooltip shows the reply
+  of an HTTP proxy that refused a connection. A proxy owner (or anyone on the way
+  to it — that connection is not encrypted) could put `<img src='file://server/…'>`
+  in it and, on hover, make Windows connect to that share outside the proxy and
+  kill switch (real IP, NTLM hash). Now: the tooltip shows plain text; the
+  interface refuses every address that is not built in or on this computer —
+  also `file://server/…` and `\\server\share` (QML URL interceptor + network
+  access); proxy replies are cut to 64 printable characters; server error
+  messages are cleaned; `$SSH_CONNECTION` is used only if it really is
+  "address port address port".
+- New test `qml_safety_tests` (also on Windows with the Qt of the releases) and
+  a CI check `tests/check_qml_text.py` (every QML text is plain text, no raw
+  Button/MenuItem/CheckBox whose label shows HTML — in Qt 6.4 such a Button even
+  crashes on `<img>`).
+
+### Fixed
+- **A failed master password change could leave the vault without its key**
+  (open on screen, but every save failed until restart). The current password
+  is now checked against the key in memory; if the new file cannot be written,
+  the old password stays in force. Unit tests for both.
+- Background threads (Shadowsocks relays, the Windows agent bridge, the
+  Shadowsocks IP check) are stopped and waited for when the program closes.
+- `tests/integration/setup.sh | tail` no longer hangs; `sodium_init()` is
+  checked in all tests.
+
+### Other
+- README: Qt 6.4 or newer (CI tests 6.4.2 and 6.12).
+- AppController split into Hosts, Keys, Proxies, Sessions and Batch files.
+
 ## 0.4.0 — 2026-11-07
 
 ### Security

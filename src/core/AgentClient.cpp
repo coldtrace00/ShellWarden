@@ -1,4 +1,5 @@
 #include "AgentClient.h"
+#include "BackgroundThreads.h"
 
 #include <QObject>
 #include <QtEndian>
@@ -189,6 +190,7 @@ void serveClient(SOCKET c)
         }
         if (send(c, reply.constData(), reply.size(), 0) != reply.size()) break;
     }
+    bgthreads::unwatch(static_cast<long long>(c));
     closesocket(c);
 }
 
@@ -206,13 +208,27 @@ void startBridge()
     int alen = sizeof a;
     getsockname(srv, reinterpret_cast<sockaddr *>(&a), &alen);
     g_bridgePort = ntohs(a.sin_port);
-    std::thread([srv] {
+    // on exit bgthreads::shutdown() closes srv and cuts the clients: the threads return
+    bgthreads::watch(static_cast<long long>(srv), true);
+    const bool started = bgthreads::start([srv] {
         for (;;) {
             SOCKET c = accept(srv, nullptr, nullptr);
-            if (c == INVALID_SOCKET) break;
-            std::thread(serveClient, c).detach();
+            if (c == INVALID_SOCKET || bgthreads::stopping()) {
+                if (c != INVALID_SOCKET) closesocket(c);
+                break;
+            }
+            bgthreads::watch(static_cast<long long>(c));
+            if (!bgthreads::start([c] { serveClient(c); })) {
+                bgthreads::unwatch(static_cast<long long>(c));
+                closesocket(c);
+            }
         }
-    }).detach();
+    });
+    if (!started) {
+        bgthreads::unwatch(static_cast<long long>(srv));
+        closesocket(srv);
+        g_bridgePort = 0;
+    }
 }
 } // namespace
 

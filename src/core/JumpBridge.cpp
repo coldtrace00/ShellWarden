@@ -1,3 +1,4 @@
+#include "SafeText.h"
 #include "JumpBridge.h"
 #include "KeyTools.h"
 #include "SecureBytes.h"
@@ -57,7 +58,7 @@ sw_socket_t JumpBridge::start(const JumpParams &jump, const ProxyConfig &proxy, 
     }
 
     if (ssh_connect(m_session) != SSH_OK) {
-        *error = QString::fromUtf8(ssh_get_error(m_session));
+        *error = safetext::snippet(ssh_get_error(m_session));
         return kInvalidSocket;
     }
     switch (ssh_session_is_known_server(m_session)) {
@@ -78,7 +79,7 @@ sw_socket_t JumpBridge::start(const JumpParams &jump, const ProxyConfig &proxy, 
     const QByteArray th = targetHost.toUtf8();
     if (!m_channel || ssh_channel_open_forward(m_channel, th.constData(), targetPort, "127.0.0.1", 0) != SSH_OK) {
         *error = QObject::tr("the jump host could not reach %1:%2 (%3)")
-                     .arg(targetHost).arg(targetPort).arg(QString::fromUtf8(ssh_get_error(m_session)));
+                     .arg(targetHost).arg(targetPort).arg(safetext::snippet(ssh_get_error(m_session)));
         return kInvalidSocket;
     }
 

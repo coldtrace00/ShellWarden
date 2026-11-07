@@ -9,6 +9,9 @@
 #include "core/Protected.h"
 #include "core/Shadowsocks.h"
 #include "core/Vault.h"
+#include "core/SafeText.h"
+#include "core/BackgroundThreads.h"
+#include "core/ProxyTunnel.h"
 #include "terminal/PasteGuard.h"
 
 #include "blake3.h"
@@ -20,6 +23,9 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 #include <QTemporaryDir>
+#include <QElapsedTimer>
+#include <atomic>
+#include <thread>
 
 #include <cstdio>
 #include <sodium.h>
@@ -53,6 +59,34 @@ static void testVault(const QString &dir)
         QString e2;
         CHECK(v.deriveWithVaultCost("correct horse battery", QByteArray(16, 'x'), reinterpret_cast<unsigned char *>(out.data()), &e2)
                   && out != QByteArray(32, 0), "derives an extra key with the vault's cost");
+    }
+    {   // changing the master password
+        Vault v(path);
+        CHECK(v.unlock("correct horse battery", &err), "opens for the password change");
+        CHECK(!v.changePassword("wrong password!", "new password 42", &err) && err == "Wrong master password.",
+              "a wrong current password is refused");
+        CHECK(v.isUnlocked() && v.data().value("hosts").toArray().size() == 1,
+              "after a refused change the vault stays open with its data");
+        CHECK(v.save(&err), "and still saves");
+        // the file is briefly unreadable (antivirus, cloud sync): nothing is lost
+        QFile::rename(path, path + ".away");
+        CHECK(!v.changePassword("wrong password!", "new password 42", &err) && v.isUnlocked()
+                  && v.data().value("hosts").toArray().size() == 1,
+              "a refused change with the file missing keeps the vault open");
+        // the file cannot be written: the old password stays in force
+        QDir().mkpath(path);   // a folder where the file should be
+        CHECK(!v.changePassword("correct horse battery", "new password 42", &err), "a change that cannot be written fails");
+        QDir().rmdir(path);
+        QFile::rename(path + ".away", path);
+        CHECK(v.isUnlocked() && v.verifyPassword("correct horse battery") && !v.verifyPassword("new password 42"),
+              "after a failed write the old password is still the one in use");
+        CHECK(v.save(&err), "saves again with the old password");
+        CHECK(v.changePassword("correct horse battery", "new password 42", &err), "a real change works");
+        Vault again(path);
+        CHECK(!again.unlock("correct horse battery", &err) && again.unlock("new password 42", &err)
+                  && again.data().value("hosts").toArray().size() == 1,
+              "the file opens with the new password only, data kept");
+        CHECK(again.changePassword("new password 42", "correct horse battery", &err), "and back");
     }
     {   // every byte of header and ciphertext is authenticated
         QByteArray raw = readFile(path);
@@ -308,14 +342,66 @@ static void testShadowsocks()
           "2022: chacha has no identity headers");
 }
 
+static void testSafeText()
+{
+    std::printf("[text from the other side]\n");
+    using safetext::snippet;
+    CHECK(snippet(QByteArray("HTTP/1.1 403 Forbidden")) == "HTTP/1.1 403 Forbidden", "ordinary text unchanged");
+    const QString html = snippet(QByteArray("HTTP/1.1 502 <b>x</b><img src='file://evil/s/x.png'>"));
+    CHECK(!html.contains('<') && !html.contains('>'), "angle brackets are neutralised");
+    CHECK(snippet(QByteArray(16000, 'A'), 64).size() == 65, "cut to the limit (plus …)");
+    CHECK(snippet(QString::fromUtf8("a\r\n\t\x1b[31mb")) == QString::fromUtf8("a [31mb"), "control characters become one space");
+    CHECK(snippet(QString::fromUtf8("abc\u202Edef\u200B")) == "abcdef", "bidi and invisible characters removed");
+    CHECK(snippet(QString::fromUtf8("сервер: помилка 🔒")) == QString::fromUtf8("сервер: помилка 🔒"), "non-Latin text and emoji kept");
+    CHECK(snippet(QByteArray()).isEmpty() && snippet(static_cast<const char *>(nullptr)).isEmpty(), "empty and null");
+}
+
+// last: shutdown() is once per program
+static void testBackgroundThreads()
+{
+    std::printf("[background threads stop on exit]\n");
+    proxytunnel::initSockets();
+    sw_socket_t a = kInvalidSocket, b = kInvalidSocket, c = kInvalidSocket, d = kInvalidSocket;
+    QString err;
+    CHECK(proxytunnel::loopbackPair(&a, &b, &err) && proxytunnel::loopbackPair(&c, &d, &err), "socket pairs");
+    std::atomic<int> left{0};
+    // one blocks in recv() forever, one loops until stopping()
+    CHECK(bgthreads::start([&left, b] {
+              char x;
+              proxytunnel::readSome(b, &x, 1, 600000);   // "forever"
+              ++left;
+          }),
+          "a worker blocked on a socket starts");
+    bgthreads::watch(static_cast<long long>(b));
+    CHECK(bgthreads::start([&left] {
+              while (!bgthreads::stopping())
+                  std::this_thread::sleep_for(std::chrono::milliseconds(20));
+              ++left;
+          }),
+          "a looping worker starts");
+    std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    CHECK(bgthreads::running() == 2, "both are running");
+    QElapsedTimer t;
+    t.start();
+    const int still = bgthreads::shutdown(3000);
+    CHECK(still == 0 && left == 2, qPrintable(QStringLiteral("shutdown() stops both (%1 left)").arg(still)));
+    CHECK(t.elapsed() < 2000, qPrintable(QStringLiteral("quickly (%1 ms)").arg(t.elapsed())));
+    CHECK(!bgthreads::start([] {}), "no new workers after shutdown");
+    for (sw_socket_t s : {a, b, c, d})
+        proxytunnel::closeSocket(s);
+}
+
 int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
-    if (sodium_init() < 0)
+    if (sodium_init() < 0) {
+        std::printf("libsodium could not start\n");
         return 2;
+    }
     QTemporaryDir tmp;
     testVault(tmp.path());
     testProtected();
+    testSafeText();
     testJournal(tmp.path());
     testFileNames();
     testPaste();
@@ -324,6 +410,7 @@ int main(int argc, char **argv)
     testMinisign();
     testUpdates();
     testShadowsocks();
+    testBackgroundThreads();
     std::printf("\n%s (%d failures)\n", g_fail ? "FAILED" : "ALL PASSED", g_fail);
     return g_fail ? 1 : 0;
 }

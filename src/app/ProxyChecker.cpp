@@ -1,4 +1,5 @@
 #include "ProxyChecker.h"
+#include "core/BackgroundThreads.h"
 
 #include <QDateTime>
 #include <QJsonDocument>
@@ -32,13 +33,17 @@ ProxyChecker::ProxyChecker(QObject *parent) : QObject(parent) {}
 void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int timeoutMs)
 {
     QPointer<ProxyChecker> self(this);
-    std::thread([self, proxy, done, timeoutMs] {
+    // tracked: on exit the program waits for it (and cuts its socket) before
+    // this object goes away
+    bgthreads::start([self, proxy, done, timeoutMs] {
         struct Service { const char *host, *path; };
         const Service services[] = {{"ipinfo.io", "/json"}, {"api.ipify.org", "/?format=json"}};
         QVariantMap r;
         QString lastError;
         QVariantList tried;   // {service, error} for every IP service that did not answer
         for (const Service &svc : services) {
+            if (bgthreads::stopping())
+                return;
             const qint64 t0 = QDateTime::currentMSecsSinceEpoch();
             QString err;
             const sw_socket_t s = shadowsocks::open(proxy, QString::fromLatin1(svc.host), 80, timeoutMs, false, &err);
@@ -46,6 +51,7 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
                 lastError = err;
                 break;   // the server itself is not reachable: the second service will not help
             }
+            bgthreads::watch(static_cast<long long>(s));
             const QByteArray req = QByteArray("GET ") + svc.path + " HTTP/1.0\r\nHost: " + svc.host
                                    + "\r\nUser-Agent: ShellWarden-SSH-Client\r\nAccept: application/json\r\nConnection: close\r\n\r\n";
             QByteArray resp;
@@ -59,6 +65,7 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
                     resp.append(buf, n);
                 }
             }
+            bgthreads::unwatch(static_cast<long long>(s));
             proxytunnel::closeSocket(s);
             const int body = int(resp.indexOf("\r\n\r\n"));
             const QJsonObject o = body > 0 ? QJsonDocument::fromJson(resp.mid(body + 4)).object() : QJsonObject();
@@ -90,9 +97,9 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
             r.insert(QStringLiteral("error"), lastError);
         }
         r.insert(QStringLiteral("checkedAt"), QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss")));
-        if (self)
+        if (!bgthreads::stopping() && self)
             QMetaObject::invokeMethod(self.data(), [done, r] { done(r); }, Qt::QueuedConnection);
-    }).detach();
+    });
 }
 
 void ProxyChecker::check(const ProxyConfig &proxy, Callback done, int timeoutMs)

@@ -38,6 +38,7 @@ T = [
 ("Blocked by kill switch", "Заблоковано kill switch", "Заблокировано kill switch", "Bloqué par le kill switch", "Bloqueado por el kill switch"),
 ("Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.", "Kill switch увімкнений: у цього хоста немає проксі, і проксі за замовчуванням не задано. Пряме з'єднання заблоковано.", "Kill switch включён: у этого хоста нет прокси, и прокси по умолчанию не задан. Прямое соединение заблокировано.", "Kill switch actif : cet hôte n'a pas de proxy et aucun proxy par défaut n'est défini. Connexion directe bloquée.", "Kill switch activado: este host no tiene proxy y no hay proxy predeterminado. Conexión directa bloqueada."),
 ("Direct", "Напряму", "Напрямую", "Direct", "Directa"),
+("The program is closing.", "Програма закривається.", "Программа закрывается.", "Le programme se ferme.", "El programa se está cerrando."),
 ("Connecting…", "Підключення…", "Подключение…", "Connexion…", "Conectando…"),
 ("checking…", "перевірка…", "проверка…", "vérification…", "comprobando…"),
 ("unknown", "невідомо", "неизвестно", "inconnue", "desconocida"),

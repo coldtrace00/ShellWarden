@@ -14,7 +14,7 @@ add_library(sw_core_for_tests STATIC
     ${SW_SRC}/core/Paths.cpp ${SW_SRC}/core/PrivateDir.cpp ${SW_SRC}/core/PrivateDirWin.cpp ${SW_SRC}/core/FileNames.cpp
     ${SW_SRC}/core/DepVersions.cpp ${SW_SRC}/core/Protected.cpp ${SW_SRC}/core/CommandHistory.cpp
     ${SW_SRC}/core/PasswordTools.cpp ${SW_SRC}/core/ActivityLog.cpp ${SW_SRC}/core/ActivityLog.h ${SW_SRC}/core/FirewallLock.cpp
-    ${SW_SRC}/core/AgentClient.cpp ${SW_SRC}/core/HostImport.cpp
+    ${SW_SRC}/core/AgentClient.cpp ${SW_SRC}/core/HostImport.cpp ${SW_SRC}/core/BackgroundThreads.cpp
     ${SW_SRC}/app/UpdateChecker.cpp ${SW_SRC}/app/UpdateChecker.h)
 set_target_properties(sw_core_for_tests PROPERTIES AUTOMOC ON)
 target_include_directories(sw_core_for_tests PUBLIC ${SW_SRC})
@@ -34,6 +34,15 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
 add_executable(unit_tests unit_tests.cpp)
 target_link_libraries(unit_tests PRIVATE sw_core_for_tests)
 add_test(NAME unit_tests COMMAND unit_tests)
+
+# the interface must not load anything from the network (offscreen, no servers)
+find_package(Qt6 REQUIRED COMPONENTS Qml Quick QuickControls2)
+add_executable(qml_safety_tests qml_safety_tests.cpp ${SW_SRC}/app/QmlSafety.cpp ${SW_SRC}/app/QmlSafety.h)
+target_include_directories(qml_safety_tests PRIVATE ${SW_SRC})
+target_compile_definitions(qml_safety_tests PRIVATE SW_QML_DIR="${PROJECT_SOURCE_DIR}/qml")
+target_link_libraries(qml_safety_tests PRIVATE Qt6::Gui Qt6::Network Qt6::Qml Qt6::Quick Qt6::QuickControls2)
+add_test(NAME qml_safety_tests COMMAND qml_safety_tests)
+set_tests_properties(qml_safety_tests PROPERTIES ENVIRONMENT QT_QPA_PLATFORM=offscreen)
 
 if (UNIX)
     add_executable(integration_tests integration_tests.cpp)

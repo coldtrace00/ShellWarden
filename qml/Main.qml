@@ -16,6 +16,9 @@ ApplicationWindow {
     title: currentSession ? currentSession.label + " — " + App.appName : App.appName
     color: Theme.bg
 
+    // tooltips show server text: plain text only (see PlainToolTips.qml)
+    PlainToolTips { }
+
     // -1 = vault pages, otherwise index of the session tab
     property int currentTab: -1
     property int splitTab: -1          // second pane (split view), -1 = none

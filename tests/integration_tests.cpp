@@ -158,7 +158,10 @@ static bool waitUntil(std::function<bool()> cond, int ms = 10000)
 int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
-    sodium_init();
+    if (sodium_init() < 0) {
+        std::printf("libsodium could not start\n");
+        return 2;
+    }
     ssh_init();
     QTemporaryDir tmp;
     const QString dir = tmp.path();

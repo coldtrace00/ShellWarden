@@ -35,6 +35,9 @@ Popup {
 
     readonly property var ansiNames: [qsTr("Black"), qsTr("Red"), qsTr("Green"), qsTr("Yellow"), qsTr("Blue"), qsTr("Magenta"), qsTr("Cyan"), qsTr("White")]
 
+    // colours go into the StyledText previews as <font color='…'>: only #rgb … #rrggbbaa
+    function hx(v) { return /^#[0-9A-Fa-f]{3,8}$/.test(String(v)) ? String(v) : (/^#[0-9A-Fa-f]{3,8}$/.test(fg) ? fg : "#e2e4ed") }
+
     function loadFrom(t) {
         bg = t.bg; fg = t.fg; cursor = t.cursor; selection = t.selection
         ansi = t.ansi.slice()
@@ -151,7 +154,7 @@ Popup {
                 anchors.margins: 12
                 spacing: 2
                 Text { textFormat: Text.StyledText; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg
-                       text: "Last login: Thu Nov  5 09:12:44 from <font color='" + (root.ansi[14] || root.fg) + "'>203.0.113.7</font>" }
+                       text: "Last login: Thu Nov  5 09:12:44 from <font color='" + root.hx(root.ansi[14]) + "'>203.0.113.7</font>" }
                 Row {
                     Text { textFormat: Text.PlainText; text: "admin@server"; font.family: Theme.monoFont; font.pixelSize: 13; font.bold: true; color: root.ansi[10] || root.fg }
                     Text { textFormat: Text.PlainText; text: ":"; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg }
@@ -160,13 +163,13 @@ Popup {
                     Text { textFormat: Text.PlainText; text: "ls -la /var/log"; font.family: Theme.monoFont; font.pixelSize: 13; color: root.input || root.fg }
                 }
                 Text { textFormat: Text.StyledText; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg
-                       text: "<b><font color='" + (root.ansi[12] || root.fg) + "'>nginx/</font></b>  syslog  <font color='" + (root.ansi[2] || root.fg) + "'>backup.sh</font>  <font color='" + (root.ansi[1] || root.fg) + "'>error.log</font>" }
+                       text: "<b><font color='" + root.hx(root.ansi[12]) + "'>nginx/</font></b>  syslog  <font color='" + root.hx(root.ansi[2]) + "'>backup.sh</font>  <font color='" + root.hx(root.ansi[1]) + "'>error.log</font>" }
                 Text { textFormat: Text.StyledText; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg
-                       text: "<b><font color='" + (root.ansi[9] || root.fg) + "'>Failed</font></b> password · <b><font color='" + (root.ansi[11] || root.fg) + "'>WARNING</font></b> disk 91% · <font color='" + (root.ansi[10] || root.fg) + "'>OK</font>" }
+                       text: "<b><font color='" + root.hx(root.ansi[9]) + "'>Failed</font></b> password · <b><font color='" + root.hx(root.ansi[11]) + "'>WARNING</font></b> disk 91% · <font color='" + root.hx(root.ansi[10]) + "'>OK</font>" }
                 Row {
                     spacing: 0
                     Text { textFormat: Text.StyledText; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg
-                           text: "<b><font color='" + (root.ansi[10] || root.fg) + "'>admin@server</font></b>:~$ " }
+                           text: "<b><font color='" + root.hx(root.ansi[10]) + "'>admin@server</font></b>:~$ " }
                     Rectangle { width: 8; height: 16; color: root.cursor }
                     Rectangle { width: 70; height: 16; color: root.selection
                                 Text { textFormat: Text.PlainText; anchors.centerIn: parent; text: qsTr("selected"); color: root.fg; font.family: Theme.monoFont; font.pixelSize: 12 } }

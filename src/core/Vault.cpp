@@ -174,11 +174,19 @@ bool Vault::changePassword(const QString &oldPassword, const QString &newPasswor
             *error = QObject::tr("The master password must be at least 8 characters.");
         return false;
     }
-    // Re-verify the current password by decrypting the file again.
-    const QJsonObject current = m_data;
-    if (!unlock(oldPassword, error))
+    if (!m_key) {
+        if (error)
+            *error = QObject::tr("The vault is locked.");
         return false;
-    m_data = current; // keep unsaved in-memory edits
+    }
+    // Check the current password against the key in memory. Never through
+    // unlock(): that locks first, and a failure (wrong password, file busy or
+    // unreadable) would leave the vault without its key.
+    if (!verifyPassword(oldPassword)) {
+        if (error)
+            *error = QObject::tr("Wrong master password.");
+        return false;
+    }
 
     unsigned char newSalt[kSaltLen];
     randombytes_buf(newSalt, sizeof newSalt);
@@ -188,10 +196,22 @@ bool Vault::changePassword(const QString &oldPassword, const QString &newPasswor
             sodium_free(newKey);
         return false;
     }
-    sodium_free(m_key);
+    unsigned char *oldKey = m_key;
+    unsigned char oldSalt[kSaltLen];
+    std::memcpy(oldSalt, m_salt, kSaltLen);
     m_key = newKey;
     std::memcpy(m_salt, newSalt, kSaltLen);
-    return writeFile(error);
+    if (!writeFile(error)) {
+        // the file still has the old password: keep using it
+        sodium_free(m_key);
+        m_key = oldKey;
+        std::memcpy(m_salt, oldSalt, kSaltLen);
+        sodium_memzero(oldSalt, sizeof oldSalt);
+        return false;
+    }
+    sodium_free(oldKey);
+    sodium_memzero(oldSalt, sizeof oldSalt);
+    return true;
 }
 
 bool Vault::deriveWithVaultCost(const QString &password, const QByteArray &salt16, unsigned char *out32,

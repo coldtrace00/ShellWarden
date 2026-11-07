@@ -58,7 +58,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **Known hosts**: fingerprint check, red warning when a host key changes; optional SSHFP (DNS) lookup. Host names in the file are **hashed** like OpenSSH's `HashKnownHosts`, so the file does not list where you connect (the Known hosts page shows the names of your own hosts while the vault is open).
 - **Pasting**: control characters (ESC…) are always removed from pasted text, so copied text cannot end bracketed paste early and run commands; text with line breaks (or very long) is shown first and pasted only after you confirm, like Windows Terminal.
 - **SFTP downloads**: file names from the server are made safe (no `..\`, `/`, `\`, `:`, control or bidi characters, no `CON`/`NUL`…), so a hostile server cannot write outside the folder you chose.
-- **Text from servers is shown as plain text** (file names, messages, banners): never as rich text, so nothing a server sends can make the program load an image from the network or a Windows share.
+- **Text from servers is shown as plain text** (file names, messages, banners, tooltips, proxy replies): never as rich text. On top of that, the interface itself cannot load anything from the network or from another computer (`http`, `file://server/…`, `\\server\share`): every address it would open is checked, so even text that slipped through could not reveal your IP or send a Windows (NTLM) login to a share. A test (`qml_safety_tests`) and a CI check (`tests/check_qml_text.py`) keep it so.
 - **Host notes**: encrypted in the vault like passwords.
 - **Routes**: SOCKS5 / HTTP CONNECT / **Shadowsocks** / Tor / **Cloudflare Tunnel** (ShellWarden starts `cloudflared access tcp` itself, so port 22 can be closed on the server). DNS is resolved by the proxy. The check shows latency, exit IP and country.
   - **Shadowsocks** (built in, no extra program). Everything up to the Shadowsocks server is encrypted and looks like random bytes, so the network in between sees neither the target server nor that it is SSH — useful where SSH or proxies are blocked. Paste an `ss://` link (Outline and others) or fill in the fields. Links that need a plugin (`plugin=`) are not supported.
@@ -90,7 +90,7 @@ What ShellWarden protects against, and what it does not.
 - **A stolen or copied disk / backup**: the vault, its backups and the journal are encrypted (Argon2id + XChaCha20-Poly1305; sealed boxes for the journal); `known_hosts` lists no host names. Without the master password they say nothing about your servers.
 - **Another user account on the same computer**: the data folder is closed to them (Linux `0700`/`0600`, Windows access list).
 - **The network between you and the server** (ISP, Wi-Fi, a censor): SSH itself, plus proxies, Tor or Shadowsocks so it does not see where you connect; the kill switch never connects directly.
-- **A hostile or compromised server**: it cannot write outside the folder you download into, cannot make the program load anything from the network by sending text, and a changed host key is shown in red.
+- **A hostile or compromised server, or the owner of an HTTP proxy** (and anyone between you and that proxy — its connection is not encrypted): it cannot write outside the folder you download into, cannot make the program load anything from the network or a Windows share by sending text, and a changed host key is shown in red.
 - **Pasted text** from web pages: control characters are removed and multi-line text is shown first.
 - **A forged update**: only releases signed with the project key, with a matching and newer version, are installed.
 
@@ -104,7 +104,8 @@ What ShellWarden protects against, and what it does not.
 ## Tests
 
 `cmake -DSHELLWARDEN_BUILD_TESTS=ON`, then:
-- `tests/unit_tests` — no network: vault (wrong password, damaged file, forged KDF settings), protected secrets, the encrypted journal, file names from servers, pasting, command history filters, hashed known_hosts, minisign and the update checks (incl. downgrade), Shadowsocks key derivation, BLAKE3 and ss:// links;
+- `tests/unit_tests` — no network: vault (wrong password, damaged file, forged KDF settings, a failed password change), protected secrets, the encrypted journal, file names from servers, pasting, command history filters, hashed known_hosts, minisign and the update checks (incl. downgrade), Shadowsocks key derivation, BLAKE3 and ss:// links, text from proxies and servers, stopping background threads on exit;
+- `tests/qml_safety_tests` — offscreen: the interface loads nothing from the network or a Windows share, not even from rich text, images or tooltips; `tests/check_qml_text.py` checks that every text in `qml/` is plain text;
 - `tests/integration_tests` — against real OpenSSH, ssh-keygen, puttygen, ssh-agent, SOCKS5 / HTTP proxies, shadowsocks-libev and shadowsocks-rust (`sudo tests/integration/setup.sh` starts them): keys, SSH, agent, proxies, host key change, .ppk import, SFTP, tunnels, jump host, all six Shadowsocks ciphers;
 - `tests/fuzz/` — libFuzzer targets for everything that reads outside input (`.ppk`/OpenSSH keys, `ss://`, `~/.ssh/config`, vault file, signatures, known_hosts, journal lines, the Shadowsocks stream).
 
@@ -141,7 +142,7 @@ If ipinfo.io and api.ipify.org are both unreachable (blocked by your network or 
 | Layer | What is used |
 |---|---|
 | Language | **C++17** (logic, networking, crypto) and **QML** (UI) |
-| Framework | **Qt 6.5+** (tested with 6.12): Core, Gui, Quick, Quick Controls 2 (Basic style), Network, LinguistTools; when available — SerialPort (COM ports) and DBus (Linux: lock on sleep / screen lock) |
+| Framework | **Qt 6.4+** (CI builds and tests on 6.4.2 and 6.12; releases are built with 6.12): Core, Gui, Quick, Quick Controls 2 (Basic style), Network, LinguistTools; when available — SerialPort (COM ports) and DBus (Linux: lock on sleep / screen lock) |
 | SSH | **libssh** 0.10 / 0.11: sessions, SFTP, L/R/D tunnels, SSH agent and agent forwarding |
 | Cryptography | **libsodium**: Argon2id, XChaCha20-Poly1305, BLAKE2b, Ed25519 (minisign signature check); **OpenSSL libcrypto** — only for PuTTY `.ppk` import |
 | Terminal | **libvterm** (xterm-256color, true colour, Unicode); rendered by a custom `QQuickItem` |
@@ -163,7 +164,7 @@ If ipinfo.io and api.ipify.org are both unreachable (blocked by your network or 
 ## Build and run
 
 ### Windows: one-time prerequisites
-- **Qt 6.5 or newer** (tested with 6.12) from the [official installer](https://www.qt.io/download-qt-installer-oss), components: *MinGW 64-bit*, and under *Developer and Designer Tools* — *MinGW*, *CMake*, *Ninja*.
+- **Qt 6.4 or newer** (releases are built with 6.12) from the [official installer](https://www.qt.io/download-qt-installer-oss), components: *MinGW 64-bit*, and under *Developer and Designer Tools* — *MinGW*, *CMake*, *Ninja*.
 - **MSYS2** in `C:\msys64` ([msys2.org](https://www.msys2.org)) — libssh, libsodium and libvterm come from there. You do not need to install them yourself, `build.bat` does it.
 - Optionally **Inno Setup 6 or 7** ([jrsoftware.org](https://jrsoftware.org/isdl.php)) — for the `setup.exe` installer.
 

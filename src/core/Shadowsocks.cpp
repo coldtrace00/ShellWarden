@@ -1,4 +1,5 @@
 #include "Shadowsocks.h"
+#include "BackgroundThreads.h"
 #include "SecureBytes.h"
 
 #include <QCryptographicHash>
@@ -405,14 +406,25 @@ private:
 // Copies between the loopback end (libssh) and the encrypted server connection.
 void relay(std::shared_ptr<Session> s, native_socket local, QByteArray pending)
 {
-    if (!pending.isEmpty() && !sendAll(local, pending)) {
-        SS_CLOSE(local);
+    // on exit bgthreads::shutdown() cuts both sockets, so the wait below returns
+    bgthreads::watch(static_cast<long long>(local));
+    bgthreads::watch(static_cast<long long>(s->server()));
+    struct Done {
+        std::shared_ptr<Session> &s;
+        native_socket local;
+        ~Done()
+        {
+            bgthreads::unwatch(static_cast<long long>(local));
+            bgthreads::unwatch(static_cast<long long>(s->server()));
+            SS_CLOSE(local);   // libssh sees the end of the stream
+        }
+    } done{s, local};
+    if (!pending.isEmpty() && !sendAll(local, pending))
         return;
-    }
     char buf[kMaxPayload];
     for (;;) {
         bool fromLocal = false, fromServer = false;
-        if (!waitReadable(local, s->server(), 30000, &fromLocal, &fromServer))
+        if (!waitReadable(local, s->server(), 30000, &fromLocal, &fromServer) || bgthreads::stopping())
             break;
         if (fromLocal) {
             const int n = int(::recv(local, buf, sizeof buf, 0));
@@ -428,7 +440,6 @@ void relay(std::shared_ptr<Session> s, native_socket local, QByteArray pending)
                 break;
         }
     }
-    SS_CLOSE(local);   // libssh sees the end of the stream
 }
 
 } // namespace
@@ -583,7 +594,14 @@ sw_socket_t open(const ProxyConfig &server, const QString &targetHost, int targe
             *error = err;
         return kInvalidSocket;
     }
-    std::thread(relay, session, native_socket(b), first).detach();
+    const native_socket local = native_socket(b);
+    if (!bgthreads::start([session, local, first] { relay(session, local, first); })) {
+        SS_CLOSE(local);
+        proxytunnel::closeSocket(a);
+        if (error)
+            *error = QObject::tr("The program is closing.");
+        return kInvalidSocket;
+    }
     return a;
 }
 

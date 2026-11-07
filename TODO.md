@@ -55,7 +55,8 @@
 - [x] Тести в репозиторії, CI (Linux, ASan/UBSan, фазинг, Windows), SECURITY.md, CHANGELOG.md, модель загроз
 - [ ] Незалежне рев'ю сховища й Shadowsocks; кілька тестерів
 - [ ] Відтворювані збірки релізу в CI + SBOM
-- [ ] Розбити AppController на частини (почато: AppControllerProtect.cpp)
+- [x] Розбити AppController на частини (Hosts, Keys, Proxies, Sessions, Batch, Protect; основний файл ~1450 рядків)
+- [ ] Далі ділити AppController.cpp: сховище, налаштування, оновлення
 
 ## Зроблено у 0.2.2
 - [x] Простіший пароль: довжина генерації числом, одна зрозуміла підказка «безпечний — від 19 символів»

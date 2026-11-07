@@ -1,5 +1,6 @@
 // SFTP part of SshWorker: listing, file operations and chunked transfers that
 // run inside the worker's event loop, so the shell stays responsive.
+#include "SafeText.h"
 #include "SshWorker.h"
 
 #include <QDateTime>
@@ -25,7 +26,7 @@ QString SshWorker::sftpErrorText() const
     case SSH_FX_PERMISSION_DENIED: return tr("Permission denied.");
     case SSH_FX_FILE_ALREADY_EXISTS: return tr("Already exists.");
     case SSH_FX_FAILURE: return tr("The server refused the operation.");
-    default: return QString::fromUtf8(ssh_get_error(m_session));
+    default: return safetext::snippet(ssh_get_error(m_session));
     }
 }
 
@@ -39,7 +40,7 @@ bool SshWorker::ensureSftp(QString *error)
     }
     m_sftp = sftp_new(m_session);
     if (!m_sftp || sftp_init(m_sftp) != SSH_OK) {
-        *error = tr("The server does not provide SFTP: %1").arg(QString::fromUtf8(ssh_get_error(m_session)));
+        *error = tr("The server does not provide SFTP: %1").arg(safetext::snippet(ssh_get_error(m_session)));
         if (m_sftp) {
             sftp_free(m_sftp);
             m_sftp = nullptr;

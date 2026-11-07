@@ -1,6 +1,8 @@
 #!/bin/bash
 # Prepares the servers tests/integration_tests.cpp talks to (Linux, as root).
 # Everything listens on 127.0.0.1 only and uses test-only passwords and keys.
+# The servers keep none of this script's input/output open, so
+# `setup.sh | tail` returns as soon as they are up.
 #
 #   sudo apt-get install -y openssh-server tinyproxy shadowsocks-libev putty-tools python3
 #   sudo tests/integration/setup.sh
@@ -31,10 +33,10 @@ AllowTcpForwarding yes
 AllowAgentForwarding yes
 Subsystem sftp internal-sftp
 CFG
-/usr/sbin/sshd -f "$W/sshd_config" -E "$W/sshd.log"
+/usr/sbin/sshd -f "$W/sshd_config" -E "$W/sshd.log" </dev/null >/dev/null 2>&1
 
 # SOCKS5 with user/password on 1080 (logs what it was asked to connect to)
-nohup python3 "$HERE/socks5.py" 1080 puser ppass "$W/socks.log" >/dev/null 2>&1 &
+nohup python3 "$HERE/socks5.py" 1080 puser ppass "$W/socks.log" </dev/null >/dev/null 2>&1 &
 
 # HTTP CONNECT on 8888
 cat > "$W/tinyproxy.conf" <<CFG
@@ -46,11 +48,11 @@ ConnectPort 2222
 LogFile "$W/tinyproxy.log"
 PidFile "$W/tinyproxy.pid"
 CFG
-tinyproxy -c "$W/tinyproxy.conf"
+tinyproxy -c "$W/tinyproxy.conf" </dev/null >/dev/null 2>&1
 
 # web server with a 2 MB file (through-the-tunnel transfers)
 head -c 2000000 /dev/urandom > "$W/www/big.bin"
-(cd "$W/www" && nohup python3 -m http.server 8766 --bind 127.0.0.1 >/dev/null 2>&1 &)
+(cd "$W/www" && exec nohup python3 -m http.server 8766 --bind 127.0.0.1) </dev/null >/dev/null 2>&1 &
 
 # Shadowsocks AEAD-2017 (shadowsocks-libev). The Debian/Ubuntu package starts
 # its own service on 8388 with a random password; stop it so ours gets the port.
@@ -61,7 +63,7 @@ pkill -x ss-server 2>/dev/null || true
 sleep 0.5
 for spec in "8388 chacha20-ietf-poly1305" "8389 aes-256-gcm" "8390 aes-128-gcm"; do
     set -- $spec
-    nohup ss-server -s 127.0.0.1 -p "$1" -k Test-SS-Pass-1 -m "$2" -u >/dev/null 2>&1 &
+    nohup ss-server -s 127.0.0.1 -p "$1" -k Test-SS-Pass-1 -m "$2" -u </dev/null >/dev/null 2>&1 &
 done
 
 # Shadowsocks 2022 (shadowsocks-rust, pinned release, checksum verified)
@@ -82,7 +84,7 @@ cat > "$W/ss2022.json" <<CFG
   "users":[{"name":"tester","password":"c3dUZXN0LXVzZXIta2V5LTMyLWJ5dGVzLTAwMDAwMDA="}]}
 ]}
 CFG
-nohup "$W/ssr/ssserver" -c "$W/ss2022.json" > "$W/ssserver.log" 2>&1 &
+nohup "$W/ssr/ssserver" -c "$W/ss2022.json" </dev/null > "$W/ssserver.log" 2>&1 &
 
 sleep 2
 # every test port must be ours and listening

@@ -2,6 +2,7 @@
 //   Local   (-L) 127.0.0.1:bind → [ssh] → dest:port
 //   Remote  (-R) server:bind   → [ssh] → dest:port reachable from this PC
 //   Dynamic (-D) local SOCKS4/4a/5 proxy whose connections leave from the server
+#include "SafeText.h"
 #include "SshWorker.h"
 
 #include <QHostAddress>
@@ -55,7 +56,7 @@ void SshWorker::startForward(FwdState &f)
                                                   f.spec.bindPort, &bound);
         if (rc != SSH_OK) {
             f.state = QStringLiteral("error");
-            f.error = tr("The server refused remote forwarding: %1").arg(QString::fromUtf8(ssh_get_error(m_session)));
+            f.error = tr("The server refused remote forwarding: %1").arg(safetext::snippet(ssh_get_error(m_session)));
             emit forwardEvent(f.spec.id, false, f.error);
             return;
         }
@@ -148,7 +149,7 @@ void SshWorker::onLocalConnection(int fwdIndex)
         } else if (!openChannelFor(c, f.spec.destHost, f.spec.destPort)) {
             emit forwardEvent(f.spec.id, false, tr("Cannot open %1:%2 through the server: %3")
                                                     .arg(f.spec.destHost).arg(f.spec.destPort)
-                                                    .arg(QString::fromUtf8(ssh_get_error(m_session))));
+                                                    .arg(safetext::snippet(ssh_get_error(m_session))));
             c->dead = true;
         }
         connect(sock, &QTcpSocket::readyRead, this, [this, c] {

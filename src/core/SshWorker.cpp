@@ -1,3 +1,5 @@
+#include "SafeText.h"
+#include <QHostAddress>
 #include "SshWorker.h"
 #include "JumpBridge.h"
 #include "KeyTools.h"
@@ -112,7 +114,7 @@ void SshWorker::start(const ConnectParams &params)
     }
 
     if (ssh_connect(m_session) != SSH_OK) {
-        fail(tr("Connection failed: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        fail(tr("Connection failed: %1").arg(safetext::snippet(ssh_get_error(m_session))));
         return;
     }
     verifyHostKey();
@@ -152,7 +154,7 @@ void SshWorker::verifyHostKey()
         return;
     case SSH_KNOWN_HOSTS_ERROR:
     default:
-        fail(tr("Host key check failed: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        fail(tr("Host key check failed: %1").arg(safetext::snippet(ssh_get_error(m_session))));
         return;
     }
 }
@@ -193,7 +195,7 @@ void SshWorker::tryAuth()
             return;
         }
         if (rc == SSH_AUTH_ERROR) {
-            fail(QString::fromUtf8(ssh_get_error(m_session)));
+            fail(safetext::snippet(ssh_get_error(m_session)));
             return;
         }
         m_methods = ssh_userauth_list(m_session, nullptr);
@@ -261,7 +263,7 @@ bool SshWorker::tryAgent()
         return false;
     }
     if (rc == SSH_AUTH_ERROR && !ssh_is_connected(m_session)) {
-        fail(QString::fromUtf8(ssh_get_error(m_session)));
+        fail(safetext::snippet(ssh_get_error(m_session)));
         return false;
     }
     if (rc == SSH_AUTH_PARTIAL) {
@@ -353,7 +355,7 @@ bool SshWorker::tryPublicKey()
         return false;
     }
     if (rc == SSH_AUTH_ERROR) {
-        fail(QString::fromUtf8(ssh_get_error(m_session)));
+        fail(safetext::snippet(ssh_get_error(m_session)));
         return false;
     }
     if (rc == SSH_AUTH_PARTIAL) {
@@ -422,7 +424,7 @@ void SshWorker::handleAuthResult(int rc, int method)
     case SSH_AUTH_AGAIN:
     case SSH_AUTH_ERROR:
     default:
-        fail(QString::fromUtf8(ssh_get_error(m_session)));
+        fail(safetext::snippet(ssh_get_error(m_session)));
         return;
     }
 }
@@ -552,7 +554,7 @@ bool SshWorker::openPipelined()
     ssh_channel_free(m_channel);
     m_channel = nullptr;
     if (!ssh_is_connected(m_session)) {
-        fail(tr("Cannot open a session channel: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        fail(tr("Cannot open a session channel: %1").arg(safetext::snippet(ssh_get_error(m_session))));
         return false;
     }
     if (m_addrCh) {
@@ -615,9 +617,14 @@ void SshWorker::readClientAddress(ssh_channel existing)
             if (out.contains('\n'))
                 break;
         }
+        // only what really is "<ip> <port> <ip> <port>": anything else from the server is ignored
         const QStringList parts = QString::fromUtf8(out).simplified().split(QLatin1Char(' '));
-        if (parts.size() >= 4)
-            emit clientAddressSeen(parts.at(0), parts.at(1), parts.at(2));
+        QHostAddress client, server;
+        bool portOk = false;
+        const int port = parts.size() >= 4 ? parts.at(1).toInt(&portOk) : 0;
+        if (parts.size() >= 4 && client.setAddress(parts.at(0)) && server.setAddress(parts.at(2))
+            && portOk && port > 0 && port < 65536)
+            emit clientAddressSeen(client.toString(), QString::number(port), server.toString());
         // Let the command finish on the server: with MaxSessions 1 sshd frees the
         // session only after that, and the shell needs that slot.
         while (t.elapsed() < 4000 && !ssh_channel_is_eof(ch)) {
@@ -646,12 +653,12 @@ void SshWorker::openShell()
         m_channel = ssh_channel_new(m_session);
     }
     if (!m_channel || (!ssh_channel_is_open(m_channel) && ssh_channel_open_session(m_channel) != SSH_OK)) {
-        fail(tr("Cannot open a session channel: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        fail(tr("Cannot open a session channel: %1").arg(safetext::snippet(ssh_get_error(m_session))));
         return;
     }
     const QByteArray term = m_p.term.toLatin1();
     if (ssh_channel_request_pty_size(m_channel, term.constData(), m_p.cols, m_p.rows) != SSH_OK) {
-        fail(tr("The server refused a terminal: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        fail(tr("The server refused a terminal: %1").arg(safetext::snippet(ssh_get_error(m_session))));
         return;
     }
     finishShell();
@@ -668,7 +675,7 @@ void SshWorker::finishShell()
             emit status(tr("The server refused agent forwarding."));
     }
     if (ssh_channel_request_shell(m_channel) != SSH_OK) {
-        fail(tr("The server refused a shell: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        fail(tr("The server refused a shell: %1").arg(safetext::snippet(ssh_get_error(m_session))));
         return;
     }
 
@@ -719,7 +726,7 @@ void SshWorker::pump()
             if (n == SSH_ERROR) {
                 if (!batch.isEmpty())
                     emit dataReceived(batch);
-                fail(tr("Connection lost: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+                fail(tr("Connection lost: %1").arg(safetext::snippet(ssh_get_error(m_session))));
                 return;
             }
             if (n <= 0)
@@ -754,7 +761,7 @@ void SshWorker::write(const QByteArray &data)
     while (off < data.size()) {
         const int n = ssh_channel_write(m_channel, data.constData() + off, uint32_t(data.size() - off));
         if (n == SSH_ERROR) {
-            fail(tr("Write failed: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+            fail(tr("Write failed: %1").arg(safetext::snippet(ssh_get_error(m_session))));
             return;
         }
         off += n;
@@ -893,7 +900,7 @@ void SshWorker::startMonitor(const QString &command, int intervalSec)
     if (!ch)
         return;
     if (ssh_channel_open_session(ch) != SSH_OK || ssh_channel_request_exec(ch, cmd.constData()) != SSH_OK) {
-        emit execDone(1, -1, {}, QString::fromUtf8(ssh_get_error(m_session)));
+        emit execDone(1, -1, {}, safetext::snippet(ssh_get_error(m_session)));
         ssh_channel_free(ch);
         return;
     }
@@ -967,7 +974,7 @@ int SshWorker::execOn(const QString &command, int timeoutMs, QByteArray *outp, Q
                 out.append(buf, n);
                 continue;
             }
-            if (n == SSH_ERROR) { err = QString::fromUtf8(ssh_get_error(m_session)); timedOut = false; break; }
+            if (n == SSH_ERROR) { err = safetext::snippet(ssh_get_error(m_session)); timedOut = false; break; }
             if (ssh_channel_is_eof(ch)) { timedOut = false; break; }
         }
         if (timedOut && err.isEmpty())
@@ -975,7 +982,7 @@ int SshWorker::execOn(const QString &command, int timeoutMs, QByteArray *outp, Q
         code = ssh_channel_get_exit_status(ch);
         ssh_channel_send_eof(ch);
     } else {
-        err = QString::fromUtf8(ssh_get_error(m_session));
+        err = safetext::snippet(ssh_get_error(m_session));
     }
     ssh_channel_close(ch);
     ssh_channel_free(ch);

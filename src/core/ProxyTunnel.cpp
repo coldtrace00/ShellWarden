@@ -1,4 +1,5 @@
 #include "ProxyTunnel.h"
+#include "SafeText.h"
 #include "SecureBytes.h"
 #include "Shadowsocks.h"
 
@@ -290,7 +291,7 @@ bool httpConnectHandshake(native_socket s, const ProxyConfig &proxy, const QStri
             if (parts.size() >= 2 && parts.at(1) == "407")
                 *error = QObject::tr("The HTTP proxy requires authentication (407).");
             else
-                *error = QObject::tr("The HTTP proxy refused the tunnel: %1").arg(QString::fromLatin1(status));
+                *error = QObject::tr("The HTTP proxy refused the tunnel: %1").arg(safetext::snippet(status, 64));   // its reply line: short, plain
         }
         return false;
     }

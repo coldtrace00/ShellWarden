@@ -1,4 +1,5 @@
 #include "KeyTools.h"
+#include "SafeText.h"
 #include "SecureBytes.h"
 
 #include <QFile>
@@ -372,7 +373,7 @@ ImportResult importPpk(const QByteArray &text, const QString &passphrase, const 
     secure::ByteGuard privGuard(priv);
     const bool encrypted = enc != "none";
     if (encrypted && enc != "aes256-cbc") {
-        *error = QObject::tr("Unsupported PuTTY key encryption: %1").arg(QString::fromLatin1(enc));
+        *error = QObject::tr("Unsupported PuTTY key encryption: %1").arg(safetext::snippet(enc, 40));
         return ImportResult::Invalid;
     }
     if (encrypted && passphrase.isEmpty())
@@ -391,7 +392,7 @@ ImportResult importPpk(const QByteArray &text, const QString &passphrase, const 
             else if (kdf == "Argon2i") alg = crypto_pwhash_ALG_ARGON2I13;
             else {
                 *error = QObject::tr("This PuTTY key uses %1, which is not supported. Re-save it in PuTTYgen with Argon2id.")
-                             .arg(QString::fromLatin1(kdf));
+                             .arg(safetext::snippet(kdf, 40));
                 return ImportResult::Invalid;
             }
             const unsigned long long mem = h.value("Argon2-Memory").toULongLong() * 1024ull;
@@ -504,7 +505,7 @@ ImportResult importPpk(const QByteArray &text, const QString &passphrase, const 
         }
         putStr(fields, curve); putStr(fields, point); putStr(fields, d);
     } else {
-        *error = QObject::tr("Unsupported PuTTY key type: %1").arg(QString::fromLatin1(type));
+        *error = QObject::tr("Unsupported PuTTY key type: %1").arg(safetext::snippet(type, 40));
         return ImportResult::Invalid;
     }
 
