@@ -124,10 +124,13 @@ Popup {
             Layout.fillHeight: true
             spacing: 10
 
-            RowLayout {
+            // the mode buttons wrap onto a second line when the words are long
+            // (uk/ru/fr) or the window is narrow, instead of pushing the dialog wider
+            Flow {
                 Layout.fillWidth: true
                 spacing: 8
-                Text { textFormat: Text.PlainText; text: qsTr("Keys:"); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; text: qsTr("Keys:"); color: Theme.textDim; font.pixelSize: 12
+                       height: 30; verticalAlignment: Text.AlignVCenter }
                 Chip { text: qsTr("One key for all servers"); on: !root.perHost && !root.replaceMode; onClicked: { root.perHost = false; root.replaceMode = false } }
                 Chip { text: qsTr("A different key per server"); on: root.perHost && !root.replaceMode; onClicked: { root.perHost = true; root.replaceMode = false } }
                 Chip { text: qsTr("Replace an old key"); on: root.replaceMode
@@ -139,14 +142,20 @@ Popup {
                            }
                            root.pickUsersOf(root.oldKeyId)
                        } }
-                Item { Layout.fillWidth: true }
+            }
+            RowLayout {
+                visible: !root.perHost && !root.replaceMode
+                Layout.fillWidth: true
+                spacing: 8
+                Text { textFormat: Text.PlainText; text: qsTr("Key to install:"); color: Theme.textDim; font.pixelSize: 12 }
                 AppCombo {
-                    visible: !root.perHost && !root.replaceMode
-                    Layout.preferredWidth: 260
+                    Layout.fillWidth: true
+                    Layout.maximumWidth: 420
                     model: root.keys.map(k => k.name + "  ·  " + k.type)
                     currentIndex: root.keyIndex(root.keyId)
                     onActivated: (i) => root.keyId = root.keys[i].id
                 }
+                Item { Layout.fillWidth: true }
             }
             RowLayout {
                 visible: root.replaceMode
@@ -277,9 +286,10 @@ Popup {
             Layout.fillHeight: true
             spacing: 10
             RowLayout {
+                Layout.fillWidth: true
                 spacing: 14
                 BusyIndicator { visible: root.batch.running; running: visible; implicitWidth: 22; implicitHeight: 22 }
-                Text { textFormat: Text.PlainText; text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 3: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 3: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.replaceMode && App.rotatePhase === "removing" ? qsTr("Step 2 of 3: logging in with the new key, removing the old one… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.replaceMode && App.rotatePhase === "verifying" ? qsTr("Step 3 of 3: a new login with the new key to check… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.batch.running ? qsTr("Installing… %1 of %2 done").arg(root.batch.doneCount).arg(root.batch.results.length) : qsTr("Finished")

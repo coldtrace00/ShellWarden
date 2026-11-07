@@ -2409,92 +2409,97 @@
         <translation>Публичный ключ добавляется в ~/.ssh/authorized_keys на каждом сервере — без ручного копирования. Чтобы войти в этот раз, используется то, что уже есть (пароль или другой ключ).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="130" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="132" />
         <source>Keys:</source>
         <translation>Ключи:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="131" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="134" />
         <source>One key for all servers</source>
         <translation>Один ключ для всех серверов</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="132" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="135" />
         <source>A different key per server</source>
         <translation>Свой ключ для каждого сервера</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="133" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="136" />
         <source>Replace an old key</source>
         <translation>Заменить старый ключ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="155" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="150" />
+        <source>Key to install:</source>
+        <translation>Какой ключ установить:</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="164" />
         <source>Old key:</source>
         <translation>Старый ключ:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="163" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="172" />
         <source>New key:</source>
         <translation>Новый ключ:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="176" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="185" />
         <source>You need two keys: create the new key first (Keychain → Generate).</source>
         <translation>Нужны два ключа: сначала создайте новый (Ключи → Создать ключ).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="182" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="191" />
         <source>The keychain is empty: create or import a key first.</source>
         <translation>Связка ключей пуста: сначала создайте или импортируйте ключ.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="188" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="197" />
         <source>Servers (%1 chosen)</source>
         <translation>Серверы (выбрано %1)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="189" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="198" />
         <source>All</source>
         <translation>Все</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="190" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="199" />
         <source>None</source>
         <translation>Нет</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="249" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="258" />
         <source>After it works, log in to these servers with the key (instead of the password)</source>
         <translation>После успеха входить на эти серверы ключом (вместо пароля)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="263" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="272" />
         <source>Close</source>
         <translation>Закрыть</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="265" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="274" />
         <source>Install on %n server(s)</source>
         <translation><numerusform>Установить на %n сервер</numerusform><numerusform>Установить на %n сервера</numerusform><numerusform>Установить на %n серверов</numerusform></translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="265" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="274" />
         <source>Replace on %n server(s)</source>
         <translation><numerusform>Заменить на %n сервере</numerusform><numerusform>Заменить на %n серверах</numerusform><numerusform>Заменить на %n серверах</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="282" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="292" />
         <source>Step 1 of 3: adding the new key… %1 of %2</source>
         <translation>Шаг 1 из 3: добавляем новый ключ… %1 из %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="283" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="293" />
         <source>Step 2 of 3: logging in with the new key, removing the old one… %1 of %2</source>
         <translation>Шаг 2 из 3: входим новым ключом, удаляем старый… %1 из %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="284" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="294" />
         <source>Step 3 of 3: a new login with the new key to check… %1 of %2</source>
         <translation>Шаг 3 из 3: проверочный вход новым ключом… %1 из %2</translation>
     </message>
@@ -2507,57 +2512,57 @@
         <translation>Шаг 2 из 2: входим новым ключом, удаляем старый… %1 из %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="285" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="295" />
         <source>Installing… %1 of %2 done</source>
         <translation>Установка… готово %1 из %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="285" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="295" />
         <source>Finished</source>
         <translation>Готово</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="332" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="342" />
         <source>The key was already there</source>
         <translation>Ключ уже был</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="333" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="343" />
         <source>Checked: a new login with the new key works, the old key is gone</source>
         <translation>Проверено: новый вход новым ключом работает, старого ключа нет</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="334" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="344" />
         <source>The new key works, the old key was removed</source>
         <translation>Новый ключ работает, старый удалён</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="335" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="345" />
         <source>The new key works (the old key was not on this server)</source>
         <translation>Новый ключ работает (старого на этом сервере не было)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="336" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="346" />
         <source>Key added</source>
         <translation>Ключ добавлен</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="337" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="347" />
         <source>waiting…</source>
         <translation>в очереди…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="337" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="347" />
         <source>running…</source>
         <translation>выполняется…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="346" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="356" />
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeyDeployDialog.qml" line="349" />
+        <location filename="../qml/pages/KeyDeployDialog.qml" line="359" />
         <source>Done</source>
         <translation>Готово</translation>
     </message>
@@ -4780,12 +4785,12 @@
         <translation>SSH-агент не ответил.</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="239" />
+        <location filename="../src/core/AgentClient.cpp" line="246" />
         <source>Cannot start the agent bridge.</source>
         <translation>Не удалось запустить мост к агенту.</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="249" />
+        <location filename="../src/core/AgentClient.cpp" line="256" />
         <source>Cannot reach the agent bridge.</source>
         <translation>Не удаётся соединиться с мостом к агенту.</translation>
     </message>
@@ -4816,58 +4821,58 @@
     <message>
         <location filename="../src/core/Shadowsocks.cpp" line="368" />
         <location filename="../src/core/Shadowsocks.cpp" line="382" />
-        <location filename="../src/core/Shadowsocks.cpp" line="585" />
+        <location filename="../src/core/Shadowsocks.cpp" line="587" />
         <source>the answer could not be decrypted — wrong password or cipher.</source>
         <translation>ответ не удалось расшифровать — неверный пароль или шифр.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="510" />
+        <location filename="../src/core/Shadowsocks.cpp" line="512" />
         <source>Enter the Shadowsocks password.</source>
         <translation>Введите пароль Shadowsocks.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="515" />
+        <location filename="../src/core/Shadowsocks.cpp" line="517" />
         <source>Several keys (key:key) work only with the 2022-blake3-aes ciphers.</source>
         <translation>Несколько ключей (ключ:ключ) работают только с шифрами 2022-blake3-aes.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="519" />
+        <location filename="../src/core/Shadowsocks.cpp" line="521" />
         <source>For %1 the password is a key: %2 random bytes in base64 (e.g. from "openssl rand -base64 %2"), as written in the server's config.</source>
         <translation>Для %1 пароль — это ключ: %2 случайных байт в base64 (например, из «openssl rand -base64 %2»), как записано в конфигурации сервера.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="531" />
-        <location filename="../src/core/Shadowsocks.cpp" line="584" />
+        <location filename="../src/core/Shadowsocks.cpp" line="533" />
+        <location filename="../src/core/Shadowsocks.cpp" line="586" />
         <source>Shadowsocks: %1</source>
         <translation>Shadowsocks: %1</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="547" />
+        <location filename="../src/core/Shadowsocks.cpp" line="549" />
         <source>Shadowsocks server %1:%2: %3</source>
         <translation>Сервер Shadowsocks %1:%2: %3</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="555" />
+        <location filename="../src/core/Shadowsocks.cpp" line="557" />
         <source>Shadowsocks: could not send the request.</source>
         <translation>Shadowsocks: не удалось отправить запрос.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="569" />
+        <location filename="../src/core/Shadowsocks.cpp" line="571" />
         <source>Shadowsocks: no answer from %1:%2 through the server — wrong password or cipher, or the server cannot reach it.</source>
         <translation>Shadowsocks: нет ответа от %1:%2 через сервер — неверный пароль или шифр, либо сервер не может до него достучаться.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="576" />
+        <location filename="../src/core/Shadowsocks.cpp" line="578" />
         <source>Shadowsocks: the server closed the connection — wrong key or cipher, this computer's clock is off by more than 30 s, or it cannot reach %1:%2.</source>
         <translation>Shadowsocks: сервер закрыл соединение — неверный ключ или шифр, часы этого компьютера отстают или спешат больше чем на 30 с, или сервер не может достучаться до %1:%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="578" />
+        <location filename="../src/core/Shadowsocks.cpp" line="580" />
         <source>Shadowsocks: the server closed the connection — wrong password or cipher, or it cannot reach %1:%2.</source>
         <translation>Shadowsocks: сервер закрыл соединение — неверный пароль или шифр, либо он не может достучаться до %1:%2.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="602" />
+        <location filename="../src/core/Shadowsocks.cpp" line="604" />
         <source>The program is closing.</source>
         <translation>Программа закрывается.</translation>
     </message>
@@ -4876,25 +4881,25 @@
         <translation>Shadowsocks: ответ не удалось расшифровать — неверный пароль или шифр.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="613" />
+        <location filename="../src/core/Shadowsocks.cpp" line="615" />
         <source>Not an ss:// link.</source>
         <translation>Это не ссылка ss://.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="644" />
-        <location filename="../src/core/Shadowsocks.cpp" line="653" />
-        <location filename="../src/core/Shadowsocks.cpp" line="673" />
+        <location filename="../src/core/Shadowsocks.cpp" line="646" />
+        <location filename="../src/core/Shadowsocks.cpp" line="655" />
+        <location filename="../src/core/Shadowsocks.cpp" line="675" />
         <source>The ss:// link could not be read.</source>
         <translation>Не удалось прочитать ссылку ss://.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="663" />
+        <location filename="../src/core/Shadowsocks.cpp" line="665" />
         <source>This link needs a plugin (%1), which ShellWarden does not run.</source>
         <translation>Эта ссылка требует плагин (%1), а ShellWarden плагины не запускает.</translation>
     </message>
     <message>
-        <location filename="../src/core/Shadowsocks.cpp" line="508" />
-        <location filename="../src/core/Shadowsocks.cpp" line="668" />
+        <location filename="../src/core/Shadowsocks.cpp" line="510" />
+        <location filename="../src/core/Shadowsocks.cpp" line="670" />
         <source>The cipher "%1" is not supported (use %2).</source>
         <translation>Шифр «%1» не поддерживается (используйте %2).</translation>
     </message>

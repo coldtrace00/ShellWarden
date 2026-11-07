@@ -34,6 +34,8 @@ Fixes from the second review.
 - Background threads (Shadowsocks relays, the Windows agent bridge, the
   Shadowsocks IP check) are stopped and waited for when the program closes
   (they wait in half-second steps: on Windows a cut socket does not wake them).
+- "Install keys on servers" no longer grows past its right edge in Ukrainian,
+  Russian or French: the mode buttons wrap, the key is chosen on its own line.
 - `tests/integration/setup.sh | tail` no longer hangs; `sodium_init()` is
   checked in all tests.
 
