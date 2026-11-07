@@ -5,7 +5,7 @@ While the major version is 0, a new MINOR may change behaviour; PATCH releases
 only fix things. Pre-releases are marked as such on GitHub and are not offered
 by the in-app updater.
 
-## Unreleased
+## 0.4.0 — 2026-11-07
 
 ### Security
 - **Activity journal encrypted on disk.** Each entry is a sealed box for the
