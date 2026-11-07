@@ -5,8 +5,23 @@ project(ShellWarden VERSION 0.3.0 LANGUAGES C CXX)
 # ---- branding: change the product name in ONE place --------------------
 set(APP_NAME        "ShellWarden"  CACHE STRING "Product name (window, data folder, installer)")
 set(APP_GITHUB_REPO "coldtrace00/ShellWarden" CACHE STRING "owner/repo used by the in-app updater (empty = no update check)")
-# minisign public key (the "RWQ…" line of minisign.pub). When set, updates must be signed with it.
-set(APP_UPDATE_PUBKEY ""         CACHE STRING "minisign public key that signs releases (SHA256SUMS.minisig)")
+# minisign public key that signs releases (SHA256SUMS.minisig). Updates are installed only
+# when they are signed with it. Empty = the official key from minisign.pub in the project
+# root; a fork puts its own key there (or passes -DAPP_UPDATE_PUBKEY=RW…); "none" = no check.
+set(APP_UPDATE_PUBKEY ""         CACHE STRING "minisign public key (RW…); empty = minisign.pub, none = no signature check")
+if (APP_UPDATE_PUBKEY STREQUAL "none")
+    set(APP_UPDATE_PUBKEY_EFFECTIVE "")
+elseif (APP_UPDATE_PUBKEY STREQUAL "" AND EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/minisign.pub")
+    file(STRINGS "${CMAKE_CURRENT_SOURCE_DIR}/minisign.pub" _pub REGEX "^RW[A-Za-z0-9+/=]+$" LIMIT_COUNT 1)
+    set(APP_UPDATE_PUBKEY_EFFECTIVE "${_pub}")
+else()
+    set(APP_UPDATE_PUBKEY_EFFECTIVE "${APP_UPDATE_PUBKEY}")
+endif()
+if (APP_UPDATE_PUBKEY_EFFECTIVE)
+    message(STATUS "Updates must be signed with minisign key ${APP_UPDATE_PUBKEY_EFFECTIVE}")
+else()
+    message(STATUS "Update signature check is OFF (SHA-256 only)")
+endif()
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -124,7 +139,7 @@ target_compile_definitions(ShellWardenApp PRIVATE
     PROJECT_VERSION_STRING="${PROJECT_VERSION}"
     APP_NAME_STRING="${APP_NAME}"
     APP_GITHUB_REPO="${APP_GITHUB_REPO}"
-    APP_UPDATE_PUBKEY="${APP_UPDATE_PUBKEY}")
+    APP_UPDATE_PUBKEY="${APP_UPDATE_PUBKEY_EFFECTIVE}")
 if (TARGET Qt6::SerialPort)
     target_link_libraries(ShellWardenApp PRIVATE Qt6::SerialPort)
     target_compile_definitions(ShellWardenApp PRIVATE SW_HAVE_SERIAL)

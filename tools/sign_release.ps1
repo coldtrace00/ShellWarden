@@ -9,18 +9,29 @@
 #    (open source projects can get one for free from the SignPath Foundation).
 # 2. SHA256SUMS + SHA256SUMS.minisig with minisign (the updater checks this).
 #
-# Once, before the first release:
-#   minisign -G -p minisign.pub -s %USERPROFILE%\.minisign\minisign.key
-#   build with -DAPP_UPDATE_PUBKEY="RWQ…(2nd line of minisign.pub)"
+# The secret key is looked up in this order: -Key, %MINISIGN_KEY%,
+# Desktop\minisign-keys\minisign.key, %USERPROFILE%\.minisign\minisign.key.
+# The matching public key is minisign.pub in the project root; builds embed it,
+# so the app installs only updates signed with this key.
 # minisign.exe: https://github.com/jedisct1/minisign/releases (or: winget install jedisct1.minisign)
 param(
     [Parameter(Mandatory = $true)][string]$Folder,
     [string]$Version = "release",
-    [string]$Key = "$env:USERPROFILE\.minisign\minisign.key",
+    [string]$Key = "",
     [string]$CertThumbprint = ""
 )
 $ErrorActionPreference = "Stop"
+if ($Key -eq "") {
+    $candidates = @($env:MINISIGN_KEY,
+                    (Join-Path ([Environment]::GetFolderPath("Desktop")) "minisign-keys\minisign.key"),
+                    "$env:USERPROFILE\.minisign\minisign.key") | Where-Object { $_ }
+    $Key = $candidates | Where-Object { Test-Path $_ } | Select-Object -First 1
+    if (-not $Key) { throw "No minisign secret key found (looked in: $($candidates -join ', '))" }
+}
+$Key = (Resolve-Path $Key).Path
+if (-not (Get-Command minisign -ErrorAction SilentlyContinue)) { throw "minisign is not installed (winget install jedisct1.minisign)" }
 Set-Location $Folder
+Write-Host "Signing with $Key (minisign asks for the key password)"
 
 if ($CertThumbprint -ne "") {
     $signtool = Get-ChildItem "${env:ProgramFiles(x86)}\Windows Kits\10\bin\*\x64\signtool.exe" -ErrorAction SilentlyContinue |

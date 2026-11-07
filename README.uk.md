@@ -64,7 +64,7 @@
 - **Журнал подій**: підключення, маршрут, IP, який бачив сервер, зміни сховища, ключів і хостів, спрацювання kill switch. Без паролів і ключів. Фільтри, пошук, експорт CSV, зберігається 12 місяців.
 
 **Інше**
-- **Оновлення**: через GitHub Releases з обов'язковою перевіркою SHA-256 (файл `SHA256SUMS`). Якщо збірка має ключ релізів (`-DAPP_UPDATE_PUBKEY=…`), ставиться лише оновлення з правильним підписом minisign (`SHA256SUMS.minisig`).
+- **Оновлення**: через GitHub Releases з обов'язковою перевіркою SHA-256 (файл `SHA256SUMS`). Ставляться лише оновлення, підписані ключем проєкту minisign (`SHA256SUMS.minisig`, ключ — у `minisign.pub`).
 - **Мови**: English, Українська, Русский, Français, Español. Перемикаються без перезапуску.
 - **Portable-режим**: усі дані поруч з .exe.
 
@@ -82,7 +82,7 @@
 | Windows API | Winsock, DWM (темний заголовок вікна), WTS (блокування сесії), Windows Firewall через `netsh`, named pipe / WM_COPYDATA (OpenSSH-агент, Pageant) |
 | Збірка | **CMake 3.21+**, **Ninja**; Windows — MinGW-w64 з Qt, бібліотеки з **MSYS2 UCRT64**, `windeployqt`; Linux — GCC/Clang і пакети дистрибутива |
 | Пакування | **Inno Setup 6/7** (`setup.exe`), portable `.zip`, CPack (`.deb`, `.tar.gz`), **AppImage** (linuxdeploy + Qt-плагін) |
-| Релізи | GitHub Releases, `SHA256SUMS`; за бажанням підпис **minisign** і Authenticode (`signtool`) |
+| Релізи | GitHub Releases, `SHA256SUMS` з підписом **minisign**; за бажанням Authenticode (`signtool`) |
 | Переклади | Qt Linguist (`.ts` → `.qm`): English, Українська, Русский, Français, Español |
 | Ресурси | прапори — [flag-icons](https://github.com/lipis/flag-icons) (MIT), назви країн — [i18n-iso-countries](https://github.com/michaelwittig/node-i18n-iso-countries) (MIT) |
 
@@ -90,7 +90,7 @@
 - **UI-потік** (QML + `AppController`) ніколи не блокується мережею: кожна SSH-сесія має власний `SshWorker` в окремому потоці; звідти ж ідуть SFTP, тунелі, агент і монітор сервера (один постійний канал).
 - **Маршрут** будується ланцюжком: `ProxyTunnel` (SOCKS5/HTTP/Tor/Cloudflare) → `JumpBridge` (jump-хост) → цільовий сервер. Kill switch і `FirewallLock` стежать, щоб з'єднання не пішло напряму.
 - **Сховище** (`Vault`) — один зашифрований файл; секрети в пам'яті тримаються в `SecureBytes` і затираються після використання.
-- **Оновлення** (`UpdateChecker`) — GitHub Releases API → вибір файлу під систему → перевірка `SHA256SUMS` (і minisign, якщо збірка має ключ) → запуск інсталятора.
+- **Оновлення** (`UpdateChecker`) — GitHub Releases API → вибір файлу під систему → перевірка `SHA256SUMS` і її підпису minisign → запуск інсталятора.
 
 ## Збірка і запуск
 
@@ -120,7 +120,7 @@ build.bat package
 У теці `dist\` з'являться:
 - `ShellWarden-<версія>-portable.zip`;
 - `ShellWarden-<версія>-setup.exe` — лише якщо встановлено [Inno Setup 6 або 7](https://jrsoftware.org/isdl.php). Під час встановлення питає теку, і всі дані потім лежать саме там, у `data\`;
-- `release\` — обидва файли плюс `SHA256SUMS`, готові для завантаження в реліз на GitHub.
+- `release\` — обидва файли плюс `SHA256SUMS` і підпис `SHA256SUMS.minisig`, готові для завантаження в реліз на GitHub.
 
 Повний лог збірки — `build\build.log`.
 
@@ -140,22 +140,34 @@ build.bat package
 2. Зберіть: `build.bat package`. У `dist\release\` будуть рівно ті файли, що треба завантажити:
    - `ShellWarden-0.3.1-setup.exe` — для встановленої версії;
    - `ShellWarden-0.3.1-portable.zip` — для portable;
-   - `SHA256SUMS` — контрольні суми (без нього програма оновлення не поставить).
+   - `SHA256SUMS` — контрольні суми (без нього програма оновлення не поставить);
+   - `SHA256SUMS.minisig` — підпис (див. *Підпис релізів* нижче; `build.bat package` питає пароль ключа і робить його сам).
    
-   Linux-збірку (`./build.sh appimage`) покладіть у ту саму теку і перерахуйте суми: `sha256sum *.exe *.zip *.AppImage > SHA256SUMS`.
+   Linux-збірку (`./build.sh appimage`) покладіть у ту саму теку і підпишіть ще раз: `tools/sign_release.sh <тека> 0.3.1` (він перераховує `SHA256SUMS` для всіх файлів).
 3. На GitHub: **Releases → Draft a new release → Choose a tag** → `v0.3.1` → *Create new tag*, перетягніть усі файли з `dist\release\`, натисніть **Publish release**. Чернетки (*draft*) і *pre-release* програма не бачить.
 4. У програмі: *Налаштування → Оновлення →* **Перевірити зараз** → **Завантажити** → **Встановити**. Інсталятор тихо ставить нову версію в ту саму теку; `data\` (сховище, ключі, налаштування) не чіпається. Portable-версія відкриває теку з перевіреним zip — розпакуйте його поверх старої.
 
 Перевірка також іде автоматично через 4 с після запуску (вимикається там же).
 
-### Підпис релізів (за бажанням)
-Один раз: `minisign -G -p minisign.pub -s ~/.minisign/minisign.key` (секретний ключ — лише у вас, з власним паролем).
-Збирайте з `-DAPP_UPDATE_PUBKEY="RWQ…"` (другий рядок `minisign.pub`; для `build.bat`: `set APP_UPDATE_PUBKEY=RWQ…`). Перед публікацією релізу:
+### Підпис релізів
+Кожен офіційний реліз підписано [minisign](https://jedisct1.github.io/minisign/). Публічний ключ лежить у [`minisign.pub`](minisign.pub) і вшитий у програму:
+
 ```
-tools/sign_release.sh dist/release 0.4.0                                   # Linux
-powershell -File tools\sign_release.ps1 -Folder dist\release -Version 0.4.0  # Windows (+ -CertThumbprint для Authenticode)
+RWTHLqknA+zq3S01ZgYde9o4CH9nluIpmb4DfczkFneGo8f3I25KR5Mi
 ```
-Скрипт створює `SHA256SUMS` і `SHA256SUMS.minisig` — завантажте їх у реліз разом із файлами.
+
+Програма ставить оновлення, лише якщо `SHA256SUMS.minisig` — правильний підпис `SHA256SUMS` саме цим ключем, а завантажений файл збігається з контрольною сумою. Підкинутий у реліз файл (наприклад, після крадіжки акаунта GitHub) буде відхилено.
+
+Перевірити реліз самостійно:
+```
+minisign -Vm SHA256SUMS -P RWTHLqknA+zq3S01ZgYde9o4CH9nluIpmb4DfczkFneGo8f3I25KR5Mi
+sha256sum -c SHA256SUMS        # Windows: certutil -hashfile <файл> SHA256
+```
+
+Для автора:
+- `build.bat package` сам підписує `dist\release\` (minisign питає пароль ключа). Секретний ключ шукається в `%MINISIGN_KEY%`, `Desktop\minisign-keys\minisign.key` і `%USERPROFILE%\.minisign\minisign.key`.
+- Підписати вручну: `powershell -ExecutionPolicy Bypass -File tools\sign_release.ps1 -Folder dist\release -Version 0.3.1` (Linux: `tools/sign_release.sh dist/release 0.3.1`). Для Authenticode додайте `-CertThumbprint`.
+- Форки: покладіть свій ключ у `minisign.pub` (`minisign -G -p minisign.pub -s minisign.key`) або збирайте з `-DAPP_UPDATE_PUBKEY=none`, щоб вимкнути перевірку.
 
 ## Де зберігаються дані
 

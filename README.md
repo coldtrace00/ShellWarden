@@ -64,7 +64,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **Activity log**: connections, route, the IP the server saw, vault / key / host changes, kill-switch events. No passwords or keys. Filters, search, CSV export, kept for 12 months.
 
 **Other**
-- **Updates**: from GitHub Releases with a mandatory SHA-256 check (`SHA256SUMS`). If the build has a release key (`-DAPP_UPDATE_PUBKEY=…`), only updates with a valid minisign signature (`SHA256SUMS.minisig`) are installed.
+- **Updates**: from GitHub Releases with a mandatory SHA-256 check (`SHA256SUMS`). Only updates signed with the project's minisign key (`SHA256SUMS.minisig`, key in `minisign.pub`) are installed.
 - **Languages**: English, Українська, Русский, Français, Español. Switch without restarting.
 - **Portable mode**: all data next to the .exe.
 
@@ -82,7 +82,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 | Windows APIs | Winsock, DWM (dark title bar), WTS (session lock), Windows Firewall via `netsh`, named pipe / WM_COPYDATA (OpenSSH agent, Pageant) |
 | Build | **CMake 3.21+**, **Ninja**; Windows — MinGW-w64 from the Qt kit, libraries from **MSYS2 UCRT64**, `windeployqt`; Linux — GCC/Clang and distribution packages |
 | Packaging | **Inno Setup 6/7** (`setup.exe`), portable `.zip`, CPack (`.deb`, `.tar.gz`), **AppImage** (linuxdeploy + Qt plugin) |
-| Releases | GitHub Releases, `SHA256SUMS`; optional **minisign** signature and Authenticode (`signtool`) |
+| Releases | GitHub Releases, `SHA256SUMS` signed with **minisign**; optional Authenticode (`signtool`) |
 | Translations | Qt Linguist (`.ts` → `.qm`) |
 | Assets | flags — [flag-icons](https://github.com/lipis/flag-icons) (MIT), country names — [i18n-iso-countries](https://github.com/michaelwittig/node-i18n-iso-countries) (MIT) |
 
@@ -90,7 +90,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - The **UI thread** (QML + `AppController`) never blocks on the network: every SSH session has its own `SshWorker` in a separate thread, which also runs SFTP, tunnels, the agent and the server monitor (one persistent channel).
 - The **route** is a chain: `ProxyTunnel` (SOCKS5/HTTP/Tor/Cloudflare) → `JumpBridge` (jump host) → target server. The kill switch and `FirewallLock` make sure nothing goes out directly.
 - The **vault** (`Vault`) is a single encrypted file; secrets in memory live in `SecureBytes` and are wiped after use.
-- **Updates** (`UpdateChecker`): GitHub Releases API → pick the package for this system → verify `SHA256SUMS` (and minisign when the build has a key) → run the installer.
+- **Updates** (`UpdateChecker`): GitHub Releases API → pick the package for this system → verify `SHA256SUMS` and its minisign signature → run the installer.
 
 ## Build and run
 
@@ -120,7 +120,7 @@ build.bat package
 `dist\` will contain:
 - `ShellWarden-<version>-portable.zip`;
 - `ShellWarden-<version>-setup.exe` — only if [Inno Setup 6 or 7](https://jrsoftware.org/isdl.php) is installed. It asks for a folder, and all data then lives right there, in `data\`;
-- `release\` — both files plus `SHA256SUMS`, ready to upload to a GitHub release.
+- `release\` — both files plus `SHA256SUMS` and the signature `SHA256SUMS.minisig`, ready to upload to a GitHub release.
 
 Full build log: `build\build.log`.
 
@@ -140,22 +140,34 @@ The program checks the **latest release** of `coldtrace00/ShellWarden` (built in
 2. Build: `build.bat package`. `dist\release\` then holds exactly the files to upload:
    - `ShellWarden-0.3.1-setup.exe` — for the installed version;
    - `ShellWarden-0.3.1-portable.zip` — for the portable version;
-   - `SHA256SUMS` — checksums (without it the program will not install the update).
+   - `SHA256SUMS` — checksums (without it the program will not install the update);
+   - `SHA256SUMS.minisig` — the signature (see *Release signing* below; `build.bat package` asks for the key password and makes it).
 
-   Put the Linux build (`./build.sh appimage`) into the same folder and recompute the sums: `sha256sum *.exe *.zip *.AppImage > SHA256SUMS`.
+   Put the Linux build (`./build.sh appimage`) into the same folder and sign again: `tools/sign_release.sh <folder> 0.3.1` (it recomputes `SHA256SUMS` for all files).
 3. On GitHub: **Releases → Draft a new release → Choose a tag** → `v0.3.1` → *Create new tag*, drag in all files from `dist\release\`, click **Publish release**. Drafts and pre-releases are not seen by the program.
 4. In the program: *Settings → Updates →* **Check now** → **Download** → **Install**. The installer silently installs the new version into the same folder; `data\` (vault, keys, settings) is not touched. The portable version opens the folder with the verified zip — extract it over the old one.
 
 The check also runs automatically 4 s after start (can be turned off in the same place).
 
-### Release signing (optional)
-Once: `minisign -G -p minisign.pub -s ~/.minisign/minisign.key` (the secret key stays with you, protected by its own password).
-Build with `-DAPP_UPDATE_PUBKEY="RWQ…"` (second line of `minisign.pub`; for `build.bat`: `set APP_UPDATE_PUBKEY=RWQ…`). Before publishing a release:
+### Release signing
+Every official release is signed with [minisign](https://jedisct1.github.io/minisign/). The public key is in [`minisign.pub`](minisign.pub) and is built into the program:
+
 ```
-tools/sign_release.sh dist/release 0.4.0                                   # Linux
-powershell -File tools\sign_release.ps1 -Folder dist\release -Version 0.4.0  # Windows (+ -CertThumbprint for Authenticode)
+RWTHLqknA+zq3S01ZgYde9o4CH9nluIpmb4DfczkFneGo8f3I25KR5Mi
 ```
-The script creates `SHA256SUMS` and `SHA256SUMS.minisig` — upload them to the release together with the files.
+
+The program installs an update only if `SHA256SUMS.minisig` is a valid signature of `SHA256SUMS` made with this key, and the downloaded file matches its checksum. A fake file put into a release (for example, after a stolen GitHub account) is refused.
+
+Verify a release yourself:
+```
+minisign -Vm SHA256SUMS -P RWTHLqknA+zq3S01ZgYde9o4CH9nluIpmb4DfczkFneGo8f3I25KR5Mi
+sha256sum -c SHA256SUMS        # Windows: certutil -hashfile <file> SHA256
+```
+
+For maintainers:
+- `build.bat package` signs `dist\release\` itself (minisign asks for the key password). The secret key is looked up in `%MINISIGN_KEY%`, `Desktop\minisign-keys\minisign.key` and `%USERPROFILE%\.minisign\minisign.key`.
+- To sign by hand: `powershell -ExecutionPolicy Bypass -File tools\sign_release.ps1 -Folder dist\release -Version 0.3.1` (Linux: `tools/sign_release.sh dist/release 0.3.1`). Add `-CertThumbprint` for Authenticode.
+- Forks: put your own key into `minisign.pub` (`minisign -G -p minisign.pub -s minisign.key`), or build with `-DAPP_UPDATE_PUBKEY=none` to disable the check.
 
 ## Where data is stored
 

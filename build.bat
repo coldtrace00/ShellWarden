@@ -100,7 +100,7 @@ set "DEPS_FWD=%DEPS:\=/%"
 rem The in-app updater checks GitHub Releases of this repository.
 rem Passed every time, so an old CMake cache can never leave it empty.
 if not defined APP_GITHUB_REPO set "APP_GITHUB_REPO=coldtrace00/ShellWarden"
-rem release builds: set APP_UPDATE_PUBKEY=RWQ... (minisign.pub) so updates must be signed
+rem Release key: minisign.pub in this folder (set APP_UPDATE_PUBKEY=none to build without the check)
 echo [2/4] Configuring (CMake)...
 "%CMAKE_EXE%" -S . -B build -G Ninja ^
     -DCMAKE_BUILD_TYPE=Release ^
@@ -200,7 +200,16 @@ if exist "dist\ShellWarden-%APPVER%-setup.exe" copy /y "dist\ShellWarden-%APPVER
 if exist "%ZIP%" copy /y "%ZIP%" dist\release\ >nul
 powershell -NoProfile -Command "$l = Get-ChildItem -File 'dist\release' | ForEach-Object { '{0}  {1}' -f (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLower(), $_.Name }; [IO.File]::WriteAllText('%CD%\dist\release\SHA256SUMS', (($l -join [char]10) + [char]10))" >> "%LOG%" 2>&1
 if exist dist\release\SHA256SUMS (echo        Release:   %CD%\dist\release  ^(upload all files to the GitHub release^)) else (echo        SHA256SUMS FAILED, see build\build.log)
-if defined APP_UPDATE_PUBKEY echo        Signed build: run tools\sign_release.ps1 -Folder dist\release before uploading.
+rem Builds embed minisign.pub, so the release must be signed with the matching key.
+echo.
+echo  Signing the release (minisign asks for the key password)...
+powershell -NoProfile -ExecutionPolicy Bypass -File tools\sign_release.ps1 -Folder "%CD%\dist\release" -Version %APPVER%
+if exist dist\release\SHA256SUMS.minisig (
+    echo        Signed:    dist\release\SHA256SUMS.minisig
+) else (
+    echo        NOT SIGNED: the app will refuse this update. Fix the error above and run:
+    echo          powershell -ExecutionPolicy Bypass -File tools\sign_release.ps1 -Folder dist\release -Version %APPVER%
+)
 echo.
 echo  Done. Files are in %CD%\dist
 start "" "%CD%\dist"
