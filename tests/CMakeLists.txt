@@ -27,6 +27,10 @@ if (WIN32)
     target_link_libraries(sw_core_for_tests PUBLIC ws2_32 advapi32)
 endif()
 
+# qt_standard_project_setup() sends every Windows .exe to the build root;
+# keep the tests in build/tests on every platform.
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
+
 add_executable(unit_tests unit_tests.cpp)
 target_link_libraries(unit_tests PRIVATE sw_core_for_tests)
 add_test(NAME unit_tests COMMAND unit_tests)
