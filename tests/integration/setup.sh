@@ -52,7 +52,13 @@ tinyproxy -c "$W/tinyproxy.conf"
 head -c 2000000 /dev/urandom > "$W/www/big.bin"
 (cd "$W/www" && nohup python3 -m http.server 8766 --bind 127.0.0.1 >/dev/null 2>&1 &)
 
-# Shadowsocks AEAD-2017 (shadowsocks-libev)
+# Shadowsocks AEAD-2017 (shadowsocks-libev). The Debian/Ubuntu package starts
+# its own service on 8388 with a random password; stop it so ours gets the port.
+if command -v systemctl >/dev/null 2>&1; then
+    systemctl stop shadowsocks-libev.service 2>/dev/null || true
+fi
+pkill -x ss-server 2>/dev/null || true
+sleep 0.5
 for spec in "8388 chacha20-ietf-poly1305" "8389 aes-256-gcm" "8390 aes-128-gcm"; do
     set -- $spec
     nohup ss-server -s 127.0.0.1 -p "$1" -k Test-SS-Pass-1 -m "$2" -u >/dev/null 2>&1 &
@@ -79,4 +85,15 @@ CFG
 nohup "$W/ssr/ssserver" -c "$W/ss2022.json" > "$W/ssserver.log" 2>&1 &
 
 sleep 2
+# every test port must be ours and listening
+for p in 2222 1080 8888 8766 8388 8389 8390 8391 8392 8393 8394; do
+    ok=0
+    for _ in $(seq 20); do
+        if (exec 3<>/dev/tcp/127.0.0.1/$p) 2>/dev/null; then ok=1; break; fi
+        sleep 0.25
+    done
+    [ $ok = 1 ] || { echo "port $p is not listening" >&2; exit 1; }
+done
+n=$(pgrep -fc "ss-server -s 127.0.0.1 -p 838" || true)
+[ "$n" = 3 ] || { echo "expected 3 test ss-server processes, found $n" >&2; ps aux | grep ss-server >&2; exit 1; }
 echo "test servers are up (logs in $W)"
