@@ -29,7 +29,15 @@ if ($Key -eq "") {
     if (-not $Key) { throw "No minisign secret key found (looked in: $($candidates -join ', '))" }
 }
 $Key = (Resolve-Path $Key).Path
-if (-not (Get-Command minisign -ErrorAction SilentlyContinue)) { throw "minisign is not installed (winget install jedisct1.minisign)" }
+# minisign: PATH, the winget alias folder, or the winget package folder
+$minisign = (Get-Command minisign -ErrorAction SilentlyContinue | Select-Object -First 1).Source
+if (-not $minisign) {
+    $minisign = @("$env:LOCALAPPDATA\Microsoft\WinGet\Links\minisign.exe") +
+                @(Get-ChildItem "$env:LOCALAPPDATA\Microsoft\WinGet\Packages\jedisct1.minisign*" -Recurse -Filter minisign.exe -ErrorAction SilentlyContinue |
+                  ForEach-Object { $_.FullName }) |
+                Where-Object { Test-Path $_ } | Select-Object -First 1
+}
+if (-not $minisign) { throw "minisign is not installed (winget install jedisct1.minisign)" }
 Set-Location $Folder
 Write-Host "Signing with $Key (minisign asks for the key password)"
 
@@ -50,7 +58,7 @@ $lines = Get-ChildItem -File | Where-Object { $_.Name -notin @("SHA256SUMS", "SH
 }
 # LF line endings, no BOM: the same bytes on every system
 [System.IO.File]::WriteAllText((Join-Path (Get-Location) "SHA256SUMS"), (($lines -join "`n") + "`n"))
-& minisign -S -s $Key -m SHA256SUMS -t "ShellWarden $Version $(Get-Date -Format yyyy-MM-dd)"
+& $minisign -S -s $Key -m SHA256SUMS -t "ShellWarden $Version $(Get-Date -Format yyyy-MM-dd)"
 if ($LASTEXITCODE -ne 0) { throw "minisign failed" }
 Get-Content SHA256SUMS
 Write-Host "Upload to the release: all files + SHA256SUMS + SHA256SUMS.minisig"

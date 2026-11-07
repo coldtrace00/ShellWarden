@@ -49,6 +49,9 @@ if not exist "%CMAKE_EXE%" (
 set "NINJA_DIR=%QT_ROOT%\Tools\Ninja"
 if not exist "%NINJA_DIR%\ninja.exe" goto :no_ninja
 
+rem PATH of the user (minisign from winget etc.), restored for signing
+set "USER_PATH=%PATH%"
+
 rem Only the Qt toolchain is on PATH during the build: MSYS2 bin folders
 rem are never added, so nothing from MSYS2 can shadow the compiler.
 set "PATH=%MINGW_DIR%\bin;%NINJA_DIR%;%QT_DIR%\bin;%SystemRoot%\System32;%SystemRoot%;%SystemRoot%\System32\WindowsPowerShell\v1.0"
@@ -203,6 +206,7 @@ if exist dist\release\SHA256SUMS (echo        Release:   %CD%\dist\release  ^(up
 rem Builds embed minisign.pub, so the release must be signed with the matching key.
 echo.
 echo  Signing the release (minisign asks for the key password)...
+set "PATH=%USER_PATH%"
 powershell -NoProfile -ExecutionPolicy Bypass -File tools\sign_release.ps1 -Folder "%CD%\dist\release" -Version %APPVER%
 if exist dist\release\SHA256SUMS.minisig (
     echo        Signed:    dist\release\SHA256SUMS.minisig
