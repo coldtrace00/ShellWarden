@@ -4,94 +4,94 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/app/AppController.cpp" line="209" />
+        <location filename="../src/app/AppController.cpp" line="210" />
         <source>Vault locked after inactivity.</source>
         <translation>Bóveda bloqueada por inactividad.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="453" />
+        <location filename="../src/app/AppController.cpp" line="454" />
         <source>Passwords do not match.</source>
         <translation>Las contraseñas no coinciden.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="541" />
+        <location filename="../src/app/AppController.cpp" line="542" />
         <source>New passwords do not match.</source>
         <translation>Las contraseñas nuevas no coinciden.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="770" />
-        <location filename="../src/app/AppController.cpp" line="921" />
-        <location filename="../src/app/AppController.cpp" line="1045" />
-        <location filename="../src/app/AppController.cpp" line="1088" />
-        <location filename="../src/app/AppController.cpp" line="1342" />
-        <location filename="../src/app/AppController.cpp" line="1756" />
-        <location filename="../src/app/AppController.cpp" line="2805" />
-        <location filename="../src/app/AppController.cpp" line="2881" />
-        <location filename="../src/app/AppController.cpp" line="2980" />
+        <location filename="../src/app/AppController.cpp" line="771" />
+        <location filename="../src/app/AppController.cpp" line="922" />
+        <location filename="../src/app/AppController.cpp" line="1046" />
+        <location filename="../src/app/AppController.cpp" line="1089" />
+        <location filename="../src/app/AppController.cpp" line="1343" />
+        <location filename="../src/app/AppController.cpp" line="1765" />
+        <location filename="../src/app/AppController.cpp" line="2817" />
+        <location filename="../src/app/AppController.cpp" line="2893" />
+        <location filename="../src/app/AppController.cpp" line="2992" />
         <source>The vault is locked.</source>
         <translation>La bóveda está bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="791" />
+        <location filename="../src/app/AppController.cpp" line="792" />
         <source>Enter a host name or IP address.</source>
         <translation>Introduce un nombre de host o una dirección IP.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="796" />
+        <location filename="../src/app/AppController.cpp" line="797" />
         <source>The host name must not contain spaces.</source>
         <translation>El nombre de host no puede contener espacios.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="799" />
-        <location filename="../src/app/AppController.cpp" line="1375" />
+        <location filename="../src/app/AppController.cpp" line="800" />
+        <location filename="../src/app/AppController.cpp" line="1376" />
         <source>Port must be between 1 and 65535.</source>
         <translation>El puerto debe estar entre 1 y 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="580" />
-        <location filename="../src/app/AppController.cpp" line="784" />
-        <location filename="../src/app/AppController.cpp" line="829" />
-        <location filename="../src/app/AppController.cpp" line="1076" />
-        <location filename="../src/app/AppController.cpp" line="1134" />
-        <location filename="../src/app/AppController.cpp" line="1212" />
-        <location filename="../src/app/AppController.cpp" line="1403" />
-        <location filename="../src/app/AppController.cpp" line="1762" />
-        <location filename="../src/app/AppController.cpp" line="3209" />
+        <location filename="../src/app/AppController.cpp" line="581" />
+        <location filename="../src/app/AppController.cpp" line="785" />
+        <location filename="../src/app/AppController.cpp" line="830" />
+        <location filename="../src/app/AppController.cpp" line="1077" />
+        <location filename="../src/app/AppController.cpp" line="1135" />
+        <location filename="../src/app/AppController.cpp" line="1213" />
+        <location filename="../src/app/AppController.cpp" line="1405" />
+        <location filename="../src/app/AppController.cpp" line="1771" />
+        <location filename="../src/app/AppController.cpp" line="3221" />
         <source>Could not save the vault.</source>
         <translation>No se pudo guardar la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="221" />
+        <location filename="../src/app/AppController.cpp" line="222" />
         <source>Vault locked: the computer went to sleep</source>
         <translation>Bóveda bloqueada: el equipo entró en suspensión</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="222" />
+        <location filename="../src/app/AppController.cpp" line="223" />
         <source>Vault locked: the computer was locked</source>
         <translation>Bóveda bloqueada: el equipo se bloqueó</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="235" />
+        <location filename="../src/app/AppController.cpp" line="236" />
         <source>%1 %2 started</source>
         <translation>%1 %2 iniciado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="236" />
+        <location filename="../src/app/AppController.cpp" line="237" />
         <source>portable mode · %1</source>
         <translation>modo portátil · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="328" />
+        <location filename="../src/app/AppController.cpp" line="329" />
         <source>My theme</source>
         <translation>Mi tema</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="338" />
+        <location filename="../src/app/AppController.cpp" line="339" />
         <source>Image not found: %1</source>
         <translation>Imagen no encontrada: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="340" />
+        <location filename="../src/app/AppController.cpp" line="341" />
         <source>The image is too large (max 25 MB).</source>
         <translation>La imagen es demasiado grande (máx. 25 MB).</translation>
     </message>
@@ -100,137 +100,137 @@
         <translation>Este archivo no es una imagen.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="345" />
+        <location filename="../src/app/AppController.cpp" line="346" />
         <source>Cannot copy the image to %1</source>
         <translation>No se puede copiar la imagen a %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="466" />
+        <location filename="../src/app/AppController.cpp" line="467" />
         <source>Vault created</source>
         <translation>Bóveda creada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="481" />
+        <location filename="../src/app/AppController.cpp" line="482" />
         <source>Failed unlock attempt</source>
         <translation>Intento de desbloqueo fallido</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="485" />
+        <location filename="../src/app/AppController.cpp" line="486" />
         <source>Vault unlocked</source>
         <translation>Bóveda desbloqueada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="528" />
+        <location filename="../src/app/AppController.cpp" line="529" />
         <source>Vault locked</source>
         <translation>Bóveda bloqueada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="543" />
+        <location filename="../src/app/AppController.cpp" line="544" />
         <source>The master password must be at least 8 characters.</source>
         <translation>La contraseña maestra debe tener al menos 8 caracteres.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="546" />
+        <location filename="../src/app/AppController.cpp" line="547" />
         <source>Master password change failed</source>
         <translation>No se pudo cambiar la contraseña maestra</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="549" />
+        <location filename="../src/app/AppController.cpp" line="550" />
         <source>Master password changed</source>
         <translation>Contraseña maestra cambiada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="655" />
+        <location filename="../src/app/AppController.cpp" line="656" />
         <source>Choose a file.</source>
         <translation>Elige un archivo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="658" />
+        <location filename="../src/app/AppController.cpp" line="659" />
         <source>Cannot write %1</source>
         <translation>No se puede escribir %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="659" />
+        <location filename="../src/app/AppController.cpp" line="660" />
         <source>Vault backup saved</source>
         <translation>Copia de seguridad de la bóveda guardada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="666" />
+        <location filename="../src/app/AppController.cpp" line="667" />
         <source>Lock the vault first.</source>
         <translation>Bloquea primero la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="673" />
+        <location filename="../src/app/AppController.cpp" line="674" />
         <source>Cannot move the old vault: %1</source>
         <translation>No se puede mover la bóveda antigua: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="678" />
+        <location filename="../src/app/AppController.cpp" line="679" />
         <source>Started over with a new vault</source>
         <translation>Se empezó de nuevo con una bóveda nueva</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="679" />
+        <location filename="../src/app/AppController.cpp" line="680" />
         <source>Old vault kept as %1</source>
         <translation>Bóveda antigua guardada como %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="701" />
+        <location filename="../src/app/AppController.cpp" line="702" />
         <source>Cannot replace the vault file.</source>
         <translation>No se puede reemplazar el archivo de la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="709" />
+        <location filename="../src/app/AppController.cpp" line="710" />
         <source>Vault restored from backup</source>
         <translation>Bóveda restaurada desde una copia</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="728" />
+        <location filename="../src/app/AppController.cpp" line="729" />
         <source>shorter than 19 characters</source>
         <translation>menos de 19 caracteres</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="729" />
+        <location filename="../src/app/AppController.cpp" line="730" />
         <source>contains a very common password</source>
         <translation>contiene una contraseña muy común</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="730" />
+        <location filename="../src/app/AppController.cpp" line="731" />
         <source>keyboard or alphabet sequence</source>
         <translation>secuencia de teclado o del alfabeto</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="731" />
+        <location filename="../src/app/AppController.cpp" line="732" />
         <source>too many repeated characters</source>
         <translation>demasiados caracteres repetidos</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="732" />
+        <location filename="../src/app/AppController.cpp" line="733" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>mezcla mayúsculas, minúsculas, números y símbolos</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="734" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Very weak</source>
         <translation>Muy débil</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="734" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Weak</source>
         <translation>Débil</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="734" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Fair</source>
         <translation>Aceptable</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="736" />
         <source>Good</source>
         <translation>Buena</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="736" />
         <source>Strong</source>
         <translation>Fuerte</translation>
     </message>
@@ -259,140 +259,140 @@
         <translation>Documentos</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="776" />
-        <location filename="../src/app/AppController.cpp" line="2004" />
+        <location filename="../src/app/AppController.cpp" line="777" />
+        <location filename="../src/app/AppController.cpp" line="2013" />
         <source>Choose a serial port.</source>
         <translation>Elige un puerto serie.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="785" />
-        <location filename="../src/app/AppController.cpp" line="835" />
+        <location filename="../src/app/AppController.cpp" line="786" />
+        <location filename="../src/app/AppController.cpp" line="836" />
         <source>Host added</source>
         <translation>Host añadido</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="785" />
-        <location filename="../src/app/AppController.cpp" line="835" />
+        <location filename="../src/app/AppController.cpp" line="786" />
+        <location filename="../src/app/AppController.cpp" line="836" />
         <source>Host changed</source>
         <translation>Host modificado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="794" />
+        <location filename="../src/app/AppController.cpp" line="795" />
         <source>A host cannot be its own jump host.</source>
         <translation>Un host no puede ser su propio host de salto.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="832" />
+        <location filename="../src/app/AppController.cpp" line="833" />
         <source>Master password on connect enabled for host</source>
         <translation>Contraseña maestra al conectar activada para el host</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="833" />
+        <location filename="../src/app/AppController.cpp" line="834" />
         <source>Master password on connect disabled for host</source>
         <translation>Contraseña maestra al conectar desactivada para el host</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1363" />
+        <location filename="../src/app/AppController.cpp" line="1364" />
         <source>Choose the Shadowsocks cipher.</source>
         <translation>Elija el cifrado de Shadowsocks.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1365" />
+        <location filename="../src/app/AppController.cpp" line="1366" />
         <source>Enter the Shadowsocks password.</source>
         <translation>Introduzca la contraseña de Shadowsocks.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1593" />
+        <location filename="../src/app/AppController.cpp" line="1602" />
         <source>Proxy turned on</source>
         <translation>Proxy activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1593" />
+        <location filename="../src/app/AppController.cpp" line="1602" />
         <source>Proxy turned off</source>
         <translation>Proxy desactivado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1594" />
+        <location filename="../src/app/AppController.cpp" line="1603" />
         <source>hosts that use it connect directly (or through the default proxy while the kill switch is on)</source>
         <translation>los hosts que lo usan se conectan directamente (o por el proxy predeterminado con el kill switch activo)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1887" />
+        <location filename="../src/app/AppController.cpp" line="1896" />
         <source>Connection check passed (master password)</source>
         <translation>Comprobación de conexión superada (contraseña maestra)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1901" />
+        <location filename="../src/app/AppController.cpp" line="1910" />
         <source>Connection cancelled: the master password was not entered.</source>
         <translation>Conexión cancelada: no se introdujo la contraseña maestra.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1925" />
+        <location filename="../src/app/AppController.cpp" line="1934" />
         <source>This proxy no longer exists.</source>
         <translation>Este proxy ya no existe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1931" />
+        <location filename="../src/app/AppController.cpp" line="1940" />
         <source>direct</source>
         <translation>directo</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1932" />
+        <location filename="../src/app/AppController.cpp" line="1941" />
         <source>Route of the host changed: %1</source>
         <translation>Ruta del host cambiada: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1934" />
+        <location filename="../src/app/AppController.cpp" line="1943" />
         <source>%1 now connects: %2</source>
         <translation>%1 ahora se conecta: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2111" />
+        <location filename="../src/app/AppController.cpp" line="2120" />
         <source>Kill switch is on: proxy "%1" is turned off and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch activo: el proxy «%1» está desactivado y no hay proxy predeterminado. Conexión directa bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2127" />
+        <location filename="../src/app/AppController.cpp" line="2136" />
         <source>The Shadowsocks route is for SSH hosts.</source>
         <translation>La ruta Shadowsocks es solo para hosts SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2221" />
+        <location filename="../src/app/AppController.cpp" line="2230" />
         <source>Direct · proxy "%1" is off</source>
         <translation>Directo · el proxy «%1» está desactivado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2345" />
+        <location filename="../src/app/AppController.cpp" line="2357" />
         <source>Behind a jump host: checked only when you connect.</source>
         <translation>Detrás de un host de salto: solo se comprueba al conectar.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2358" />
+        <location filename="../src/app/AppController.cpp" line="2370" />
         <source>Kill switch is on: not checked directly.</source>
         <translation>Kill switch activo: no se comprueba directamente.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2365" />
+        <location filename="../src/app/AppController.cpp" line="2377" />
         <source>Via Tor: not checked in the background.</source>
         <translation>Por Tor: no se comprueba en segundo plano.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2366" />
+        <location filename="../src/app/AppController.cpp" line="2378" />
         <source>Via Cloudflare Tunnel: checked only when you connect.</source>
         <translation>Por Cloudflare Tunnel: solo se comprueba al conectar.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2371" />
+        <location filename="../src/app/AppController.cpp" line="2383" />
         <source>The proxy of this host is not complete.</source>
         <translation>El proxy de este host está incompleto.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2396" />
+        <location filename="../src/app/AppController.cpp" line="2408" />
         <source>The port is open, but no SSH server answered.</source>
         <translation>El puerto está abierto, pero no respondió ningún servidor SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2851" />
+        <location filename="../src/app/AppController.cpp" line="2863" />
         <source>Asks for the master password: enter it to include this host.</source>
         <translation>Pide la contraseña maestra: introdúcela para incluir este host.</translation>
     </message>
@@ -409,81 +409,81 @@
         <translation>2FA desactivada para el host</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="887" />
+        <location filename="../src/app/AppController.cpp" line="888" />
         <source>Tunnels updated in %n open session(s) — no reconnect needed.</source>
         <translation><numerusform>Túneles actualizados en %n sesión abierta, sin reconectar.</numerusform><numerusform>Túneles actualizados en %n sesiones abiertas, sin reconectar.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="995" />
+        <location filename="../src/app/AppController.cpp" line="996" />
         <source>Hosts imported</source>
         <translation>Hosts importados</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="995" />
+        <location filename="../src/app/AppController.cpp" line="996" />
         <source>%1 hosts, %2 keys</source>
         <translation>%1 hosts, %2 claves</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="996" />
+        <location filename="../src/app/AppController.cpp" line="997" />
         <source>Imported %1 host(s) and %2 key(s).</source>
         <translation>Importados %1 host(s) y %2 clave(s).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="998" />
+        <location filename="../src/app/AppController.cpp" line="999" />
         <source>Keys with a passphrase were not imported — add them in Keychain → Import: %1</source>
         <translation>Las claves con frase no se importaron: añádelas en Llavero → Importar: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1004" />
+        <location filename="../src/app/AppController.cpp" line="1005" />
         <source>Host deleted</source>
         <translation>Host eliminado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1030" />
+        <location filename="../src/app/AppController.cpp" line="1031" />
         <source> (copy)</source>
         <translation> (copia)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1047" />
+        <location filename="../src/app/AppController.cpp" line="1048" />
         <source>Passphrases do not match.</source>
         <translation>Las frases de contraseña no coinciden.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1077" />
+        <location filename="../src/app/AppController.cpp" line="1078" />
         <source>Key generated</source>
         <translation>Clave generada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1078" />
+        <location filename="../src/app/AppController.cpp" line="1079" />
         <source> · no passphrase</source>
         <translation> · sin frase de contraseña</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1097" />
+        <location filename="../src/app/AppController.cpp" line="1098" />
         <source>This key is protected. Enter its passphrase.</source>
         <translation>Esta clave está protegida. Introduce su frase de contraseña.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1101" />
-        <location filename="../src/app/AppController.cpp" line="1208" />
+        <location filename="../src/app/AppController.cpp" line="1102" />
+        <location filename="../src/app/AppController.cpp" line="1209" />
         <source>Wrong passphrase.</source>
         <translation>Frase de contraseña incorrecta.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1112" />
+        <location filename="../src/app/AppController.cpp" line="1113" />
         <source>This key is already in the keychain ("%1").</source>
         <translation>Esta clave ya está en el llavero («%1»).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1138" />
+        <location filename="../src/app/AppController.cpp" line="1139" />
         <source>Key imported</source>
         <translation>Clave importada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1166" />
-        <location filename="../src/app/AppController.cpp" line="1178" />
-        <location filename="../src/app/AppController.cpp" line="1189" />
-        <location filename="../src/app/AppController.cpp" line="1214" />
+        <location filename="../src/app/AppController.cpp" line="1167" />
+        <location filename="../src/app/AppController.cpp" line="1179" />
+        <location filename="../src/app/AppController.cpp" line="1190" />
+        <location filename="../src/app/AppController.cpp" line="1215" />
         <source>Key not found.</source>
         <translation>Clave no encontrada.</translation>
     </message>
@@ -492,99 +492,99 @@
         <translation>Esta clave está protegida con OpenPGP. Quita primero la protección (pedirá el PIN).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1195" />
+        <location filename="../src/app/AppController.cpp" line="1196" />
         <source>Private key exported</source>
         <translation>Clave privada exportada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1251" />
+        <location filename="../src/app/AppController.cpp" line="1252" />
         <source>Key deleted</source>
         <translation>Clave eliminada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1373" />
+        <location filename="../src/app/AppController.cpp" line="1374" />
         <source>Enter the proxy address.</source>
         <translation>Introduce la dirección del proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1404" />
+        <location filename="../src/app/AppController.cpp" line="1406" />
         <source>Proxy changed</source>
         <translation>Proxy modificado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1404" />
+        <location filename="../src/app/AppController.cpp" line="1406" />
         <source>Proxy added</source>
         <translation>Proxy añadido</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1413" />
+        <location filename="../src/app/AppController.cpp" line="1415" />
         <source>Proxy deleted</source>
         <translation>Proxy eliminado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1487" />
+        <location filename="../src/app/AppController.cpp" line="1493" />
         <source>cloudflared was not found. Install it (winget install Cloudflare.cloudflared) or choose cloudflared.exe.</source>
         <translation>No se encontró cloudflared. Instálalo (winget install Cloudflare.cloudflared) o elige cloudflared.exe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1489" />
+        <location filename="../src/app/AppController.cpp" line="1495" />
         <source>%1 does not run.</source>
         <translation>%1 no se ejecuta.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1491" />
+        <location filename="../src/app/AppController.cpp" line="1497" />
         <source>via Cloudflare · %1</source>
         <translation>vía Cloudflare · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1533" />
+        <location filename="../src/app/AppController.cpp" line="1542" />
         <source>Enter the proxy address and port.</source>
         <translation>Introduce la dirección y el puerto del proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1627" />
+        <location filename="../src/app/AppController.cpp" line="1636" />
         <source>Kill switch fired</source>
         <translation>Kill switch activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1667" />
-        <location filename="../src/app/AppController.cpp" line="1696" />
+        <location filename="../src/app/AppController.cpp" line="1676" />
+        <location filename="../src/app/AppController.cpp" line="1705" />
         <source>Kill switch: proxy "%1" stopped responding (%2). Session closed.</source>
         <translation>Kill switch: el proxy «%1» dejó de responder (%2). Sesión cerrada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1668" />
+        <location filename="../src/app/AppController.cpp" line="1677" />
         <source>no answer</source>
         <translation>sin respuesta</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1700" />
+        <location filename="../src/app/AppController.cpp" line="1709" />
         <source>Kill switch: proxy "%1" now exits from your real IP. Session closed.</source>
         <translation>Kill switch: el proxy «%1» ahora sale por tu IP real. Sesión cerrada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1720" />
+        <location filename="../src/app/AppController.cpp" line="1729" />
         <source>Firewall lock failed</source>
         <translation>Falló el bloqueo del firewall</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1727" />
+        <location filename="../src/app/AppController.cpp" line="1736" />
         <source>Firewall lock enabled</source>
         <translation>Bloqueo del firewall activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1740" />
+        <location filename="../src/app/AppController.cpp" line="1749" />
         <source>Firewall lock removed</source>
         <translation>Bloqueo del firewall eliminado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1759" />
-        <location filename="../src/app/AppController.cpp" line="2807" />
+        <location filename="../src/app/AppController.cpp" line="1768" />
+        <location filename="../src/app/AppController.cpp" line="2819" />
         <source>Enter a command.</source>
         <translation>Introduce un comando.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="1821" />
+        <location filename="../src/app/AppController.cpp" line="1830" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Fragmento enviado a %n sesión</numerusform><numerusform>Fragmento enviado a %n sesiones</numerusform></translation>
     </message>
@@ -597,22 +597,22 @@
         <translation>servidor</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1867" />
-        <location filename="../src/app/AppController.cpp" line="1937" />
-        <location filename="../src/app/AppController.cpp" line="1961" />
-        <location filename="../src/app/AppController.cpp" line="3213" />
+        <location filename="../src/app/AppController.cpp" line="1876" />
+        <location filename="../src/app/AppController.cpp" line="1946" />
+        <location filename="../src/app/AppController.cpp" line="1970" />
+        <location filename="../src/app/AppController.cpp" line="3225" />
         <source>This host no longer exists.</source>
         <translation>Este host ya no existe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1870" />
+        <location filename="../src/app/AppController.cpp" line="1879" />
         <source>Too many wrong attempts. Try again in %1 s.</source>
         <translation>Demasiados intentos fallidos. Vuelve a intentarlo en %1 s.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1875" />
-        <location filename="../src/app/AppController.cpp" line="2813" />
-        <location filename="../src/app/AppController.cpp" line="2985" />
+        <location filename="../src/app/AppController.cpp" line="1884" />
+        <location filename="../src/app/AppController.cpp" line="2825" />
+        <location filename="../src/app/AppController.cpp" line="2997" />
         <source>Wrong master password.</source>
         <translation>Contraseña maestra incorrecta.</translation>
     </message>
@@ -621,7 +621,7 @@
         <translation>Código 2FA incorrecto o caducado.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1883" />
+        <location filename="../src/app/AppController.cpp" line="1892" />
         <source>Connection check failed</source>
         <translation>Falló la verificación de conexión</translation>
     </message>
@@ -634,7 +634,7 @@
         <translation>Conexión cancelada: no se completó la verificación 2FA / contraseña maestra.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1961" />
+        <location filename="../src/app/AppController.cpp" line="1970" />
         <source>Unlock the vault to reconnect.</source>
         <translation>Desbloquea la bóveda para reconectar.</translation>
     </message>
@@ -643,68 +643,68 @@
         <translation>Esperando el PIN de OpenPGP (Kleopatra)…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1979" />
+        <location filename="../src/app/AppController.cpp" line="1988" />
         <source>Use the form user@host or user@host:port</source>
         <translation>Usa el formato usuario@host o usuario@host:puerto</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1985" />
+        <location filename="../src/app/AppController.cpp" line="1994" />
         <source>Invalid port.</source>
         <translation>Puerto no válido.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2091" />
+        <location filename="../src/app/AppController.cpp" line="2100" />
         <source>Serial</source>
         <translation>Serie</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2109" />
+        <location filename="../src/app/AppController.cpp" line="2118" />
         <source>Blocked by kill switch</source>
         <translation>Bloqueado por el kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2114" />
+        <location filename="../src/app/AppController.cpp" line="2123" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch activado: este host no tiene proxy y no hay proxy predeterminado. Conexión directa bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2123" />
+        <location filename="../src/app/AppController.cpp" line="2132" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>La ruta Cloudflare Tunnel es para hosts SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2133" />
+        <location filename="../src/app/AppController.cpp" line="2142" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor se está iniciando: pulsa Reconectar en un momento.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2137" />
+        <location filename="../src/app/AppController.cpp" line="2146" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · directo · sin cifrar</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2138" />
+        <location filename="../src/app/AppController.cpp" line="2147" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · sin cifrar</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2150" />
+        <location filename="../src/app/AppController.cpp" line="2159" />
         <source>Starting Tor…</source>
         <translation>Iniciando Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2157" />
+        <location filename="../src/app/AppController.cpp" line="2166" />
         <source>Tor: %1</source>
         <translation>Tor: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2171" />
+        <location filename="../src/app/AppController.cpp" line="2180" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Iniciando cloudflared… (la primera vez el navegador puede pedir iniciar sesión en Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2184" />
-        <location filename="../src/app/AppController.cpp" line="2190" />
+        <location filename="../src/app/AppController.cpp" line="2193" />
+        <location filename="../src/app/AppController.cpp" line="2199" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel: %1</translation>
     </message>
@@ -713,124 +713,124 @@
         <translation>La clave SSH está protegida con OpenPGP: pulsa Reconectar e introduce tu PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2216" />
+        <location filename="../src/app/AppController.cpp" line="2225" />
         <source> → jump %1</source>
         <translation> → salto %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2222" />
+        <location filename="../src/app/AppController.cpp" line="2231" />
         <source>Direct</source>
         <translation>Directa</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2224" />
+        <location filename="../src/app/AppController.cpp" line="2233" />
         <source>Connecting…</source>
         <translation>Conectando…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2225" />
-        <location filename="../src/app/AppController.cpp" line="2261" />
+        <location filename="../src/app/AppController.cpp" line="2234" />
+        <location filename="../src/app/AppController.cpp" line="2270" />
         <source>checking…</source>
         <translation>comprobando…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2233" />
+        <location filename="../src/app/AppController.cpp" line="2242" />
         <source>unknown</source>
         <translation>desconocida</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2244" />
+        <location filename="../src/app/AppController.cpp" line="2253" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel: cloudflared no está en ejecución. Pulsa Reconectar.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2251" />
+        <location filename="../src/app/AppController.cpp" line="2260" />
         <source>Connecting through Cloudflare…</source>
         <translation>Conectando a través de Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2260" />
+        <location filename="../src/app/AppController.cpp" line="2269" />
         <source>Checking proxy…</source>
         <translation>Comprobando el proxy…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2284" />
+        <location filename="../src/app/AppController.cpp" line="2296" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch: el proxy sale por tu IP real (%1). Conexión bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2288" />
+        <location filename="../src/app/AppController.cpp" line="2300" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch: falló la comprobación del proxy (%1). Conexión bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2292" />
+        <location filename="../src/app/AppController.cpp" line="2304" />
         <source>proxy check failed: %1</source>
         <translation>falló la comprobación del proxy: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2508" />
+        <location filename="../src/app/AppController.cpp" line="2520" />
         <source>Password saved to the vault.</source>
         <translation>Contraseña guardada en la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2522" />
+        <location filename="../src/app/AppController.cpp" line="2534" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Frase de contraseña de la clave guardada en la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2677" />
+        <location filename="../src/app/AppController.cpp" line="2689" />
         <source>Kill switch enabled</source>
         <translation>Kill switch activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2677" />
+        <location filename="../src/app/AppController.cpp" line="2689" />
         <source>Kill switch disabled</source>
         <translation>Kill switch desactivado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2684" />
+        <location filename="../src/app/AppController.cpp" line="2696" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch activado: sesión directa cerrada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2689" />
+        <location filename="../src/app/AppController.cpp" line="2701" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>El kill switch cerró %1 sesión(es) directa(s).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2792" />
+        <location filename="../src/app/AppController.cpp" line="2804" />
         <source>Tor: new identity</source>
         <translation>Tor: nueva identidad</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2795" />
+        <location filename="../src/app/AppController.cpp" line="2807" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Nueva identidad Tor: las conexiones nuevas usan otra salida. Las sesiones abiertas mantienen su ruta hasta reconectar.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2809" />
-        <location filename="../src/app/AppController.cpp" line="2982" />
+        <location filename="../src/app/AppController.cpp" line="2821" />
+        <location filename="../src/app/AppController.cpp" line="2994" />
         <source>Choose at least one host.</source>
         <translation>Elige al menos un host.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2815" />
+        <location filename="../src/app/AppController.cpp" line="2827" />
         <source>Protected hosts unlocked with the master password for a batch run</source>
         <translation>Hosts protegidos desbloqueados con la contraseña maestra para una ejecución en lote</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2828" />
+        <location filename="../src/app/AppController.cpp" line="2840" />
         <source>Command run on %n host(s)</source>
         <translation><numerusform>Comando ejecutado en %n host</numerusform><numerusform>Comando ejecutado en %n hosts</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2847" />
+        <location filename="../src/app/AppController.cpp" line="2859" />
         <source>Serial connection: not supported here.</source>
         <translation>Conexión serie: no compatible aquí.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2849" />
+        <location filename="../src/app/AppController.cpp" line="2861" />
         <source>Telnet host: commands can only be run over SSH.</source>
         <translation>Host Telnet: los comandos solo se ejecutan por SSH.</translation>
     </message>
@@ -839,72 +839,72 @@
         <translation>Protegido con 2FA / contraseña maestra: introduce la contraseña maestra para incluirlo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2999" />
+        <location filename="../src/app/AppController.cpp" line="3011" />
         <source>Choose a key.</source>
         <translation>Elige una clave.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3018" />
+        <location filename="../src/app/AppController.cpp" line="3030" />
         <source>Public keys sent to %n server(s)</source>
         <translation><numerusform>Claves públicas enviadas a %n servidor</numerusform><numerusform>Claves públicas enviadas a %n servidores</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3027" />
+        <location filename="../src/app/AppController.cpp" line="3039" />
         <source>Another run is still going.</source>
         <translation>Todavía hay otra ejecución en curso.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3030" />
+        <location filename="../src/app/AppController.cpp" line="3042" />
         <source>Choose the old and the new key.</source>
         <translation>Elija la clave antigua y la nueva.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3034" />
+        <location filename="../src/app/AppController.cpp" line="3046" />
         <source>The new key must be a different key.</source>
         <translation>La clave nueva debe ser otra clave.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3036" />
+        <location filename="../src/app/AppController.cpp" line="3048" />
         <source>Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.</source>
         <translation>Solo la parte pública de la clave nueva está en el llavero, así que ShellWarden no puede entrar con ella. Elija una clave con su parte privada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3042" />
+        <location filename="../src/app/AppController.cpp" line="3054" />
         <source>Enter the passphrase of the new key: it is needed to check that the new key works.</source>
         <translation>Introduzca la frase de contraseña de la clave nueva: hace falta para comprobar que funciona.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3057" />
+        <location filename="../src/app/AppController.cpp" line="3069" />
         <source>Key replacement started</source>
         <translation>Sustitución de clave iniciada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3104" />
+        <location filename="../src/app/AppController.cpp" line="3116" />
         <source>The new key could not be added, nothing changed: %1</source>
         <translation>No se pudo añadir la clave nueva, no cambió nada: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3117" />
+        <location filename="../src/app/AppController.cpp" line="3129" />
         <source>The new key did not work here, so the old key was kept: %1</source>
         <translation>La clave nueva no funcionó aquí, así que se mantuvo la antigua: %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3143" />
+        <location filename="../src/app/AppController.cpp" line="3155" />
         <source>Key replaced on %n server(s)</source>
         <translation><numerusform>Clave sustituida en %n servidor</numerusform><numerusform>Clave sustituida en %n servidores</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3144" />
+        <location filename="../src/app/AppController.cpp" line="3156" />
         <source>%1 of %2 servers</source>
         <translation>%1 de %2 servidores</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3188" />
+        <location filename="../src/app/AppController.cpp" line="3200" />
         <source>The key is now used to log in on %n server(s).</source>
         <translation><numerusform>Ahora la clave se usa para entrar en %n servidor.</numerusform><numerusform>Ahora la clave se usa para entrar en %n servidores.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3259" />
+        <location filename="../src/app/AppController.cpp" line="3271" />
         <source>Wrong passphrase for the key "%1".</source>
         <translation>Frase de contraseña incorrecta para la clave «%1».</translation>
     </message>
@@ -917,47 +917,47 @@
         <translation>La clave está protegida con OpenPGP: ábrelo en una pestaña.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2853" />
+        <location filename="../src/app/AppController.cpp" line="2865" />
         <source>Kill switch: this host has no proxy.</source>
         <translation>Kill switch: este host no tiene proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2868" />
+        <location filename="../src/app/AppController.cpp" line="2880" />
         <source>Cloudflare Tunnel is not started: open this host in a tab once.</source>
         <translation>Cloudflare Tunnel no está iniciado: abre este host una vez en una pestaña.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2883" />
+        <location filename="../src/app/AppController.cpp" line="2895" />
         <source>Enter the file path.</source>
         <translation>Introduce la ruta del archivo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2887" />
+        <location filename="../src/app/AppController.cpp" line="2899" />
         <source>Choose two hosts.</source>
         <translation>Elige dos hosts.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2910" />
+        <location filename="../src/app/AppController.cpp" line="2922" />
         <source>Command Prompt (cmd)</source>
         <translation>Símbolo del sistema (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2919" />
+        <location filename="../src/app/AppController.cpp" line="2931" />
         <source>Default shell (%1)</source>
         <translation>Shell predeterminado (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2933" />
+        <location filename="../src/app/AppController.cpp" line="2945" />
         <source>No shell found on this computer.</source>
         <translation>No se encontró ningún shell en este equipo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2945" />
+        <location filename="../src/app/AppController.cpp" line="2957" />
         <source>this computer</source>
         <translation>este equipo</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2948" />
+        <location filename="../src/app/AppController.cpp" line="2960" />
         <source>Local terminal opened</source>
         <translation>Terminal local abierto</translation>
     </message>
@@ -974,7 +974,7 @@
         <translation>Clave SSH desbloqueada con OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2962" />
+        <location filename="../src/app/AppController.cpp" line="2974" />
         <source>The agent did not answer.</source>
         <translation>El agente no respondió.</translation>
     </message>
@@ -3766,143 +3766,143 @@
         <translation>Ninguno: bloquear esos hosts</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="140" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="141" />
         <source>Your real (direct) IP:</source>
         <translation>Tu IP real (directa):</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="142" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="146" />
         <source>checking…</source>
         <translation>comprobando…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="150" />
         <source>unavailable: </source>
         <translation>no disponible: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="148" />
         <source>not checked</source>
         <translation>sin comprobar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="161" />
-        <location filename="../qml/pages/ProxiesPage.qml" line="335" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="174" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="359" />
         <source>Check</source>
         <translation>Comprobar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="168" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="181" />
         <source>Used for the leak check: a proxy whose exit IP equals this address is treated as broken.</source>
         <translation>Se usa para detectar fugas: un proxy cuya IP de salida coincide con esta dirección se considera roto.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="201" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="214" />
         <source>Firewall lock</source>
         <translation>Bloqueo por firewall</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="220" />
         <source>active</source>
         <translation>activo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="220" />
         <source>off</source>
         <translation>desactivado</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="216" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="229" />
         <source>The strongest protection: a Windows Defender Firewall rule lets %1 connect ONLY to your proxies (and localhost). Even a bug in the program could not reveal your real IP — Windows drops the packets. Needs administrator rights (UAC). Update the rule after adding or changing proxies.</source>
         <translation>La protección más fuerte: una regla del Firewall de Windows Defender solo permite a %1 conectarse a tus proxys (y localhost). Ni siquiera un fallo del programa podría revelar tu IP real: Windows descarta los paquetes. Requiere permisos de administrador (UAC). Actualiza la regla tras añadir o cambiar proxys.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="229" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="242" />
         <source>Remove rule</source>
         <translation>Eliminar regla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="246" />
         <source>Update rule</source>
         <translation>Actualizar regla</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="246" />
         <source>Enable firewall lock</source>
         <translation>Activar el bloqueo por firewall</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="294" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="308" />
         <source>default</source>
         <translation>predeterminado</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="296" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="310" />
         <source>cloudflared access tcp → the host's address</source>
         <translation>cloudflared access tcp → la dirección del host</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="310" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="327" />
         <source>Turned off · its hosts use the default proxy; with no default proxy they are blocked (kill switch is on)</source>
         <translation>Desactivado · sus hosts usan el proxy predeterminado; sin él se bloquean (kill switch activo)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="311" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="328" />
         <source>Turned off · its hosts connect directly, from your real IP</source>
         <translation>Desactivado · sus hosts se conectan directamente, desde su IP real</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="314" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="331" />
         <source>Ready · %1</source>
         <translation>Listo · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="315" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="332" />
         <source>Working · exit IP %1%2 · %3 ms · checked %4</source>
         <translation>Funciona · IP de salida %1%2 · %3 ms · comprobado %4</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="319" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="336" />
         <source>Not working: %1 · checked %2</source>
         <translation>No funciona: %1 · comprobado %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="320" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="337" />
         <source>Checking…</source>
         <translation>Comprobando…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="321" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="338" />
         <source>Not checked yet</source>
         <translation>Aún sin comprobar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="330" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="354" />
         <source>New identity</source>
         <translation>Nueva identidad</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="333" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="357" />
         <source>Switch to new Tor circuits: a different exit IP for new connections</source>
         <translation>Cambiar a nuevos circuitos Tor: otra IP de salida para las conexiones nuevas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="342" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="366" />
         <source>Turn this proxy off without deleting it: hosts that use it will connect directly (with the kill switch on — through the default proxy, never directly). Open sessions are not touched.</source>
         <translation>Desactivar este proxy sin borrarlo: los hosts que lo usan se conectarán directamente (con el kill switch activo, por el proxy predeterminado, nunca directamente). Las sesiones abiertas no se tocan.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="343" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="367" />
         <source>Turn this proxy back on</source>
         <translation>Volver a activar este proxy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="355" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="379" />
         <source>No proxies yet</source>
         <translation>Aún no hay proxies</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="356" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="380" />
         <source>Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default.</source>
         <translation>Añada un proxy SOCKS5, HTTP, Shadowsocks o Tor y asígnelo a hosts o hágalo predeterminado.</translation>
     </message>
@@ -3918,14 +3918,57 @@
 <context>
     <name>ProxyChecker</name>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="142" />
         <source>Unexpected answer from the IP service</source>
         <translation>Respuesta inesperada del servicio de IP</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="156" />
         <source>no IP service answered (%1)</source>
         <translation>ningún servicio de IP respondió (%1)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="165" />
+        <source>unexpected answer</source>
+        <translation>respuesta inesperada</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="166" />
+        <source>name not found (DNS)</source>
+        <translation>nombre no encontrado (DNS)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="168" />
+        <source>no answer (timeout)</source>
+        <translation>sin respuesta (tiempo agotado)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="169" />
+        <source>connection refused</source>
+        <translation>conexión rechazada</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="170" />
+        <source>connection closed</source>
+        <translation>conexión cerrada</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="171" />
+        <source>TLS error — something on the network intercepts HTTPS</source>
+        <translation>error TLS: algo en la red intercepta el HTTPS</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="183" />
+        <source>No IP service answered</source>
+        <translation>Ningún servicio de IP respondió</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="184" />
+        <source>The proxy may have no internet access, or it blocks these services.</source>
+        <translation>Puede que el proxy no tenga acceso a internet o que bloquee estos servicios.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="185" />
+        <source>No internet connection, or your network blocks these services.</source>
+        <translation>No hay conexión a internet o su red bloquea estos servicios.</translation>
     </message>
 </context>
 <context>
@@ -4219,17 +4262,17 @@
 %2Latencia: %3 ms</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="377" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="384" />
         <source>Delete</source>
         <translation>Eliminar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="382" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="389" />
         <source>Test</source>
         <translation>Probar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="387" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="394" />
         <source>Save</source>
         <translation>Guardar</translation>
     </message>
@@ -4629,14 +4672,32 @@
         <translation>Sin respuesta a través del servidor Shadowsocks: contraseña o cifrado incorrectos, o el servidor no tiene acceso a internet</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="75" />
         <source>no answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access</source>
         <translation>sin respuesta a través del servidor Shadowsocks: contraseña o cifrado incorrectos, o el servidor no tiene acceso a internet</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="76" />
         <source>Unexpected answer from the IP service</source>
         <translation>Respuesta inesperada del servicio de IP</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="76" />
+        <source>no answer</source>
+        <translation>sin respuesta</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="76" />
+        <source>unexpected answer</source>
+        <translation>respuesta inesperada</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="81" />
+        <source>No IP service answered through the Shadowsocks server</source>
+        <translation>Ningún servicio de IP respondió a través del servidor Shadowsocks</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="82" />
+        <source>Wrong password or cipher, or the Shadowsocks server has no internet access.</source>
+        <translation>Contraseña o cifrado incorrectos, o el servidor Shadowsocks no tiene acceso a internet.</translation>
     </message>
 </context>
 <context>

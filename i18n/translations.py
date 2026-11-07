@@ -1347,6 +1347,17 @@ T = [
 ('via proxy · %1', 'через проксі · %1', 'через прокси · %1', 'via le proxy · %1', 'vía proxy · %1'),
 ('no IP service answered (%1)', 'жоден сервіс IP не відповів (%1)', 'ни один сервис IP не ответил (%1)', 'aucun service IP n\'a répondu (%1)', 'ningún servicio de IP respondió (%1)'),
 ('no answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access', 'немає відповіді через сервер Shadowsocks — неправильний пароль чи шифр, або сервер не має доступу до інтернету', 'нет ответа через сервер Shadowsocks — неверный пароль или шифр, либо у сервера нет доступа в интернет', "pas de réponse via le serveur Shadowsocks — mauvais mot de passe ou chiffrement, ou le serveur n'a pas accès à Internet", 'sin respuesta a través del servidor Shadowsocks: contraseña o cifrado incorrectos, o el servidor no tiene acceso a internet'),
+('No IP service answered', 'Жоден сервіс IP не відповів', 'Ни один сервис IP не ответил', "Aucun service IP n'a répondu", 'Ningún servicio de IP respondió'),
+('No IP service answered through the Shadowsocks server', 'Через сервер Shadowsocks не відповів жоден сервіс IP', 'Через сервер Shadowsocks не ответил ни один сервис IP', "Aucun service IP n'a répondu via le serveur Shadowsocks", 'Ningún servicio de IP respondió a través del servidor Shadowsocks'),
+('No internet connection, or your network blocks these services.', 'Немає інтернету, або ваша мережа блокує ці сервіси.', 'Нет интернета, или ваша сеть блокирует эти сервисы.', 'Pas de connexion Internet, ou votre réseau bloque ces services.', 'No hay conexión a internet o su red bloquea estos servicios.'),
+('TLS error — something on the network intercepts HTTPS', 'помилка TLS — щось у мережі перехоплює HTTPS', 'ошибка TLS — что-то в сети перехватывает HTTPS', 'erreur TLS — quelque chose sur le réseau intercepte le HTTPS', 'error TLS: algo en la red intercepta el HTTPS'),
+('The proxy may have no internet access, or it blocks these services.', 'Можливо, проксі не має доступу до інтернету або блокує ці сервіси.', 'Возможно, у прокси нет доступа в интернет или он блокирует эти сервисы.', "Le proxy n'a peut-être pas accès à Internet, ou il bloque ces services.", 'Puede que el proxy no tenga acceso a internet o que bloquee estos servicios.'),
+('Wrong password or cipher, or the Shadowsocks server has no internet access.', 'Неправильний пароль чи шифр, або сервер Shadowsocks не має доступу до інтернету.', 'Неверный пароль или шифр, либо у сервера Shadowsocks нет доступа в интернет.', "Mauvais mot de passe ou chiffrement, ou le serveur Shadowsocks n'a pas accès à Internet.", 'Contraseña o cifrado incorrectos, o el servidor Shadowsocks no tiene acceso a internet.'),
+('connection closed', "з'єднання закрито", 'соединение закрыто', 'connexion fermée', 'conexión cerrada'),
+('connection refused', "з'єднання відхилено", 'соединение отклонено', 'connexion refusée', 'conexión rechazada'),
+('name not found (DNS)', "ім'я не знайдено (DNS)", 'имя не найдено (DNS)', 'nom introuvable (DNS)', 'nombre no encontrado (DNS)'),
+('no answer (timeout)', 'немає відповіді (час вийшов)', 'нет ответа (время вышло)', 'pas de réponse (délai dépassé)', 'sin respuesta (tiempo agotado)'),
+('unexpected answer', 'неочікувана відповідь', 'неожиданный ответ', 'réponse inattendue', 'respuesta inesperada'),
 ]
 
 # Plural forms (numerus): uk/ru have 3 forms, fr/es 2.

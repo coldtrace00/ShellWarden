@@ -358,7 +358,14 @@ Drawer {
                                     .arg(root.testResult.ip)
                                     .arg(root.testResult.location ? root.testResult.location + "\n" : "")
                                     .arg(root.testResult.latencyMs)
-                              : root.testResult.error)
+                              : (root.testResult.summary || root.testResult.error))
+                    }
+                    CheckErrors {
+                        visible: !root.testing && !!root.testResult && !root.testResult.ok && !!root.testResult.summary
+                        Layout.fillWidth: true
+                        errors: root.testResult && root.testResult.errors ? root.testResult.errors : []
+                        hint: root.testResult && root.testResult.hint ? root.testResult.hint : ""
+                        accent: Theme.danger
                     }
                 }
             }

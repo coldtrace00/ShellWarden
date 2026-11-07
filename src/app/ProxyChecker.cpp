@@ -37,6 +37,7 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
         const Service services[] = {{"ipinfo.io", "/json"}, {"api.ipify.org", "/?format=json"}};
         QVariantMap r;
         QString lastError;
+        QVariantList tried;   // {service, error} for every IP service that did not answer
         for (const Service &svc : services) {
             const qint64 t0 = QDateTime::currentMSecsSinceEpoch();
             QString err;
@@ -71,12 +72,21 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
                 r.insert(QStringLiteral("latencyMs"), int(QDateTime::currentMSecsSinceEpoch() - t0));
                 break;
             }
-            lastError = (lastError.isEmpty() ? QString() : lastError + QStringLiteral("; ")) + QString::fromLatin1(svc.host) + QStringLiteral(": ")
-                        + (resp.isEmpty() ? QObject::tr("no answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access")
-                                          : QObject::tr("Unexpected answer from the IP service"));
+            tried << QVariantMap{{QStringLiteral("service"), QString::fromLatin1(svc.host)},
+                                 {QStringLiteral("error"), resp.isEmpty() ? QObject::tr("no answer") : QObject::tr("unexpected answer")}};
         }
         if (r.isEmpty()) {
             r.insert(QStringLiteral("ok"), false);
+            if (!tried.isEmpty()) {
+                r.insert(QStringLiteral("summary"), QObject::tr("No IP service answered through the Shadowsocks server"));
+                r.insert(QStringLiteral("hint"), QObject::tr("Wrong password or cipher, or the Shadowsocks server has no internet access."));
+                r.insert(QStringLiteral("errors"), tried);
+                QStringList parts;
+                for (const QVariant &t : tried)
+                    parts << t.toMap().value(QStringLiteral("service")).toString() + QStringLiteral(": ") + t.toMap().value(QStringLiteral("error")).toString();
+                lastError = r.value(QStringLiteral("summary")).toString() + QStringLiteral(" (") + parts.join(QStringLiteral("; ")) + QStringLiteral(") — ")
+                            + r.value(QStringLiteral("hint")).toString();
+            }
             r.insert(QStringLiteral("error"), lastError);
         }
         r.insert(QStringLiteral("checkedAt"), QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss")));
@@ -106,7 +116,7 @@ void ProxyChecker::check(const ProxyConfig &proxy, Callback done, int timeoutMs)
 }
 
 void ProxyChecker::request(QNetworkAccessManager *nam, int endpoint, qint64 startedMs,
-                           Callback done, int timeoutMs, const QString &earlierErrors)
+                           Callback done, int timeoutMs, const QVariantList &earlier)
 {
     QNetworkRequest req(QUrl(QString::fromLatin1(kEndpoints[endpoint])));
     req.setRawHeader("Accept", "application/json");
@@ -138,22 +148,46 @@ void ProxyChecker::request(QNetworkAccessManager *nam, int endpoint, qint64 star
             }
         }
 
-        const QString err = reply->error() == QNetworkReply::NoError
-                                ? tr("Unexpected answer from the IP service")
-                                : reply->errorString();
         const bool proxyFault = reply->error() == QNetworkReply::ProxyConnectionRefusedError
                                 || reply->error() == QNetworkReply::ProxyNotFoundError
                                 || reply->error() == QNetworkReply::ProxyAuthenticationRequiredError;
-        // name every service that was tried, so a blocked one is easy to spot
-        const QString all = proxyFault ? err
-                            : (earlierErrors.isEmpty() ? QString() : earlierErrors + QStringLiteral("; "))
-                                  + QUrl(QString::fromLatin1(kEndpoints[endpoint])).host() + QStringLiteral(": ") + err;
-        if (endpoint + 1 < kEndpointCount && !proxyFault) {
-            request(nam, endpoint + 1, startedMs, done, timeoutMs, all);
+        if (proxyFault) {   // the proxy itself failed: the second service would not help
+            r.insert(QStringLiteral("ok"), false);
+            r.insert(QStringLiteral("error"), reply->errorString());
+            r.insert(QStringLiteral("checkedAt"), QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss")));
+            nam->deleteLater();
+            done(r);
             return;
         }
+        // short, human words per service; the full text stays in "error" for the log
+        QString why;
+        switch (reply->error()) {
+        case QNetworkReply::NoError: why = tr("unexpected answer"); break;
+        case QNetworkReply::HostNotFoundError: why = tr("name not found (DNS)"); break;
+        case QNetworkReply::TimeoutError:
+        case QNetworkReply::OperationCanceledError: why = tr("no answer (timeout)"); break;
+        case QNetworkReply::ConnectionRefusedError: why = tr("connection refused"); break;
+        case QNetworkReply::RemoteHostClosedError: why = tr("connection closed"); break;
+        case QNetworkReply::SslHandshakeFailedError: why = tr("TLS error — something on the network intercepts HTTPS"); break;
+        default: why = reply->errorString(); break;
+        }
+        QVariantList tried = earlier;
+        tried << QVariantMap{{QStringLiteral("service"), QUrl(QString::fromLatin1(kEndpoints[endpoint])).host()},
+                             {QStringLiteral("error"), why}};
+        if (endpoint + 1 < kEndpointCount) {
+            request(nam, endpoint + 1, startedMs, done, timeoutMs, tried);
+            return;
+        }
+        const bool viaProxy = nam->proxy().type() != QNetworkProxy::NoProxy;
         r.insert(QStringLiteral("ok"), false);
-        r.insert(QStringLiteral("error"), endpoint > 0 && !proxyFault ? tr("no IP service answered (%1)").arg(all) : all);
+        r.insert(QStringLiteral("summary"), tr("No IP service answered"));
+        r.insert(QStringLiteral("hint"), viaProxy ? tr("The proxy may have no internet access, or it blocks these services.")
+                                                  : tr("No internet connection, or your network blocks these services."));
+        r.insert(QStringLiteral("errors"), tried);
+        QStringList parts;
+        for (const QVariant &t : tried)
+            parts << t.toMap().value(QStringLiteral("service")).toString() + QStringLiteral(": ") + t.toMap().value(QStringLiteral("error")).toString();
+        r.insert(QStringLiteral("error"), r.value(QStringLiteral("summary")).toString() + QStringLiteral(" (") + parts.join(QStringLiteral("; ")) + QStringLiteral(")"));
         r.insert(QStringLiteral("checkedAt"), QDateTime::currentDateTime().toString(QStringLiteral("HH:mm:ss")));
         nam->deleteLater();
         done(r);

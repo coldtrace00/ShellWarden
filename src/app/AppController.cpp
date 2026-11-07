@@ -136,7 +136,8 @@ AppController::AppController(QObject *parent)
                  QStringLiteral("host"), QStringLiteral("port"), QStringLiteral("username"),
                  QStringLiteral("checkState"), QStringLiteral("exitIp"), QStringLiteral("location"),
                  QStringLiteral("exitCountry"), QStringLiteral("disabled"),
-                 QStringLiteral("latencyMs"), QStringLiteral("checkError"), QStringLiteral("checkedAt")},
+                 QStringLiteral("latencyMs"), QStringLiteral("checkError"), QStringLiteral("checkedAt"),
+                 QStringLiteral("checkSummary"), QStringLiteral("checkHint"), QStringLiteral("checkErrors")},
                 {QStringLiteral("password")}),
       m_snippets({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("command"),
                   QStringLiteral("group"), QStringLiteral("autoRun"), QStringLiteral("script")}, {}),
@@ -1378,7 +1379,8 @@ QString AppController::saveProxy(const QVariantMap &p)
     if (o.value(QStringLiteral("name")).toString().trimmed().isEmpty())
         o.insert(QStringLiteral("name"), QStringLiteral("%1:%2").arg(host).arg(port));
     // Never persist transient check results.
-    for (const char *k : {"checkState", "exitIp", "location", "exitCountry", "latencyMs", "checkError", "checkedAt", "hasPassword"})
+    for (const char *k : {"checkState", "exitIp", "location", "exitCountry", "latencyMs", "checkError", "checkedAt", "hasPassword",
+                          "checkSummary", "checkHint", "checkErrors"})
         o.remove(QString::fromLatin1(k));
 
     QJsonArray list = section(kProxies);
@@ -1440,7 +1442,8 @@ void AppController::checkProxy(const QString &id)
     if (p.isEmpty())
         return;
     m_proxies.setTransient(id, {{QStringLiteral("checkState"), QStringLiteral("checking")},
-                                {QStringLiteral("checkError"), QString()}});
+                                {QStringLiteral("checkError"), QString()}, {QStringLiteral("checkSummary"), QString()},
+                                {QStringLiteral("checkHint"), QString()}, {QStringLiteral("checkErrors"), QVariant()}});
     if (p.value(QStringLiteral("type")).toString() == QLatin1String("tor")
         && m_tor.needsStart(p.value(QStringLiteral("torMode")).toString())) {
         if (m_tor.state() != QLatin1String("starting"))
@@ -1461,7 +1464,10 @@ void AppController::checkProxy(const QString &id)
         const QVariantMap r = cloudflaredCheck(p.value(QStringLiteral("cfPath")).toString());
         m_proxies.setTransient(id, {{QStringLiteral("checkState"), r.value(QStringLiteral("ok")).toBool() ? QStringLiteral("ok") : QStringLiteral("fail")},
                                     {QStringLiteral("location"), r.value(QStringLiteral("location"))},
-                                    {QStringLiteral("checkError"), r.value(QStringLiteral("error"))}});
+                                    {QStringLiteral("checkError"), r.value(QStringLiteral("error"))},
+                                    {QStringLiteral("checkSummary"), r.value(QStringLiteral("summary"))},
+                                    {QStringLiteral("checkHint"), r.value(QStringLiteral("hint"))},
+                                    {QStringLiteral("checkErrors"), r.value(QStringLiteral("errors"))}});
         return;
     }
     m_checker.check(proxyConfig(p), [this, id](const QVariantMap &r) { storeCheck(id, r); });
@@ -1502,6 +1508,9 @@ void AppController::storeCheck(const QString &proxyId, const QVariantMap &r)
         {QStringLiteral("exitCountry"), r.value(QStringLiteral("country"))},
         {QStringLiteral("latencyMs"), r.value(QStringLiteral("latencyMs"))},
         {QStringLiteral("checkError"), r.value(QStringLiteral("error"))},
+        {QStringLiteral("checkSummary"), r.value(QStringLiteral("summary"))},
+        {QStringLiteral("checkHint"), r.value(QStringLiteral("hint"))},
+        {QStringLiteral("checkErrors"), r.value(QStringLiteral("errors"))},
         {QStringLiteral("checkedAt"), r.value(QStringLiteral("checkedAt"))},
     });
 }
@@ -2271,6 +2280,9 @@ void AppController::startSession(TerminalSession *s, const QJsonObject &host)
             {QStringLiteral("exitCountry"), r.value(QStringLiteral("country"))},
             {QStringLiteral("latencyMs"), r.value(QStringLiteral("latencyMs"))},
             {QStringLiteral("checkError"), r.value(QStringLiteral("error"))},
+            {QStringLiteral("checkSummary"), r.value(QStringLiteral("summary"))},
+            {QStringLiteral("checkHint"), r.value(QStringLiteral("hint"))},
+            {QStringLiteral("checkErrors"), r.value(QStringLiteral("errors"))},
             {QStringLiteral("checkedAt"), r.value(QStringLiteral("checkedAt"))},
         });
         if (!guard || guard->state() != TerminalSession::Preparing)

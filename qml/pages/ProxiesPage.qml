@@ -138,19 +138,29 @@ Item {
                             RowLayout {
                                 Layout.fillWidth: true
                                 spacing: 8
-                                Text { text: qsTr("Your real (direct) IP:"); color: Theme.textDim; font.pixelSize: 12; Layout.alignment: Qt.AlignTop }
+                                Text { text: qsTr("Your real (direct) IP:"); color: Theme.textDim; font.pixelSize: 12 }
                                 Text {
-                                    Layout.fillWidth: !App.directIp.ok
-                                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
+                                    readonly property bool failed: !App.directIp.checking && !App.directIp.ok && !!App.directIp.error
+                                    Layout.fillWidth: failed
+                                    wrapMode: Text.WordWrap
                                     text: App.directIp.checking ? qsTr("checking…")
-                                          : (App.directIp.ok ? App.directIp.ip
-                                                             : (App.directIp.error ? qsTr("unavailable: ") + App.directIp.error : qsTr("not checked")))
-                                    color: Theme.text
-                                    font.pixelSize: App.directIp.ok || !App.directIp.error ? 13 : 12
-                                    font.family: Theme.monoFont
+                                          : App.directIp.ok ? App.directIp.ip
+                                          : !App.directIp.error ? qsTr("not checked")
+                                          : App.directIp.summary ? App.directIp.summary
+                                          : qsTr("unavailable: ") + App.directIp.error
+                                    color: failed ? Theme.warn : Theme.text
+                                    font.pixelSize: failed ? 12 : 13
+                                    font.family: failed ? Qt.application.font.family : Theme.monoFont
                                     font.bold: !!App.directIp.ok
                                 }
                                 CountryBadge { code: App.directIp.ok ? (App.directIp.country || "") : "" }
+                            }
+                            CheckErrors {
+                                visible: !App.directIp.checking && !App.directIp.ok && !!App.directIp.summary
+                                Layout.fillWidth: true
+                                Layout.topMargin: 2
+                                errors: App.directIp.errors || []
+                                hint: App.directIp.hint || ""
                             }
                             Text {
                                 visible: !!App.directIp.ok && !!App.directIp.location
@@ -323,12 +333,19 @@ Item {
                                                .arg(model.exitIp)
                                                .arg(model.location ? " (" + model.location + ")" : "")
                                                .arg(model.latencyMs).arg(model.checkedAt)
-                                    case "fail": return qsTr("Not working: %1 · checked %2").arg(model.checkError).arg(model.checkedAt)
+                                    case "fail": return qsTr("Not working: %1 · checked %2").arg(model.checkSummary || model.checkError).arg(model.checkedAt)
                                     case "checking": return model.type === "tor" && App.tor.state === "starting" ? App.tor.message : qsTr("Checking…")
                                     default: return qsTr("Not checked yet")
                                     }
                                 }
                             }
+                            }
+                            CheckErrors {
+                                visible: !model.disabled && model.checkState === "fail" && !!model.checkSummary
+                                Layout.fillWidth: true
+                                errors: model.checkErrors || []
+                                hint: model.checkHint || ""
+                                accent: Theme.danger
                             }
                         }
 

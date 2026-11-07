@@ -4,94 +4,94 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/app/AppController.cpp" line="209" />
+        <location filename="../src/app/AppController.cpp" line="210" />
         <source>Vault locked after inactivity.</source>
         <translation>Сховище заблоковано через бездіяльність.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="453" />
+        <location filename="../src/app/AppController.cpp" line="454" />
         <source>Passwords do not match.</source>
         <translation>Паролі не збігаються.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="541" />
+        <location filename="../src/app/AppController.cpp" line="542" />
         <source>New passwords do not match.</source>
         <translation>Нові паролі не збігаються.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="770" />
-        <location filename="../src/app/AppController.cpp" line="921" />
-        <location filename="../src/app/AppController.cpp" line="1045" />
-        <location filename="../src/app/AppController.cpp" line="1088" />
-        <location filename="../src/app/AppController.cpp" line="1342" />
-        <location filename="../src/app/AppController.cpp" line="1756" />
-        <location filename="../src/app/AppController.cpp" line="2805" />
-        <location filename="../src/app/AppController.cpp" line="2881" />
-        <location filename="../src/app/AppController.cpp" line="2980" />
+        <location filename="../src/app/AppController.cpp" line="771" />
+        <location filename="../src/app/AppController.cpp" line="922" />
+        <location filename="../src/app/AppController.cpp" line="1046" />
+        <location filename="../src/app/AppController.cpp" line="1089" />
+        <location filename="../src/app/AppController.cpp" line="1343" />
+        <location filename="../src/app/AppController.cpp" line="1765" />
+        <location filename="../src/app/AppController.cpp" line="2817" />
+        <location filename="../src/app/AppController.cpp" line="2893" />
+        <location filename="../src/app/AppController.cpp" line="2992" />
         <source>The vault is locked.</source>
         <translation>Сховище заблоковане.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="791" />
+        <location filename="../src/app/AppController.cpp" line="792" />
         <source>Enter a host name or IP address.</source>
         <translation>Введіть ім'я хоста або IP-адресу.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="796" />
+        <location filename="../src/app/AppController.cpp" line="797" />
         <source>The host name must not contain spaces.</source>
         <translation>Ім'я хоста не може містити пробілів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="799" />
-        <location filename="../src/app/AppController.cpp" line="1375" />
+        <location filename="../src/app/AppController.cpp" line="800" />
+        <location filename="../src/app/AppController.cpp" line="1376" />
         <source>Port must be between 1 and 65535.</source>
         <translation>Порт має бути від 1 до 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="580" />
-        <location filename="../src/app/AppController.cpp" line="784" />
-        <location filename="../src/app/AppController.cpp" line="829" />
-        <location filename="../src/app/AppController.cpp" line="1076" />
-        <location filename="../src/app/AppController.cpp" line="1134" />
-        <location filename="../src/app/AppController.cpp" line="1212" />
-        <location filename="../src/app/AppController.cpp" line="1403" />
-        <location filename="../src/app/AppController.cpp" line="1762" />
-        <location filename="../src/app/AppController.cpp" line="3209" />
+        <location filename="../src/app/AppController.cpp" line="581" />
+        <location filename="../src/app/AppController.cpp" line="785" />
+        <location filename="../src/app/AppController.cpp" line="830" />
+        <location filename="../src/app/AppController.cpp" line="1077" />
+        <location filename="../src/app/AppController.cpp" line="1135" />
+        <location filename="../src/app/AppController.cpp" line="1213" />
+        <location filename="../src/app/AppController.cpp" line="1405" />
+        <location filename="../src/app/AppController.cpp" line="1771" />
+        <location filename="../src/app/AppController.cpp" line="3221" />
         <source>Could not save the vault.</source>
         <translation>Не вдалося зберегти сховище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="221" />
+        <location filename="../src/app/AppController.cpp" line="222" />
         <source>Vault locked: the computer went to sleep</source>
         <translation>Сховище заблоковано: комп'ютер заснув</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="222" />
+        <location filename="../src/app/AppController.cpp" line="223" />
         <source>Vault locked: the computer was locked</source>
         <translation>Сховище заблоковано: комп'ютер заблоковано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="235" />
+        <location filename="../src/app/AppController.cpp" line="236" />
         <source>%1 %2 started</source>
         <translation>%1 %2 запущено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="236" />
+        <location filename="../src/app/AppController.cpp" line="237" />
         <source>portable mode · %1</source>
         <translation>портативний режим · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="328" />
+        <location filename="../src/app/AppController.cpp" line="329" />
         <source>My theme</source>
         <translation>Моя тема</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="338" />
+        <location filename="../src/app/AppController.cpp" line="339" />
         <source>Image not found: %1</source>
         <translation>Зображення не знайдено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="340" />
+        <location filename="../src/app/AppController.cpp" line="341" />
         <source>The image is too large (max 25 MB).</source>
         <translation>Зображення завелике (максимум 25 МБ).</translation>
     </message>
@@ -100,137 +100,137 @@
         <translation>Цей файл не є зображенням.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="345" />
+        <location filename="../src/app/AppController.cpp" line="346" />
         <source>Cannot copy the image to %1</source>
         <translation>Не вдається скопіювати зображення в %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="466" />
+        <location filename="../src/app/AppController.cpp" line="467" />
         <source>Vault created</source>
         <translation>Сховище створено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="481" />
+        <location filename="../src/app/AppController.cpp" line="482" />
         <source>Failed unlock attempt</source>
         <translation>Невдала спроба розблокування</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="485" />
+        <location filename="../src/app/AppController.cpp" line="486" />
         <source>Vault unlocked</source>
         <translation>Сховище розблоковано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="528" />
+        <location filename="../src/app/AppController.cpp" line="529" />
         <source>Vault locked</source>
         <translation>Сховище заблоковано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="543" />
+        <location filename="../src/app/AppController.cpp" line="544" />
         <source>The master password must be at least 8 characters.</source>
         <translation>Майстер-пароль має містити щонайменше 8 символів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="546" />
+        <location filename="../src/app/AppController.cpp" line="547" />
         <source>Master password change failed</source>
         <translation>Не вдалося змінити майстер-пароль</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="549" />
+        <location filename="../src/app/AppController.cpp" line="550" />
         <source>Master password changed</source>
         <translation>Майстер-пароль змінено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="655" />
+        <location filename="../src/app/AppController.cpp" line="656" />
         <source>Choose a file.</source>
         <translation>Виберіть файл.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="658" />
+        <location filename="../src/app/AppController.cpp" line="659" />
         <source>Cannot write %1</source>
         <translation>Не вдається записати %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="659" />
+        <location filename="../src/app/AppController.cpp" line="660" />
         <source>Vault backup saved</source>
         <translation>Резервну копію сховища збережено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="666" />
+        <location filename="../src/app/AppController.cpp" line="667" />
         <source>Lock the vault first.</source>
         <translation>Спершу заблокуйте сховище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="673" />
+        <location filename="../src/app/AppController.cpp" line="674" />
         <source>Cannot move the old vault: %1</source>
         <translation>Не вдається перемістити старе сховище: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="678" />
+        <location filename="../src/app/AppController.cpp" line="679" />
         <source>Started over with a new vault</source>
         <translation>Почато заново з новим сховищем</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="679" />
+        <location filename="../src/app/AppController.cpp" line="680" />
         <source>Old vault kept as %1</source>
         <translation>Старе сховище збережено як %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="701" />
+        <location filename="../src/app/AppController.cpp" line="702" />
         <source>Cannot replace the vault file.</source>
         <translation>Не вдається замінити файл сховища.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="709" />
+        <location filename="../src/app/AppController.cpp" line="710" />
         <source>Vault restored from backup</source>
         <translation>Сховище відновлено з резервної копії</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="728" />
+        <location filename="../src/app/AppController.cpp" line="729" />
         <source>shorter than 19 characters</source>
         <translation>коротший за 19 символів</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="729" />
+        <location filename="../src/app/AppController.cpp" line="730" />
         <source>contains a very common password</source>
         <translation>містить дуже поширений пароль</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="730" />
+        <location filename="../src/app/AppController.cpp" line="731" />
         <source>keyboard or alphabet sequence</source>
         <translation>послідовність клавіш або літер абетки</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="731" />
+        <location filename="../src/app/AppController.cpp" line="732" />
         <source>too many repeated characters</source>
         <translation>забагато повторюваних символів</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="732" />
+        <location filename="../src/app/AppController.cpp" line="733" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>поєднуйте великі й малі літери, цифри та символи</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="734" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Very weak</source>
         <translation>Дуже слабкий</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="734" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Weak</source>
         <translation>Слабкий</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="734" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Fair</source>
         <translation>Середній</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="736" />
         <source>Good</source>
         <translation>Добрий</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="736" />
         <source>Strong</source>
         <translation>Надійний</translation>
     </message>
@@ -259,140 +259,140 @@
         <translation>Документи</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="776" />
-        <location filename="../src/app/AppController.cpp" line="2004" />
+        <location filename="../src/app/AppController.cpp" line="777" />
+        <location filename="../src/app/AppController.cpp" line="2013" />
         <source>Choose a serial port.</source>
         <translation>Виберіть послідовний порт.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="785" />
-        <location filename="../src/app/AppController.cpp" line="835" />
+        <location filename="../src/app/AppController.cpp" line="786" />
+        <location filename="../src/app/AppController.cpp" line="836" />
         <source>Host added</source>
         <translation>Хост додано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="785" />
-        <location filename="../src/app/AppController.cpp" line="835" />
+        <location filename="../src/app/AppController.cpp" line="786" />
+        <location filename="../src/app/AppController.cpp" line="836" />
         <source>Host changed</source>
         <translation>Хост змінено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="794" />
+        <location filename="../src/app/AppController.cpp" line="795" />
         <source>A host cannot be its own jump host.</source>
         <translation>Хост не може бути власним jump-хостом.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="832" />
+        <location filename="../src/app/AppController.cpp" line="833" />
         <source>Master password on connect enabled for host</source>
         <translation>Майстер-пароль при підключенні увімкнено для хоста</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="833" />
+        <location filename="../src/app/AppController.cpp" line="834" />
         <source>Master password on connect disabled for host</source>
         <translation>Майстер-пароль при підключенні вимкнено для хоста</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1363" />
+        <location filename="../src/app/AppController.cpp" line="1364" />
         <source>Choose the Shadowsocks cipher.</source>
         <translation>Виберіть шифр Shadowsocks.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1365" />
+        <location filename="../src/app/AppController.cpp" line="1366" />
         <source>Enter the Shadowsocks password.</source>
         <translation>Введіть пароль Shadowsocks.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1593" />
+        <location filename="../src/app/AppController.cpp" line="1602" />
         <source>Proxy turned on</source>
         <translation>Проксі увімкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1593" />
+        <location filename="../src/app/AppController.cpp" line="1602" />
         <source>Proxy turned off</source>
         <translation>Проксі вимкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1594" />
+        <location filename="../src/app/AppController.cpp" line="1603" />
         <source>hosts that use it connect directly (or through the default proxy while the kill switch is on)</source>
         <translation>хости, що його використовують, підключаються напряму (або через проксі за замовчуванням, коли kill switch увімкнено)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1887" />
+        <location filename="../src/app/AppController.cpp" line="1896" />
         <source>Connection check passed (master password)</source>
         <translation>Перевірку перед підключенням пройдено (майстер-пароль)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1901" />
+        <location filename="../src/app/AppController.cpp" line="1910" />
         <source>Connection cancelled: the master password was not entered.</source>
         <translation>Підключення скасовано: майстер-пароль не введено.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1925" />
+        <location filename="../src/app/AppController.cpp" line="1934" />
         <source>This proxy no longer exists.</source>
         <translation>Цього проксі вже немає.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1931" />
+        <location filename="../src/app/AppController.cpp" line="1940" />
         <source>direct</source>
         <translation>напряму</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1932" />
+        <location filename="../src/app/AppController.cpp" line="1941" />
         <source>Route of the host changed: %1</source>
         <translation>Маршрут хоста змінено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1934" />
+        <location filename="../src/app/AppController.cpp" line="1943" />
         <source>%1 now connects: %2</source>
         <translation>%1 тепер підключається: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2111" />
+        <location filename="../src/app/AppController.cpp" line="2120" />
         <source>Kill switch is on: proxy "%1" is turned off and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch увімкнено: проксі «%1» вимкнено, а проксі за замовчуванням не вибрано. Пряме підключення заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2127" />
+        <location filename="../src/app/AppController.cpp" line="2136" />
         <source>The Shadowsocks route is for SSH hosts.</source>
         <translation>Маршрут Shadowsocks — лише для SSH-хостів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2221" />
+        <location filename="../src/app/AppController.cpp" line="2230" />
         <source>Direct · proxy "%1" is off</source>
         <translation>Напряму · проксі «%1» вимкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2345" />
+        <location filename="../src/app/AppController.cpp" line="2357" />
         <source>Behind a jump host: checked only when you connect.</source>
         <translation>Через jump-хост: перевіряється лише під час підключення.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2358" />
+        <location filename="../src/app/AppController.cpp" line="2370" />
         <source>Kill switch is on: not checked directly.</source>
         <translation>Kill switch увімкнено: напряму не перевіряється.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2365" />
+        <location filename="../src/app/AppController.cpp" line="2377" />
         <source>Via Tor: not checked in the background.</source>
         <translation>Через Tor: у фоні не перевіряється.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2366" />
+        <location filename="../src/app/AppController.cpp" line="2378" />
         <source>Via Cloudflare Tunnel: checked only when you connect.</source>
         <translation>Через Cloudflare Tunnel: перевіряється лише під час підключення.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2371" />
+        <location filename="../src/app/AppController.cpp" line="2383" />
         <source>The proxy of this host is not complete.</source>
         <translation>Проксі цього хоста налаштовано не повністю.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2396" />
+        <location filename="../src/app/AppController.cpp" line="2408" />
         <source>The port is open, but no SSH server answered.</source>
         <translation>Порт відкритий, але SSH-сервер не відповів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2851" />
+        <location filename="../src/app/AppController.cpp" line="2863" />
         <source>Asks for the master password: enter it to include this host.</source>
         <translation>Питає майстер-пароль: введіть його, щоб додати цей хост.</translation>
     </message>
@@ -409,81 +409,81 @@
         <translation>2FA вимкнено для хоста</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="887" />
+        <location filename="../src/app/AppController.cpp" line="888" />
         <source>Tunnels updated in %n open session(s) — no reconnect needed.</source>
         <translation><numerusform>Тунелі оновлено в %n відкритій сесії — перепідключатися не треба.</numerusform><numerusform>Тунелі оновлено в %n відкритих сесіях — перепідключатися не треба.</numerusform><numerusform>Тунелі оновлено в %n відкритих сесіях — перепідключатися не треба.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="995" />
+        <location filename="../src/app/AppController.cpp" line="996" />
         <source>Hosts imported</source>
         <translation>Хости імпортовано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="995" />
+        <location filename="../src/app/AppController.cpp" line="996" />
         <source>%1 hosts, %2 keys</source>
         <translation>хостів: %1, ключів: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="996" />
+        <location filename="../src/app/AppController.cpp" line="997" />
         <source>Imported %1 host(s) and %2 key(s).</source>
         <translation>Імпортовано хостів: %1, ключів: %2.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="998" />
+        <location filename="../src/app/AppController.cpp" line="999" />
         <source>Keys with a passphrase were not imported — add them in Keychain → Import: %1</source>
         <translation>Ключі з паролем не імпортовано — додайте їх у «Ключі» → «Імпорт»: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1004" />
+        <location filename="../src/app/AppController.cpp" line="1005" />
         <source>Host deleted</source>
         <translation>Хост видалено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1030" />
+        <location filename="../src/app/AppController.cpp" line="1031" />
         <source> (copy)</source>
         <translation> (копія)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1047" />
+        <location filename="../src/app/AppController.cpp" line="1048" />
         <source>Passphrases do not match.</source>
         <translation>Паролі ключа не збігаються.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1077" />
+        <location filename="../src/app/AppController.cpp" line="1078" />
         <source>Key generated</source>
         <translation>Ключ створено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1078" />
+        <location filename="../src/app/AppController.cpp" line="1079" />
         <source> · no passphrase</source>
         <translation> · без пароля</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1097" />
+        <location filename="../src/app/AppController.cpp" line="1098" />
         <source>This key is protected. Enter its passphrase.</source>
         <translation>Ключ захищений. Введіть його пароль.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1101" />
-        <location filename="../src/app/AppController.cpp" line="1208" />
+        <location filename="../src/app/AppController.cpp" line="1102" />
+        <location filename="../src/app/AppController.cpp" line="1209" />
         <source>Wrong passphrase.</source>
         <translation>Неправильний пароль ключа.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1112" />
+        <location filename="../src/app/AppController.cpp" line="1113" />
         <source>This key is already in the keychain ("%1").</source>
         <translation>Цей ключ уже є у сховищі ключів («%1»).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1138" />
+        <location filename="../src/app/AppController.cpp" line="1139" />
         <source>Key imported</source>
         <translation>Ключ імпортовано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1166" />
-        <location filename="../src/app/AppController.cpp" line="1178" />
-        <location filename="../src/app/AppController.cpp" line="1189" />
-        <location filename="../src/app/AppController.cpp" line="1214" />
+        <location filename="../src/app/AppController.cpp" line="1167" />
+        <location filename="../src/app/AppController.cpp" line="1179" />
+        <location filename="../src/app/AppController.cpp" line="1190" />
+        <location filename="../src/app/AppController.cpp" line="1215" />
         <source>Key not found.</source>
         <translation>Ключ не знайдено.</translation>
     </message>
@@ -492,99 +492,99 @@
         <translation>Цей ключ захищено OpenPGP. Спочатку зніміть захист (буде запит PIN).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1195" />
+        <location filename="../src/app/AppController.cpp" line="1196" />
         <source>Private key exported</source>
         <translation>Приватний ключ експортовано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1251" />
+        <location filename="../src/app/AppController.cpp" line="1252" />
         <source>Key deleted</source>
         <translation>Ключ видалено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1373" />
+        <location filename="../src/app/AppController.cpp" line="1374" />
         <source>Enter the proxy address.</source>
         <translation>Введіть адресу проксі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1404" />
+        <location filename="../src/app/AppController.cpp" line="1406" />
         <source>Proxy changed</source>
         <translation>Проксі змінено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1404" />
+        <location filename="../src/app/AppController.cpp" line="1406" />
         <source>Proxy added</source>
         <translation>Проксі додано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1413" />
+        <location filename="../src/app/AppController.cpp" line="1415" />
         <source>Proxy deleted</source>
         <translation>Проксі видалено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1487" />
+        <location filename="../src/app/AppController.cpp" line="1493" />
         <source>cloudflared was not found. Install it (winget install Cloudflare.cloudflared) or choose cloudflared.exe.</source>
         <translation>cloudflared не знайдено. Встановіть його (winget install Cloudflare.cloudflared) або виберіть cloudflared.exe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1489" />
+        <location filename="../src/app/AppController.cpp" line="1495" />
         <source>%1 does not run.</source>
         <translation>%1 не запускається.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1491" />
+        <location filename="../src/app/AppController.cpp" line="1497" />
         <source>via Cloudflare · %1</source>
         <translation>через Cloudflare · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1533" />
+        <location filename="../src/app/AppController.cpp" line="1542" />
         <source>Enter the proxy address and port.</source>
         <translation>Введіть адресу і порт проксі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1627" />
+        <location filename="../src/app/AppController.cpp" line="1636" />
         <source>Kill switch fired</source>
         <translation>Спрацював kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1667" />
-        <location filename="../src/app/AppController.cpp" line="1696" />
+        <location filename="../src/app/AppController.cpp" line="1676" />
+        <location filename="../src/app/AppController.cpp" line="1705" />
         <source>Kill switch: proxy "%1" stopped responding (%2). Session closed.</source>
         <translation>Kill switch: проксі «%1» перестав відповідати (%2). Сесію закрито.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1668" />
+        <location filename="../src/app/AppController.cpp" line="1677" />
         <source>no answer</source>
         <translation>немає відповіді</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1700" />
+        <location filename="../src/app/AppController.cpp" line="1709" />
         <source>Kill switch: proxy "%1" now exits from your real IP. Session closed.</source>
         <translation>Kill switch: проксі «%1» тепер виходить з вашого реального IP. Сесію закрито.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1720" />
+        <location filename="../src/app/AppController.cpp" line="1729" />
         <source>Firewall lock failed</source>
         <translation>Не вдалося ввімкнути блокування брандмауером</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1727" />
+        <location filename="../src/app/AppController.cpp" line="1736" />
         <source>Firewall lock enabled</source>
         <translation>Блокування брандмауером увімкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1740" />
+        <location filename="../src/app/AppController.cpp" line="1749" />
         <source>Firewall lock removed</source>
         <translation>Блокування брандмауером знято</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1759" />
-        <location filename="../src/app/AppController.cpp" line="2807" />
+        <location filename="../src/app/AppController.cpp" line="1768" />
+        <location filename="../src/app/AppController.cpp" line="2819" />
         <source>Enter a command.</source>
         <translation>Введіть команду.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="1821" />
+        <location filename="../src/app/AppController.cpp" line="1830" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Сніпет надіслано в %n сесію</numerusform><numerusform>Сніпет надіслано в %n сесії</numerusform><numerusform>Сніпет надіслано в %n сесій</numerusform></translation>
     </message>
@@ -597,22 +597,22 @@
         <translation>сервер</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1867" />
-        <location filename="../src/app/AppController.cpp" line="1937" />
-        <location filename="../src/app/AppController.cpp" line="1961" />
-        <location filename="../src/app/AppController.cpp" line="3213" />
+        <location filename="../src/app/AppController.cpp" line="1876" />
+        <location filename="../src/app/AppController.cpp" line="1946" />
+        <location filename="../src/app/AppController.cpp" line="1970" />
+        <location filename="../src/app/AppController.cpp" line="3225" />
         <source>This host no longer exists.</source>
         <translation>Цього хоста більше не існує.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1870" />
+        <location filename="../src/app/AppController.cpp" line="1879" />
         <source>Too many wrong attempts. Try again in %1 s.</source>
         <translation>Забагато невдалих спроб. Спробуйте через %1 с.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1875" />
-        <location filename="../src/app/AppController.cpp" line="2813" />
-        <location filename="../src/app/AppController.cpp" line="2985" />
+        <location filename="../src/app/AppController.cpp" line="1884" />
+        <location filename="../src/app/AppController.cpp" line="2825" />
+        <location filename="../src/app/AppController.cpp" line="2997" />
         <source>Wrong master password.</source>
         <translation>Неправильний майстер-пароль.</translation>
     </message>
@@ -621,7 +621,7 @@
         <translation>Неправильний або прострочений код 2FA.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1883" />
+        <location filename="../src/app/AppController.cpp" line="1892" />
         <source>Connection check failed</source>
         <translation>Перевірку перед підключенням не пройдено</translation>
     </message>
@@ -634,7 +634,7 @@
         <translation>Підключення скасовано: перевірку 2FA / майстер-пароля не завершено.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1961" />
+        <location filename="../src/app/AppController.cpp" line="1970" />
         <source>Unlock the vault to reconnect.</source>
         <translation>Розблокуйте сховище, щоб перепідключитися.</translation>
     </message>
@@ -643,68 +643,68 @@
         <translation>Очікую PIN OpenPGP (Kleopatra)…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1979" />
+        <location filename="../src/app/AppController.cpp" line="1988" />
         <source>Use the form user@host or user@host:port</source>
         <translation>Формат: user@host або user@host:port</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1985" />
+        <location filename="../src/app/AppController.cpp" line="1994" />
         <source>Invalid port.</source>
         <translation>Неправильний порт.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2091" />
+        <location filename="../src/app/AppController.cpp" line="2100" />
         <source>Serial</source>
         <translation>Serial</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2109" />
+        <location filename="../src/app/AppController.cpp" line="2118" />
         <source>Blocked by kill switch</source>
         <translation>Заблоковано kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2114" />
+        <location filename="../src/app/AppController.cpp" line="2123" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch увімкнений: у цього хоста немає проксі, і проксі за замовчуванням не задано. Пряме з'єднання заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2123" />
+        <location filename="../src/app/AppController.cpp" line="2132" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>Маршрут Cloudflare Tunnel — для SSH-хостів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2133" />
+        <location filename="../src/app/AppController.cpp" line="2142" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor запускається — за мить натисніть «Перепідключитися».</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2137" />
+        <location filename="../src/app/AppController.cpp" line="2146" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · напряму · без шифрування</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2138" />
+        <location filename="../src/app/AppController.cpp" line="2147" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · без шифрування</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2150" />
+        <location filename="../src/app/AppController.cpp" line="2159" />
         <source>Starting Tor…</source>
         <translation>Запуск Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2157" />
+        <location filename="../src/app/AppController.cpp" line="2166" />
         <source>Tor: %1</source>
         <translation>Tor: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2171" />
+        <location filename="../src/app/AppController.cpp" line="2180" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Запуск cloudflared… (першого разу браузер може попросити увійти в Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2184" />
-        <location filename="../src/app/AppController.cpp" line="2190" />
+        <location filename="../src/app/AppController.cpp" line="2193" />
+        <location filename="../src/app/AppController.cpp" line="2199" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel: %1</translation>
     </message>
@@ -713,124 +713,124 @@
         <translation>SSH-ключ захищено OpenPGP: натисніть «Перепідключитися» і введіть PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2216" />
+        <location filename="../src/app/AppController.cpp" line="2225" />
         <source> → jump %1</source>
         <translation> → через %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2222" />
+        <location filename="../src/app/AppController.cpp" line="2231" />
         <source>Direct</source>
         <translation>Напряму</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2224" />
+        <location filename="../src/app/AppController.cpp" line="2233" />
         <source>Connecting…</source>
         <translation>Підключення…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2225" />
-        <location filename="../src/app/AppController.cpp" line="2261" />
+        <location filename="../src/app/AppController.cpp" line="2234" />
+        <location filename="../src/app/AppController.cpp" line="2270" />
         <source>checking…</source>
         <translation>перевірка…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2233" />
+        <location filename="../src/app/AppController.cpp" line="2242" />
         <source>unknown</source>
         <translation>невідомо</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2244" />
+        <location filename="../src/app/AppController.cpp" line="2253" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel: cloudflared не запущений. Натисніть «Перепідключитися».</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2251" />
+        <location filename="../src/app/AppController.cpp" line="2260" />
         <source>Connecting through Cloudflare…</source>
         <translation>Підключення через Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2260" />
+        <location filename="../src/app/AppController.cpp" line="2269" />
         <source>Checking proxy…</source>
         <translation>Перевірка проксі…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2284" />
+        <location filename="../src/app/AppController.cpp" line="2296" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch: проксі виходить з вашого реального IP (%1). З'єднання заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2288" />
+        <location filename="../src/app/AppController.cpp" line="2300" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch: перевірка проксі не пройшла (%1). З'єднання заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2292" />
+        <location filename="../src/app/AppController.cpp" line="2304" />
         <source>proxy check failed: %1</source>
         <translation>перевірка проксі не пройшла: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2508" />
+        <location filename="../src/app/AppController.cpp" line="2520" />
         <source>Password saved to the vault.</source>
         <translation>Пароль збережено у сховищі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2522" />
+        <location filename="../src/app/AppController.cpp" line="2534" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Пароль ключа збережено у сховищі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2677" />
+        <location filename="../src/app/AppController.cpp" line="2689" />
         <source>Kill switch enabled</source>
         <translation>Kill switch увімкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2677" />
+        <location filename="../src/app/AppController.cpp" line="2689" />
         <source>Kill switch disabled</source>
         <translation>Kill switch вимкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2684" />
+        <location filename="../src/app/AppController.cpp" line="2696" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch увімкнено: пряму сесію закрито.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2689" />
+        <location filename="../src/app/AppController.cpp" line="2701" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>Kill switch закрив прямих сесій: %1.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2792" />
+        <location filename="../src/app/AppController.cpp" line="2804" />
         <source>Tor: new identity</source>
         <translation>Tor: нова особа</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2795" />
+        <location filename="../src/app/AppController.cpp" line="2807" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Нова особа Tor: нові підключення підуть через інший вихід. Відкриті сесії зберігають маршрут до перепідключення.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2809" />
-        <location filename="../src/app/AppController.cpp" line="2982" />
+        <location filename="../src/app/AppController.cpp" line="2821" />
+        <location filename="../src/app/AppController.cpp" line="2994" />
         <source>Choose at least one host.</source>
         <translation>Виберіть хоча б один хост.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2815" />
+        <location filename="../src/app/AppController.cpp" line="2827" />
         <source>Protected hosts unlocked with the master password for a batch run</source>
         <translation>Захищені хости відкрито майстер-паролем для групового запуску</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2828" />
+        <location filename="../src/app/AppController.cpp" line="2840" />
         <source>Command run on %n host(s)</source>
         <translation><numerusform>Команду виконано на %n сервері</numerusform><numerusform>Команду виконано на %n серверах</numerusform><numerusform>Команду виконано на %n серверах</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2847" />
+        <location filename="../src/app/AppController.cpp" line="2859" />
         <source>Serial connection: not supported here.</source>
         <translation>Послідовний порт: тут не підтримується.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2849" />
+        <location filename="../src/app/AppController.cpp" line="2861" />
         <source>Telnet host: commands can only be run over SSH.</source>
         <translation>Telnet-хост: команди можна виконувати лише через SSH.</translation>
     </message>
@@ -839,72 +839,72 @@
         <translation>Захищений 2FA / майстер-паролем: введіть майстер-пароль, щоб додати його.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2999" />
+        <location filename="../src/app/AppController.cpp" line="3011" />
         <source>Choose a key.</source>
         <translation>Виберіть ключ.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3018" />
+        <location filename="../src/app/AppController.cpp" line="3030" />
         <source>Public keys sent to %n server(s)</source>
         <translation><numerusform>Публічні ключі надіслано на %n сервер</numerusform><numerusform>Публічні ключі надіслано на %n сервери</numerusform><numerusform>Публічні ключі надіслано на %n серверів</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3027" />
+        <location filename="../src/app/AppController.cpp" line="3039" />
         <source>Another run is still going.</source>
         <translation>Ще триває попередній запуск.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3030" />
+        <location filename="../src/app/AppController.cpp" line="3042" />
         <source>Choose the old and the new key.</source>
         <translation>Виберіть старий і новий ключ.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3034" />
+        <location filename="../src/app/AppController.cpp" line="3046" />
         <source>The new key must be a different key.</source>
         <translation>Новий ключ має бути іншим ключем.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3036" />
+        <location filename="../src/app/AppController.cpp" line="3048" />
         <source>Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.</source>
         <translation>У сховищі лише публічна частина нового ключа, тож ShellWarden не може ним увійти. Виберіть ключ разом із приватною частиною.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3042" />
+        <location filename="../src/app/AppController.cpp" line="3054" />
         <source>Enter the passphrase of the new key: it is needed to check that the new key works.</source>
         <translation>Введіть пароль нового ключа: він потрібен, щоб перевірити, що новий ключ працює.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3057" />
+        <location filename="../src/app/AppController.cpp" line="3069" />
         <source>Key replacement started</source>
         <translation>Почато заміну ключа</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3104" />
+        <location filename="../src/app/AppController.cpp" line="3116" />
         <source>The new key could not be added, nothing changed: %1</source>
         <translation>Новий ключ не вдалося додати, нічого не змінено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3117" />
+        <location filename="../src/app/AppController.cpp" line="3129" />
         <source>The new key did not work here, so the old key was kept: %1</source>
         <translation>Новий ключ тут не спрацював, тому старий лишився: %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3143" />
+        <location filename="../src/app/AppController.cpp" line="3155" />
         <source>Key replaced on %n server(s)</source>
         <translation><numerusform>Ключ замінено на %n сервері</numerusform><numerusform>Ключ замінено на %n серверах</numerusform><numerusform>Ключ замінено на %n серверах</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3144" />
+        <location filename="../src/app/AppController.cpp" line="3156" />
         <source>%1 of %2 servers</source>
         <translation>%1 з %2 серверів</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3188" />
+        <location filename="../src/app/AppController.cpp" line="3200" />
         <source>The key is now used to log in on %n server(s).</source>
         <translation><numerusform>Тепер ключ використовується для входу на %n сервер.</numerusform><numerusform>Тепер ключ використовується для входу на %n сервери.</numerusform><numerusform>Тепер ключ використовується для входу на %n серверів.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3259" />
+        <location filename="../src/app/AppController.cpp" line="3271" />
         <source>Wrong passphrase for the key "%1".</source>
         <translation>Неправильний пароль ключа «%1».</translation>
     </message>
@@ -917,47 +917,47 @@
         <translation>Ключ захищено OpenPGP: відкрийте хост у вкладці.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2853" />
+        <location filename="../src/app/AppController.cpp" line="2865" />
         <source>Kill switch: this host has no proxy.</source>
         <translation>Kill switch: у цього хоста немає проксі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2868" />
+        <location filename="../src/app/AppController.cpp" line="2880" />
         <source>Cloudflare Tunnel is not started: open this host in a tab once.</source>
         <translation>Cloudflare Tunnel не запущено: один раз відкрийте цей хост у вкладці.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2883" />
+        <location filename="../src/app/AppController.cpp" line="2895" />
         <source>Enter the file path.</source>
         <translation>Вкажіть шлях до файлу.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2887" />
+        <location filename="../src/app/AppController.cpp" line="2899" />
         <source>Choose two hosts.</source>
         <translation>Виберіть два хости.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2910" />
+        <location filename="../src/app/AppController.cpp" line="2922" />
         <source>Command Prompt (cmd)</source>
         <translation>Командний рядок (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2919" />
+        <location filename="../src/app/AppController.cpp" line="2931" />
         <source>Default shell (%1)</source>
         <translation>Оболонка за замовчуванням (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2933" />
+        <location filename="../src/app/AppController.cpp" line="2945" />
         <source>No shell found on this computer.</source>
         <translation>На цьому комп'ютері не знайдено оболонки.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2945" />
+        <location filename="../src/app/AppController.cpp" line="2957" />
         <source>this computer</source>
         <translation>цей комп'ютер</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2948" />
+        <location filename="../src/app/AppController.cpp" line="2960" />
         <source>Local terminal opened</source>
         <translation>Відкрито локальний термінал</translation>
     </message>
@@ -974,7 +974,7 @@
         <translation>SSH-ключ розблоковано через OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2962" />
+        <location filename="../src/app/AppController.cpp" line="2974" />
         <source>The agent did not answer.</source>
         <translation>Агент не відповів.</translation>
     </message>
@@ -3766,143 +3766,143 @@
         <translation>Немає — блокувати такі хости</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="140" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="141" />
         <source>Your real (direct) IP:</source>
         <translation>Ваш реальний (прямий) IP:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="142" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="146" />
         <source>checking…</source>
         <translation>перевірка…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="150" />
         <source>unavailable: </source>
         <translation>недоступно: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="148" />
         <source>not checked</source>
         <translation>не перевірено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="161" />
-        <location filename="../qml/pages/ProxiesPage.qml" line="335" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="174" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="359" />
         <source>Check</source>
         <translation>Перевірити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="168" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="181" />
         <source>Used for the leak check: a proxy whose exit IP equals this address is treated as broken.</source>
         <translation>Використовується для перевірки витоку: проксі, чий вихідний IP збігається з цією адресою, вважається несправним.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="201" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="214" />
         <source>Firewall lock</source>
         <translation>Блокування брандмауером</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="220" />
         <source>active</source>
         <translation>активне</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="220" />
         <source>off</source>
         <translation>вимкнено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="216" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="229" />
         <source>The strongest protection: a Windows Defender Firewall rule lets %1 connect ONLY to your proxies (and localhost). Even a bug in the program could not reveal your real IP — Windows drops the packets. Needs administrator rights (UAC). Update the rule after adding or changing proxies.</source>
         <translation>Найсильніший захист: правило брандмауера Windows Defender дозволяє %1 підключатися ЛИШЕ до ваших проксі (і localhost). Навіть помилка в програмі не розкриє ваш реальний IP — Windows відкине пакети. Потрібні права адміністратора (UAC). Оновлюйте правило після додавання чи зміни проксі.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="229" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="242" />
         <source>Remove rule</source>
         <translation>Видалити правило</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="246" />
         <source>Update rule</source>
         <translation>Оновити правило</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="246" />
         <source>Enable firewall lock</source>
         <translation>Увімкнути блокування брандмауером</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="294" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="308" />
         <source>default</source>
         <translation>за замовч.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="296" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="310" />
         <source>cloudflared access tcp → the host's address</source>
         <translation>cloudflared access tcp → адреса хоста</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="310" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="327" />
         <source>Turned off · its hosts use the default proxy; with no default proxy they are blocked (kill switch is on)</source>
         <translation>Вимкнено · його хости йдуть через проксі за замовчуванням; без нього вони блокуються (kill switch увімкнено)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="311" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="328" />
         <source>Turned off · its hosts connect directly, from your real IP</source>
         <translation>Вимкнено · його хости підключаються напряму, з вашого справжнього IP</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="314" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="331" />
         <source>Ready · %1</source>
         <translation>Готово · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="315" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="332" />
         <source>Working · exit IP %1%2 · %3 ms · checked %4</source>
         <translation>Працює · вихідний IP %1%2 · %3 мс · перевірено %4</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="319" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="336" />
         <source>Not working: %1 · checked %2</source>
         <translation>Не працює: %1 · перевірено %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="320" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="337" />
         <source>Checking…</source>
         <translation>Перевірка…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="321" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="338" />
         <source>Not checked yet</source>
         <translation>Ще не перевірено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="330" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="354" />
         <source>New identity</source>
         <translation>Нова особа</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="333" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="357" />
         <source>Switch to new Tor circuits: a different exit IP for new connections</source>
         <translation>Перейти на нові ланцюжки Tor: інший вихідний IP для нових підключень</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="342" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="366" />
         <source>Turn this proxy off without deleting it: hosts that use it will connect directly (with the kill switch on — through the default proxy, never directly). Open sessions are not touched.</source>
         <translation>Вимкнути цей проксі, не видаляючи: хости, що його використовують, підключатимуться напряму (з увімкненим kill switch — через проксі за замовчуванням, ніколи напряму). Відкриті сесії не зачіпаються.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="343" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="367" />
         <source>Turn this proxy back on</source>
         <translation>Знову увімкнути цей проксі</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="355" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="379" />
         <source>No proxies yet</source>
         <translation>Проксі поки немає</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="356" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="380" />
         <source>Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default.</source>
         <translation>Додайте проксі SOCKS5, HTTP, Shadowsocks або Tor, а потім призначте його хостам або зробіть типовим.</translation>
     </message>
@@ -3918,14 +3918,57 @@
 <context>
     <name>ProxyChecker</name>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="142" />
         <source>Unexpected answer from the IP service</source>
         <translation>Неочікувана відповідь від сервісу IP</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="156" />
         <source>no IP service answered (%1)</source>
         <translation>жоден сервіс IP не відповів (%1)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="165" />
+        <source>unexpected answer</source>
+        <translation>неочікувана відповідь</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="166" />
+        <source>name not found (DNS)</source>
+        <translation>ім'я не знайдено (DNS)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="168" />
+        <source>no answer (timeout)</source>
+        <translation>немає відповіді (час вийшов)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="169" />
+        <source>connection refused</source>
+        <translation>з'єднання відхилено</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="170" />
+        <source>connection closed</source>
+        <translation>з'єднання закрито</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="171" />
+        <source>TLS error — something on the network intercepts HTTPS</source>
+        <translation>помилка TLS — щось у мережі перехоплює HTTPS</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="183" />
+        <source>No IP service answered</source>
+        <translation>Жоден сервіс IP не відповів</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="184" />
+        <source>The proxy may have no internet access, or it blocks these services.</source>
+        <translation>Можливо, проксі не має доступу до інтернету або блокує ці сервіси.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="185" />
+        <source>No internet connection, or your network blocks these services.</source>
+        <translation>Немає інтернету, або ваша мережа блокує ці сервіси.</translation>
     </message>
 </context>
 <context>
@@ -4219,17 +4262,17 @@
 %2Затримка: %3 мс</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="377" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="384" />
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="382" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="389" />
         <source>Test</source>
         <translation>Перевірити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="387" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="394" />
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -4629,14 +4672,32 @@
         <translation>Немає відповіді через сервер Shadowsocks — неправильний пароль чи шифр, або сервер не має доступу до інтернету</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="75" />
         <source>no answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access</source>
         <translation>немає відповіді через сервер Shadowsocks — неправильний пароль чи шифр, або сервер не має доступу до інтернету</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="76" />
         <source>Unexpected answer from the IP service</source>
         <translation>Неочікувана відповідь від сервісу IP</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="76" />
+        <source>no answer</source>
+        <translation>немає відповіді</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="76" />
+        <source>unexpected answer</source>
+        <translation>неочікувана відповідь</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="81" />
+        <source>No IP service answered through the Shadowsocks server</source>
+        <translation>Через сервер Shadowsocks не відповів жоден сервіс IP</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="82" />
+        <source>Wrong password or cipher, or the Shadowsocks server has no internet access.</source>
+        <translation>Неправильний пароль чи шифр, або сервер Shadowsocks не має доступу до інтернету.</translation>
     </message>
 </context>
 <context>

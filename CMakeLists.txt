@@ -106,6 +106,7 @@ qt_add_qml_module(ShellWardenApp
         qml/components/ThemeEditor.qml
         qml/components/QuickSearch.qml
         qml/components/CountryBadge.qml
+        qml/components/CheckErrors.qml
         qml/components/ColorPicker.qml
         qml/components/AppMenuItem.qml
         qml/components/MonitorBar.qml
