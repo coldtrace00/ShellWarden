@@ -1,0 +1,11 @@
+[Desktop Entry]
+Type=Application
+Name=ShellWarden
+GenericName=SSH Client
+Comment=Secure SSH client: encrypted vault, proxy kill switch, SFTP, tunnels
+Exec=shellwarden
+Icon=shellwarden
+Terminal=false
+Categories=Network;RemoteAccess;System;TerminalEmulator;
+Keywords=ssh;sftp;terminal;putty;serial;
+StartupWMClass=shellwarden

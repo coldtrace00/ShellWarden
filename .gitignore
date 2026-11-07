@@ -1,0 +1,23 @@
+# build output
+build/
+build-*/
+dist/
+*.AppImage
+
+# IDE
+*.user
+*.user.*
+.vs/
+.vscode/
+.idea/
+.qtcreator/
+
+# generated translations (made from i18n/*.ts at build time)
+*.qm
+
+# never commit your own data
+data/
+portable
+*.swv
+*.swv.bak
+*.key
