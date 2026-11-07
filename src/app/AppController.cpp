@@ -157,8 +157,12 @@ AppController::AppController(QObject *parent)
         if (st == m_updaterState)
             return;
         m_updaterState = st;
-        if (!m_updater.automatic())
+        if (!m_updater.automatic()) {
+            // "Check now" in the settings: show what the new version brings right away
+            if (st == QLatin1String("available"))
+                emit updateDialogRequested(QStringLiteral("available"));
             return;
+        }
         if (st == QLatin1String("available")
             && m_settings.value(QStringLiteral("skippedUpdate")).toString() != m_updater.latestVersion())
             emit updateDialogRequested(QStringLiteral("available"));
@@ -2189,6 +2193,15 @@ void AppController::checkForUpdates()
 void AppController::skipUpdate(const QString &version)
 {
     m_settings.setValue(QStringLiteral("skippedUpdate"), version);
+}
+
+void AppController::showUpdateDetails()
+{
+    const QString st = m_updater.state();
+    const bool newer = st == QLatin1String("available") || st == QLatin1String("downloading")
+                       || st == QLatin1String("ready")
+                       || UpdateChecker::compareVersions(m_updater.latestVersion(), version()) > 0;
+    emit updateDialogRequested(newer ? QStringLiteral("available") : QStringLiteral("current"));
 }
 
 void AppController::onSecretVerified(const QString &hostId, int kind, const QString &secret)

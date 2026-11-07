@@ -503,20 +503,14 @@ Item {
                             AppButton { visible: App.updater.state !== "downloading"; text: qsTr("Check now"); glyph: Theme.iconRefresh; compact: true; onClicked: App.checkForUpdates() }
                             AppButton { visible: App.updater.state === "available"; text: qsTr("Download"); glyph: Theme.iconSave; variant: "primary"; compact: true; onClicked: App.updater.download() }
                             AppButton { visible: App.updater.state === "ready"; text: qsTr("Install"); glyph: Theme.iconUpdate; variant: "primary"; compact: true; onClicked: App.updater.install() }
+                            AppButton {
+                                visible: App.updater.localizedNotes !== "" && App.updater.state !== "downloading"
+                                text: qsTr("What's new"); compact: true; variant: "ghost"
+                                onClicked: App.showUpdateDetails()
+                            }
                             AppButton { visible: App.updater.pageUrl !== ""; text: qsTr("Release page"); compact: true; variant: "ghost"; onClicked: App.updater.openPage() }
                         }
                         ProgressBar { visible: App.updater.state === "downloading"; Layout.fillWidth: true; value: App.updater.progress }
-                        Text {
-                            visible: App.updater.localizedNotes !== "" && (App.updater.state === "available" || App.updater.state === "ready")
-                            Layout.fillWidth: true
-                            Layout.maximumHeight: 120
-                            clip: true
-                            text: App.updater.localizedNotes
-                            color: Theme.textDim
-                            font.pixelSize: 11
-                            wrapMode: Text.WordWrap
-                            textFormat: Text.MarkdownText
-                        }
                     }
                 }
             }

@@ -215,6 +215,7 @@ public:
     Q_INVOKABLE void setLanguage(const QString &code);
     Q_INVOKABLE void checkForUpdates();
     Q_INVOKABLE void skipUpdate(const QString &version);   // no pop-up for this version
+    Q_INVOKABLE void showUpdateDetails();                   // the update window for the last check
     QString updateRepo() const;
     Q_INVOKABLE QString formatBytes(qint64 bytes) const;
     Q_INVOKABLE void beep() const;

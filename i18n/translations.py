@@ -1214,6 +1214,7 @@ T = [
 ("You have version %1. The download is checked before it is installed.", "У вас версія %1. Завантаження перевіряється перед встановленням.", "У вас версия %1. Загрузка проверяется перед установкой.", "Vous avez la version %1. Le téléchargement est vérifié avant l'installation.", "Tiene la versión %1. La descarga se verifica antes de instalarla."),
 ("No description for this release.", "Для цього релізу немає опису.", "У этого релиза нет описания.", "Aucune description pour cette version.", "Esta versión no tiene descripción."),
 ("Skip this version", "Пропустити цю версію", "Пропустить эту версию", "Ignorer cette version", "Omitir esta versión"),
+("What's new", "Що нового", "Что нового", "Nouveautés", "Novedades"),
 ("Later", "Пізніше", "Позже", "Plus tard", "Más tarde"),
 ("Update now", "Оновити зараз", "Обновить сейчас", "Mettre à jour", "Actualizar ahora"),
 ]

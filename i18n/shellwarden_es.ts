@@ -4,94 +4,94 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/app/AppController.cpp" line="183" />
+        <location filename="../src/app/AppController.cpp" line="187" />
         <source>Vault locked after inactivity.</source>
         <translation>Bóveda bloqueada por inactividad.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="424" />
+        <location filename="../src/app/AppController.cpp" line="428" />
         <source>Passwords do not match.</source>
         <translation>Las contraseñas no coinciden.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="510" />
+        <location filename="../src/app/AppController.cpp" line="514" />
         <source>New passwords do not match.</source>
         <translation>Las contraseñas nuevas no coinciden.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="739" />
-        <location filename="../src/app/AppController.cpp" line="890" />
-        <location filename="../src/app/AppController.cpp" line="1014" />
-        <location filename="../src/app/AppController.cpp" line="1057" />
-        <location filename="../src/app/AppController.cpp" line="1296" />
-        <location filename="../src/app/AppController.cpp" line="1650" />
-        <location filename="../src/app/AppController.cpp" line="2500" />
-        <location filename="../src/app/AppController.cpp" line="2576" />
-        <location filename="../src/app/AppController.cpp" line="2675" />
+        <location filename="../src/app/AppController.cpp" line="743" />
+        <location filename="../src/app/AppController.cpp" line="894" />
+        <location filename="../src/app/AppController.cpp" line="1018" />
+        <location filename="../src/app/AppController.cpp" line="1061" />
+        <location filename="../src/app/AppController.cpp" line="1300" />
+        <location filename="../src/app/AppController.cpp" line="1654" />
+        <location filename="../src/app/AppController.cpp" line="2513" />
+        <location filename="../src/app/AppController.cpp" line="2589" />
+        <location filename="../src/app/AppController.cpp" line="2688" />
         <source>The vault is locked.</source>
         <translation>La bóveda está bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="760" />
+        <location filename="../src/app/AppController.cpp" line="764" />
         <source>Enter a host name or IP address.</source>
         <translation>Introduce un nombre de host o una dirección IP.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="765" />
+        <location filename="../src/app/AppController.cpp" line="769" />
         <source>The host name must not contain spaces.</source>
         <translation>El nombre de host no puede contener espacios.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="768" />
-        <location filename="../src/app/AppController.cpp" line="1320" />
+        <location filename="../src/app/AppController.cpp" line="772" />
+        <location filename="../src/app/AppController.cpp" line="1324" />
         <source>Port must be between 1 and 65535.</source>
         <translation>El puerto debe estar entre 1 y 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="549" />
-        <location filename="../src/app/AppController.cpp" line="753" />
-        <location filename="../src/app/AppController.cpp" line="798" />
-        <location filename="../src/app/AppController.cpp" line="1045" />
-        <location filename="../src/app/AppController.cpp" line="1103" />
-        <location filename="../src/app/AppController.cpp" line="1181" />
-        <location filename="../src/app/AppController.cpp" line="1346" />
-        <location filename="../src/app/AppController.cpp" line="1656" />
-        <location filename="../src/app/AppController.cpp" line="2765" />
+        <location filename="../src/app/AppController.cpp" line="553" />
+        <location filename="../src/app/AppController.cpp" line="757" />
+        <location filename="../src/app/AppController.cpp" line="802" />
+        <location filename="../src/app/AppController.cpp" line="1049" />
+        <location filename="../src/app/AppController.cpp" line="1107" />
+        <location filename="../src/app/AppController.cpp" line="1185" />
+        <location filename="../src/app/AppController.cpp" line="1350" />
+        <location filename="../src/app/AppController.cpp" line="1660" />
+        <location filename="../src/app/AppController.cpp" line="2778" />
         <source>Could not save the vault.</source>
         <translation>No se pudo guardar la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="195" />
+        <location filename="../src/app/AppController.cpp" line="199" />
         <source>Vault locked: the computer went to sleep</source>
         <translation>Bóveda bloqueada: el equipo entró en suspensión</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="196" />
+        <location filename="../src/app/AppController.cpp" line="200" />
         <source>Vault locked: the computer was locked</source>
         <translation>Bóveda bloqueada: el equipo se bloqueó</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="209" />
+        <location filename="../src/app/AppController.cpp" line="213" />
         <source>%1 %2 started</source>
         <translation>%1 %2 iniciado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="210" />
+        <location filename="../src/app/AppController.cpp" line="214" />
         <source>portable mode · %1</source>
         <translation>modo portátil · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="299" />
+        <location filename="../src/app/AppController.cpp" line="303" />
         <source>My theme</source>
         <translation>Mi tema</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="309" />
+        <location filename="../src/app/AppController.cpp" line="313" />
         <source>Image not found: %1</source>
         <translation>Imagen no encontrada: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="311" />
+        <location filename="../src/app/AppController.cpp" line="315" />
         <source>The image is too large (max 25 MB).</source>
         <translation>La imagen es demasiado grande (máx. 25 MB).</translation>
     </message>
@@ -100,205 +100,205 @@
         <translation>Este archivo no es una imagen.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="316" />
+        <location filename="../src/app/AppController.cpp" line="320" />
         <source>Cannot copy the image to %1</source>
         <translation>No se puede copiar la imagen a %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="437" />
+        <location filename="../src/app/AppController.cpp" line="441" />
         <source>Vault created</source>
         <translation>Bóveda creada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="452" />
+        <location filename="../src/app/AppController.cpp" line="456" />
         <source>Failed unlock attempt</source>
         <translation>Intento de desbloqueo fallido</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="456" />
+        <location filename="../src/app/AppController.cpp" line="460" />
         <source>Vault unlocked</source>
         <translation>Bóveda desbloqueada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="497" />
+        <location filename="../src/app/AppController.cpp" line="501" />
         <source>Vault locked</source>
         <translation>Bóveda bloqueada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="512" />
+        <location filename="../src/app/AppController.cpp" line="516" />
         <source>The master password must be at least 8 characters.</source>
         <translation>La contraseña maestra debe tener al menos 8 caracteres.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="515" />
+        <location filename="../src/app/AppController.cpp" line="519" />
         <source>Master password change failed</source>
         <translation>No se pudo cambiar la contraseña maestra</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="518" />
+        <location filename="../src/app/AppController.cpp" line="522" />
         <source>Master password changed</source>
         <translation>Contraseña maestra cambiada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="624" />
+        <location filename="../src/app/AppController.cpp" line="628" />
         <source>Choose a file.</source>
         <translation>Elige un archivo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="627" />
+        <location filename="../src/app/AppController.cpp" line="631" />
         <source>Cannot write %1</source>
         <translation>No se puede escribir %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="628" />
+        <location filename="../src/app/AppController.cpp" line="632" />
         <source>Vault backup saved</source>
         <translation>Copia de seguridad de la bóveda guardada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="635" />
+        <location filename="../src/app/AppController.cpp" line="639" />
         <source>Lock the vault first.</source>
         <translation>Bloquea primero la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="642" />
+        <location filename="../src/app/AppController.cpp" line="646" />
         <source>Cannot move the old vault: %1</source>
         <translation>No se puede mover la bóveda antigua: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="647" />
+        <location filename="../src/app/AppController.cpp" line="651" />
         <source>Started over with a new vault</source>
         <translation>Se empezó de nuevo con una bóveda nueva</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="648" />
+        <location filename="../src/app/AppController.cpp" line="652" />
         <source>Old vault kept as %1</source>
         <translation>Bóveda antigua guardada como %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="670" />
+        <location filename="../src/app/AppController.cpp" line="674" />
         <source>Cannot replace the vault file.</source>
         <translation>No se puede reemplazar el archivo de la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="678" />
+        <location filename="../src/app/AppController.cpp" line="682" />
         <source>Vault restored from backup</source>
         <translation>Bóveda restaurada desde una copia</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="697" />
+        <location filename="../src/app/AppController.cpp" line="701" />
         <source>shorter than 19 characters</source>
         <translation>menos de 19 caracteres</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="698" />
+        <location filename="../src/app/AppController.cpp" line="702" />
         <source>contains a very common password</source>
         <translation>contiene una contraseña muy común</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="699" />
+        <location filename="../src/app/AppController.cpp" line="703" />
         <source>keyboard or alphabet sequence</source>
         <translation>secuencia de teclado o del alfabeto</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="700" />
+        <location filename="../src/app/AppController.cpp" line="704" />
         <source>too many repeated characters</source>
         <translation>demasiados caracteres repetidos</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="701" />
+        <location filename="../src/app/AppController.cpp" line="705" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>mezcla mayúsculas, minúsculas, números y símbolos</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="703" />
+        <location filename="../src/app/AppController.cpp" line="707" />
         <source>Very weak</source>
         <translation>Muy débil</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="703" />
+        <location filename="../src/app/AppController.cpp" line="707" />
         <source>Weak</source>
         <translation>Débil</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="703" />
+        <location filename="../src/app/AppController.cpp" line="707" />
         <source>Fair</source>
         <translation>Aceptable</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="704" />
+        <location filename="../src/app/AppController.cpp" line="708" />
         <source>Good</source>
         <translation>Buena</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="704" />
+        <location filename="../src/app/AppController.cpp" line="708" />
         <source>Strong</source>
         <translation>Fuerte</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="745" />
-        <location filename="../src/app/AppController.cpp" line="1897" />
+        <location filename="../src/app/AppController.cpp" line="749" />
+        <location filename="../src/app/AppController.cpp" line="1901" />
         <source>Choose a serial port.</source>
         <translation>Elige un puerto serie.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="754" />
-        <location filename="../src/app/AppController.cpp" line="804" />
+        <location filename="../src/app/AppController.cpp" line="758" />
+        <location filename="../src/app/AppController.cpp" line="808" />
         <source>Host added</source>
         <translation>Host añadido</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="754" />
-        <location filename="../src/app/AppController.cpp" line="804" />
+        <location filename="../src/app/AppController.cpp" line="758" />
+        <location filename="../src/app/AppController.cpp" line="808" />
         <source>Host changed</source>
         <translation>Host modificado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="763" />
+        <location filename="../src/app/AppController.cpp" line="767" />
         <source>A host cannot be its own jump host.</source>
         <translation>Un host no puede ser su propio host de salto.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="801" />
+        <location filename="../src/app/AppController.cpp" line="805" />
         <source>Master password on connect enabled for host</source>
         <translation>Contraseña maestra al conectar activada para el host</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="802" />
+        <location filename="../src/app/AppController.cpp" line="806" />
         <source>Master password on connect disabled for host</source>
         <translation>Contraseña maestra al conectar desactivada para el host</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1780" />
+        <location filename="../src/app/AppController.cpp" line="1784" />
         <source>Connection check passed (master password)</source>
         <translation>Comprobación de conexión superada (contraseña maestra)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1794" />
+        <location filename="../src/app/AppController.cpp" line="1798" />
         <source>Connection cancelled: the master password was not entered.</source>
         <translation>Conexión cancelada: no se introdujo la contraseña maestra.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1818" />
+        <location filename="../src/app/AppController.cpp" line="1822" />
         <source>This proxy no longer exists.</source>
         <translation>Este proxy ya no existe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1824" />
+        <location filename="../src/app/AppController.cpp" line="1828" />
         <source>direct</source>
         <translation>directo</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1825" />
+        <location filename="../src/app/AppController.cpp" line="1829" />
         <source>Route of the host changed: %1</source>
         <translation>Ruta del host cambiada: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1827" />
+        <location filename="../src/app/AppController.cpp" line="1831" />
         <source>%1 now connects: %2</source>
         <translation>%1 ahora se conecta: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2546" />
+        <location filename="../src/app/AppController.cpp" line="2559" />
         <source>Asks for the master password: enter it to include this host.</source>
         <translation>Pide la contraseña maestra: introdúcela para incluir este host.</translation>
     </message>
@@ -315,81 +315,81 @@
         <translation>2FA desactivada para el host</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="856" />
+        <location filename="../src/app/AppController.cpp" line="860" />
         <source>Tunnels updated in %n open session(s) — no reconnect needed.</source>
         <translation><numerusform>Túneles actualizados en %n sesión abierta, sin reconectar.</numerusform><numerusform>Túneles actualizados en %n sesiones abiertas, sin reconectar.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="964" />
+        <location filename="../src/app/AppController.cpp" line="968" />
         <source>Hosts imported</source>
         <translation>Hosts importados</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="964" />
+        <location filename="../src/app/AppController.cpp" line="968" />
         <source>%1 hosts, %2 keys</source>
         <translation>%1 hosts, %2 claves</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="965" />
+        <location filename="../src/app/AppController.cpp" line="969" />
         <source>Imported %1 host(s) and %2 key(s).</source>
         <translation>Importados %1 host(s) y %2 clave(s).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="967" />
+        <location filename="../src/app/AppController.cpp" line="971" />
         <source>Keys with a passphrase were not imported — add them in Keychain → Import: %1</source>
         <translation>Las claves con frase no se importaron: añádelas en Llavero → Importar: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="973" />
+        <location filename="../src/app/AppController.cpp" line="977" />
         <source>Host deleted</source>
         <translation>Host eliminado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="999" />
+        <location filename="../src/app/AppController.cpp" line="1003" />
         <source> (copy)</source>
         <translation> (copia)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1016" />
+        <location filename="../src/app/AppController.cpp" line="1020" />
         <source>Passphrases do not match.</source>
         <translation>Las frases de contraseña no coinciden.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1046" />
+        <location filename="../src/app/AppController.cpp" line="1050" />
         <source>Key generated</source>
         <translation>Clave generada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1047" />
+        <location filename="../src/app/AppController.cpp" line="1051" />
         <source> · no passphrase</source>
         <translation> · sin frase de contraseña</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1066" />
+        <location filename="../src/app/AppController.cpp" line="1070" />
         <source>This key is protected. Enter its passphrase.</source>
         <translation>Esta clave está protegida. Introduce su frase de contraseña.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1070" />
-        <location filename="../src/app/AppController.cpp" line="1177" />
+        <location filename="../src/app/AppController.cpp" line="1074" />
+        <location filename="../src/app/AppController.cpp" line="1181" />
         <source>Wrong passphrase.</source>
         <translation>Frase de contraseña incorrecta.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1081" />
+        <location filename="../src/app/AppController.cpp" line="1085" />
         <source>This key is already in the keychain ("%1").</source>
         <translation>Esta clave ya está en el llavero («%1»).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1107" />
+        <location filename="../src/app/AppController.cpp" line="1111" />
         <source>Key imported</source>
         <translation>Clave importada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1135" />
-        <location filename="../src/app/AppController.cpp" line="1147" />
-        <location filename="../src/app/AppController.cpp" line="1158" />
-        <location filename="../src/app/AppController.cpp" line="1183" />
+        <location filename="../src/app/AppController.cpp" line="1139" />
+        <location filename="../src/app/AppController.cpp" line="1151" />
+        <location filename="../src/app/AppController.cpp" line="1162" />
+        <location filename="../src/app/AppController.cpp" line="1187" />
         <source>Key not found.</source>
         <translation>Clave no encontrada.</translation>
     </message>
@@ -398,99 +398,99 @@
         <translation>Esta clave está protegida con OpenPGP. Quita primero la protección (pedirá el PIN).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1164" />
+        <location filename="../src/app/AppController.cpp" line="1168" />
         <source>Private key exported</source>
         <translation>Clave privada exportada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1220" />
+        <location filename="../src/app/AppController.cpp" line="1224" />
         <source>Key deleted</source>
         <translation>Clave eliminada</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1318" />
+        <location filename="../src/app/AppController.cpp" line="1322" />
         <source>Enter the proxy address.</source>
         <translation>Introduce la dirección del proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1347" />
+        <location filename="../src/app/AppController.cpp" line="1351" />
         <source>Proxy changed</source>
         <translation>Proxy modificado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1347" />
+        <location filename="../src/app/AppController.cpp" line="1351" />
         <source>Proxy added</source>
         <translation>Proxy añadido</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1356" />
+        <location filename="../src/app/AppController.cpp" line="1360" />
         <source>Proxy deleted</source>
         <translation>Proxy eliminado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1430" />
+        <location filename="../src/app/AppController.cpp" line="1434" />
         <source>cloudflared was not found. Install it (winget install Cloudflare.cloudflared) or choose cloudflared.exe.</source>
         <translation>No se encontró cloudflared. Instálalo (winget install Cloudflare.cloudflared) o elige cloudflared.exe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1432" />
+        <location filename="../src/app/AppController.cpp" line="1436" />
         <source>%1 does not run.</source>
         <translation>%1 no se ejecuta.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1434" />
+        <location filename="../src/app/AppController.cpp" line="1438" />
         <source>via Cloudflare · %1</source>
         <translation>vía Cloudflare · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1476" />
+        <location filename="../src/app/AppController.cpp" line="1480" />
         <source>Enter the proxy address and port.</source>
         <translation>Introduce la dirección y el puerto del proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1521" />
+        <location filename="../src/app/AppController.cpp" line="1525" />
         <source>Kill switch fired</source>
         <translation>Kill switch activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1561" />
-        <location filename="../src/app/AppController.cpp" line="1590" />
+        <location filename="../src/app/AppController.cpp" line="1565" />
+        <location filename="../src/app/AppController.cpp" line="1594" />
         <source>Kill switch: proxy "%1" stopped responding (%2). Session closed.</source>
         <translation>Kill switch: el proxy «%1» dejó de responder (%2). Sesión cerrada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1562" />
+        <location filename="../src/app/AppController.cpp" line="1566" />
         <source>no answer</source>
         <translation>sin respuesta</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1594" />
+        <location filename="../src/app/AppController.cpp" line="1598" />
         <source>Kill switch: proxy "%1" now exits from your real IP. Session closed.</source>
         <translation>Kill switch: el proxy «%1» ahora sale por tu IP real. Sesión cerrada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1614" />
+        <location filename="../src/app/AppController.cpp" line="1618" />
         <source>Firewall lock failed</source>
         <translation>Falló el bloqueo del firewall</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1621" />
+        <location filename="../src/app/AppController.cpp" line="1625" />
         <source>Firewall lock enabled</source>
         <translation>Bloqueo del firewall activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1634" />
+        <location filename="../src/app/AppController.cpp" line="1638" />
         <source>Firewall lock removed</source>
         <translation>Bloqueo del firewall eliminado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1653" />
-        <location filename="../src/app/AppController.cpp" line="2502" />
+        <location filename="../src/app/AppController.cpp" line="1657" />
+        <location filename="../src/app/AppController.cpp" line="2515" />
         <source>Enter a command.</source>
         <translation>Introduce un comando.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="1715" />
+        <location filename="../src/app/AppController.cpp" line="1719" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Fragmento enviado a %n sesión</numerusform><numerusform>Fragmento enviado a %n sesiones</numerusform></translation>
     </message>
@@ -503,22 +503,22 @@
         <translation>servidor</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1760" />
-        <location filename="../src/app/AppController.cpp" line="1830" />
-        <location filename="../src/app/AppController.cpp" line="1854" />
-        <location filename="../src/app/AppController.cpp" line="2769" />
+        <location filename="../src/app/AppController.cpp" line="1764" />
+        <location filename="../src/app/AppController.cpp" line="1834" />
+        <location filename="../src/app/AppController.cpp" line="1858" />
+        <location filename="../src/app/AppController.cpp" line="2782" />
         <source>This host no longer exists.</source>
         <translation>Este host ya no existe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1763" />
+        <location filename="../src/app/AppController.cpp" line="1767" />
         <source>Too many wrong attempts. Try again in %1 s.</source>
         <translation>Demasiados intentos fallidos. Vuelve a intentarlo en %1 s.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1768" />
-        <location filename="../src/app/AppController.cpp" line="2508" />
-        <location filename="../src/app/AppController.cpp" line="2680" />
+        <location filename="../src/app/AppController.cpp" line="1772" />
+        <location filename="../src/app/AppController.cpp" line="2521" />
+        <location filename="../src/app/AppController.cpp" line="2693" />
         <source>Wrong master password.</source>
         <translation>Contraseña maestra incorrecta.</translation>
     </message>
@@ -527,7 +527,7 @@
         <translation>Código 2FA incorrecto o caducado.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1776" />
+        <location filename="../src/app/AppController.cpp" line="1780" />
         <source>Connection check failed</source>
         <translation>Falló la verificación de conexión</translation>
     </message>
@@ -540,7 +540,7 @@
         <translation>Conexión cancelada: no se completó la verificación 2FA / contraseña maestra.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1854" />
+        <location filename="../src/app/AppController.cpp" line="1858" />
         <source>Unlock the vault to reconnect.</source>
         <translation>Desbloquea la bóveda para reconectar.</translation>
     </message>
@@ -549,68 +549,68 @@
         <translation>Esperando el PIN de OpenPGP (Kleopatra)…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1872" />
+        <location filename="../src/app/AppController.cpp" line="1876" />
         <source>Use the form user@host or user@host:port</source>
         <translation>Usa el formato usuario@host o usuario@host:puerto</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1878" />
+        <location filename="../src/app/AppController.cpp" line="1882" />
         <source>Invalid port.</source>
         <translation>Puerto no válido.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1984" />
+        <location filename="../src/app/AppController.cpp" line="1988" />
         <source>Serial</source>
         <translation>Serie</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2001" />
+        <location filename="../src/app/AppController.cpp" line="2005" />
         <source>Blocked by kill switch</source>
         <translation>Bloqueado por el kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2002" />
+        <location filename="../src/app/AppController.cpp" line="2006" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch activado: este host no tiene proxy y no hay proxy predeterminado. Conexión directa bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2011" />
+        <location filename="../src/app/AppController.cpp" line="2015" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>La ruta Cloudflare Tunnel es para hosts SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2017" />
+        <location filename="../src/app/AppController.cpp" line="2021" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor se está iniciando: pulsa Reconectar en un momento.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2021" />
+        <location filename="../src/app/AppController.cpp" line="2025" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · directo · sin cifrar</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2022" />
+        <location filename="../src/app/AppController.cpp" line="2026" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · sin cifrar</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2034" />
+        <location filename="../src/app/AppController.cpp" line="2038" />
         <source>Starting Tor…</source>
         <translation>Iniciando Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2041" />
+        <location filename="../src/app/AppController.cpp" line="2045" />
         <source>Tor: %1</source>
         <translation>Tor: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2055" />
+        <location filename="../src/app/AppController.cpp" line="2059" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Iniciando cloudflared… (la primera vez el navegador puede pedir iniciar sesión en Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2068" />
-        <location filename="../src/app/AppController.cpp" line="2074" />
+        <location filename="../src/app/AppController.cpp" line="2072" />
+        <location filename="../src/app/AppController.cpp" line="2078" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel: %1</translation>
     </message>
@@ -619,124 +619,124 @@
         <translation>La clave SSH está protegida con OpenPGP: pulsa Reconectar e introduce tu PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2100" />
+        <location filename="../src/app/AppController.cpp" line="2104" />
         <source> → jump %1</source>
         <translation> → salto %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2103" />
+        <location filename="../src/app/AppController.cpp" line="2107" />
         <source>Direct</source>
         <translation>Directa</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2104" />
+        <location filename="../src/app/AppController.cpp" line="2108" />
         <source>Connecting…</source>
         <translation>Conectando…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2105" />
-        <location filename="../src/app/AppController.cpp" line="2140" />
+        <location filename="../src/app/AppController.cpp" line="2109" />
+        <location filename="../src/app/AppController.cpp" line="2144" />
         <source>checking…</source>
         <translation>comprobando…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2113" />
+        <location filename="../src/app/AppController.cpp" line="2117" />
         <source>unknown</source>
         <translation>desconocida</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2124" />
+        <location filename="../src/app/AppController.cpp" line="2128" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel: cloudflared no está en ejecución. Pulsa Reconectar.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2131" />
+        <location filename="../src/app/AppController.cpp" line="2135" />
         <source>Connecting through Cloudflare…</source>
         <translation>Conectando a través de Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2139" />
+        <location filename="../src/app/AppController.cpp" line="2143" />
         <source>Checking proxy…</source>
         <translation>Comprobando el proxy…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2163" />
+        <location filename="../src/app/AppController.cpp" line="2167" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch: el proxy sale por tu IP real (%1). Conexión bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2167" />
+        <location filename="../src/app/AppController.cpp" line="2171" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch: falló la comprobación del proxy (%1). Conexión bloqueada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2171" />
+        <location filename="../src/app/AppController.cpp" line="2175" />
         <source>proxy check failed: %1</source>
         <translation>falló la comprobación del proxy: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2207" />
+        <location filename="../src/app/AppController.cpp" line="2220" />
         <source>Password saved to the vault.</source>
         <translation>Contraseña guardada en la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2221" />
+        <location filename="../src/app/AppController.cpp" line="2234" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Frase de contraseña de la clave guardada en la bóveda.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2372" />
+        <location filename="../src/app/AppController.cpp" line="2385" />
         <source>Kill switch enabled</source>
         <translation>Kill switch activado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2372" />
+        <location filename="../src/app/AppController.cpp" line="2385" />
         <source>Kill switch disabled</source>
         <translation>Kill switch desactivado</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2379" />
+        <location filename="../src/app/AppController.cpp" line="2392" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch activado: sesión directa cerrada.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2384" />
+        <location filename="../src/app/AppController.cpp" line="2397" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>El kill switch cerró %1 sesión(es) directa(s).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2487" />
+        <location filename="../src/app/AppController.cpp" line="2500" />
         <source>Tor: new identity</source>
         <translation>Tor: nueva identidad</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2490" />
+        <location filename="../src/app/AppController.cpp" line="2503" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Nueva identidad Tor: las conexiones nuevas usan otra salida. Las sesiones abiertas mantienen su ruta hasta reconectar.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2504" />
-        <location filename="../src/app/AppController.cpp" line="2677" />
+        <location filename="../src/app/AppController.cpp" line="2517" />
+        <location filename="../src/app/AppController.cpp" line="2690" />
         <source>Choose at least one host.</source>
         <translation>Elige al menos un host.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2510" />
+        <location filename="../src/app/AppController.cpp" line="2523" />
         <source>Protected hosts unlocked with the master password for a batch run</source>
         <translation>Hosts protegidos desbloqueados con la contraseña maestra para una ejecución en lote</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2523" />
+        <location filename="../src/app/AppController.cpp" line="2536" />
         <source>Command run on %n host(s)</source>
         <translation><numerusform>Comando ejecutado en %n host</numerusform><numerusform>Comando ejecutado en %n hosts</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2542" />
+        <location filename="../src/app/AppController.cpp" line="2555" />
         <source>Serial connection: not supported here.</source>
         <translation>Conexión serie: no compatible aquí.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2544" />
+        <location filename="../src/app/AppController.cpp" line="2557" />
         <source>Telnet host: commands can only be run over SSH.</source>
         <translation>Host Telnet: los comandos solo se ejecutan por SSH.</translation>
     </message>
@@ -745,22 +745,22 @@
         <translation>Protegido con 2FA / contraseña maestra: introduce la contraseña maestra para incluirlo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2694" />
+        <location filename="../src/app/AppController.cpp" line="2707" />
         <source>Choose a key.</source>
         <translation>Elige una clave.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2713" />
+        <location filename="../src/app/AppController.cpp" line="2726" />
         <source>Public keys sent to %n server(s)</source>
         <translation><numerusform>Claves públicas enviadas a %n servidor</numerusform><numerusform>Claves públicas enviadas a %n servidores</numerusform></translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2744" />
+        <location filename="../src/app/AppController.cpp" line="2757" />
         <source>The key is now used to log in on %n server(s).</source>
         <translation><numerusform>Ahora la clave se usa para entrar en %n servidor.</numerusform><numerusform>Ahora la clave se usa para entrar en %n servidores.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2806" />
+        <location filename="../src/app/AppController.cpp" line="2819" />
         <source>Wrong passphrase for the key "%1".</source>
         <translation>Frase de contraseña incorrecta para la clave «%1».</translation>
     </message>
@@ -773,47 +773,47 @@
         <translation>La clave está protegida con OpenPGP: ábrelo en una pestaña.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2548" />
+        <location filename="../src/app/AppController.cpp" line="2561" />
         <source>Kill switch: this host has no proxy.</source>
         <translation>Kill switch: este host no tiene proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2563" />
+        <location filename="../src/app/AppController.cpp" line="2576" />
         <source>Cloudflare Tunnel is not started: open this host in a tab once.</source>
         <translation>Cloudflare Tunnel no está iniciado: abre este host una vez en una pestaña.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2578" />
+        <location filename="../src/app/AppController.cpp" line="2591" />
         <source>Enter the file path.</source>
         <translation>Introduce la ruta del archivo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2582" />
+        <location filename="../src/app/AppController.cpp" line="2595" />
         <source>Choose two hosts.</source>
         <translation>Elige dos hosts.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2605" />
+        <location filename="../src/app/AppController.cpp" line="2618" />
         <source>Command Prompt (cmd)</source>
         <translation>Símbolo del sistema (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2614" />
+        <location filename="../src/app/AppController.cpp" line="2627" />
         <source>Default shell (%1)</source>
         <translation>Shell predeterminado (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2628" />
+        <location filename="../src/app/AppController.cpp" line="2641" />
         <source>No shell found on this computer.</source>
         <translation>No se encontró ningún shell en este equipo.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2640" />
+        <location filename="../src/app/AppController.cpp" line="2653" />
         <source>this computer</source>
         <translation>este equipo</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2643" />
+        <location filename="../src/app/AppController.cpp" line="2656" />
         <source>Local terminal opened</source>
         <translation>Terminal local abierto</translation>
     </message>
@@ -830,7 +830,7 @@
         <translation>Clave SSH desbloqueada con OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2657" />
+        <location filename="../src/app/AppController.cpp" line="2670" />
         <source>The agent did not answer.</source>
         <translation>El agente no respondió.</translation>
     </message>
@@ -3019,62 +3019,67 @@
         <translation>Este host pide la contraseña maestra antes de cada conexión.</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="678" />
+        <location filename="../qml/Main.qml" line="681" />
         <source>What's new in ShellWarden %1</source>
         <translation>Novedades de ShellWarden %1</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="679" />
+        <location filename="../qml/Main.qml" line="682" />
         <source>ShellWarden %1 is available</source>
         <translation>ShellWarden %1 está disponible</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="680" />
+        <location filename="../qml/Main.qml" line="683" />
         <source>ShellWarden was updated to version %1.</source>
         <translation>ShellWarden se actualizó a la versión %1.</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="681" />
+        <location filename="../qml/Main.qml" line="684" />
+        <source>You have the latest version (%1).</source>
+        <translation>Tienes la última versión (%1).</translation>
+    </message>
+    <message>
+        <location filename="../qml/Main.qml" line="685" />
         <source>You have version %1. The download is checked before it is installed.</source>
         <translation>Tiene la versión %1. La descarga se verifica antes de instalarla.</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="700" />
+        <location filename="../qml/Main.qml" line="704" />
         <source>No description for this release.</source>
         <translation>Esta versión no tiene descripción.</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="718" />
+        <location filename="../qml/Main.qml" line="722" />
         <source>Downloading… %1%</source>
         <translation>Descargando… %1 %</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="729" />
+        <location filename="../qml/Main.qml" line="733" />
         <source>Skip this version</source>
         <translation>Omitir esta versión</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="734" />
+        <location filename="../qml/Main.qml" line="738" />
         <source>Release page</source>
         <translation>Página de la versión</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="740" />
+        <location filename="../qml/Main.qml" line="744" />
         <source>Later</source>
         <translation>Más tarde</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="745" />
+        <location filename="../qml/Main.qml" line="749" />
         <source>Update now</source>
         <translation>Actualizar ahora</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="750" />
+        <location filename="../qml/Main.qml" line="754" />
         <source>Install</source>
         <translation>Instalar</translation>
     </message>
     <message>
-        <location filename="../qml/Main.qml" line="755" />
+        <location filename="../qml/Main.qml" line="759" />
         <source>OK</source>
         <translation>Aceptar</translation>
     </message>
@@ -4624,7 +4629,7 @@
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="349" />
-        <location filename="../qml/pages/SettingsPage.qml" line="623" />
+        <location filename="../qml/pages/SettingsPage.qml" line="617" />
         <source>Restore</source>
         <translation>Restaurar</translation>
     </message>
@@ -4689,82 +4694,87 @@
         <translation>19+ caracteres, o pulsa Generar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="526" />
+        <location filename="../qml/pages/SettingsPage.qml" line="508" />
+        <source>What's new</source>
+        <translation>Novedades</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="520" />
         <source>Keyboard shortcuts</source>
         <translation>Atajos de teclado</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="533" />
+        <location filename="../qml/pages/SettingsPage.qml" line="527" />
         <source>They use Ctrl+Shift, so plain Ctrl+C, Ctrl+K and the like still go to the server.</source>
         <translation>Usan Ctrl+Mayús, así que Ctrl+C, Ctrl+K y similares siguen yendo al servidor.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="543" />
+        <location filename="../qml/pages/SettingsPage.qml" line="537" />
         <source>Quick search: hosts, tabs, snippets, pages</source>
         <translation>Búsqueda rápida: hosts, pestañas, fragmentos, páginas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="544" />
+        <location filename="../qml/pages/SettingsPage.qml" line="538" />
         <source>Find text in the terminal</source>
         <translation>Buscar texto en el terminal</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="545" />
+        <location filename="../qml/pages/SettingsPage.qml" line="539" />
         <source>Next tab</source>
         <translation>Pestaña siguiente</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="546" />
+        <location filename="../qml/pages/SettingsPage.qml" line="540" />
         <source>Previous tab</source>
         <translation>Pestaña anterior</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="547" />
+        <location filename="../qml/pages/SettingsPage.qml" line="541" />
         <source>Close the tab</source>
         <translation>Cerrar la pestaña</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="548" />
+        <location filename="../qml/pages/SettingsPage.qml" line="542" />
         <source>Back to the vault (hosts)</source>
         <translation>Volver a la bóveda (hosts)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="549" />
+        <location filename="../qml/pages/SettingsPage.qml" line="543" />
         <source>Split view</source>
         <translation>Vista dividida</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="550" />
+        <location filename="../qml/pages/SettingsPage.qml" line="544" />
         <source>Collapse / expand the side menu</source>
         <translation>Contraer / expandir el menú lateral</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="551" />
+        <location filename="../qml/pages/SettingsPage.qml" line="545" />
         <source>Copy</source>
         <translation>Copiar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="552" />
+        <location filename="../qml/pages/SettingsPage.qml" line="546" />
         <source>Paste</source>
         <translation>Pegar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="553" />
+        <location filename="../qml/pages/SettingsPage.qml" line="547" />
         <source>Scroll up</source>
         <translation>Desplazar hacia arriba</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="554" />
+        <location filename="../qml/pages/SettingsPage.qml" line="548" />
         <source>Scroll down</source>
         <translation>Desplazar hacia abajo</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="555" />
+        <location filename="../qml/pages/SettingsPage.qml" line="549" />
         <source>Lock the vault</source>
         <translation>Bloquear la bóveda</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="598" />
+        <location filename="../qml/pages/SettingsPage.qml" line="592" />
         <source>Open-source SSH client · MIT licence</source>
         <translation>Cliente SSH de código abierto · licencia MIT</translation>
     </message>
@@ -4773,27 +4783,27 @@
         <translation>Atajos: Ctrl+Shift+T bóveda, Ctrl+Tab pestaña siguiente, Ctrl+Shift+W cerrar pestaña, Ctrl+Shift+D vista dividida, Ctrl+Shift+B menú lateral, Ctrl+Shift+C / Ctrl+Shift+V copiar / pegar, Shift+RePág/AvPág desplazar, Ctrl+Shift+L bloquear la bóveda.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="611" />
+        <location filename="../qml/pages/SettingsPage.qml" line="605" />
         <source>Restore vault from backup</source>
         <translation>Restaurar la bóveda desde una copia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="612" />
+        <location filename="../qml/pages/SettingsPage.qml" line="606" />
         <source>The current vault is kept in the backups folder first. Enter the master password of the backup.</source>
         <translation>La bóveda actual se guarda primero en la carpeta de copias. Introduce la contraseña maestra de la copia.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="615" />
+        <location filename="../qml/pages/SettingsPage.qml" line="609" />
         <source>Master password of the backup</source>
         <translation>Contraseña maestra de la copia</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="620" />
+        <location filename="../qml/pages/SettingsPage.qml" line="614" />
         <source>Cancel</source>
         <translation>Cancelar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="628" />
+        <location filename="../qml/pages/SettingsPage.qml" line="622" />
         <source>Vault restored.</source>
         <translation>Bóveda restaurada.</translation>
     </message>
@@ -4917,12 +4927,12 @@
         <translation>Instalar</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="506" />
+        <location filename="../qml/pages/SettingsPage.qml" line="511" />
         <source>Release page</source>
         <translation>Página de la versión</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="590" />
+        <location filename="../qml/pages/SettingsPage.qml" line="584" />
         <source>About</source>
         <translation>Acerca de</translation>
     </message>

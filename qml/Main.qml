@@ -673,13 +673,15 @@ ApplicationWindow {
     // New version found at start, or "what's new" after an update
     Modal {
         id: updateDialog
-        property string mode: "available"     // available | updated
+        property string mode: "available"     // available | updated | current
+        readonly property bool aboutThis: mode === "updated" || mode === "current"
         property string pending: ""           // asked for while the vault was locked
         readonly property var up: App.updater
         readonly property string latest: String(up.latestVersion).replace(/^v/i, "")
-        title: mode === "updated" ? qsTr("What's new in ShellWarden %1").arg(App.version)
+        title: aboutThis ? qsTr("What's new in ShellWarden %1").arg(App.version)
                                   : qsTr("ShellWarden %1 is available").arg(latest)
         subtitle: mode === "updated" ? qsTr("ShellWarden was updated to version %1.").arg(App.version)
+                  : mode === "current" ? qsTr("You have the latest version (%1).").arg(App.version)
                                      : qsTr("You have version %1. The download is checked before it is installed.").arg(App.version)
         width: Math.min(560, (parent ? parent.width : 560) - 40)
         function show(m) { pending = ""; mode = m; open() }
@@ -753,7 +755,7 @@ ApplicationWindow {
                 onClicked: updateDialog.up.install()
             }
             AppButton {
-                visible: updateDialog.mode === "updated"
+                visible: updateDialog.aboutThis
                 text: qsTr("OK"); variant: "primary"
                 onClicked: updateDialog.close()
             }
