@@ -69,6 +69,9 @@ Drawer {
         username.text = h.username || ""
         password.text = h.password || ""
         password.revealed = false
+        root.passwordProtected = !!h.passwordProtected
+        root.clearPassword = false
+        root.wasProtected = !!h.confirmMaster
         keyBox.currentIndex = indexIn(App.keys, h.keyId || "")
         proxyBox.currentIndex = indexIn(App.proxies, h.proxyId || "")
         jumpBox.currentIndex = jumpIndex(h.jumpHostId || "")
@@ -78,6 +81,7 @@ Drawer {
         fBind.text = ""; fDest.text = ""; fType.currentIndex = 0
         confirmMaster.checked = !!h.confirmMaster
         alwaysAsk.checked = !!h.alwaysAskPassphrase
+        keepHistory.checked = !h.noHistory
         useAgent.checked = !!h.useAgent
         agentForward.checked = !!h.agentForward
         root.agentName = App.agentStatus().name || ""
@@ -108,7 +112,25 @@ Drawer {
         return 0
     }
 
+    property bool passwordProtected: false   // a saved password, sealed: the editor cannot show it
+    property bool clearPassword: false
+    property bool wasProtected: false
+
+    MasterPrompt { id: masterPrompt }
+
     function save(andConnect) {
+        // Turning protection off opens the sealed secrets: that needs the master password.
+        if (root.hostId !== "" && root.wasProtected && !confirmMaster.checked && !root.serial) {
+            masterPrompt.ask(qsTr("Stop asking for the master password?"),
+                             qsTr("The password and key of this host are kept encrypted with your master password. Enter it to decrypt them back into the vault."),
+                             qsTr("Turn off"),
+                             pw => {
+                                 const e = App.unprotectHost(root.hostId, pw)
+                                 if (e === "") { root.wasProtected = false; Qt.callLater(root.save, andConnect) }
+                                 return e
+                             })
+            return
+        }
         const host = {
             id: root.hostId,
             type: root.serial ? "serial" : root.telnet ? "telnet" : "ssh",
@@ -130,6 +152,8 @@ Drawer {
             host.port = parseInt(port.text) || 0
             host.username = username.text.trim()
             host.password = password.text
+            host.clearPassword = root.clearPassword
+            host.keepPassword = root.passwordProtected && password.text === ""
             host.keyId = keyBox.currentIndex > 0 ? App.keys.get(keyBox.currentIndex - 1).id : ""
             host.proxyId = proxyBox.currentIndex > 0 ? App.proxies.get(proxyBox.currentIndex - 1).id : ""
             host.jumpHostId = jumpBox.currentIndex > 0 ? root.jumpCandidates[jumpBox.currentIndex - 1].id : ""
@@ -137,6 +161,7 @@ Drawer {
             host.forwards = root.forwards
             host.confirmMaster = confirmMaster.checked
             host.alwaysAskPassphrase = alwaysAsk.checked
+            host.noHistory = !keepHistory.checked
             host.useAgent = useAgent.checked
             host.agentForward = agentForward.checked
         }
@@ -149,6 +174,7 @@ Drawer {
     }
 
     component SectionTitle: Text {
+        textFormat: Text.PlainText
         Layout.leftMargin: 24
         Layout.topMargin: 10
         color: Theme.textFaint
@@ -162,7 +188,7 @@ Drawer {
         property alias currentIndex: cb.currentIndex
         property alias currentText: cb.currentText
         spacing: 5
-        Text { id: lbl; color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+        Text { textFormat: Text.PlainText; id: lbl; color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
         AppCombo { id: cb; Layout.fillWidth: true }
     }
 
@@ -175,6 +201,7 @@ Drawer {
             Layout.margins: 24
             Layout.bottomMargin: 8
             Text {
+                textFormat: Text.PlainText
                 text: root.hostId ? qsTr("Edit host") : qsTr("New host")
                 color: Theme.text
                 font.pixelSize: 20
@@ -222,7 +249,7 @@ Drawer {
                             anchors.centerIn: parent
                             spacing: 6
                             IconLabel { glyph: modelData.g; size: 14; color: seg.on ? Theme.accent : Theme.textDim }
-                            Text { text: modelData.t; color: seg.on ? Theme.text : Theme.textDim; font.pixelSize: 12 }
+                            Text { textFormat: Text.PlainText; text: modelData.t; color: seg.on ? Theme.text : Theme.textDim; font.pixelSize: 12 }
                         }
                     }
                 }
@@ -268,6 +295,7 @@ Drawer {
                         spacing: 8
                         IconLabel { glyph: Theme.iconWarning; size: 16; color: Theme.warn; Layout.alignment: Qt.AlignTop }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             wrapMode: Text.WordWrap
                             color: Theme.text
@@ -287,7 +315,7 @@ Drawer {
                     ColumnLayout {
                         Layout.fillWidth: true
                         spacing: 5
-                        Text { text: qsTr("Port"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                        Text { textFormat: Text.PlainText; text: qsTr("Port"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                         AppCombo { id: serialPort; Layout.fillWidth: true; editable: true; model: App.serialPorts() }
                     }
                     LabeledCombo { id: baud; Layout.preferredWidth: 130; label: qsTr("Speed (baud)")
@@ -316,14 +344,28 @@ Drawer {
                     Layout.fillWidth: true; Layout.leftMargin: 24; Layout.rightMargin: 24
                     label: qsTr("Password")
                     secret: true
-                    placeholder: qsTr("Leave empty to be asked when connecting")
+                    placeholder: root.passwordProtected && !root.clearPassword
+                                 ? qsTr("Saved, protected by the master password — type to replace")
+                                 : qsTr("Leave empty to be asked when connecting")
                     hint: qsTr("Stored encrypted in the vault.")
+                }
+                Text {
+                    visible: root.passwordProtected && !root.serial && !root.telnet
+                    Layout.leftMargin: 24
+                    text: root.clearPassword ? qsTr("The saved password will be removed. <a href=\"undo\">Keep it</a>")
+                                             : qsTr("<a href=\"rm\">Remove the saved password</a>")
+                    textFormat: Text.StyledText
+                    linkColor: Theme.accent
+                    color: Theme.textDim
+                    font.pixelSize: 11
+                    onLinkActivated: link => root.clearPassword = (link === "rm")
+                    HoverHandler { cursorShape: Qt.PointingHandCursor }
                 }
                 ColumnLayout {
                     visible: !root.serial && !root.telnet
                     Layout.fillWidth: true; Layout.leftMargin: 24; Layout.rightMargin: 24
                     spacing: 5
-                    Text { text: qsTr("SSH key (from the keychain)"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                    Text { textFormat: Text.PlainText; text: qsTr("SSH key (from the keychain)"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                     RowLayout {
                         Layout.fillWidth: true
                         spacing: 6
@@ -351,6 +393,7 @@ Drawer {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         visible: keyBox.currentIndex > 0 && App.keys.count >= keyBox.currentIndex
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
@@ -372,7 +415,7 @@ Drawer {
                     visible: !root.serial
                     Layout.fillWidth: true; Layout.leftMargin: 24; Layout.rightMargin: 24
                     spacing: 5
-                    Text { text: qsTr("Proxy"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                    Text { textFormat: Text.PlainText; text: qsTr("Proxy"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                     AppCombo {
                         id: proxyBox
                         Layout.fillWidth: true
@@ -387,6 +430,7 @@ Drawer {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         font.pixelSize: 11
@@ -410,7 +454,7 @@ Drawer {
                     visible: !root.serial && !root.telnet
                     Layout.fillWidth: true; Layout.leftMargin: 24; Layout.rightMargin: 24
                     spacing: 5
-                    Text { text: qsTr("Jump host (ProxyJump)"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                    Text { textFormat: Text.PlainText; text: qsTr("Jump host (ProxyJump)"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                     AppCombo {
                         id: jumpBox
                         Layout.fillWidth: true
@@ -421,6 +465,7 @@ Drawer {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         visible: jumpBox.currentIndex > 0
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
@@ -448,8 +493,9 @@ Drawer {
                                 anchors.leftMargin: 10
                                 anchors.rightMargin: 6
                                 spacing: 8
-                                Text { text: "-" + modelData.type; color: Theme.accent; font.family: Theme.monoFont; font.bold: true; font.pixelSize: 12 }
+                                Text { textFormat: Text.PlainText; text: "-" + modelData.type; color: Theme.accent; font.family: Theme.monoFont; font.bold: true; font.pixelSize: 12 }
                                 Text {
+                                    textFormat: Text.PlainText
                                     Layout.fillWidth: true
                                     elide: Text.ElideMiddle
                                     color: Theme.text
@@ -472,7 +518,7 @@ Drawer {
                                         root.forwards = f
                                     }
                                     background: Rectangle { radius: 6; color: autoBtn.on ? Theme.accentDim : "transparent"; border.color: autoBtn.on ? Theme.accent : Theme.border }
-                                    contentItem: Text { id: autoTxt; text: autoBtn.on ? qsTr("auto") : qsTr("manual"); color: autoBtn.on ? Theme.accent : Theme.textDim
+                                    contentItem: Text { textFormat: Text.PlainText; id: autoTxt; text: autoBtn.on ? qsTr("auto") : qsTr("manual"); color: autoBtn.on ? Theme.accent : Theme.textDim
                                                         font.pixelSize: 10; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                                     ToolTip.visible: hovered
                                     ToolTip.text: autoBtn.on ? qsTr("Opens by itself on connect. Click: start it by hand from the Tunnels panel instead.")
@@ -508,7 +554,7 @@ Drawer {
                                 spacing: 8
                                 ColumnLayout {
                                     spacing: 3
-                                    Text { text: fType.currentIndex === 1 ? qsTr("Port on the server") : qsTr("Port on this PC"); color: Theme.textDim; font.pixelSize: 11 }
+                                    Text { textFormat: Text.PlainText; text: fType.currentIndex === 1 ? qsTr("Port on the server") : qsTr("Port on this PC"); color: Theme.textDim; font.pixelSize: 11 }
                                     TextField {
                                         id: fBind; Layout.preferredWidth: 110; placeholderText: fType.currentIndex === 2 ? "1080" : "8080"
                                         color: Theme.text; font.family: Theme.monoFont
@@ -519,7 +565,7 @@ Drawer {
                                     Layout.fillWidth: true
                                     visible: fType.currentIndex !== 2
                                     spacing: 3
-                                    Text { text: fType.currentIndex === 1 ? qsTr("Goes to (address:port on this PC's side)") : qsTr("Goes to (address:port as the server sees it)")
+                                    Text { textFormat: Text.PlainText; text: fType.currentIndex === 1 ? qsTr("Goes to (address:port on this PC's side)") : qsTr("Goes to (address:port as the server sees it)")
                                            color: Theme.textDim; font.pixelSize: 11; elide: Text.ElideRight; Layout.fillWidth: true }
                                     TextField { id: fDest; Layout.fillWidth: true; placeholderText: "127.0.0.1:80"; color: Theme.text; font.family: Theme.monoFont }
                                 }
@@ -527,7 +573,7 @@ Drawer {
                             RowLayout {
                                 Layout.fillWidth: true
                                 spacing: 8
-                                Text { Layout.fillWidth: true; Layout.alignment: Qt.AlignVCenter; text: qsTr("Open by itself on connect"); color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; Layout.alignment: Qt.AlignVCenter; text: qsTr("Open by itself on connect"); color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight }
                                 AppSwitch { id: fAuto; checked: false; Layout.alignment: Qt.AlignVCenter }
                             }
                             AppButton {
@@ -539,6 +585,7 @@ Drawer {
                                 onClicked: root.addPendingTunnel()
                             }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 font.pixelSize: 11
@@ -552,6 +599,7 @@ Drawer {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         font.pixelSize: 11
@@ -560,6 +608,7 @@ Drawer {
                         text: qsTr("Press \"Add tunnel\" (or Save — it is added for you).")
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         visible: root.forwards.length > 0
                         wrapMode: Text.WordWrap
@@ -582,9 +631,9 @@ Drawer {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 2
-                            Text { text: qsTr("Ask for the master password to connect"); color: Theme.text; font.pixelSize: 13 }
-                            Text { Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
-                                   text: qsTr("Even when the vault is unlocked. Good for production servers.") }
+                            Text { textFormat: Text.PlainText; text: qsTr("Ask for the master password to connect"); color: Theme.text; font.pixelSize: 13 }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+                                   text: qsTr("Even when the vault is unlocked. The password and the key of this host stay encrypted with your master password and are decrypted only for the moment of connecting. A key used by such a host is protected for every host that uses it. Good for production servers.") }
                         }
                         AppSwitch { id: confirmMaster }
                     }
@@ -595,8 +644,8 @@ Drawer {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 2
-                            Text { text: qsTr("Always ask the key passphrase"); color: Theme.text; font.pixelSize: 13 }
-                            Text { Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+                            Text { textFormat: Text.PlainText; text: qsTr("Always ask the key passphrase"); color: Theme.text; font.pixelSize: 13 }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
                                    text: qsTr("Ignore a passphrase saved in the vault for this host.") }
                         }
                         AppSwitch { id: alwaysAsk }
@@ -608,8 +657,8 @@ Drawer {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 2
-                            Text { text: qsTr("Use keys from the SSH agent"); color: Theme.text; font.pixelSize: 13 }
-                            Text { Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+                            Text { textFormat: Text.PlainText; text: qsTr("Use keys from the SSH agent"); color: Theme.text; font.pixelSize: 13 }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
                                    text: (root.agentName !== "" ? qsTr("Found: %1.").arg(root.agentName) + " "
                                                                 : qsTr("No agent is running right now.") + " ")
                                          + qsTr("Pageant, the Windows OpenSSH agent, ssh-agent, KeePassXC, a YubiKey… are tried before the key above.") }
@@ -623,11 +672,23 @@ Drawer {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 2
-                            Text { text: qsTr("Agent forwarding (ssh -A)"); color: Theme.text; font.pixelSize: 13 }
-                            Text { Layout.fillWidth: true; wrapMode: Text.WordWrap; color: agentForward.checked ? Theme.warn : Theme.textFaint; font.pixelSize: 11
+                            Text { textFormat: Text.PlainText; text: qsTr("Agent forwarding (ssh -A)"); color: Theme.text; font.pixelSize: 13 }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: agentForward.checked ? Theme.warn : Theme.textFaint; font.pixelSize: 11
                                    text: qsTr("From this server you can go further (git pull, ssh to the next server) with your keys, which never leave this computer. Only for servers you trust: while you are connected, root there can use your agent.") }
                         }
                         AppSwitch { id: agentForward }
+                    }
+                    RowLayout {
+                        Layout.fillWidth: true
+                        spacing: 12
+                        ColumnLayout {
+                            Layout.fillWidth: true
+                            spacing: 2
+                            Text { textFormat: Text.PlainText; text: qsTr("Remember commands for this host"); color: Theme.text; font.pixelSize: 13 }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+                                   text: qsTr("Command history (Ctrl+Shift+H), kept encrypted in the vault. Commands typed in database shells (mysql>, psql) and commands that look like they contain a password or token are never remembered. Turn off for servers where you type secrets.") }
+                        }
+                        AppSwitch { id: keepHistory }
                     }
                 }
 
@@ -648,6 +709,7 @@ Drawer {
                             anchors.fill: parent
                             anchors.margins: 1
                             TextArea {
+                                textFormat: TextArea.PlainText
                                 id: notesArea
                                 wrapMode: TextArea.Wrap
                                 selectByMouse: true
@@ -660,6 +722,7 @@ Drawer {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         text: qsTr("Stored encrypted in the vault, like passwords. In an open tab: the notes button in the toolbar.")
@@ -699,19 +762,19 @@ Drawer {
                                 Rectangle {
                                     width: 32; height: 32; radius: 8
                                     color: Theme.tint(lookCol.previewColor, "2e")
-                                    Text { anchors.centerIn: parent; text: Theme.initials(lookCol.previewName); color: lookCol.previewColor; font.pixelSize: 12; font.weight: Font.Bold }
+                                    Text { textFormat: Text.PlainText; anchors.centerIn: parent; text: Theme.initials(lookCol.previewName); color: lookCol.previewColor; font.pixelSize: 12; font.weight: Font.Bold }
                                 }
                                 ColumnLayout {
                                     Layout.fillWidth: true
                                     spacing: 4
-                                    Text { Layout.fillWidth: true; text: lookCol.previewName; color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold; elide: Text.ElideRight }
+                                    Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: lookCol.previewName; color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold; elide: Text.ElideRight }
                                     Rectangle { Layout.preferredWidth: 90; height: 3; radius: 2; color: lookCol.previewColor }
                                 }
-                                Text { text: qsTr("preview"); color: Theme.textFaint; font.pixelSize: 10 }
+                                Text { textFormat: Text.PlainText; text: qsTr("preview"); color: Theme.textFaint; font.pixelSize: 10 }
                             }
                         }
 
-                        Text { text: qsTr("Colour"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                        Text { textFormat: Text.PlainText; text: qsTr("Colour"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                         // even grid: every cell has the same width, circles are centred in it
                         GridLayout {
                             id: colorPick
@@ -744,7 +807,7 @@ Drawer {
                                             border.width: 2
                                             border.color: Theme.bg
                                         }
-                                        Text { visible: parent.parent.isAuto; anchors.centerIn: parent; text: "A"; color: Theme.textDim; font.pixelSize: 11; font.weight: Font.DemiBold }
+                                        Text { textFormat: Text.PlainText; visible: parent.parent.isAuto; anchors.centerIn: parent; text: "A"; color: Theme.textDim; font.pixelSize: 11; font.weight: Font.DemiBold }
                                         IconLabel { visible: parent.parent.isPlus && !colorPick.isCustom; anchors.centerIn: parent; glyph: Theme.iconAdd; size: 12; color: Theme.textDim }
                                     }
                                     MouseArea {
@@ -768,7 +831,7 @@ Drawer {
                             onAccepted: colorPick.value = selectedColor.toString()
                         }
 
-                        Text { text: qsTr("Terminal theme"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium; Layout.topMargin: 4 }
+                        Text { textFormat: Text.PlainText; text: qsTr("Terminal theme"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium; Layout.topMargin: 4 }
                         // 0 = default from Settings, i > 0 = App.terminalThemes[i - 1]
                         ListView {
                             id: themeBox
@@ -798,6 +861,7 @@ Drawer {
                 }
 
                 Text {
+                    textFormat: Text.PlainText
                     id: err
                     visible: text !== ""
                     Layout.fillWidth: true; Layout.leftMargin: 24; Layout.rightMargin: 24
@@ -816,6 +880,7 @@ Drawer {
             implicitHeight: footErr.implicitHeight + 20
             color: Theme.dangerDim
             Text {
+                textFormat: Text.PlainText
                 id: footErr
                 anchors.left: parent.left; anchors.right: parent.right; anchors.verticalCenter: parent.verticalCenter
                 anchors.leftMargin: 24; anchors.rightMargin: 24

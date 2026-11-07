@@ -170,6 +170,7 @@ void SshWorker::answerHostKey(bool accept)
     knownhosts::removeHost(m_p.knownHostsPath, m_p.host, m_p.port);
     if (ssh_session_update_known_hosts(m_session) != SSH_OK)
         emit status(tr("Warning: could not save the host key."));
+    knownhosts::hashFile(m_p.knownHostsPath);   // the file must not list where you connect
     tryAuth();
 }
 

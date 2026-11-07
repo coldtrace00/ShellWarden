@@ -100,7 +100,7 @@ Popup {
         RowLayout {
             Layout.fillWidth: true
             IconLabel { glyph: Theme.iconSplit; size: 18; color: Theme.accent }
-            Text { Layout.fillWidth: true; text: qsTr("Compare a file on two servers"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
+            Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Compare a file on two servers"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
             AppButton { glyph: Theme.iconClose; variant: "ghost"; compact: true; onClicked: root.close() }
         }
         GridLayout {
@@ -111,14 +111,14 @@ Popup {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 5
-                Text { text: qsTr("First server"); color: "#ff7a8c"; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; text: qsTr("First server"); color: "#ff7a8c"; font.pixelSize: 12; font.weight: Font.Medium }
                 AppCombo { id: hostA; Layout.fillWidth: true; model: root.hostList.map(h => h.label) }
                 AppField { id: pathA; Layout.fillWidth: true; label: qsTr("File"); mono: true; text: "/etc/nginx/nginx.conf" }
             }
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 5
-                Text { text: qsTr("Second server"); color: "#6be3a2"; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; text: qsTr("Second server"); color: "#6be3a2"; font.pixelSize: 12; font.weight: Font.Medium }
                 AppCombo { id: hostB; Layout.fillWidth: true; model: root.hostList.map(h => h.label); currentIndex: Math.min(1, count - 1) }
                 AppField { id: pathB; Layout.fillWidth: true; label: qsTr("File (empty = same path)"); mono: true; placeholder: pathA.text }
             }
@@ -138,14 +138,15 @@ Popup {
             }
             BusyIndicator { visible: root.runner.running; running: visible; implicitWidth: 22; implicitHeight: 22 }
             Text {
+                textFormat: Text.PlainText
                 visible: !root.runner.running && root.error === "" && (root.rows.length > 0 || root.added + root.removed > 0)
                 text: root.added + root.removed === 0 ? qsTr("The files are identical") : qsTr("−%1 lines · +%2 lines").arg(root.removed).arg(root.added)
                 color: root.added + root.removed === 0 ? Theme.ok : Theme.text
                 font.pixelSize: 13; font.weight: Font.DemiBold
             }
-            Text { visible: root.error !== ""; Layout.fillWidth: true; text: root.error; color: Theme.danger; font.pixelSize: 12; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; visible: root.error !== ""; Layout.fillWidth: true; text: root.error; color: Theme.danger; font.pixelSize: 12; wrapMode: Text.WordWrap }
             Item { Layout.fillWidth: true; visible: root.error === "" }
-            Text { text: qsTr("Only changes"); color: Theme.textDim; font.pixelSize: 12 }
+            Text { textFormat: Text.PlainText; text: qsTr("Only changes"); color: Theme.textDim; font.pixelSize: 12 }
             AppSwitch { checked: root.onlyChanges; onToggled: root.onlyChanges = checked }
         }
         Rectangle {
@@ -173,8 +174,8 @@ Popup {
                     Row {
                         anchors.verticalCenter: parent.verticalCenter
                         spacing: 0
-                        Text { width: 46; horizontalAlignment: Text.AlignRight; text: modelData.a || ""; color: Theme.textFaint; font.family: Theme.monoFont; font.pixelSize: 11 }
-                        Text { width: 46; horizontalAlignment: Text.AlignRight; text: modelData.b || ""; color: Theme.textFaint; font.family: Theme.monoFont; font.pixelSize: 11 }
+                        Text { textFormat: Text.PlainText; width: 46; horizontalAlignment: Text.AlignRight; text: modelData.a || ""; color: Theme.textFaint; font.family: Theme.monoFont; font.pixelSize: 11 }
+                        Text { textFormat: Text.PlainText; width: 46; horizontalAlignment: Text.AlignRight; text: modelData.b || ""; color: Theme.textFaint; font.family: Theme.monoFont; font.pixelSize: 11 }
                         Text {
                             leftPadding: 10
                             text: (modelData.t < 0 ? "− " : modelData.t > 0 ? "+ " : modelData.t === 2 ? "" : "  ") + modelData.s
@@ -188,6 +189,7 @@ Popup {
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: root.rows.length === 0 && !root.runner.running
                 width: parent.width - 40

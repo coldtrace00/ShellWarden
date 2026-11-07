@@ -25,8 +25,9 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 2
-                Text { text: qsTr("Keychain"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: qsTr("Keychain"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     text: qsTr("Public keys are saved as a single OpenSSH line — paste-ready for authorized_keys.")
@@ -58,6 +59,7 @@ Item {
                 spacing: 10
                 Rectangle { width: 8; height: 8; radius: 4; color: agentBar.st.available ? (agentBar.st.keys > 0 ? Theme.ok : Theme.warn) : Theme.textFaint }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     font.pixelSize: 12
@@ -111,17 +113,18 @@ Item {
                             Flow {
                                 Layout.fillWidth: true
                                 spacing: 8
-                                Text { text: model.name; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
+                                Text { textFormat: Text.PlainText; text: model.name; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
                                 Rectangle {
                                     radius: 4; color: Theme.surface2
                                     implicitWidth: typeText.implicitWidth + 12; implicitHeight: 20
-                                    Text { id: typeText; anchors.centerIn: parent; text: model.type; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
+                                    Text { textFormat: Text.PlainText; id: typeText; anchors.centerIn: parent; text: model.type; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
                                 }
                                 Rectangle {
                                     radius: 4
                                     color: !model.encrypted ? Theme.warnDim : (model.hasPassphrase ? Theme.okDim : Theme.surface2)
                                     implicitWidth: ppText.implicitWidth + 12; implicitHeight: 20
                                     Text {
+                                        textFormat: Text.PlainText
                                         id: ppText
                                         anchors.centerIn: parent
                                         font.pixelSize: 11
@@ -130,8 +133,26 @@ Item {
                                                                : (model.hasPassphrase ? qsTr("Passphrase saved") : qsTr("Passphrase asked on connect"))
                                     }
                                 }
+                                Rectangle {
+                                    visible: !!model.protected
+                                    radius: 4
+                                    color: Theme.accentDim
+                                    implicitWidth: protRow.implicitWidth + 12; implicitHeight: 20
+                                    RowLayout {
+                                        id: protRow
+                                        anchors.centerIn: parent
+                                        spacing: 4
+                                        IconLabel { glyph: Theme.iconShield; size: 11; color: Theme.accent }
+                                        Text { textFormat: Text.PlainText; text: qsTr("Master password"); color: Theme.accent; font.pixelSize: 11 }
+                                    }
+                                    HoverHandler { id: protHover }
+                                    ToolTip.visible: protHover.hovered
+                                    ToolTip.delay: 300
+                                    ToolTip.text: qsTr("Used by a host that asks for the master password: the key stays encrypted with it and is opened only to connect. Every host that uses this key asks for the master password.")
+                                }
                             }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 Layout.preferredWidth: 100
                                 text: model.fingerprint
@@ -169,6 +190,7 @@ Item {
                         color: Theme.terminalBg
                         border.color: Theme.border
                         TextEdit {
+                            textFormat: TextEdit.PlainText
                             id: pubText
                             anchors.fill: parent
                             anchors.margins: 8
@@ -194,8 +216,8 @@ Item {
                 anchors.centerIn: parent
                 spacing: 12
                 IconLabel { Layout.alignment: Qt.AlignHCenter; glyph: Theme.iconKey; size: 40; color: Theme.textFaint }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No keys yet"); color: Theme.text; font.pixelSize: 16 }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("Generate an Ed25519 key protected by a passphrase, or import an existing one."); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("No keys yet"); color: Theme.text; font.pixelSize: 16 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("Generate an Ed25519 key protected by a passphrase, or import an existing one."); color: Theme.textDim; font.pixelSize: 12 }
                 RowLayout {
                     Layout.alignment: Qt.AlignHCenter
                     AppButton { text: qsTr("Import"); glyph: Theme.iconFolder; onClicked: importDlg.openFresh() }
@@ -261,10 +283,18 @@ Item {
             let e = ""
             if (mode === "pub") e = App.exportPublicKey(keyId, selectedFile)
             else if (mode === "rfc") e = App.exportPublicKeyRfc4716(keyId, selectedFile)
-            else e = App.exportPrivateKey(keyId, selectedFile)
+            else if (App.keyIsProtected(keyId)) {
+                const kid = keyId, file = selectedFile
+                keyMaster.ask(qsTr("Export a protected key"),
+                              qsTr("This key belongs to a host that asks for the master password, so it is kept encrypted with it. Enter the master password to export it."),
+                              qsTr("Export"),
+                              pw => { const r = App.exportPrivateKey(kid, file, pw); if (r === "") toastLocal.show(qsTr("Saved")); return r })
+                return
+            } else e = App.exportPrivateKey(keyId, selectedFile)
             toastLocal.show(e === "" ? qsTr("Saved") : e)
         }
     }
+    MasterPrompt { id: keyMaster }
 
     KeyDeployDialog { id: deployDlg }
     KeyGenerateDialog { id: genDlg }
@@ -277,7 +307,7 @@ Item {
         subtitle: qsTr("Stored encrypted in the vault so you are not asked on every connection.")
         function openFresh() { ppField.text = ""; ppErr.text = ""; open(); ppField.field.forceActiveFocus() }
         AppField { id: ppField; Layout.fillWidth: true; label: qsTr("Passphrase"); secret: true; onAccepted: ppSave.clicked() }
-        Text { id: ppErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12 }
+        Text { textFormat: Text.PlainText; id: ppErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12 }
         RowLayout {
             Layout.fillWidth: true
             Item { Layout.fillWidth: true }
@@ -332,7 +362,7 @@ Item {
         color: Theme.surface2; border.color: Theme.border
         opacity: 0; visible: opacity > 0
         Behavior on opacity { NumberAnimation { duration: 160 } }
-        Text { id: tlText; anchors.centerIn: parent; color: Theme.text; font.pixelSize: 12 }
+        Text { textFormat: Text.PlainText; id: tlText; anchors.centerIn: parent; color: Theme.text; font.pixelSize: 12 }
         Timer { id: tlTimer; interval: 2500; onTriggered: toastLocal.opacity = 0 }
     }
 }

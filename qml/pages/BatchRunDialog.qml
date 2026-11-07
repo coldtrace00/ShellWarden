@@ -44,7 +44,7 @@ Popup {
             const h = App.hosts.get(i)
             if (h.type === "serial" || h.type === "telnet") continue
             out.push({ id: h.id, label: h.label, group: h.group || "", addr: (h.username ? h.username + "@" : "") + h.hostname,
-                       protected: !!h.confirmMaster, color: h.color || "" })
+                       protected: App.hostIsProtected(h.id), color: h.color || "" })
         }
         return out
     }
@@ -95,14 +95,14 @@ Popup {
             width: 22; height: 22; radius: 11
             color: st.done ? Theme.accent : Theme.surface2
             border.color: st.done ? Theme.accent : Theme.border
-            Text { anchors.centerIn: parent; visible: !st.done; text: st.n; color: Theme.text; font.pixelSize: 11; font.weight: Font.Bold }
+            Text { textFormat: Text.PlainText; anchors.centerIn: parent; visible: !st.done; text: st.n; color: Theme.text; font.pixelSize: 11; font.weight: Font.Bold }
             IconLabel { anchors.centerIn: parent; visible: st.done; glyph: Theme.iconCheck; size: 12; color: Theme.bg }
         }
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 1
-            Text { text: st.title; color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
-            Text { Layout.fillWidth: true; visible: st.hint !== ""; text: st.hint; color: Theme.textFaint; font.pixelSize: 11; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; text: st.title; color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
+            Text { textFormat: Text.PlainText; Layout.fillWidth: true; visible: st.hint !== ""; text: st.hint; color: Theme.textFaint; font.pixelSize: 11; wrapMode: Text.WordWrap }
         }
     }
 
@@ -113,7 +113,7 @@ Popup {
         implicitWidth: chipText.implicitWidth + 22
         hoverEnabled: true
         background: Rectangle { radius: 14; color: chip.on ? Theme.accentDim : (chip.hovered ? Theme.surface2 : "transparent"); border.color: chip.on ? Theme.accent : Theme.border }
-        contentItem: Text { id: chipText; text: chip.text; color: chip.on ? Theme.text : Theme.textDim; font.pixelSize: 12
+        contentItem: Text { textFormat: Text.PlainText; id: chipText; text: chip.text; color: chip.on ? Theme.text : Theme.textDim; font.pixelSize: 12
                             horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
     }
 
@@ -125,8 +125,9 @@ Popup {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 1
-                Text { text: qsTr("Run on several hosts"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: qsTr("Run on several hosts"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     text: qsTr("Type a command once, tick the servers, press Run. ShellWarden connects to each one by itself and shows where it worked and where it failed.")
@@ -160,6 +161,7 @@ Popup {
                     anchors.fill: parent
                     anchors.margins: 1
                     TextArea {
+                        textFormat: TextArea.PlainText
                         id: cmd
                         color: Theme.text
                         font.family: Theme.monoFont
@@ -186,7 +188,7 @@ Popup {
                 Layout.fillWidth: true
                 spacing: 8
                 // how to run from the keyboard
-                    Text { text: qsTr("Run with:"); color: Theme.textDim; font.pixelSize: 11 }
+                    Text { textFormat: Text.PlainText; text: qsTr("Run with:"); color: Theme.textDim; font.pixelSize: 11 }
                     Repeater {
                         model: [["ctrl", "Ctrl+Enter"], ["enter", "Enter"]]
                         delegate: Chip {
@@ -196,6 +198,7 @@ Popup {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         text: root.enterRuns ? qsTr("Shift+Enter — new line") : qsTr("Enter — new line")
                         color: Theme.textFaint; font.pixelSize: 11
                     }
@@ -213,6 +216,7 @@ Popup {
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 color: Theme.textFaint
@@ -297,8 +301,8 @@ Popup {
                             ColumnLayout {
                                 Layout.fillWidth: true
                                 spacing: 0
-                                Text { Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight }
-                                Text { Layout.fillWidth: true; text: modelData.addr + (modelData.group ? " · " + modelData.group : ""); color: Theme.textFaint; font.pixelSize: 10; font.family: Theme.monoFont; elide: Text.ElideRight }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.addr + (modelData.group ? " · " + modelData.group : ""); color: Theme.textFaint; font.pixelSize: 10; font.family: Theme.monoFont; elide: Text.ElideRight }
                             }
                             IconLabel {
                                 visible: modelData.protected
@@ -311,9 +315,9 @@ Popup {
                         }
                     }
                 }
-                Text { anchors.centerIn: parent; visible: root.visibleHosts.length === 0; text: qsTr("No hosts"); color: Theme.textFaint }
+                Text { textFormat: Text.PlainText; anchors.centerIn: parent; visible: root.visibleHosts.length === 0; text: qsTr("No hosts"); color: Theme.textFaint }
             }
-            Text { visible: root.error !== ""; text: root.error; color: Theme.danger; font.pixelSize: 12 }
+            Text { textFormat: Text.PlainText; visible: root.error !== ""; text: root.error; color: Theme.danger; font.pixelSize: 12 }
             RowLayout {
                 Layout.fillWidth: true
                 Step {
@@ -356,6 +360,7 @@ Popup {
                 color: Theme.bg
                 border.color: Theme.border
                 Text {
+                    textFormat: Text.PlainText
                     anchors.fill: parent; anchors.leftMargin: 10; anchors.rightMargin: 10
                     verticalAlignment: Text.AlignVCenter
                     elide: Text.ElideRight
@@ -368,14 +373,15 @@ Popup {
                 spacing: 14
                 BusyIndicator { visible: root.batch.running; running: visible; implicitWidth: 22; implicitHeight: 22 }
                 Text {
+                    textFormat: Text.PlainText
                     text: root.batch.running ? qsTr("Running… %1 of %2 done").arg(root.batch.doneCount).arg(root.batch.results.length)
                                              : qsTr("Finished")
                     color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold
                 }
-                Text { text: "✓ " + root.batch.okCount; color: Theme.ok; font.pixelSize: 13; font.weight: Font.DemiBold }
-                Text { text: "✗ " + root.batch.failCount; color: root.batch.failCount > 0 ? Theme.danger : Theme.textFaint; font.pixelSize: 13; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: "✓ " + root.batch.okCount; color: Theme.ok; font.pixelSize: 13; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: "✗ " + root.batch.failCount; color: root.batch.failCount > 0 ? Theme.danger : Theme.textFaint; font.pixelSize: 13; font.weight: Font.DemiBold }
                 Item { Layout.fillWidth: true }
-                Text { text: qsTr("Click a row to see its output"); color: Theme.textFaint; font.pixelSize: 11 }
+                Text { textFormat: Text.PlainText; text: qsTr("Click a row to see its output"); color: Theme.textFaint; font.pixelSize: 11 }
             }
             Rectangle {
                 Layout.fillWidth: true
@@ -425,8 +431,9 @@ Popup {
                                 ColumnLayout {
                                     Layout.fillWidth: true
                                     spacing: 0
-                                    Text { Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
+                                    Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
                                     Text {
+                                        textFormat: Text.PlainText
                                         Layout.fillWidth: true
                                         elide: Text.ElideRight
                                         font.pixelSize: 11
@@ -438,6 +445,7 @@ Popup {
                                     }
                                 }
                                 Text {
+                                    textFormat: Text.PlainText
                                     visible: modelData.state === "ok" || modelData.state === "fail"
                                     text: (modelData.exitCode >= 0 ? qsTr("code %1").arg(modelData.exitCode) + " · " : "") + (modelData.ms / 1000).toFixed(1) + " s"
                                     color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont
@@ -459,6 +467,7 @@ Popup {
                                 anchors.fill: parent
                                 anchors.margins: 6
                                 TextArea {
+                                    textFormat: TextArea.PlainText
                                     id: outText
                                     readOnly: true
                                     selectByMouse: true

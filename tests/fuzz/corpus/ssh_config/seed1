@@ -1,0 +1,9 @@
+Host web1
+  HostName web1.example.com
+  User deploy
+  Port 2200
+  IdentityFile ~/.ssh/id_ed25519
+  ProxyJump bastion
+Host *
+  ServerAliveInterval 30
+Include conf.d/*

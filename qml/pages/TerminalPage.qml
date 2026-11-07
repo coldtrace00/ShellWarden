@@ -65,6 +65,66 @@ Rectangle {
     }
 
     // Commands run on this host earlier: search, put one into the prompt or run it.
+    // Several lines (or a very long text) on the clipboard: every line break is an
+    // Enter, so show what will run before it runs.
+    Modal {
+        id: pasteAsk
+        property string text: ""
+        property int lines: 0
+        title: qsTr("Paste %n lines?", "", pasteAsk.lines)
+        subtitle: qsTr("Each line break works like Enter: the lines run one after another as soon as they arrive. Check the text first — what you copied from a web page is not always what you saw.")
+        width: Math.min(640, (parent ? parent.width : 640) - 40)
+        function ask(text, lines, preview) {
+            pasteAsk.text = text
+            pasteAsk.lines = lines
+            pastePreview.text = preview + (text.length > 1500 ? "\n…" : "")
+            pasteNoAsk.checked = false
+            open()
+        }
+        onClosed: { pasteAsk.text = ""; pastePreview.text = ""; term.forceActiveFocus() }
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: Math.min(260, pastePreview.implicitHeight + 20)
+            radius: 8
+            color: Theme.bg
+            border.color: Theme.border
+            Flickable {
+                anchors.fill: parent
+                anchors.margins: 10
+                clip: true
+                contentHeight: pastePreview.implicitHeight
+                contentWidth: width
+                Text {
+                    id: pastePreview
+                    width: parent.width
+                    textFormat: Text.PlainText
+                    wrapMode: Text.WrapAnywhere
+                    font.family: Theme.monoFont
+                    font.pixelSize: 12
+                    color: Theme.text
+                }
+            }
+        }
+        AppCheckBox { id: pasteNoAsk; text: qsTr("Do not ask again (Settings → Terminal)") }
+        RowLayout {
+            Layout.fillWidth: true
+            Item { Layout.fillWidth: true }
+            AppButton { text: qsTr("Cancel"); onClicked: pasteAsk.close() }
+            AppButton {
+                text: qsTr("Paste")
+                variant: "primary"
+                onClicked: {
+                    if (pasteNoAsk.checked)
+                        App.setSetting("pasteWarning", false)
+                    const t = pasteAsk.text
+                    pasteAsk.close()
+                    term.pasteText(t)
+                }
+            }
+        }
+    }
+
     Modal {
         id: historyPopup
         property var all: []
@@ -130,7 +190,7 @@ Rectangle {
                         anchors.fill: parent
                         anchors.leftMargin: 10; anchors.rightMargin: 6
                         spacing: 6
-                        Text { Layout.fillWidth: true; text: modelData; color: Theme.text; font.family: Theme.monoFont; font.pixelSize: 12; elide: Text.ElideRight }
+                        Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData; color: Theme.text; font.family: Theme.monoFont; font.pixelSize: 12; elide: Text.ElideRight }
                         AbstractButton {
                             visible: hh.hovered
                             width: 22; height: 22
@@ -142,6 +202,7 @@ Rectangle {
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: historyPopup.shown.length === 0
                 width: parent.width - 40
@@ -229,7 +290,7 @@ Rectangle {
                 anchors.centerIn: parent
                 spacing: 6
                 IconLabel { glyph: tb.glyph; size: 15; color: tb.on ? tb.tint : (tb.hovered ? Theme.text : Theme.textDim) }
-                Text { visible: tb.label.length > 0; text: tb.label; color: tb.on ? Theme.text : Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; visible: tb.label.length > 0; text: tb.label; color: tb.on ? Theme.text : Theme.textDim; font.pixelSize: 12 }
             }
         }
         ToolTip.visible: hovered && tip !== ""
@@ -284,6 +345,7 @@ Rectangle {
                             color: root.session && root.session.viaProxy ? Theme.accent : Theme.textDim
                         }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             text: root.session ? root.session.routeText : ""
                             color: Theme.text
@@ -294,6 +356,7 @@ Rectangle {
                 }
 
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     text: root.session ? root.session.endpoint : ""
                     color: Theme.textDim
@@ -307,6 +370,7 @@ Rectangle {
                     spacing: 6
                     visible: root.isSsh && (root.session.seenIp !== "" || root.session.expectedIp !== "" || root.session.expectedLocation !== "")
                     Text {
+                        textFormat: Text.PlainText
                         visible: root.width > 900
                         text: root.session && root.session.seenIp !== "" ? qsTr("Server sees you as") : qsTr("Expected exit IP")
                         color: Theme.textDim
@@ -330,6 +394,7 @@ Rectangle {
                                 color: root.ipConfirmed ? Theme.ok : Theme.warn
                             }
                             Text {
+                                textFormat: Text.PlainText
                                 text: !root.session ? ""
                                       : root.session.seenIp !== "" ? root.session.seenIp
                                       : (root.session.expectedIp !== "" ? root.session.expectedIp : root.session.expectedLocation)
@@ -389,6 +454,7 @@ Rectangle {
                                 color: root.session && root.session.viaProxy ? Theme.accent : Theme.textDim
                             }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 elide: Text.ElideRight
                                 font.pixelSize: 11
@@ -549,6 +615,8 @@ Rectangle {
                 fontSize: App.settings.fontSize
                 copyOnSelect: App.settings.copyOnSelect
                 rightClickPaste: App.settings.rightClickPaste
+                confirmPaste: App.settings.pasteWarning !== false
+                onPasteConfirmRequested: (text, lines, preview) => pasteAsk.ask(text, lines, preview)
                 scrollbackLines: App.settings.scrollback
                 highlightOutput: App.settings.highlightOutput
                 focus: root.visible
@@ -607,6 +675,7 @@ Rectangle {
                         Keys.onEscapePressed: root.closeSearch()
                     }
                     Text {
+                        textFormat: Text.PlainText
                         text: searchField.text === "" ? "" : (term.matchCount === 0 ? qsTr("no matches") : (term.matchIndex + 1) + " / " + term.matchCount)
                         color: term.matchCount === 0 && searchField.text !== "" ? Theme.danger : Theme.textDim
                         font.pixelSize: 11
@@ -619,7 +688,7 @@ Rectangle {
                         ToolTip.visible: hovered; ToolTip.text: qsTr("Match case")
                         hoverEnabled: true
                         background: Rectangle { radius: 5; color: caseBox.checked ? Theme.accentDim : (caseBox.hovered ? Theme.surface2 : "transparent") }
-                        contentItem: Text { text: "Aa"; color: caseBox.checked ? Theme.accent : Theme.textDim; font.pixelSize: 11; font.bold: true
+                        contentItem: Text { textFormat: Text.PlainText; text: "Aa"; color: caseBox.checked ? Theme.accent : Theme.textDim; font.pixelSize: 11; font.bold: true
                                             horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                     }
                     ToolBtn { glyph: Theme.iconArrowUp; tip: qsTr("Older (Enter)"); onClicked: term.findNext(true) }
@@ -646,7 +715,7 @@ Rectangle {
                     anchors.centerIn: parent
                     spacing: 6
                     IconLabel { glyph: Theme.iconBroadcast; size: 13; color: Theme.warn }
-                    Text { text: qsTr("Broadcast: typing goes to %1 tab(s)").arg(root.session ? root.session.broadcastCount : 0); color: Theme.text; font.pixelSize: 11 }
+                    Text { textFormat: Text.PlainText; text: qsTr("Broadcast: typing goes to %1 tab(s)").arg(root.session ? root.session.broadcastCount : 0); color: Theme.text; font.pixelSize: 11 }
                 }
             }
 
@@ -674,6 +743,7 @@ Rectangle {
                     spacing: 10
                     BusyIndicator { Layout.alignment: Qt.AlignHCenter; running: parent.visible; implicitWidth: 34; implicitHeight: 34 }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         text: root.session ? root.session.statusText : ""
@@ -682,6 +752,7 @@ Rectangle {
                         wrapMode: Text.WordWrap
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         visible: root.session && (root.session.expectedIp !== "" || root.session.expectedLocation !== "")
@@ -724,6 +795,7 @@ Rectangle {
                             color: root.session && root.session.hostKeyStatus !== 0 ? Theme.danger : Theme.accent
                         }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             wrapMode: Text.WordWrap
                             color: Theme.text
@@ -735,6 +807,7 @@ Rectangle {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         color: Theme.textDim
@@ -755,8 +828,9 @@ Rectangle {
                             anchors.fill: parent
                             anchors.margins: 10
                             spacing: 4
-                            Text { text: root.session ? root.session.hostKeyType : ""; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
+                            Text { textFormat: Text.PlainText; text: root.session ? root.session.hostKeyType : ""; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
                             TextEdit {
+                                textFormat: TextEdit.PlainText
                                 Layout.fillWidth: true
                                 text: root.session ? root.session.hostKeyFingerprint : ""
                                 readOnly: true
@@ -782,6 +856,7 @@ Rectangle {
                             size: 14; color: parent.tint
                         }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             wrapMode: Text.WordWrap
                             font.pixelSize: 12
@@ -832,6 +907,7 @@ Rectangle {
                     anchors.margins: 24
                     spacing: 12
                     Text {
+                        textFormat: Text.PlainText
                         text: !root.session ? "" : root.session.secretKind === 1 ? qsTr("Key passphrase")
                               : root.session.secretKind === 2 ? (/code|otp|token|verif|2fa|authenticator/i.test(root.session.secretPrompt)
                                                                   ? qsTr("Server 2FA code") : qsTr("Server asks"))
@@ -841,6 +917,7 @@ Rectangle {
                         font.weight: Font.DemiBold
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         text: root.session ? root.session.secretPrompt : ""
@@ -893,6 +970,7 @@ Rectangle {
                         color: root.session && root.session.closedWithError ? Theme.danger : Theme.textDim
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         text: !root.session ? "" : root.session.statusText
@@ -988,9 +1066,9 @@ Rectangle {
             RowLayout {
                 Layout.fillWidth: true
                 IconLabel { glyph: Theme.iconFile; size: 14; color: Theme.accent }
-                Text { Layout.fillWidth: true; text: qsTr("Notes · %1").arg(root.session ? root.session.label : ""); color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold; elide: Text.ElideRight }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Notes · %1").arg(root.session ? root.session.label : ""); color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold; elide: Text.ElideRight }
                 IconLabel { glyph: Theme.iconLock; size: 11; color: Theme.textFaint }
-                Text { text: qsTr("encrypted"); color: Theme.textFaint; font.pixelSize: 10 }
+                Text { textFormat: Text.PlainText; text: qsTr("encrypted"); color: Theme.textFaint; font.pixelSize: 10 }
             }
             Rectangle {
                 Layout.fillWidth: true
@@ -1002,6 +1080,7 @@ Rectangle {
                     anchors.fill: parent
                     anchors.margins: 1
                     TextArea {
+                        textFormat: TextArea.PlainText
                         id: notesEdit
                         wrapMode: TextArea.Wrap
                         selectByMouse: true
@@ -1013,7 +1092,7 @@ Rectangle {
                     }
                 }
             }
-            Text { visible: notesPop.err !== ""; text: notesPop.err; color: Theme.danger; font.pixelSize: 11 }
+            Text { textFormat: Text.PlainText; visible: notesPop.err !== ""; text: notesPop.err; color: Theme.danger; font.pixelSize: 11 }
             RowLayout {
                 Layout.fillWidth: true
                 Item { Layout.fillWidth: true }
@@ -1047,7 +1126,7 @@ Rectangle {
             spacing: 8
             RowLayout {
                 Layout.fillWidth: true
-                Text { Layout.fillWidth: true; text: qsTr("Colour theme for this tab"); color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Colour theme for this tab"); color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
                 AppButton { text: qsTr("Create your own"); glyph: Theme.iconAdd; compact: true; onClicked: { themeMenu.close(); tabThemeEditor.openNew() } }
             }
             GridView {

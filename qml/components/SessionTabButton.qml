@@ -85,6 +85,7 @@ AbstractButton {
                 width: 24; height: 24; radius: 7
                 color: Theme.tint(root.hostColor, "33")
                 Text {
+                    textFormat: Text.PlainText
                     anchors.centerIn: parent
                     text: root.session && root.session.kind === "serial" ? "⏚" : Theme.initials(root.session ? root.session.label : "")
                     color: root.hostColor
@@ -116,6 +117,7 @@ AbstractButton {
                     spacing: 5
                     Layout.fillWidth: true
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         text: root.session ? root.session.label : ""
                         color: root.active ? Theme.text : Theme.textDim
@@ -138,6 +140,7 @@ AbstractButton {
                     }
                 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     text: root.session ? root.session.endpoint : ""
                     color: Theme.textFaint

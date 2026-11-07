@@ -36,6 +36,7 @@ ColumnLayout {
     }
 
     Text {
+        textFormat: Text.PlainText
         Layout.fillWidth: true
         wrapMode: Text.WordWrap
         text: qsTr("Needed once for this run (not saved):")

@@ -35,8 +35,8 @@ Item {
                 ColumnLayout {
                     Layout.fillWidth: true
                     spacing: 2
-                    Text { text: qsTr("Proxies & kill switch"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
-                    Text { text: qsTr("SOCKS5, HTTP CONNECT, Shadowsocks, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor."); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+                    Text { textFormat: Text.PlainText; text: qsTr("Proxies & kill switch"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
+                    Text { textFormat: Text.PlainText; text: qsTr("SOCKS5, HTTP CONNECT, Shadowsocks, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor."); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
                 }
                 AppButton { text: qsTr("Add proxy"); glyph: Theme.iconAdd; variant: "primary"; onClicked: editor.openFor("") }
             }
@@ -67,8 +67,9 @@ Item {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 3
-                            Text { text: qsTr("Kill switch"); color: Theme.text; font.pixelSize: 16; font.weight: Font.DemiBold }
+                            Text { textFormat: Text.PlainText; text: qsTr("Kill switch"); color: Theme.text; font.pixelSize: 16; font.weight: Font.DemiBold }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 color: Theme.textDim
@@ -85,8 +86,8 @@ Item {
                                 RowLayout {
                                     Layout.fillWidth: true
                                     spacing: 6
-                                    Text { text: "•"; color: Theme.accent; font.pixelSize: 12; Layout.alignment: Qt.AlignTop }
-                                    Text { Layout.fillWidth: true; wrapMode: Text.WordWrap; text: modelData; color: Theme.textDim; font.pixelSize: 12 }
+                                    Text { textFormat: Text.PlainText; text: "•"; color: Theme.accent; font.pixelSize: 12; Layout.alignment: Qt.AlignTop }
+                                    Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; text: modelData; color: Theme.textDim; font.pixelSize: 12 }
                                 }
                             }
                         }
@@ -104,8 +105,9 @@ Item {
                             Layout.fillWidth: true
                             Layout.preferredWidth: 200
                             spacing: 2
-                            Text { Layout.fillWidth: true; text: qsTr("Kill switch: proxy for hosts without one"); color: Theme.text; font.pixelSize: 13; wrapMode: Text.WordWrap }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Kill switch: proxy for hosts without one"); color: Theme.text; font.pixelSize: 13; wrapMode: Text.WordWrap }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 color: Theme.textFaint
@@ -138,8 +140,9 @@ Item {
                             RowLayout {
                                 Layout.fillWidth: true
                                 spacing: 8
-                                Text { text: qsTr("Your real (direct) IP:"); color: Theme.textDim; font.pixelSize: 12 }
+                                Text { textFormat: Text.PlainText; text: qsTr("Your real (direct) IP:"); color: Theme.textDim; font.pixelSize: 12 }
                                 Text {
+                                    textFormat: Text.PlainText
                                     readonly property bool failed: !App.directIp.checking && !App.directIp.ok && !!App.directIp.error
                                     Layout.fillWidth: failed
                                     wrapMode: Text.WordWrap
@@ -163,6 +166,7 @@ Item {
                                 hint: App.directIp.hint || ""
                             }
                             Text {
+                                textFormat: Text.PlainText
                                 visible: !!App.directIp.ok && !!App.directIp.location
                                 Layout.fillWidth: true
                                 text: App.directIp.location || ""
@@ -174,6 +178,7 @@ Item {
                         AppButton { text: qsTr("Check"); glyph: Theme.iconRefresh; compact: true; onClicked: App.checkDirectIp() }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         color: Theme.textFaint
@@ -211,17 +216,18 @@ Item {
                             spacing: 3
                             RowLayout {
                                 spacing: 8
-                                Text { text: qsTr("Firewall lock"); color: Theme.text; font.pixelSize: 16; font.weight: Font.DemiBold }
+                                Text { textFormat: Text.PlainText; text: qsTr("Firewall lock"); color: Theme.text; font.pixelSize: 16; font.weight: Font.DemiBold }
                                 Rectangle {
                                     radius: 4
                                     color: App.firewallActive ? Theme.okDim : Theme.surface2
                                     implicitWidth: fwState.implicitWidth + 12; implicitHeight: 20
-                                    Text { id: fwState; anchors.centerIn: parent; font.pixelSize: 11
+                                    Text { textFormat: Text.PlainText; id: fwState; anchors.centerIn: parent; font.pixelSize: 11
                                            text: App.firewallActive ? qsTr("active") : qsTr("off")
                                            color: App.firewallActive ? Theme.ok : Theme.textDim }
                                 }
                             }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 color: Theme.textDim
@@ -236,7 +242,7 @@ Item {
                         Layout.fillWidth: true
                         spacing: 8
                         Item { Layout.fillWidth: true }
-                        Text { id: fwErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+                        Text { textFormat: Text.PlainText; id: fwErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
                         AppButton {
                             visible: App.firewallActive
                             text: qsTr("Remove rule"); variant: "ghost"
@@ -295,25 +301,26 @@ Item {
                             spacing: 3
                             RowLayout {
                                 spacing: 8
-                                Text { text: model.name; color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold }
+                                Text { textFormat: Text.PlainText; text: model.name; color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold }
                                 Rectangle {
                                     radius: 4; color: Theme.surface2
                                     implicitWidth: ptype.implicitWidth + 12; implicitHeight: 20
-                                    Text { id: ptype; anchors.centerIn: parent; text: model.type === "http" ? "HTTP" : model.type === "tor" ? "Tor" : model.type === "cloudflare" ? "Cloudflare" : model.type === "shadowsocks" ? "Shadowsocks" : "SOCKS5"; color: model.type === "tor" ? "#c58cff" : model.type === "cloudflare" ? "#f6a04d" : model.type === "shadowsocks" ? "#5ec8ff" : Theme.textDim; font.pixelSize: 11 }
+                                    Text { textFormat: Text.PlainText; id: ptype; anchors.centerIn: parent; text: model.type === "http" ? "HTTP" : model.type === "tor" ? "Tor" : model.type === "cloudflare" ? "Cloudflare" : model.type === "shadowsocks" ? "Shadowsocks" : "SOCKS5"; color: model.type === "tor" ? "#c58cff" : model.type === "cloudflare" ? "#f6a04d" : model.type === "shadowsocks" ? "#5ec8ff" : Theme.textDim; font.pixelSize: 11 }
                                 }
                                 Rectangle {
                                     visible: App.settings.defaultProxyId === model.id
                                     radius: 4; color: Theme.accentDim
                                     implicitWidth: pdef.implicitWidth + 12; implicitHeight: 20
-                                    Text { id: pdef; anchors.centerIn: parent; text: qsTr("default"); color: Theme.accent; font.pixelSize: 11 }
+                                    Text { textFormat: Text.PlainText; id: pdef; anchors.centerIn: parent; text: qsTr("default"); color: Theme.accent; font.pixelSize: 11 }
                                 }
-                                Text { text: model.type === "cloudflare" ? qsTr("cloudflared access tcp → the host's address") : model.host + ":" + model.port; color: Theme.textDim; font.pixelSize: 12; font.family: Theme.monoFont }
+                                Text { textFormat: Text.PlainText; text: model.type === "cloudflare" ? qsTr("cloudflared access tcp → the host's address") : model.host + ":" + model.port; color: Theme.textDim; font.pixelSize: 12; font.family: Theme.monoFont }
                             }
                             RowLayout {
                             Layout.fillWidth: true
                             spacing: 6
                             CountryBadge { code: model.checkState === "ok" ? (model.exitCountry || "") : ""; showName: false }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 // a failure keeps its whole text (e.g. both IP services' errors)
                                 wrapMode: model.checkState === "fail" ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
@@ -376,8 +383,8 @@ Item {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.topMargin: 30
                 spacing: 10
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No proxies yet"); color: Theme.text; font.pixelSize: 15 }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default."); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("No proxies yet"); color: Theme.text; font.pixelSize: 15 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default."); color: Theme.textDim; font.pixelSize: 12 }
             }
 
             Item { height: 20 }

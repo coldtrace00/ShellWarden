@@ -1,0 +1,137 @@
+# Builds and tests every push and pull request. Releases are still built and
+# signed on the maintainer's computer (the minisign key never leaves it);
+# this only shows that the code builds and the tests pass.
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Linux · build, unit + integration tests
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake ninja-build g++ pkg-config \
+            qt6-base-dev qt6-base-dev-tools qt6-declarative-dev qt6-declarative-dev-tools \
+            qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-serialport-dev libgl-dev \
+            libssh-dev libsodium-dev libvterm-dev libssl-dev \
+            openssh-server openssh-client tinyproxy shadowsocks-libev putty-tools python3
+      - name: Library versions
+        run: pkg-config --modversion libssh libsodium libcrypto vterm
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DSHELLWARDEN_BUILD_TESTS=ON
+      - name: Build (app + tests)
+        run: cmake --build build
+      - name: Unit tests
+        run: ./build/tests/unit_tests
+      - name: Test servers (sshd, proxies, Shadowsocks)
+        run: sudo tests/integration/setup.sh
+      - name: Integration tests
+        run: sudo ./build/tests/integration_tests
+
+  sanitizers:
+    name: Linux · ASan + UBSan
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake ninja-build clang libclang-rt-18-dev pkg-config \
+            qt6-base-dev qt6-base-dev-tools qt6-declarative-dev qt6-declarative-dev-tools \
+            qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-serialport-dev libgl-dev \
+            libssh-dev libsodium-dev libvterm-dev libssl-dev \
+            openssh-server openssh-client tinyproxy shadowsocks-libev putty-tools python3
+      - name: Configure (clang, sanitizers)
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSHELLWARDEN_BUILD_TESTS=ON \
+            -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
+            "-DCMAKE_C_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer" \
+            "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined -fno-omit-frame-pointer -fno-sanitize-recover=undefined" \
+            "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build tests
+        run: cmake --build build --target unit_tests integration_tests
+      - name: Unit tests
+        run: ./build/tests/unit_tests
+      - name: Test servers
+        run: sudo tests/integration/setup.sh
+      - name: Integration tests
+        run: sudo ASAN_OPTIONS=detect_leaks=0 ./build/tests/integration_tests
+
+  fuzz:
+    name: Linux · fuzz parsers (2 min each)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y --no-install-recommends \
+            cmake ninja-build clang libclang-rt-18-dev pkg-config \
+            qt6-base-dev qt6-base-dev-tools qt6-declarative-dev qt6-declarative-dev-tools \
+            qt6-tools-dev qt6-tools-dev-tools qt6-l10n-tools qt6-serialport-dev libgl-dev \
+            libssh-dev libsodium-dev libvterm-dev libssl-dev
+      - name: Configure
+        run: |
+          cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=RelWithDebInfo -DSHELLWARDEN_BUILD_TESTS=ON -DSHELLWARDEN_FUZZ=ON \
+            -DCMAKE_C_COMPILER=clang -DCMAKE_CXX_COMPILER=clang++ \
+            "-DCMAKE_C_FLAGS=-fsanitize=address,undefined,fuzzer-no-link" \
+            "-DCMAKE_CXX_FLAGS=-fsanitize=address,undefined,fuzzer-no-link -fno-omit-frame-pointer" \
+            "-DCMAKE_EXE_LINKER_FLAGS=-fsanitize=address,undefined"
+      - name: Build fuzzers
+        run: |
+          cmake --build build --target $(for t in ppk_import ss_link ssh_config vault_file minisign known_hosts journal_line ss_stream; do echo fuzz_$t; done)
+      - name: Fuzz
+        env:
+          LSAN_OPTIONS: suppressions=${{ github.workspace }}/tests/fuzz/lsan.supp
+        run: |
+          for t in ppk_import ss_link ssh_config vault_file minisign known_hosts journal_line ss_stream; do
+            mkdir -p corpus/$t
+            cp -r tests/fuzz/corpus/$t/. corpus/$t/ 2>/dev/null || true
+            echo "== $t"
+            ./build/tests/fuzz_$t corpus/$t -max_total_time=120 -rss_limit_mb=3000 -timeout=20 -print_final_stats=1
+          done
+      - name: Crash inputs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-crashes
+          path: |
+            crash-*
+            timeout-*
+            oom-*
+
+  windows:
+    name: Windows · build + unit tests (MSYS2 UCRT64)
+    runs-on: windows-2022
+    defaults:
+      run:
+        shell: msys2 {0}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: >-
+            mingw-w64-ucrt-x86_64-gcc mingw-w64-ucrt-x86_64-cmake mingw-w64-ucrt-x86_64-ninja
+            mingw-w64-ucrt-x86_64-qt6-base mingw-w64-ucrt-x86_64-qt6-declarative mingw-w64-ucrt-x86_64-qt6-tools
+            mingw-w64-ucrt-x86_64-qt6-translations mingw-w64-ucrt-x86_64-qt6-serialport
+            mingw-w64-ucrt-x86_64-libssh mingw-w64-ucrt-x86_64-libsodium mingw-w64-ucrt-x86_64-libvterm
+      - name: Configure
+        run: cmake -S . -B build -G Ninja -DCMAKE_BUILD_TYPE=Release -DSHELLWARDEN_BUILD_TESTS=ON "-DSHELLWARDEN_DEPS_PREFIX=$(cygpath -m "$MINGW_PREFIX")"
+      - name: Build (app + tests)
+        run: cmake --build build
+      - name: Unit tests
+        run: ./build/tests/unit_tests.exe

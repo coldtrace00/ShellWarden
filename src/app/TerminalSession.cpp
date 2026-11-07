@@ -1,4 +1,6 @@
 #include "TerminalSession.h"
+#include "core/FileNames.h"
+#include "core/CommandHistory.h"
 #include <QRegularExpression>
 #include "LocalPty.h"
 #include "core/ActivityLog.h"
@@ -466,22 +468,8 @@ void TerminalSession::kill(const QString &reason)
     emit logEvent(ActivityLog::Security, QStringLiteral("killswitch"), tr("Session closed by the kill switch"), reason);
 }
 
-QString TerminalSession::commandFromLine(const QString &line)
-{
-    // The prompt ends at the first "$ ", "# ", "% " or "> " (user@host:~$ ls -la);
-    // prompts of zsh themes end with "❯", "➜" or "»".
-    static const QRegularExpression shell(QStringLiteral("^.*?[$#%>] "));
-    static const QRegularExpression fancy(QStringLiteral("^.*?[\u276F\u279C\u00BB]\\s+"));
-    QRegularExpressionMatch m = shell.match(line);
-    if (!m.hasMatch())
-        m = fancy.match(line);
-    if (!m.hasMatch())
-        return {};                  // no prompt: a password or a program asking something
-    const QString rest = line.mid(m.capturedEnd());
-    if (rest.trimmed().isEmpty() || rest.startsWith(QLatin1Char(' ')))
-        return {};                  // " command" = do not remember (like bash's ignorespace)
-    return rest.trimmed();
-}
+QString TerminalSession::commandFromLine(const QString &line) { return history::commandFromLine(line); }
+bool TerminalSession::looksSecret(const QString &cmd) { return history::looksSecret(cmd); }
 
 void TerminalSession::noteCommand(const QString &line)
 {
@@ -712,7 +700,9 @@ int TerminalSession::sftpRename(const QString &from, const QString &to)
 int TerminalSession::download(const QString &remote, const QUrl &localFolder)
 {
     const int id = m_nextReq++;
-    const QString name = remote.section(QLatin1Char('/'), -1);
+    // The name comes from the server: "..\\..\\Startup\\x.bat" must stay a plain
+    // file name inside the chosen folder, never a path out of it.
+    const QString name = filenames::safeLocal(remote.section(QLatin1Char('/'), -1));
     const QString dir = localFolder.isLocalFile() ? localFolder.toLocalFile() : localFolder.toString();
     QString local = QDir(dir).filePath(name);
     // never overwrite silently
@@ -720,6 +710,10 @@ int TerminalSession::download(const QString &remote, const QUrl &localFolder)
         const QFileInfo fi(QDir(dir).filePath(name));
         local = QDir(dir).filePath(fi.completeBaseName() + QStringLiteral(" (%1)").arg(n)
                                    + (fi.suffix().isEmpty() ? QString() : QLatin1Char('.') + fi.suffix()));
+    }
+    if (QFileInfo(local).absolutePath() != QFileInfo(dir).absoluteFilePath()) {   // belt and braces
+        emit logEvent(ActivityLog::Security, QStringLiteral("sftp"), tr("Download refused: unsafe file name"), remote);
+        return -1;
     }
     TransferInfo t{id, false, name, remote, local, 0, 0, 0, QString(), 0, 0};
     t.startedMs = QDateTime::currentMSecsSinceEpoch();

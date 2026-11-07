@@ -21,6 +21,7 @@ ColumnLayout {
     spacing: 5
 
     Text {
+        textFormat: Text.PlainText
         visible: root.label !== ""
         text: root.label
         color: Theme.textDim
@@ -79,6 +80,7 @@ ColumnLayout {
     }
 
     Text {
+        textFormat: Text.PlainText
         visible: root.hint !== ""
         text: root.hint
         color: Theme.textFaint

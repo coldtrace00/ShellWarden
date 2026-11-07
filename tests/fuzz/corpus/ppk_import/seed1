@@ -1,0 +1,14 @@
+PuTTY-User-Key-File-3: ssh-ed25519
+Encryption: aes256-cbc
+Comment: fuzz
+Public-Lines: 2
+AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5
+C9okWi0dh2l9GKJl
+Key-Derivation: Argon2id
+Argon2-Memory: 8192
+Argon2-Passes: 8
+Argon2-Parallelism: 1
+Argon2-Salt: 0011223344556677
+Private-Lines: 1
+AAAAIMdGy2ySIi3lmRrdN0azxP5bbnIZJpiLbtDT80vixHJs
+Private-MAC: 00112233445566778899aabbccddeeff00112233445566778899aabbccddeeff

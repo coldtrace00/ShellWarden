@@ -5,6 +5,7 @@
 #include <QFile>
 #include <QMessageAuthenticationCode>
 #include <QSaveFile>
+#include <QRandomGenerator>
 #include <QStandardPaths>
 
 namespace knownhosts {
@@ -122,6 +123,56 @@ int removeHost(const QString &path, const QString &host, int port)
     if (removed)
         writeLines(path, lines);
     return removed;
+}
+
+bool matches(const QString &hostsField, const QString &host, int port)
+{
+    return fieldMatches(hostsField.toUtf8(), hostPattern(host, port));
+}
+
+QByteArray hashedName(const QString &pattern, const QByteArray &salt)
+{
+    QByteArray s = salt;
+    if (s.isEmpty()) {
+        s.resize(20);
+        QRandomGenerator::system()->fillRange(reinterpret_cast<quint32 *>(s.data()), 5);
+    }
+    const QByteArray mac = QMessageAuthenticationCode::hash(pattern.toUtf8(), s, QCryptographicHash::Sha1);
+    return "|1|" + s.toBase64() + '|' + mac.toBase64();
+}
+
+int hashFile(const QString &path)
+{
+    const QList<QByteArray> lines = readLines(path);
+    QList<QByteArray> out;
+    int hashed = 0;
+    for (const QByteArray &raw : lines) {
+        const QByteArray l = raw.trimmed();
+        const int sp = l.indexOf(' ');
+        // comments, marker lines (@cert-authority …) and wildcard patterns stay as they are:
+        // a hashed pattern could no longer match anything
+        if (l.isEmpty() || l.startsWith('#') || l.startsWith('@') || sp <= 0) {
+            out << raw;
+            continue;
+        }
+        const QByteArray field = l.left(sp), rest = l.mid(sp);
+        bool plain = false;
+        for (const QByteArray &item : field.split(','))
+            plain = plain || (!item.startsWith("|1|") && !item.isEmpty());
+        if (!plain || field.contains('*') || field.contains('?') || field.contains('!')) {
+            out << raw;
+            continue;
+        }
+        for (const QByteArray &item : field.split(',')) {
+            if (item.isEmpty())
+                continue;
+            out << (item.startsWith("|1|") ? item : hashedName(QString::fromUtf8(item), {})) + rest;
+            ++hashed;
+        }
+    }
+    if (hashed && !writeLines(path, out))
+        return -1;
+    return hashed;
 }
 
 } // namespace knownhosts

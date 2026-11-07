@@ -38,6 +38,7 @@ Popup {
             spacing: 4
             Layout.fillWidth: true
             Text {
+                textFormat: Text.PlainText
                 text: root.title
                 color: Theme.text
                 font.pixelSize: 18
@@ -46,6 +47,7 @@ Popup {
                 wrapMode: Text.WordWrap
             }
             Text {
+                textFormat: Text.PlainText
                 visible: root.subtitle !== ""
                 text: root.subtitle
                 color: Theme.textDim

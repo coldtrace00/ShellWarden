@@ -1,4 +1,5 @@
 #include "TerminalItem.h"
+#include "PasteGuard.h"
 #include "app/TerminalSession.h"
 
 #include <QClipboard>
@@ -986,15 +987,28 @@ void TerminalItem::copySelection()
 
 void TerminalItem::paste()
 {
+    if (!m_session || !m_emu)
+        return;
+    const QString t = pasteguard::clean(QGuiApplication::clipboard()->text());
+    if (t.isEmpty())
+        return;
+    if (m_confirmPaste && pasteguard::needsConfirm(t)) {
+        QString preview = t.left(1500);
+        preview.replace(QLatin1Char('\r'), QLatin1Char('\n'));
+        emit pasteConfirmRequested(t, pasteguard::lineCount(t), preview);
+        return;
+    }
+    pasteText(t);
+}
+
+void TerminalItem::pasteText(const QString &text)
+{
     InputGuard inputGuard(m_session);
     if (!m_session || !m_emu)
         return;
-    QString t = QGuiApplication::clipboard()->text();
+    const QString t = pasteguard::clean(text);   // never trust the caller with ESC
     if (t.isEmpty())
         return;
-    // Terminals expect CR for line breaks.
-    t.replace(QStringLiteral("\r\n"), QStringLiteral("\r"));
-    t.replace(QLatin1Char('\n'), QLatin1Char('\r'));
     scrollToBottom();
     m_emu->startPaste(); // emits ESC[200~ only if the app enabled bracketed paste
     writeToSession(t.toUtf8());

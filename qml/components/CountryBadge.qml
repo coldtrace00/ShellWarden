@@ -33,6 +33,7 @@ RowLayout {
         }
     }
     Text {
+        textFormat: Text.PlainText
         visible: root.showName && root.name !== ""
         text: root.name
         color: root.textColor

@@ -1,4 +1,5 @@
 #include "Paths.h"
+#include "PrivateDir.h"
 
 #include <QCoreApplication>
 #include <QDir>
@@ -10,6 +11,7 @@ namespace paths {
 
 namespace {
 QString g_dataDir;
+QString g_protectError;
 bool g_portable = false;
 
 void copyIfMissing(const QString &from, const QString &to)
@@ -51,7 +53,14 @@ void init()
             copyIfMissing(legacy + QStringLiteral("/known_hosts"), knownHostsFile());
         }
     }
+
+    // vault, backups, journal, known_hosts and settings: readable only by this user
+    QDir().mkpath(updatesDir());
+    if (!privatedir::protect(g_dataDir, &g_protectError) && g_protectError.isEmpty())
+        g_protectError = QStringLiteral("?");
 }
+
+QString protectionError() { return g_protectError; }
 
 bool isPortable() { return g_portable; }
 bool isInstalled()
@@ -77,9 +86,15 @@ QString keysDir()
 }
 QString updatesDir()
 {
+#ifdef Q_OS_WIN
+    // %TEMP% on Windows belongs to the user alone
     return g_portable ? g_dataDir + QStringLiteral("/updates")
                       : QStandardPaths::writableLocation(QStandardPaths::TempLocation) + QLatin1Char('/')
                             + QCoreApplication::applicationName() + QStringLiteral("-update");
+#else
+    // never /tmp: it is shared by all users, and a downloaded update is about to be run
+    return g_dataDir + QStringLiteral("/updates");
+#endif
 }
 QString cacheDir() { return g_dataDir + QStringLiteral("/cache"); }
 

@@ -36,7 +36,7 @@ Rectangle {
         hoverEnabled: true
         autoRepeat: true
         background: Rectangle { radius: 7; color: sb.pressed ? Theme.surfaceHover : sb.hovered ? Theme.tint(Theme.surfaceHover, "aa") : "transparent" }
-        contentItem: Text { text: sb.glyph; color: sb.enabled ? Theme.text : Theme.textFaint; font.pixelSize: 15
+        contentItem: Text { textFormat: Text.PlainText; text: sb.glyph; color: sb.enabled ? Theme.text : Theme.textFaint; font.pixelSize: 15
                             horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
     }
 

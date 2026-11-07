@@ -99,7 +99,7 @@ ColumnLayout {
         Layout.fillWidth: true
         visible: root.lengthSlider
         spacing: 10
-        Text { text: qsTr("Length for \"Generate\":"); color: Theme.textDim; font.pixelSize: 12 }
+        Text { textFormat: Text.PlainText; text: qsTr("Length for \"Generate\":"); color: Theme.textDim; font.pixelSize: 12 }
         AppSpin {
             id: genLen
             from: 19; to: 64
@@ -107,7 +107,7 @@ ColumnLayout {
             value: root.generateLength
             onValueModified: { root.generateLength = value; if (root.generated) root.generate() }
         }
-        Text { text: qsTr("characters (19–64)"); color: Theme.textFaint; font.pixelSize: 12; Layout.fillWidth: true }
+        Text { textFormat: Text.PlainText; text: qsTr("characters (19–64)"); color: Theme.textFaint; font.pixelSize: 12; Layout.fillWidth: true }
     }
 
     // strength meter
@@ -132,6 +132,7 @@ ColumnLayout {
             }
         }
         Text {
+            textFormat: Text.PlainText
             readonly property int len: field.text.length
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
@@ -157,6 +158,7 @@ ColumnLayout {
         onAccepted: root.accepted()
     }
     Text {
+        textFormat: Text.PlainText
         visible: root.showConfirm && confirm.text.length > 0 && !root.matches
         text: qsTr("Does not match.")
         color: Theme.danger
@@ -181,6 +183,7 @@ ColumnLayout {
                 Layout.fillWidth: true
                 IconLabel { glyph: Theme.iconWarning; color: Theme.warn; size: 16 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.text

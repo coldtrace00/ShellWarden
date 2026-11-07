@@ -1,5 +1,7 @@
 #pragma once
 
+#include <utility>
+
 #include "core/SshWorker.h"
 #include "terminal/TerminalEmulator.h"
 
@@ -86,12 +88,17 @@ public:
     ~TerminalSession() override;
 
     TerminalEmulator *emulator() { return &m_emu; }
+    static bool looksSecret(const QString &cmd);
     static QString commandFromLine(const QString &line);   // "user@h:~$ ls" -> "ls"
 
     QString hostId() const { return m_hostId; }
     // route chosen for this tab only (right-click "Connect via"): "direct", a proxy id, or "" = the host's own
     QString routeOverride() const { return m_routeOverride; }
     void setRouteOverride(const QString &r) { m_routeOverride = r; }
+    // Secrets of a protected host, opened with the master password for this one
+    // connection attempt; taken (and so removed from here) when it starts.
+    void setOpenedSecrets(const QHash<QString, QString> &s) { m_openedSecrets = s; }
+    QHash<QString, QString> takeOpenedSecrets() { return std::exchange(m_openedSecrets, {}); }
     QString label() const { return m_label; }
     QString endpoint() const { return m_endpoint; }
     QString kind() const { return m_kind; }
@@ -234,8 +241,9 @@ private:
     QVariantMap m_monitor;
     bool m_monOn = false;
     int m_monInterval = 5;
-    int m_monRunning = 0;
-    QString m_routeOverride;   // interval of the running monitor channel, 0 = not running
+    int m_monRunning = 0;   // interval of the running monitor channel, 0 = not running
+    QString m_routeOverride;
+    QHash<QString, QString> m_openedSecrets;
     quint64 m_cpuTotal = 0, m_cpuIdle = 0, m_rx = 0, m_tx = 0;
     qint64 m_netAt = 0;
 

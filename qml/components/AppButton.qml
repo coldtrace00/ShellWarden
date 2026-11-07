@@ -52,6 +52,7 @@ AbstractButton {
                 color: root.labelColor
             }
             Text {
+                textFormat: Text.PlainText
                 visible: root.text !== ""
                 text: root.text
                 color: root.labelColor

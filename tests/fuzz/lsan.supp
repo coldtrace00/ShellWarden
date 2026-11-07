@@ -1,0 +1,3 @@
+# Known leaks inside libraries, not in ShellWarden (LeakSanitizer).
+# libssh 0.10.x: a few bytes when ssh_pki_import_privkey_base64() rejects a malformed key.
+leak:libssh.so

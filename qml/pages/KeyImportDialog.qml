@@ -29,13 +29,14 @@ Modal {
         spacing: 5
         RowLayout {
             Layout.fillWidth: true
-            Text { text: qsTr("Private key"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium; Layout.fillWidth: true }
+            Text { textFormat: Text.PlainText; text: qsTr("Private key"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium; Layout.fillWidth: true }
             AppButton { text: qsTr("Load from file…"); glyph: Theme.iconFolder; compact: true; onClicked: openDlg.open() }
         }
         ScrollView {
             Layout.fillWidth: true
             Layout.preferredHeight: 160
             TextArea {
+                textFormat: TextArea.PlainText
                 id: keyText
                 placeholderText: "-----BEGIN OPENSSH PRIVATE KEY-----\n…"
                 placeholderTextColor: Theme.textFaint
@@ -64,7 +65,7 @@ Modal {
         checked: true
     }
 
-    Text { id: err; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 12 }
+    Text { textFormat: Text.PlainText; id: err; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 12 }
 
     RowLayout {
         Layout.fillWidth: true

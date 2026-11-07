@@ -146,7 +146,11 @@ public:
     Q_INVOKABLE QString readTextFile(const QUrl &url) const;
     Q_INVOKABLE QString exportPublicKey(const QString &id, const QUrl &url);        // OpenSSH one-line
     Q_INVOKABLE QString exportPublicKeyRfc4716(const QString &id, const QUrl &url); // SSH2 format
-    Q_INVOKABLE QString exportPrivateKey(const QString &id, const QUrl &url);
+    Q_INVOKABLE QString exportPrivateKey(const QString &id, const QUrl &url, const QString &masterPassword = {});
+    // a key kept encrypted for a host that asks for the master password
+    Q_INVOKABLE bool keyIsProtected(const QString &id) const;
+    // turns "ask for the master password" off: its secrets are decrypted again
+    Q_INVOKABLE QString unprotectHost(const QString &hostId, const QString &masterPassword);
     Q_INVOKABLE QString setKeyPassphrase(const QString &id, const QString &passphrase, bool save);
     Q_INVOKABLE void forgetKeyPassphrase(const QString &id);
     Q_INVOKABLE void renameKey(const QString &id, const QString &name);
@@ -290,11 +294,28 @@ private:
     QHash<QString, QString> m_nextRoute;   // hostId -> route for the tab about to open
     ProxyConfig proxyConfig(const QJsonObject &p, const QString &firstHop = QString()) const;
     QVariantMap cloudflaredCheck(const QString &customPath) const;
-    ConnectParams paramsFor(const QJsonObject &host, const QJsonObject &jumpHost) const;
-    BatchRunner::Job batchJob(const QString &hostId, bool protectedOk = false) const;
+    using Opened = QHash<QString, QString>;   // "<id>/<field>" → secret, for one connection only
+    ConnectParams paramsFor(const QJsonObject &host, const QJsonObject &jumpHost, const Opened &opened = {}) const;
+
+    // ---- protected hosts (see core/Protected.h)
+    QString ensureVaultKeys(const QString &password);      // journal + protection key pairs, on open
+    bool deriveProtectSecret(const QString &master, unsigned char *secret32) const;   // false = wrong password
+    bool sealObject(QJsonObject &o, const QStringList &fields) const;                 // plain → sealed
+    bool sealAllProtected();                                // hosts that ask + their keys; true if changed
+    Opened openFor(const QStringList &hostIds, const unsigned char *secret32) const;  // host, key, jump host, its key
+    Opened openFor(const QStringList &hostIds, const QString &master, QString *error) const;
+    static void wipe(Opened &o);
+    bool openWithMaster(const QVariantList &hostIds, const QString &master, Opened *opened, QString *error) const;
+    QString secretOf(const QJsonObject &o, const QString &field, const Opened &opened) const;
+    static bool isSealed(const QJsonObject &o, const QString &field = {});
+    bool hostNeedsMaster(const QJsonObject &host) const;
+    QByteArray protectPublicKey() const;
+    // protectedOk: the master password was given for this run; opened: the protected secrets it opened
+    BatchRunner::Job batchJob(const QString &hostId, bool protectedOk = false, const QHash<QString, QString> &opened = {}) const;
     void onBatchFinished();
     QHash<QString, QString> m_keyAssign;
     QString m_rotatePhase, m_rotateOld, m_rotateNew, m_rotateNewPass;
+    QByteArray m_rotateNewKey;   // the new private key, for steps 2 and 3 (it may be protected)
     bool m_rotateUnlocked = false;
     QHash<QString, QString> m_rotateFailed;   // hostId -> why the new key could not be added
     void rotateSecondStep();
@@ -313,8 +334,8 @@ private:
     QVariantList customThemes() const;
     void applyTunnelsLive(const QString &hostId, const QJsonArray &before, const QJsonArray &after);
     void storeCustomThemes(const QVariantList &list);
-    bool needsChallenge(const QJsonObject &host) const;
-    void openHostNow(const QString &id);
+    bool needsChallenge(const QJsonObject &host) const { return hostNeedsMaster(host); }
+    void openHostNow(const QString &id, const QHash<QString, QString> &opened = {});
     void logEvent(int level, const QString &cat, const QString &msg, const QString &detail = {},
                   const QString &host = {});
 

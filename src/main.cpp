@@ -8,6 +8,10 @@
 #include <QGuiApplication>
 #include <QIcon>
 #include <QQmlApplicationEngine>
+#include "core/DepVersions.h"
+#include <QQmlNetworkAccessManagerFactory>
+#include <QNetworkAccessManager>
+#include <QNetworkRequest>
 #include <QQmlContext>
 #include <QQuickStyle>
 
@@ -48,6 +52,33 @@ void reportStartupFailure()
 }
 } // namespace
 
+// The interface never needs the network. Text from servers (file names, error
+// messages, banners) is shown in QML, and QML turns "<img src=http://…>" in a
+// Text into a web request — made directly, outside any proxy, Tor or kill
+// switch, which would reveal the real IP. So QML gets a network that only
+// serves files built into the program and local files.
+class LocalOnlyNam : public QNetworkAccessManager
+{
+public:
+    using QNetworkAccessManager::QNetworkAccessManager;
+protected:
+    QNetworkReply *createRequest(Operation op, const QNetworkRequest &request, QIODevice *data) override
+    {
+        const QString scheme = request.url().scheme();
+        if (scheme == QLatin1String("qrc") || scheme == QLatin1String("file") || scheme == QLatin1String("data"))
+            return QNetworkAccessManager::createRequest(op, request, data);
+        QNetworkRequest blocked(request);
+        blocked.setUrl(QUrl(QStringLiteral("blocked:")));   // unknown scheme: fails at once, nothing is sent
+        return QNetworkAccessManager::createRequest(op, blocked, data);
+    }
+};
+
+class LocalOnlyNamFactory : public QQmlNetworkAccessManagerFactory
+{
+public:
+    QNetworkAccessManager *create(QObject *parent) override { return new LocalOnlyNam(parent); }
+};
+
 int main(int argc, char *argv[])
 {
     g_prevHandler = qInstallMessageHandler(collect);
@@ -66,6 +97,12 @@ int main(int argc, char *argv[])
     if (sodium_init() < 0)
         return 1;
     ssh_init();
+    // a swapped, older libssh / OpenSSL DLL must not be used silently
+    if (const QString problem = depversions::runtimeProblem(); !problem.isEmpty()) {
+        g_startupLog << problem;
+        reportStartupFailure();
+        return 1;
+    }
     proxytunnel::initSockets();
 
     QQuickStyle::setStyle(QStringLiteral("Basic"));
@@ -74,7 +111,9 @@ int main(int argc, char *argv[])
     {
         AppController controller;
         controller.applyLanguage(controller.settings().value(QStringLiteral("language")).toString());
+        LocalOnlyNamFactory localOnly;   // must outlive the engine
         QQmlApplicationEngine engine;
+        engine.setNetworkAccessManagerFactory(&localOnly);
         controller.setEngine(&engine);
         engine.rootContext()->setContextProperty(QStringLiteral("App"), &controller);
         QObject::connect(&engine, &QQmlApplicationEngine::objectCreationFailed, &app,

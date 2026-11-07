@@ -1,0 +1,3 @@
+example.com,10.0.0.5 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOMqqnkVzrm0SdG6UOoqKLsabgH5C9okWi0dh2l9GKJl
+@cert-authority *.corp ssh-rsa AAAA
+|1|A6pSzl4ydKf5zDVtG3pU90stFhU=|WZEpE054WLd3zAprLN7hwCaSfhQ= ssh-ed25519 AAAA

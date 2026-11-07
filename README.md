@@ -54,26 +54,63 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **Vault**: Argon2id (256 MiB, 3 passes) → XChaCha20-Poly1305. Authenticated header, daily backups (14 days).
 - **Password generator**: 19+ characters (length slider) with a strength estimate. A manual password needs 8+ characters, with a warning and an "I accept the risk" button.
 - **Auto-lock**: after a set number of minutes or hours, on Windows lock / sleep, or never.
-- **Master password per connection** (host → *Advanced protection*): asked even when the vault is unlocked; 5 wrong attempts → 30 s lockout. For real 2FA, set it up on the server (PAM + Google Authenticator) — ShellWarden shows the server's code prompt.
-- **Known hosts**: fingerprint check, red warning when a host key changes; optional SSHFP (DNS) lookup.
+- **Master password per connection** (host → *Advanced protection*): asked even when the vault is unlocked; 5 wrong attempts → 30 s lockout. The host's password and its private key (with the passphrase) stay **encrypted a second time** while the vault is open — sealed with a key pair whose secret half is derived from the master password (Argon2id with the vault's own cost) only for the moment of connecting, then wiped. A key used by such a host is protected for every host that uses it. Turning the option off asks for the master password. Once connected, the session keeps what it needs in memory until the tab is closed. For real 2FA, set it up on the server (PAM + Google Authenticator) — ShellWarden shows the server's code prompt.
+- **Known hosts**: fingerprint check, red warning when a host key changes; optional SSHFP (DNS) lookup. Host names in the file are **hashed** like OpenSSH's `HashKnownHosts`, so the file does not list where you connect (the Known hosts page shows the names of your own hosts while the vault is open).
+- **Pasting**: control characters (ESC…) are always removed from pasted text, so copied text cannot end bracketed paste early and run commands; text with line breaks (or very long) is shown first and pasted only after you confirm, like Windows Terminal.
+- **SFTP downloads**: file names from the server are made safe (no `..\`, `/`, `\`, `:`, control or bidi characters, no `CON`/`NUL`…), so a hostile server cannot write outside the folder you chose.
+- **Text from servers is shown as plain text** (file names, messages, banners): never as rich text, so nothing a server sends can make the program load an image from the network or a Windows share.
 - **Host notes**: encrypted in the vault like passwords.
 - **Routes**: SOCKS5 / HTTP CONNECT / **Shadowsocks** / Tor / **Cloudflare Tunnel** (ShellWarden starts `cloudflared access tcp` itself, so port 22 can be closed on the server). DNS is resolved by the proxy. The check shows latency, exit IP and country.
-  - **Shadowsocks** (built in, no extra program): AEAD ciphers chacha20-ietf-poly1305, aes-256-gcm, aes-128-gcm. Everything up to the Shadowsocks server is encrypted and looks like random bytes, so the network in between sees neither the target server nor that it is SSH — useful where SSH or proxies are blocked. Paste an `ss://` link (Outline and others) or fill in the fields. Links that need a plugin (`plugin=`) are not supported.
+  - **Shadowsocks** (built in, no extra program). Everything up to the Shadowsocks server is encrypted and looks like random bytes, so the network in between sees neither the target server nor that it is SSH — useful where SSH or proxies are blocked. Paste an `ss://` link (Outline and others) or fill in the fields. Links that need a plugin (`plugin=`) are not supported.
+    - **Shadowsocks 2022** (recommended): `2022-blake3-aes-256-gcm`, `2022-blake3-aes-128-gcm`, `2022-blake3-chacha20-poly1305`; the password is the server's base64 key; identity headers (`iPSK:uPSK`, multi-user servers) for the aes ciphers. Protects against replayed connections; the server's clock must be within ±30 s.
+    - **Older AEAD (2017)**: `chacha20-ietf-poly1305`, `aes-256-gcm`, `aes-128-gcm`. Honest limits of that protocol (not of this code): the key comes from the password through MD5 without salt, there is no protection against replayed connections, and active probing of the server can reveal it. Use it only where the server has nothing newer.
   - Every proxy can be **turned off** without deleting it: its hosts then connect directly (with the kill switch on — through the kill-switch proxy, never directly).
   - Next to "Server sees you as" the terminal shows how the session goes: *via proxy*, *via jump host* or *direct*.
 - **IP in the server logs**: `$SSH_CONNECTION` is read and the address that ends up in `auth.log` is shown.
 - **Kill switch**:
   - direct connections are forbidden;
   - the proxy is checked every **3 s** (configurable), the exit IP every minute;
-  - if the proxy dies or starts exiting from your real IP, sessions are closed at once;
+  - if the proxy dies, sessions are closed within those 3 s; if it starts exiting from your real IP, they are closed at the next exit-IP check — **up to a minute later**;
   - the program never falls back to a direct connection.
-- **Firewall lock** (Windows): a Windows Defender Firewall rule lets ShellWarden.exe connect only to the proxy and localhost. Even a bug in the program cannot leak the real IP.
-- **Activity log**: connections, route, the IP the server saw, vault / key / host changes, kill-switch events. No passwords or keys. Filters, search, CSV export, kept for 12 months.
+- **Firewall lock** (Windows): a Windows Defender Firewall rule lets ShellWarden.exe connect only to the proxy and localhost, so a mistake in the program itself cannot send SSH traffic past the proxy. Limits: the rule is for ShellWarden.exe only — `tor.exe` and `cloudflared.exe` are separate programs, and when a proxy is given by **name**, Windows' DNS service (not ShellWarden) looks that name up. For the strictest setup give the proxy as an IP address.
+- **Activity log**: connections, route, the IP the server saw, vault / key / host changes, kill-switch events. No passwords or keys. Filters, search, CSV export. **Encrypted on disk**: every entry is a sealed box for the journal's public key, so it is written even while the vault is locked (e.g. a failed unlock attempt) but can only be read with the vault open; nothing about where you connected is on disk in the clear. Kept 30 days by default (7 / 30 / 90 / 365, Settings), or turned off. A plain journal of an older version is encrypted and removed on the first unlock.
+- **Data folder is private**: on Linux the folder is `0700` and its files `0600`; on Windows it gets its own access list (you, SYSTEM, Administrators) — the installer sets it, and the program checks it at every start.
 
 **Other**
-- **Updates**: from GitHub Releases with a mandatory SHA-256 check (`SHA256SUMS`). Only updates signed with the project's minisign key (`SHA256SUMS.minisig`, key in `minisign.pub`) are installed.
+- **Updates**: from GitHub Releases with a mandatory SHA-256 check (`SHA256SUMS`). Only updates signed with the project's minisign key (`SHA256SUMS.minisig`, key in `minisign.pub`) are installed. The version in the signed comment, in the release tag and in the file name must agree and be **newer** than the installed one, so an old signed release cannot be pushed as an "update" (no downgrade).
+- **Libraries**: libssh ≥ 0.10.6 (Terrapin, CVE-2023-48795), libsodium ≥ 1.0.18 and OpenSSL ≥ 3.0 are required at build time and checked again at start (a swapped older DLL is refused).
 - **Languages**: English, Українська, Русский, Français, Español. Switch without restarting.
 - **Portable mode**: all data next to the .exe.
+
+## Threat model
+
+What ShellWarden protects against, and what it does not.
+
+**Protects**
+- **A stolen or copied disk / backup**: the vault, its backups and the journal are encrypted (Argon2id + XChaCha20-Poly1305; sealed boxes for the journal); `known_hosts` lists no host names. Without the master password they say nothing about your servers.
+- **Another user account on the same computer**: the data folder is closed to them (Linux `0700`/`0600`, Windows access list).
+- **The network between you and the server** (ISP, Wi-Fi, a censor): SSH itself, plus proxies, Tor or Shadowsocks so it does not see where you connect; the kill switch never connects directly.
+- **A hostile or compromised server**: it cannot write outside the folder you download into, cannot make the program load anything from the network by sending text, and a changed host key is shown in red.
+- **Pasted text** from web pages: control characters are removed and multi-line text is shown first.
+- **A forged update**: only releases signed with the project key, with a matching and newer version, are installed.
+
+**Does not protect**
+- **Malware on your own computer, or someone with administrator rights on it**: they can read the memory of the running program (while the vault is open, its contents are decrypted there) or record your keystrokes. No local program can defend against that.
+- **A server you log in to** sees what you type there; with agent forwarding, root on that server can use your agent while you are connected.
+- **Who runs your proxy / Shadowsocks / Tor exit** sees where you connect (but not inside SSH).
+- **A weak master password**: Argon2id makes guessing slow, not impossible.
+- **Open sessions after the vault locks**: they keep running and keep the secrets they logged in with in memory until their tab is closed.
+
+## Tests
+
+`cmake -DSHELLWARDEN_BUILD_TESTS=ON`, then:
+- `tests/unit_tests` — no network: vault (wrong password, damaged file, forged KDF settings), protected secrets, the encrypted journal, file names from servers, pasting, command history filters, hashed known_hosts, minisign and the update checks (incl. downgrade), Shadowsocks key derivation, BLAKE3 and ss:// links;
+- `tests/integration_tests` — against real OpenSSH, ssh-keygen, puttygen, ssh-agent, SOCKS5 / HTTP proxies, shadowsocks-libev and shadowsocks-rust (`sudo tests/integration/setup.sh` starts them): keys, SSH, agent, proxies, host key change, .ppk import, SFTP, tunnels, jump host, all six Shadowsocks ciphers;
+- `tests/fuzz/` — libFuzzer targets for everything that reads outside input (`.ppk`/OpenSSH keys, `ss://`, `~/.ssh/config`, vault file, signatures, known_hosts, journal lines, the Shadowsocks stream).
+
+GitHub Actions (`.github/workflows/ci.yml`) runs all of them on every push — the Linux build, ASan + UBSan, fuzzing, and a Windows (MSYS2) build with the unit tests. Releases are still built and signed on the maintainer's computer.
+
+Security problems: see [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md).
 
 ## Network connections and external services
 
@@ -223,12 +260,12 @@ For maintainers:
 The folder contains:
 - `vault.swv` — the vault (hosts, passwords, keys, notes — all encrypted), with `vault.swv.bak` next to it;
 - `backups/` — daily copies;
-- `known_hosts`;
+- `known_hosts` — host names hashed;
 - `settings.ini`;
-- `logs/` — activity log;
+- `logs/` — activity log, encrypted (`journal.pub` is its public key; the secret key is in the vault);
 - `backgrounds/` — pictures of your own themes (if any).
 
-The installer asks for a folder, and that is where everything is kept: `<folder>\data` (the folder gets write permissions and stays when the program is uninstalled). A new install starts from scratch: nothing is taken from `%APPDATA%` (move data with *Save backup* / *Restore*). Updates are installed by the same installer.
+The installer asks for a folder, and that is where everything is kept: `<folder>\data` (writable for the user who installed, closed to other accounts on the computer, and kept when the program is uninstalled). A new install starts from scratch: nothing is taken from `%APPDATA%` (move data with *Save backup* / *Restore*). Updates are installed by the same installer.
 
 For the installed and portable versions the same folder also holds `keys/` (default location for exported keys), `updates/` (downloaded updates), `cache/`, `tor/` (if ShellWarden starts tor.exe). The program then writes nothing to the registry, `%APPDATA%` or user folders; the portable archive (`build.bat package`) already contains the `portable` file.
 

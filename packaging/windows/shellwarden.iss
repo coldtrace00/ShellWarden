@@ -63,7 +63,8 @@ es.SelectDirBrowseLabel=Todo lo que guarda ShellWarden (bóveda con hosts, contr
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"
 
 [Dirs]
-; writable for the user even under Program Files, and kept on uninstall (it is the user's vault)
+; writable for the user even under Program Files, and kept on uninstall (it is the user's vault).
+; Right after installing, [Code] below narrows it to this user only (+ SYSTEM and Administrators).
 Name: "{app}\data"; Permissions: users-modify; Flags: uninsneveruninstall
 
 [Files]
@@ -86,3 +87,29 @@ Filename: "{sys}\netsh.exe"; Parameters: "advfirewall firewall delete rule name=
 ; The vault, keys and logs (%APPDATA%\ShellWarden or {app}\data) are NOT
 ; removed on uninstall: they are the user's data. Delete that folder by hand if wanted.
 ; Updates run this installer again with /SILENT: the previous choice of tasks is kept.
+
+[Code]
+// The data folder holds the vault, its backups and the journal: other user
+// accounts on this computer must not be able to read it. Give the user who
+// installs full control, then drop inherited permissions and "Users".
+// Runs on every install and update, so older installs are fixed too.
+// If the first step fails, nothing is taken away (the folder stays usable).
+procedure MakeDataPrivate();
+var
+  Dir, Icacls: String;
+  Code: Integer;
+begin
+  Dir := ExpandConstant('{app}\data');
+  Icacls := ExpandConstant('{sys}\icacls.exe');
+  if not DirExists(Dir) then
+    exit;
+  if Exec(Icacls, '"' + Dir + '" /grant "' + GetUserNameString() + ':(OI)(CI)F"', '', SW_HIDE, ewWaitUntilTerminated, Code) and (Code = 0) then
+    Exec(Icacls, '"' + Dir + '" /inheritance:r /grant:r *S-1-5-18:(OI)(CI)F *S-1-5-32-544:(OI)(CI)F /remove:g *S-1-5-32-545 *S-1-1-0 *S-1-5-11',
+         '', SW_HIDE, ewWaitUntilTerminated, Code);
+end;
+
+procedure CurStepChanged(CurStep: TSetupStep);
+begin
+  if CurStep = ssPostInstall then
+    MakeDataPrivate();
+end;

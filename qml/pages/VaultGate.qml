@@ -55,6 +55,7 @@ Rectangle {
                     Logo { Layout.alignment: Qt.AlignHCenter; size: 64 }
 
                     Text {
+                        textFormat: Text.PlainText
                         Layout.alignment: Qt.AlignHCenter
                         text: root.creating ? qsTr("Create your vault") : qsTr("Welcome back")
                         color: Theme.text
@@ -62,6 +63,7 @@ Rectangle {
                         font.weight: Font.DemiBold
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         horizontalAlignment: Text.AlignHCenter
                         wrapMode: Text.WordWrap
@@ -94,6 +96,7 @@ Rectangle {
                         onAccepted: root.submit()
                     }
                     Text {
+                        textFormat: Text.PlainText
                         visible: root.creating && newPw.generated
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
@@ -103,6 +106,7 @@ Rectangle {
                     }
 
                     Text {
+                        textFormat: Text.PlainText
                         id: err
                         visible: text !== ""
                         Layout.fillWidth: true
@@ -147,6 +151,7 @@ Rectangle {
         subtitle: qsTr("The master password cannot be recovered — that is what keeps the vault safe. Your saved hosts, passwords and keys stay locked in the old vault.")
         onOpened: confirmBox.checked = false
         Text {
+            textFormat: Text.PlainText
             Layout.fillWidth: true
             wrapMode: Text.WordWrap
             color: Theme.textDim
@@ -154,7 +159,7 @@ Rectangle {
             text: qsTr("The old vault is not deleted: it is moved to the backups folder (forgotten-<date>.swv). If you remember the password later, open it with Settings → Vault → Restore from backup. Known hosts and settings are kept.")
         }
         AppCheckBox { id: confirmBox; text: qsTr("I understand that hosts and keys must be added again") }
-        Text { id: soErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+        Text { textFormat: Text.PlainText; id: soErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
         RowLayout {
             Layout.fillWidth: true
             Item { Layout.fillWidth: true }
@@ -189,6 +194,7 @@ Rectangle {
                 spacing: 8
                 IconLabel { glyph: Theme.iconGlobe; size: 14; color: Theme.textDim }
                 Text {
+                    textFormat: Text.PlainText
                     text: {
                         for (const l of App.languages) if (l.code === App.language) return l.name
                         return "Language"

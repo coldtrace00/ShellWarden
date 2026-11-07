@@ -58,6 +58,11 @@ qt_add_executable(ShellWardenApp WIN32
     src/core/JumpBridge.h       src/core/JumpBridge.cpp
     src/core/ProxyTunnel.h      src/core/ProxyTunnel.cpp
     src/core/Paths.h            src/core/Paths.cpp
+    src/core/PrivateDir.h       src/core/PrivateDir.cpp       src/core/PrivateDirWin.cpp
+    src/core/FileNames.h        src/core/FileNames.cpp
+    src/core/DepVersions.h      src/core/DepVersions.cpp
+    src/core/Protected.h        src/core/Protected.cpp
+    src/core/CommandHistory.h   src/core/CommandHistory.cpp
     src/core/PasswordTools.h    src/core/PasswordTools.cpp
     src/core/ActivityLog.h      src/core/ActivityLog.cpp
     src/core/FirewallLock.h     src/core/FirewallLock.cpp
@@ -65,6 +70,7 @@ qt_add_executable(ShellWardenApp WIN32
     src/core/HostImport.h       src/core/HostImport.cpp
 
     src/terminal/TerminalItem.h src/terminal/TerminalItem.cpp
+    src/terminal/PasteGuard.h
     src/terminal/TerminalEmulator.h src/terminal/TerminalEmulator.cpp
 
     src/app/VaultListModel.h    src/app/VaultListModel.cpp
@@ -80,6 +86,7 @@ qt_add_executable(ShellWardenApp WIN32
     src/app/LocalPty.h          src/app/LocalPty.cpp
     src/app/TerminalSession.h   src/app/TerminalSession.cpp
     src/app/AppController.h     src/app/AppController.cpp
+    src/app/AppControllerProtect.cpp
 )
 
 set_source_files_properties(qml/Theme.qml qml/Icons.qml PROPERTIES QT_QML_SINGLETON_TYPE TRUE)
@@ -97,6 +104,7 @@ qt_add_qml_module(ShellWardenApp
         qml/components/SideNavButton.qml
         qml/components/SessionTabButton.qml
         qml/components/Modal.qml
+        qml/components/MasterPrompt.qml
         qml/components/AppSwitch.qml
         qml/components/PasswordField.qml
         qml/components/Logo.qml
@@ -231,4 +239,12 @@ else()
     set(CPACK_DEBIAN_PACKAGE_DEPENDS "qml6-module-qtquick, qml6-module-qtquick-controls, qml6-module-qtquick-layouts, qml6-module-qtquick-shapes, qml6-module-qtquick-dialogs, qml6-module-qtquick-window, qml6-module-qtquick-templates, qml6-module-qtqml-workerscript")
     set(CPACK_GENERATOR "DEB;TGZ")
     include(CPack)
+endif()
+
+# ---------------------------------------------------------------------------
+# Tests: cmake -DSHELLWARDEN_BUILD_TESTS=ON, then ctest (see tests/README.md)
+option(SHELLWARDEN_BUILD_TESTS "Build the unit and integration tests" OFF)
+if (SHELLWARDEN_BUILD_TESTS)
+    enable_testing()
+    add_subdirectory(tests)
 endif()

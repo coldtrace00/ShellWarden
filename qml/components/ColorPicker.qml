@@ -45,7 +45,7 @@ Popup {
 
     contentItem: ColumnLayout {
         spacing: 12
-        Text { text: root.title; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
+        Text { textFormat: Text.PlainText; text: root.title; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
 
         // saturation (x) / brightness (y) square
         Rectangle {

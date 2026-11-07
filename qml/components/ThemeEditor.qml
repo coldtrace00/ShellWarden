@@ -98,8 +98,8 @@ Popup {
             Layout.fillWidth: true
             Layout.preferredWidth: 300
             spacing: 1
-            Text { text: cr.label; color: Theme.text; font.pixelSize: 13 }
-            Text { visible: cr.hint !== ""; text: cr.hint; color: Theme.textFaint; font.pixelSize: 11; wrapMode: Text.WordWrap; Layout.fillWidth: true }
+            Text { textFormat: Text.PlainText; text: cr.label; color: Theme.text; font.pixelSize: 13 }
+            Text { textFormat: Text.PlainText; visible: cr.hint !== ""; text: cr.hint; color: Theme.textFaint; font.pixelSize: 11; wrapMode: Text.WordWrap; Layout.fillWidth: true }
         }
         Item { Layout.fillWidth: true; implicitHeight: 1 }
         AbstractButton {
@@ -111,7 +111,7 @@ Popup {
             contentItem: Item {
                 Rectangle { id: sw; x: 8; anchors.verticalCenter: parent.verticalCenter; width: 18; height: 18; radius: 5
                             color: cr.value || "transparent"; border.color: Theme.border }
-                Text { anchors.left: sw.right; anchors.leftMargin: 8; anchors.verticalCenter: parent.verticalCenter
+                Text { textFormat: Text.PlainText; anchors.left: sw.right; anchors.leftMargin: 8; anchors.verticalCenter: parent.verticalCenter
                        text: cr.value || qsTr("not set"); color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
             }
         }
@@ -125,7 +125,7 @@ Popup {
             Layout.fillWidth: true
             Layout.margins: 20
             Layout.bottomMargin: 12
-            Text { Layout.fillWidth: true; text: root.themeId ? qsTr("Edit theme") : qsTr("Create your own theme"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
+            Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: root.themeId ? qsTr("Edit theme") : qsTr("Create your own theme"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
             AppButton { glyph: Theme.iconClose; variant: "ghost"; compact: true; onClicked: root.close() }
         }
 
@@ -153,11 +153,11 @@ Popup {
                 Text { textFormat: Text.StyledText; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg
                        text: "Last login: Thu Nov  5 09:12:44 from <font color='" + (root.ansi[14] || root.fg) + "'>203.0.113.7</font>" }
                 Row {
-                    Text { text: "admin@server"; font.family: Theme.monoFont; font.pixelSize: 13; font.bold: true; color: root.ansi[10] || root.fg }
-                    Text { text: ":"; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg }
-                    Text { text: "~"; font.family: Theme.monoFont; font.pixelSize: 13; font.bold: true; color: root.ansi[12] || root.fg }
-                    Text { text: "$ "; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg }
-                    Text { text: "ls -la /var/log"; font.family: Theme.monoFont; font.pixelSize: 13; color: root.input || root.fg }
+                    Text { textFormat: Text.PlainText; text: "admin@server"; font.family: Theme.monoFont; font.pixelSize: 13; font.bold: true; color: root.ansi[10] || root.fg }
+                    Text { textFormat: Text.PlainText; text: ":"; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg }
+                    Text { textFormat: Text.PlainText; text: "~"; font.family: Theme.monoFont; font.pixelSize: 13; font.bold: true; color: root.ansi[12] || root.fg }
+                    Text { textFormat: Text.PlainText; text: "$ "; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg }
+                    Text { textFormat: Text.PlainText; text: "ls -la /var/log"; font.family: Theme.monoFont; font.pixelSize: 13; color: root.input || root.fg }
                 }
                 Text { textFormat: Text.StyledText; font.family: Theme.monoFont; font.pixelSize: 13; color: root.fg
                        text: "<b><font color='" + (root.ansi[12] || root.fg) + "'>nginx/</font></b>  syslog  <font color='" + (root.ansi[2] || root.fg) + "'>backup.sh</font>  <font color='" + (root.ansi[1] || root.fg) + "'>error.log</font>" }
@@ -169,7 +169,7 @@ Popup {
                            text: "<b><font color='" + (root.ansi[10] || root.fg) + "'>admin@server</font></b>:~$ " }
                     Rectangle { width: 8; height: 16; color: root.cursor }
                     Rectangle { width: 70; height: 16; color: root.selection
-                                Text { anchors.centerIn: parent; text: qsTr("selected"); color: root.fg; font.family: Theme.monoFont; font.pixelSize: 12 } }
+                                Text { textFormat: Text.PlainText; anchors.centerIn: parent; text: qsTr("selected"); color: root.fg; font.family: Theme.monoFont; font.pixelSize: 12 } }
                 }
             }
         }
@@ -198,7 +198,7 @@ Popup {
                     }
                     ColumnLayout {
                         spacing: 5
-                        Text { text: qsTr("Start from"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                        Text { textFormat: Text.PlainText; text: qsTr("Start from"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                         AppCombo {
                             Layout.preferredWidth: 220
                             model: App.terminalThemes.map(t => t.name)
@@ -239,6 +239,7 @@ Popup {
                                     ToolTip.visible: hovered; ToolTip.text: qsTr("Don't colour input") }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
                         color: Theme.textFaint
@@ -249,7 +250,7 @@ Popup {
                         Layout.fillWidth: true
                         visible: root.input !== ""
                         spacing: 10
-                        Text { Layout.fillWidth: true; text: qsTr("Apply automatically after connecting"); color: Theme.text; font.pixelSize: 12 }
+                        Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Apply automatically after connecting"); color: Theme.text; font.pixelSize: 12 }
                         AppSwitch { checked: root.autoInput; onToggled: root.autoInput = checked }
                     }
                     RowLayout {
@@ -263,6 +264,7 @@ Popup {
                             color: Theme.bg
                             border.color: Theme.border
                             Text {
+                                textFormat: Text.PlainText
                                 anchors.fill: parent; anchors.leftMargin: 8; anchors.rightMargin: 8
                                 verticalAlignment: Text.AlignVCenter
                                 text: App.inputColorCommand(root.input).trim()
@@ -288,8 +290,9 @@ Popup {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 1
-                            Text { text: qsTr("Background picture"); color: Theme.text; font.pixelSize: 13 }
+                            Text { textFormat: Text.PlainText; text: qsTr("Background picture"); color: Theme.text; font.pixelSize: 13 }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 color: Theme.textFaint; font.pixelSize: 11
@@ -304,7 +307,7 @@ Popup {
                         Layout.fillWidth: true
                         visible: root.bgImage !== ""
                         spacing: 10
-                        Text { text: qsTr("Darken picture"); color: Theme.textDim; font.pixelSize: 12 }
+                        Text { textFormat: Text.PlainText; text: qsTr("Darken picture"); color: Theme.textDim; font.pixelSize: 12 }
                         Slider {
                             id: dimSlider
                             Layout.fillWidth: true
@@ -322,9 +325,10 @@ Popup {
                                 width: 16; height: 16; radius: 8; color: Theme.accent; border.color: Theme.bg; border.width: 2
                             }
                         }
-                        Text { text: root.bgDim + "%"; color: Theme.text; font.pixelSize: 12; font.family: Theme.monoFont; Layout.preferredWidth: 36 }
+                        Text { textFormat: Text.PlainText; text: root.bgDim + "%"; color: Theme.text; font.pixelSize: 12; font.family: Theme.monoFont; Layout.preferredWidth: 36 }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         visible: root.bgImage !== ""
                         wrapMode: Text.WordWrap
@@ -340,8 +344,8 @@ Popup {
                     Layout.fillWidth: true
                     Layout.leftMargin: 20; Layout.rightMargin: 20
                     spacing: 6
-                    Text { text: qsTr("Palette (the 16 colours programs use)"); color: Theme.text; font.pixelSize: 13 }
-                    Text { Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+                    Text { textFormat: Text.PlainText; text: qsTr("Palette (the 16 colours programs use)"); color: Theme.text; font.pixelSize: 13 }
+                    Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
                            text: qsTr("Top row: normal colours, bottom row: bright. ls colours folders blue, errors are red, and so on. Click a colour to change it.") }
                     Grid {
                         columns: 8
@@ -369,7 +373,7 @@ Popup {
             Layout.fillWidth: true
             Layout.leftMargin: 16; Layout.rightMargin: 16; Layout.topMargin: 8
             AppCheckBox { id: useNow; text: qsTr("Use as the default theme") }
-            Text { Layout.fillWidth: true; text: root.error; color: Theme.danger; font.pixelSize: 12; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: root.error; color: Theme.danger; font.pixelSize: 12; wrapMode: Text.WordWrap }
         }
         RowLayout {
             Layout.fillWidth: true

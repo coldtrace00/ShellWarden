@@ -14,8 +14,9 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 2
-                Text { text: qsTr("Known hosts"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: qsTr("Known hosts"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WrapAnywhere
                     text: qsTr("Trusted server keys (OpenSSH format): %1").arg(App.knownHostsPath)
@@ -49,11 +50,14 @@ Item {
                         spacing: 3
                         Text {
                             Layout.fillWidth: true
-                            text: modelData.hosts.indexOf("|1|") === 0 ? qsTr("(hashed host name)") : modelData.hosts
+                            text: modelData.name !== "" ? modelData.name
+                                  : qsTr("Not one of your hosts (name hidden)")
+                            textFormat: Text.PlainText
                             color: Theme.text; font.pixelSize: 13; font.family: Theme.monoFont
                             elide: Text.ElideRight
                         }
                         Text {
+                            textFormat: Text.PlainText
                             text: modelData.keyType + "   " + modelData.fingerprint
                             color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont
                         }
@@ -74,8 +78,8 @@ Item {
                 anchors.centerIn: parent
                 spacing: 10
                 IconLabel { Layout.alignment: Qt.AlignHCenter; glyph: Theme.iconFingerprint; size: 40; color: Theme.textFaint }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No trusted servers yet"); color: Theme.text; font.pixelSize: 15 }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("Keys are added here after you confirm a server's fingerprint."); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("No trusted servers yet"); color: Theme.text; font.pixelSize: 15 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("Keys are added here after you confirm a server's fingerprint."); color: Theme.textDim; font.pixelSize: 12 }
             }
         }
     }

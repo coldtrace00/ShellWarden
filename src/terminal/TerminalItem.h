@@ -26,6 +26,8 @@ class TerminalItem : public QQuickPaintedItem
     Q_PROPERTY(int fontSize READ fontSize WRITE setFontSize NOTIFY fontChanged)
     Q_PROPERTY(bool copyOnSelect MEMBER m_copyOnSelect NOTIFY optionsChanged)
     Q_PROPERTY(bool rightClickPaste MEMBER m_rightClickPaste NOTIFY optionsChanged)
+    // ask before pasting several lines (or very long text); see PasteGuard.h
+    Q_PROPERTY(bool confirmPaste MEMBER m_confirmPaste NOTIFY optionsChanged)
     // Colours errors, warnings, IP addresses, URLs, paths and dates in plain
     // (default-coloured) output. Text the server already colours is left alone,
     // and full-screen programs (vim, mc, htop) are never touched.
@@ -66,6 +68,8 @@ public:
 
     Q_INVOKABLE void copySelection();
     Q_INVOKABLE void paste();
+    // pastes exactly this (already confirmed) text; control characters are removed again
+    Q_INVOKABLE void pasteText(const QString &text);
     Q_INVOKABLE void selectAll();
     Q_INVOKABLE void clearScrollback();
     Q_INVOKABLE void scrollTo(int offset);
@@ -81,6 +85,8 @@ public:
     void setHighlightOutput(bool on);
 
 signals:
+    // paste() found several lines: QML asks, then calls pasteText(text)
+    void pasteConfirmRequested(const QString &text, int lines, const QString &preview);
     void sessionChanged();
     void fontChanged();
     void optionsChanged();
@@ -137,6 +143,7 @@ private:
     CellPos m_selA, m_selB;
     bool m_copyOnSelect = true;
     bool m_rightClickPaste = true;
+    bool m_confirmPaste = true;
     bool m_highlight = true;
     struct Match { int line; int col; int len; };
     std::vector<Match> m_matches;

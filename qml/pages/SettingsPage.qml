@@ -28,7 +28,7 @@ Item {
             RowLayout {
                 spacing: 10
                 IconLabel { visible: sec.glyph !== ""; glyph: sec.glyph; size: 17; color: Theme.accent }
-                Text { text: sec.title; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: sec.title; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
             }
             ColumnLayout { id: inner; Layout.fillWidth: true; spacing: 12 }
         }
@@ -46,8 +46,8 @@ Item {
             id: labelCol
             width: parent.width
             spacing: 2
-            Text { width: parent.width; text: label; color: Theme.text; font.pixelSize: 13; wrapMode: Text.WordWrap }
-            Text { width: parent.width; visible: hint !== ""; text: hint; color: Theme.textFaint; font.pixelSize: 11; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; width: parent.width; text: label; color: Theme.text; font.pixelSize: 13; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; width: parent.width; visible: hint !== ""; text: hint; color: Theme.textFaint; font.pixelSize: 11; wrapMode: Text.WordWrap }
         }
     }
 
@@ -84,6 +84,7 @@ Item {
 
             Item { height: 8 }
             Text {
+                textFormat: Text.PlainText
                 Layout.leftMargin: 28
                 text: qsTr("Settings"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold
             }
@@ -156,8 +157,8 @@ Item {
                                 anchors.centerIn: parent
                                 spacing: 6
                                 IconLabel { anchors.horizontalCenter: parent.horizontalCenter; glyph: Theme.iconAdd; size: 18; color: Theme.accent }
-                                Text { anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("Create your own"); color: Theme.text; font.pixelSize: 12; font.weight: Font.DemiBold }
-                                Text { anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("colours, picture"); color: Theme.textFaint; font.pixelSize: 10 }
+                                Text { textFormat: Text.PlainText; anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("Create your own"); color: Theme.text; font.pixelSize: 12; font.weight: Font.DemiBold }
+                                Text { textFormat: Text.PlainText; anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("colours, picture"); color: Theme.textFaint; font.pixelSize: 10 }
                             }
                         }
                     }
@@ -217,6 +218,7 @@ Item {
                     color: Theme.terminalBg
                     border.color: Theme.border
                     Text {
+                        textFormat: Text.PlainText
                         anchors.fill: parent
                         anchors.margins: 12
                         verticalAlignment: Text.AlignVCenter
@@ -242,6 +244,10 @@ Item {
                 Row_ {
                     SettingLabel { label: qsTr("Right click pastes"); hint: qsTr("Like PuTTY. Ctrl+Shift+V and Shift+Insert always paste.") }
                     AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.rightClickPaste; onToggled: App.setSetting("rightClickPaste", checked) }
+                }
+                Row_ {
+                    SettingLabel { label: qsTr("Ask before pasting several lines"); hint: qsTr("Every line break is an Enter. Shows the text first, like Windows Terminal. Control characters (ESC…) are always removed from pasted text.") }
+                    AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.pasteWarning !== false; onToggled: App.setSetting("pasteWarning", checked) }
                 }
                 Row_ {
                     SettingLabel { label: qsTr("Highlight output"); hint: qsTr("Colours errors, warnings, OK, IP addresses, URLs, paths and dates in plain text. What the server already colours, and full-screen programs (vim, mc, htop), are left as they are.") }
@@ -298,22 +304,24 @@ Item {
                         spacing: 4
                         RowLayout {
                             spacing: 8
-                            Text { text: App.portable ? qsTr("Portable mode") : qsTr("Installed mode"); color: Theme.text; font.pixelSize: 12; font.weight: Font.DemiBold }
+                            Text { textFormat: Text.PlainText; text: App.portable ? qsTr("Portable mode") : qsTr("Installed mode"); color: Theme.text; font.pixelSize: 12; font.weight: Font.DemiBold }
                             Text {
+                                textFormat: Text.PlainText
                                 text: App.portable ? qsTr("(data next to the program — nothing written to the PC)")
                                                    : qsTr("(create an empty file \"portable\" next to the .exe to switch)")
                                 color: Theme.textFaint; font.pixelSize: 11
                             }
                         }
-                        Text { text: qsTr("Vault file: %1").arg(App.vaultPath); color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont; Layout.fillWidth: true; elide: Text.ElideMiddle }
+                        Text { textFormat: Text.PlainText; text: qsTr("Vault file: %1").arg(App.vaultPath); color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont; Layout.fillWidth: true; elide: Text.ElideMiddle }
                         Text {
+                            textFormat: Text.PlainText
                             visible: App.portable
                             Layout.fillWidth: true
                             wrapMode: Text.WordWrap
                             color: Theme.textFaint; font.pixelSize: 11
                             text: qsTr("Everything is in this folder: vault.swv (hosts, passwords, keys — encrypted), settings.ini, known_hosts, logs, backups, keys (exported keys), updates, cache.")
                         }
-                        Text { text: qsTr("Encryption: Argon2id (256 MiB, 3 passes) → XChaCha20-Poly1305, authenticated header."); color: Theme.textFaint; font.pixelSize: 11 }
+                        Text { textFormat: Text.PlainText; text: qsTr("Encryption: Argon2id (256 MiB, 3 passes) → XChaCha20-Poly1305, authenticated header."); color: Theme.textFaint; font.pixelSize: 11 }
                     }
                 }
                 RowLayout {
@@ -325,6 +333,7 @@ Item {
                     Item { Layout.fillWidth: true }
                 }
                 Text {
+                    textFormat: Text.PlainText
                     id: vaultMsg
                     visible: text !== ""
                     function show(err, ok) { color = err === "" ? Theme.ok : Theme.danger; text = err === "" ? ok : err }
@@ -343,8 +352,8 @@ Item {
                             visible: index < 5
                             spacing: 10
                             IconLabel { glyph: Theme.iconClock; size: 13; color: Theme.textDim }
-                            Text { text: modelData.date; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
-                            Text { text: modelData.size; color: Theme.textFaint; font.pixelSize: 11 }
+                            Text { textFormat: Text.PlainText; text: modelData.date; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
+                            Text { textFormat: Text.PlainText; text: modelData.size; color: Theme.textFaint; font.pixelSize: 11 }
                             Item { Layout.fillWidth: true }
                             AppButton { text: qsTr("Restore"); compact: true; variant: "ghost"
                                         onClicked: { restorePopup.file = modelData.url; restorePopup.open() } }
@@ -422,7 +431,7 @@ Item {
 
                 Rectangle { Layout.fillWidth: true; height: 1; color: Theme.border }
 
-                Text { text: qsTr("Change master password"); color: Theme.text; font.pixelSize: 13; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; text: qsTr("Change master password"); color: Theme.text; font.pixelSize: 13; font.weight: Font.Medium }
                 AppField { id: oldPw; Layout.fillWidth: true; label: qsTr("Current master password"); secret: true; enabled: App.vaultUnlocked }
                 PasswordField {
                     lengthSlider: true
@@ -434,7 +443,7 @@ Item {
                 }
                 RowLayout {
                     Layout.fillWidth: true
-                    Text { id: pwMsg; Layout.fillWidth: true; font.pixelSize: 12; wrapMode: Text.WordWrap }
+                    Text { textFormat: Text.PlainText; id: pwMsg; Layout.fillWidth: true; font.pixelSize: 12; wrapMode: Text.WordWrap }
                     AppButton {
                         text: qsTr("Change password"); variant: "primary"
                         enabled: App.vaultUnlocked && oldPw.text !== "" && newPw.acceptable && newPw.text.length > 0
@@ -453,8 +462,21 @@ Item {
                 title: qsTr("Activity log")
                 glyph: Theme.iconLog
                 Row_ {
-                    SettingLabel { label: qsTr("Keep an activity log"); hint: qsTr("Connections, routes, IP seen by servers, vault and key changes, kill switch events. Never passwords or keys. 12 months are kept.") }
+                    SettingLabel { label: qsTr("Keep an activity log"); hint: qsTr("Connections, routes, IP seen by servers, vault and key changes, kill switch events. Never passwords or keys. Encrypted: it can only be read while the vault is open.") }
                     AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.logEnabled; onToggled: App.setSetting("logEnabled", checked) }
+                }
+                Row_ {
+                    visible: App.settings.logEnabled
+                    SettingLabel { label: qsTr("Keep entries for"); hint: qsTr("Older entries are deleted.") }
+                    AppCombo {
+                        id: keepDays
+                        readonly property var days: [7, 30, 90, 365]
+                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                        Layout.preferredWidth: 160
+                        model: [qsTr("7 days"), qsTr("30 days"), qsTr("90 days"), qsTr("1 year")]
+                        currentIndex: Math.max(0, days.indexOf(App.settings.logRetentionDays || 30))
+                        onActivated: App.setSetting("logRetentionDays", days[currentIndex])
+                    }
                 }
             }
 
@@ -496,6 +518,7 @@ Item {
                             Layout.fillWidth: true
                             spacing: 10
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 color: Theme.text
@@ -532,6 +555,7 @@ Item {
                 title: qsTr("Keyboard shortcuts")
                 glyph: Theme.iconTerminal
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.textFaint
@@ -574,7 +598,7 @@ Item {
                                     model: modelData[0].split("+")
                                     delegate: Row {
                                         spacing: 3
-                                        Text { visible: index > 0; text: "+"; color: Theme.textFaint; font.pixelSize: 11; anchors.verticalCenter: parent.verticalCenter }
+                                        Text { textFormat: Text.PlainText; visible: index > 0; text: "+"; color: Theme.textFaint; font.pixelSize: 11; anchors.verticalCenter: parent.verticalCenter }
                                         Rectangle {
                                             implicitWidth: capText.implicitWidth + 12
                                             implicitHeight: 22
@@ -582,12 +606,12 @@ Item {
                                             color: Theme.surface2
                                             border.color: Theme.border
                                             Rectangle { anchors.bottom: parent.bottom; anchors.left: parent.left; anchors.right: parent.right; height: 2; radius: 5; color: Theme.border }
-                                            Text { id: capText; anchors.centerIn: parent; text: modelData; color: Theme.text; font.pixelSize: 11; font.family: Theme.monoFont }
+                                            Text { textFormat: Text.PlainText; id: capText; anchors.centerIn: parent; text: modelData; color: Theme.text; font.pixelSize: 11; font.family: Theme.monoFont }
                                         }
                                     }
                                 }
                             }
-                            Text { Layout.fillWidth: true; Layout.alignment: Qt.AlignVCenter; text: modelData[1]; color: Theme.textDim; font.pixelSize: 12; wrapMode: Text.WordWrap }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; Layout.alignment: Qt.AlignVCenter; text: modelData[1]; color: Theme.textDim; font.pixelSize: 12; wrapMode: Text.WordWrap }
                         }
                     }
                 }
@@ -601,9 +625,9 @@ Item {
                     Logo { size: 48 }
                     ColumnLayout {
                         spacing: 2
-                        Text { text: App.appName + " " + App.version; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
-                        Text { text: qsTr("Open-source SSH client · MIT licence"); color: Theme.textDim; font.pixelSize: 12 }
-                        Text { text: "libssh · libvterm · libsodium · OpenSSL · Qt"; color: Theme.textFaint; font.pixelSize: 11 }
+                        Text { textFormat: Text.PlainText; text: App.appName + " " + App.version; color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold }
+                        Text { textFormat: Text.PlainText; text: qsTr("Open-source SSH client · MIT licence"); color: Theme.textDim; font.pixelSize: 12 }
+                        Text { textFormat: Text.PlainText; text: "libssh · libvterm · libsodium · OpenSSL · Qt"; color: Theme.textFaint; font.pixelSize: 11 }
                     }
                 }
             }
@@ -646,9 +670,9 @@ Item {
         title: qsTr("Restore vault from backup")
         subtitle: qsTr("The current vault is kept in the backups folder first. Enter the master password of the backup.")
         onOpened: { restorePw.text = ""; restoreErr.text = ""; restorePw.field.forceActiveFocus() }
-        Text { text: String(restorePopup.file).replace("file:///", ""); color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont; Layout.fillWidth: true; elide: Text.ElideMiddle }
+        Text { textFormat: Text.PlainText; text: String(restorePopup.file).replace("file:///", ""); color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont; Layout.fillWidth: true; elide: Text.ElideMiddle }
         AppField { id: restorePw; Layout.fillWidth: true; label: qsTr("Master password of the backup"); secret: true; onAccepted: restoreOk.clicked() }
-        Text { id: restoreErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12 }
+        Text { textFormat: Text.PlainText; id: restoreErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12 }
         RowLayout {
             Layout.fillWidth: true
             Item { Layout.fillWidth: true }

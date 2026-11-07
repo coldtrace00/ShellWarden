@@ -37,12 +37,13 @@ Popup {
             const h = App.hosts.get(i)
             if (h.type === "serial" || h.type === "telnet") continue
             out.push({ id: h.id, label: h.label, addr: (h.username ? h.username + "@" : "") + h.hostname,
-                       group: h.group || "", keyId: h.keyId || "", protected: !!h.confirmMaster })
+                       group: h.group || "", keyId: h.keyId || "", protected: App.hostIsProtected(h.id) })
         }
         return out
     }
     readonly property int pickedCount: { let n = 0; for (const k in picked) if (picked[k]) ++n; return n }
     readonly property bool needMaster: hosts.some(h => picked[h.id] && h.protected)
+                                       || (replaceMode && App.keyIsProtected(keyId))
     function keyIndex(id) { return Math.max(0, keys.findIndex(k => k.id === id)) }
     function keyFor(hostId) { return perHost ? (hostKey[hostId] || (keys.length ? keys[0].id : "")) : keyId }
 
@@ -90,7 +91,7 @@ Popup {
         implicitWidth: chipText.implicitWidth + 24
         hoverEnabled: true
         background: Rectangle { radius: 15; color: chip.on ? Theme.accentDim : (chip.hovered ? Theme.surface2 : "transparent"); border.color: chip.on ? Theme.accent : Theme.border }
-        contentItem: Text { id: chipText; text: chip.text; color: chip.on ? Theme.text : Theme.textDim; font.pixelSize: 12
+        contentItem: Text { textFormat: Text.PlainText; id: chipText; text: chip.text; color: chip.on ? Theme.text : Theme.textDim; font.pixelSize: 12
                             horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
     }
 
@@ -102,8 +103,9 @@ Popup {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 1
-                Text { text: root.replaceMode ? qsTr("Replace a key on servers") : qsTr("Install keys on servers"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: root.replaceMode ? qsTr("Replace a key on servers") : qsTr("Install keys on servers"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.textDim; font.pixelSize: 12
@@ -125,7 +127,7 @@ Popup {
             RowLayout {
                 Layout.fillWidth: true
                 spacing: 8
-                Text { text: qsTr("Keys:"); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; text: qsTr("Keys:"); color: Theme.textDim; font.pixelSize: 12 }
                 Chip { text: qsTr("One key for all servers"); on: !root.perHost && !root.replaceMode; onClicked: { root.perHost = false; root.replaceMode = false } }
                 Chip { text: qsTr("A different key per server"); on: root.perHost && !root.replaceMode; onClicked: { root.perHost = true; root.replaceMode = false } }
                 Chip { text: qsTr("Replace an old key"); on: root.replaceMode
@@ -150,7 +152,7 @@ Popup {
                 visible: root.replaceMode
                 Layout.fillWidth: true
                 spacing: 8
-                Text { text: qsTr("Old key:"); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; text: qsTr("Old key:"); color: Theme.textDim; font.pixelSize: 12 }
                 AppCombo {
                     Layout.fillWidth: true
                     model: root.keys.map(k => k.name + "  ·  " + k.type)
@@ -158,7 +160,7 @@ Popup {
                     onActivated: (i) => { root.oldKeyId = root.keys[i].id; root.pickUsersOf(root.oldKeyId) }
                 }
                 IconLabel { glyph: Theme.iconArrowRight; size: 16; color: Theme.accent }
-                Text { text: qsTr("New key:"); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; text: qsTr("New key:"); color: Theme.textDim; font.pixelSize: 12 }
                 AppCombo {
                     Layout.fillWidth: true
                     model: root.keys.map(k => k.name + "  ·  " + k.type)
@@ -167,6 +169,7 @@ Popup {
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 visible: root.replaceMode && root.keys.length < 2
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
@@ -174,6 +177,7 @@ Popup {
                 color: Theme.warn; font.pixelSize: 12
             }
             Text {
+                textFormat: Text.PlainText
                 visible: root.keys.length === 0
                 text: qsTr("The keychain is empty: create or import a key first.")
                 color: Theme.warn; font.pixelSize: 12
@@ -181,7 +185,7 @@ Popup {
 
             RowLayout {
                 Layout.fillWidth: true
-                Text { Layout.fillWidth: true; text: qsTr("Servers (%1 chosen)").arg(root.pickedCount); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Servers (%1 chosen)").arg(root.pickedCount); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                 AppButton { text: qsTr("All"); compact: true; variant: "ghost"; onClicked: { const p = {}; for (const h of root.hosts) p[h.id] = true; root.picked = p } }
                 AppButton { text: qsTr("None"); compact: true; variant: "ghost"; onClicked: root.picked = ({}) }
             }
@@ -219,8 +223,8 @@ Popup {
                             ColumnLayout {
                                 Layout.fillWidth: true
                                 spacing: 0
-                                Text { Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
-                                Text { Layout.fillWidth: true; text: modelData.addr + (modelData.group ? " · " + modelData.group : ""); color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont; elide: Text.ElideRight }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.addr + (modelData.group ? " · " + modelData.group : ""); color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont; elide: Text.ElideRight }
                             }
                             IconLabel { visible: modelData.protected; glyph: Theme.iconShield; size: 12; color: Theme.warn }
                             AppCombo {
@@ -252,7 +256,7 @@ Popup {
                 needMaster: root.needMaster
                 onSubmit: root.install()
             }
-            Text { visible: root.error !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; text: root.error; color: Theme.danger; font.pixelSize: 12 }
+            Text { textFormat: Text.PlainText; visible: root.error !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; text: root.error; color: Theme.danger; font.pixelSize: 12 }
             RowLayout {
                 Layout.fillWidth: true
                 Item { Layout.fillWidth: true }
@@ -275,13 +279,13 @@ Popup {
             RowLayout {
                 spacing: 14
                 BusyIndicator { visible: root.batch.running; running: visible; implicitWidth: 22; implicitHeight: 22 }
-                Text { text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 3: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                Text { textFormat: Text.PlainText; text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 3: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.replaceMode && App.rotatePhase === "removing" ? qsTr("Step 2 of 3: logging in with the new key, removing the old one… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.replaceMode && App.rotatePhase === "verifying" ? qsTr("Step 3 of 3: a new login with the new key to check… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.batch.running ? qsTr("Installing… %1 of %2 done").arg(root.batch.doneCount).arg(root.batch.results.length) : qsTr("Finished")
                        color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
-                Text { text: "✓ " + root.batch.okCount; color: Theme.ok; font.pixelSize: 13; font.weight: Font.DemiBold }
-                Text { text: "✗ " + root.batch.failCount; color: root.batch.failCount > 0 ? Theme.danger : Theme.textFaint; font.pixelSize: 13; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: "✓ " + root.batch.okCount; color: Theme.ok; font.pixelSize: 13; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: "✗ " + root.batch.failCount; color: root.batch.failCount > 0 ? Theme.danger : Theme.textFaint; font.pixelSize: 13; font.weight: Font.DemiBold }
             }
             Rectangle {
                 Layout.fillWidth: true
@@ -318,8 +322,9 @@ Popup {
                             ColumnLayout {
                                 Layout.fillWidth: true
                                 spacing: 0
-                                Text { Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.label; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
                                 Text {
+                                    textFormat: Text.PlainText
                                     Layout.fillWidth: true
                                     elide: Text.ElideRight
                                     font.pixelSize: 11

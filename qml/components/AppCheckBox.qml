@@ -17,6 +17,7 @@ CheckBox {
         IconLabel { anchors.centerIn: parent; visible: root.checked; glyph: Theme.iconCheck; size: 12; color: "#0b1214" }
     }
     contentItem: Text {
+        textFormat: Text.PlainText
         leftPadding: root.indicator.width + root.spacing
         text: root.text
         color: root.enabled ? Theme.text : Theme.textFaint

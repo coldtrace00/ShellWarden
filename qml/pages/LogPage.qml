@@ -67,11 +67,12 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 2
-                Text { text: qsTr("Activity log"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: qsTr("Activity log"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     Layout.preferredWidth: 100
-                    text: App.settings.logEnabled ? qsTr("Stored locally, never contains passwords or keys: %1").arg(root.log.directory)
+                    text: App.settings.logEnabled ? qsTr("Encrypted on disk, readable only while the vault is open; never contains passwords or keys: %1").arg(root.log.directory)
                                                   : qsTr("Logging is turned off in Settings.")
                     color: App.settings.logEnabled ? Theme.textDim : Theme.warn
                     font.pixelSize: 12
@@ -120,7 +121,7 @@ Item {
                         color: chip.on ? Theme.accentDim : (chip.hovered ? Theme.surface2 : Theme.surface)
                         border.color: chip.on ? Theme.accent : Theme.border
                     }
-                    contentItem: Text { id: chipText; text: modelData.label; color: chip.on ? Theme.text : Theme.textDim
+                    contentItem: Text { textFormat: Text.PlainText; id: chipText; text: modelData.label; color: chip.on ? Theme.text : Theme.textDim
                                         font.pixelSize: 12; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                 }
             }
@@ -152,6 +153,7 @@ Item {
                         color: root.levelColor(model.level)
                     }
                     Text {
+                        textFormat: Text.PlainText
                         x: 29; anchors.verticalCenter: parent.verticalCenter
                         text: model.time; color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont
                     }
@@ -169,15 +171,17 @@ Item {
                             spacing: 8
                             width: parent.width
                             Text {
+                                textFormat: Text.PlainText
                                 id: msg
                                 width: Math.min(implicitWidth, parent.width - (hostTxt.visible ? hostTxt.implicitWidth + 8 : 0))
                                 text: model.message; color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight
                                 font.weight: model.level >= 2 ? Font.DemiBold : Font.Normal
                             }
-                            Text { id: hostTxt; visible: model.host !== ""; text: model.host; color: Theme.accent; font.pixelSize: 11
+                            Text { textFormat: Text.PlainText; id: hostTxt; visible: model.host !== ""; text: model.host; color: Theme.accent; font.pixelSize: 11
                                    anchors.verticalCenter: msg.verticalCenter }
                         }
                         Text {
+                            textFormat: Text.PlainText
                             visible: model.detail !== ""
                             width: parent.width
                             text: model.detail
@@ -192,6 +196,7 @@ Item {
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: list.count === 0
                 text: qsTr("Nothing here yet")

@@ -94,8 +94,8 @@ Item {
             anchors.centerIn: parent
             spacing: 2
             IconLabel { Layout.alignment: Qt.AlignHCenter; glyph: parent.parent.glyph; size: 15; color: parent.parent.tint }
-            Text { Layout.alignment: Qt.AlignHCenter; text: parent.parent.label; color: Theme.text; font.pixelSize: 10; font.weight: Font.Medium }
-            Text { Layout.alignment: Qt.AlignHCenter; visible: text !== ""; text: parent.parent.sub; color: Theme.textDim; font.pixelSize: 9; font.family: Theme.monoFont }
+            Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: parent.parent.label; color: Theme.text; font.pixelSize: 10; font.weight: Font.Medium }
+            Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; visible: text !== ""; text: parent.parent.sub; color: Theme.textDim; font.pixelSize: 9; font.family: Theme.monoFont }
         }
     }
 
@@ -108,7 +108,7 @@ Item {
             Layout.margins: 10
             spacing: 6
             IconLabel { glyph: Theme.iconTunnel; size: 16; color: Theme.accent }
-            Text { text: qsTr("Tunnels"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold; Layout.fillWidth: true }
+            Text { textFormat: Text.PlainText; text: qsTr("Tunnels"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold; Layout.fillWidth: true }
             AppButton { glyph: Theme.iconAdd; compact: true; text: qsTr("Add"); onClicked: addBox.visible = !addBox.visible }
             AppButton { glyph: Theme.iconClose; compact: true; variant: "ghost"; onClicked: root.closeRequested() }
         }
@@ -163,6 +163,7 @@ Item {
                     }
                 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.textFaint
@@ -185,7 +186,7 @@ Item {
             Layout.rightMargin: 10
             Layout.topMargin: 4
             spacing: 6
-            Text { text: qsTr("Saved for this host — not running"); color: Theme.textDim; font.pixelSize: 11; font.weight: Font.Medium }
+            Text { textFormat: Text.PlainText; text: qsTr("Saved for this host — not running"); color: Theme.textDim; font.pixelSize: 11; font.weight: Font.Medium }
             Repeater {
                 model: root.stopped
                 delegate: Rectangle {
@@ -199,8 +200,9 @@ Item {
                         anchors.leftMargin: 10
                         anchors.rightMargin: 6
                         spacing: 8
-                        Text { text: "-" + modelData.type; color: Theme.textDim; font.family: Theme.monoFont; font.bold: true; font.pixelSize: 11 }
+                        Text { textFormat: Text.PlainText; text: "-" + modelData.type; color: Theme.textDim; font.family: Theme.monoFont; font.bold: true; font.pixelSize: 11 }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             elide: Text.ElideMiddle
                             color: Theme.text
@@ -257,9 +259,10 @@ Item {
                             radius: 5
                             implicitWidth: 26; implicitHeight: 20
                             color: Theme.tint(card.tint, "33")
-                            Text { anchors.centerIn: parent; text: "-" + modelData.type; color: card.tint; font.pixelSize: 11; font.bold: true; font.family: Theme.monoFont }
+                            Text { textFormat: Text.PlainText; anchors.centerIn: parent; text: "-" + modelData.type; color: card.tint; font.pixelSize: 11; font.bold: true; font.family: Theme.monoFont }
                         }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             text: modelData.bind + "  →  " + modelData.dest
                             color: Theme.text
@@ -314,6 +317,7 @@ Item {
                             }
                         }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             text: modelData.state === "error" ? modelData.error
                                   : qsTr("%1 connection(s) · ↓ %2 · ↑ %3").arg(modelData.active).arg(root.fmt(modelData.bytesIn)).arg(root.fmt(modelData.bytesOut))
@@ -341,6 +345,7 @@ Item {
                         }
                     }
                     Text {
+                        textFormat: Text.PlainText
                         Layout.fillWidth: true
                         visible: modelData.state === "active"
                         wrapMode: Text.WordWrap
@@ -362,8 +367,9 @@ Item {
             Layout.bottomMargin: 40
             spacing: 8
             IconLabel { Layout.alignment: Qt.AlignHCenter; glyph: Theme.iconTunnel; size: 34; color: Theme.textFaint }
-            Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No tunnels"); color: Theme.text; font.pixelSize: 13 }
+            Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("No tunnels"); color: Theme.text; font.pixelSize: 13 }
             Text {
+                textFormat: Text.PlainText
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: root.width - 40
                 horizontalAlignment: Text.AlignHCenter

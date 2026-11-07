@@ -18,7 +18,7 @@
 //   data/cache/          Qt's QML cache
 //   data/tor/            tor.exe started by ShellWarden
 // Installed mode: %APPDATA%\<AppName> on Windows, ~/.local/share/<AppName>
-// on Linux.
+// on Linux. Either way the folder is made private to the user (PrivateDir.h).
 namespace paths {
 
 void init();                 // call once, after QCoreApplication exists
@@ -33,5 +33,7 @@ QString backupsDir();
 QString keysDir();           // portable: data/keys; installed: ~/.ssh (or home)
 QString updatesDir();
 QString cacheDir();
+// Empty when the data folder is private to this user (see PrivateDir.h).
+QString protectionError();
 
 } // namespace paths

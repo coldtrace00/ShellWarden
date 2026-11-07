@@ -37,7 +37,7 @@ Popup {
         spacing: 12
         RowLayout {
             Layout.fillWidth: true
-            Text { Layout.fillWidth: true; text: qsTr("Import hosts"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
+            Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Import hosts"); color: Theme.text; font.pixelSize: 18; font.weight: Font.DemiBold }
             AppButton { glyph: Theme.iconClose; variant: "ghost"; compact: true; onClicked: root.close() }
         }
         Row {
@@ -52,12 +52,13 @@ Popup {
                     hoverEnabled: true
                     onClicked: root.load(modelData.k)
                     background: Rectangle { radius: 8; color: seg.on ? Theme.accentDim : (seg.hovered ? Theme.surface2 : "transparent"); border.color: seg.on ? Theme.accent : Theme.border }
-                    contentItem: Text { id: segText; text: modelData.t; color: seg.on ? Theme.text : Theme.textDim; font.pixelSize: 12
+                    contentItem: Text { textFormat: Text.PlainText; id: segText; text: modelData.t; color: seg.on ? Theme.text : Theme.textDim; font.pixelSize: 12
                                         horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                 }
             }
         }
         Text {
+            textFormat: Text.PlainText
             Layout.fillWidth: true
             wrapMode: Text.WrapAnywhere
             color: Theme.textFaint
@@ -98,8 +99,9 @@ Popup {
                         ColumnLayout {
                             Layout.fillWidth: true
                             spacing: 1
-                            Text { Layout.fillWidth: true; text: modelData.label; color: modelData.exists ? Theme.textFaint : Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
+                            Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.label; color: modelData.exists ? Theme.textFaint : Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 elide: Text.ElideMiddle
                                 color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont
@@ -108,11 +110,12 @@ Popup {
                                       + (modelData.keyFile ? "  🔑 " + modelData.keyFile.split(/[\\/]/).pop() + (modelData.keyExists ? "" : " (?)") : "")
                             }
                         }
-                        Text { visible: !!modelData.exists; text: qsTr("already added"); color: Theme.textFaint; font.pixelSize: 11 }
+                        Text { textFormat: Text.PlainText; visible: !!modelData.exists; text: qsTr("already added"); color: Theme.textFaint; font.pixelSize: 11 }
                     }
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: root.items.length === 0
                 width: parent.width - 40
@@ -123,7 +126,7 @@ Popup {
             }
         }
 
-        Text { Layout.fillWidth: true; visible: root.result !== ""; text: root.result; color: Theme.ok; font.pixelSize: 12; wrapMode: Text.WordWrap }
+        Text { textFormat: Text.PlainText; Layout.fillWidth: true; visible: root.result !== ""; text: root.result; color: Theme.ok; font.pixelSize: 12; wrapMode: Text.WordWrap }
 
         RowLayout {
             Layout.fillWidth: true

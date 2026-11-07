@@ -2,6 +2,7 @@
 #include "SecureBytes.h"
 
 #include <QCryptographicHash>
+#include <QDateTime>
 #include <QMessageAuthenticationCode>
 #include <QObject>
 #include <QUrl>
@@ -9,6 +10,8 @@
 
 #include <openssl/evp.h>
 #include <sodium.h>
+
+#include "blake3.h"
 
 #include <chrono>
 #include <cstring>
@@ -34,29 +37,52 @@ namespace {
 
 using Clock = std::chrono::steady_clock;
 
-struct CipherInfo { const char *name; int keyLen; };
+struct CipherInfo { const char *name; int keyLen; bool sip022; bool chacha; };
 constexpr CipherInfo kCiphers[] = {
-    {"chacha20-ietf-poly1305", 32},
-    {"aes-256-gcm", 32},
-    {"aes-128-gcm", 16},
+    // Shadowsocks 2022 (SIP022): a real key instead of a password, replay protection, timestamps
+    {"2022-blake3-aes-256-gcm", 32, true, false},
+    {"2022-blake3-aes-128-gcm", 16, true, false},
+    {"2022-blake3-chacha20-poly1305", 32, true, true},
+    // AEAD 2017 (SIP004)
+    {"chacha20-ietf-poly1305", 32, false, true},
+    {"aes-256-gcm", 32, false, false},
+    {"aes-128-gcm", 16, false, false},
 };
 constexpr int kTagLen = 16;
 constexpr int kNonceLen = 12;
-constexpr int kMaxPayload = 0x3FFF;   // SIP004: payload length is at most 16383
+constexpr int kMaxPayload = 0x3FFF;     // SIP004: payload length is at most 16383 (we never send more)
+constexpr int kMaxPayload2022 = 0xFFFF; // SIP022 allows up to 65535
+constexpr int kMaxTimeSkew = 30;        // seconds, SIP022
 
-int keyLenOf(const QString &method)
+const CipherInfo *cipherOf(const QString &method)
 {
     for (const CipherInfo &c : kCiphers)
         if (method == QLatin1String(c.name))
-            return c.keyLen;
-    return 0;
+            return &c;
+    return nullptr;
+}
+
+int keyLenOf(const QString &method)
+{
+    const CipherInfo *c = cipherOf(method);
+    return c ? c->keyLen : 0;
+}
+
+QByteArray blake3DeriveKey(const char *context, const QByteArray &material, int len)
+{
+    blake3_hasher h;
+    blake3_hasher_init_derive_key(&h, context);
+    blake3_hasher_update(&h, material.constData(), size_t(material.size()));
+    QByteArray out(len, Qt::Uninitialized);
+    blake3_hasher_finalize(&h, reinterpret_cast<uint8_t *>(out.data()), size_t(len));
+    return out;
 }
 
 // One direction of the stream: subkey + little-endian nonce counter.
 class Aead
 {
 public:
-    Aead(const QString &method, const QByteArray &subkey) : m_chacha(method.startsWith(QLatin1String("chacha"))), m_key(subkey)
+    Aead(bool chacha, const QByteArray &subkey) : m_chacha(chacha), m_key(subkey)
     {
         if (!m_chacha) {
             m_ctx = EVP_CIPHER_CTX_new();
@@ -72,6 +98,7 @@ public:
     Aead(const Aead &) = delete;
     Aead &operator=(const Aead &) = delete;
 
+    // empty result = encryption failed
     QByteArray seal(const char *data, int len)
     {
         QByteArray out(len + kTagLen, Qt::Uninitialized);
@@ -81,7 +108,7 @@ public:
             ok = crypto_aead_chacha20poly1305_ietf_encrypt(
                      reinterpret_cast<unsigned char *>(out.data()), &outLen, reinterpret_cast<const unsigned char *>(data),
                      size_t(len), nullptr, 0, nullptr, m_nonce, reinterpret_cast<const unsigned char *>(m_key.constData())) == 0;
-        } else {
+        } else if (m_ctx) {
             int n = 0, f = 0;
             ok = EVP_EncryptInit_ex(m_ctx, m_cipher, nullptr, nullptr, nullptr) == 1
                  && EVP_CIPHER_CTX_ctrl(m_ctx, EVP_CTRL_GCM_SET_IVLEN, kNonceLen, nullptr) == 1
@@ -108,7 +135,7 @@ public:
                      reinterpret_cast<unsigned char *>(plain->data()), &outLen, nullptr,
                      reinterpret_cast<const unsigned char *>(data), size_t(len), nullptr, 0, m_nonce,
                      reinterpret_cast<const unsigned char *>(m_key.constData())) == 0;
-        } else {
+        } else if (m_ctx) {
             int n = 0, f = 0;
             QByteArray tag(data + plainLen, kTagLen);
             ok = EVP_DecryptInit_ex(m_ctx, m_cipher, nullptr, nullptr, nullptr) == 1
@@ -124,7 +151,7 @@ public:
     }
 
 private:
-    void next() { sodium_increment(m_nonce, kNonceLen); }   // little-endian counter, as SIP004 wants
+    void next() { sodium_increment(m_nonce, kNonceLen); }   // little-endian counter, as SIP004/SIP022 want
 
     bool m_chacha;
     QByteArray m_key;
@@ -132,6 +159,24 @@ private:
     EVP_CIPHER_CTX *m_ctx = nullptr;
     const EVP_CIPHER *m_cipher = nullptr;
 };
+
+// SIP022 identity header: AES-ECB of one 16-byte block
+QByteArray aesEncryptBlock(const QByteArray &key, const QByteArray &block)
+{
+    QByteArray out(32, Qt::Uninitialized);
+    EVP_CIPHER_CTX *ctx = EVP_CIPHER_CTX_new();
+    int n = 0, f = 0;
+    const bool ok = ctx
+        && EVP_EncryptInit_ex(ctx, key.size() == 32 ? EVP_aes_256_ecb() : EVP_aes_128_ecb(), nullptr,
+                              reinterpret_cast<const unsigned char *>(key.constData()), nullptr) == 1
+        && EVP_CIPHER_CTX_set_padding(ctx, 0) == 1
+        && EVP_EncryptUpdate(ctx, reinterpret_cast<unsigned char *>(out.data()), &n,
+                             reinterpret_cast<const unsigned char *>(block.constData()), 16) == 1
+        && EVP_EncryptFinal_ex(ctx, reinterpret_cast<unsigned char *>(out.data()) + n, &f) == 1;
+    if (ctx)
+        EVP_CIPHER_CTX_free(ctx);
+    return ok && n + f == 16 ? out.left(16) : QByteArray();
+}
 
 bool waitReadable(native_socket a, native_socket b, int timeoutMs, bool *aReady, bool *bReady)
 {
@@ -167,73 +212,175 @@ bool sendAll(native_socket s, const QByteArray &data)
     return true;
 }
 
+void putU16(QByteArray &b, int v) { b.append(char((v >> 8) & 0xff)); b.append(char(v & 0xff)); }
+void putU64(QByteArray &b, quint64 v) { for (int i = 7; i >= 0; --i) b.append(char((v >> (8 * i)) & 0xff)); }
+quint64 getU64(const char *p) { quint64 v = 0; for (int i = 0; i < 8; ++i) v = (v << 8) | uchar(p[i]); return v; }
+
 // The encrypted connection to the server: salts, both directions, chunk framing.
+// SIP004 (AEAD 2017) and SIP022 (Shadowsocks 2022).
 class Session
 {
 public:
-    Session(native_socket server, const QString &method, const QByteArray &key)
-        : m_server(server), m_method(method), m_key(key) {}
+    // keys: SIP004 — one key from the password; SIP022 — the PSKs (identity keys…, user key)
+    Session(native_socket server, const CipherInfo &cipher, const QList<QByteArray> &keys)
+        : m_server(server), m_cipher(cipher), m_keys(keys) {}
     ~Session()
     {
-        secure::wipe(m_key);
+        for (QByteArray &k : m_keys)
+            secure::wipe(k);
         if (m_server != native_socket(kInvalidSocket))
             SS_CLOSE(m_server);
     }
 
-    // first message: our salt + the target address in the first chunk
+    const QByteArray &userKey() const { return m_keys.last(); }
+    int keyLen() const { return m_cipher.keyLen; }
+    QString error() const { return m_error; }
+
+    QByteArray subkey(const QByteArray &salt) const
+    {
+        return m_cipher.sip022 ? blake3DeriveKey("shadowsocks 2022 session subkey", userKey() + salt, keyLen())
+                               : hkdfSha1(userKey(), salt, "ss-subkey", keyLen());
+    }
+
+    // first message: our salt + the target address (SIP022: + identity headers, header chunks)
     bool start(const QString &host, int port)
     {
-        QByteArray salt(m_key.size(), Qt::Uninitialized);
+        QByteArray salt(keyLen(), Qt::Uninitialized);
         randombytes_buf(salt.data(), size_t(salt.size()));
-        m_enc = std::make_unique<Aead>(m_method, hkdfSha1(m_key, salt, "ss-subkey", m_key.size()));
-        QByteArray addr;
+        m_enc = std::make_unique<Aead>(m_cipher.chacha, subkey(salt));
         const QByteArray h = QUrl::toAce(host).isEmpty() ? host.toUtf8() : QUrl::toAce(host);
+        if (h.isEmpty() || h.size() >= 256)
+            return false;
+        QByteArray addr;
         addr.append(char(0x03));               // ATYP: domain name, resolved by the server (no DNS leak)
         addr.append(char(h.size()));
         addr.append(h);
-        addr.append(char((port >> 8) & 0xff));
-        addr.append(char(port & 0xff));
-        return h.size() > 0 && h.size() < 256 && sendAll(m_server, salt + seal(addr));
+        putU16(addr, port);
+
+        if (!m_cipher.sip022) {
+            const QByteArray first = seal(addr);
+            return !first.isEmpty() && sendAll(m_server, salt + first);
+        }
+
+        m_requestSalt = salt;
+        QByteArray out = salt;
+        // identity headers (several keys, aes only): each says which key comes next
+        for (int i = 0; i + 1 < m_keys.size(); ++i) {
+            const QByteArray idKey = blake3DeriveKey("shadowsocks 2022 identity subkey", m_keys.at(i) + salt, keyLen());
+            QByteArray next(32, Qt::Uninitialized);
+            blake3_hasher hh;
+            blake3_hasher_init(&hh);
+            blake3_hasher_update(&hh, m_keys.at(i + 1).constData(), size_t(m_keys.at(i + 1).size()));
+            blake3_hasher_finalize(&hh, reinterpret_cast<uint8_t *>(next.data()), 32);
+            const QByteArray eih = aesEncryptBlock(idKey, next.left(16));
+            if (eih.isEmpty())
+                return false;
+            out += eih;
+        }
+        // variable-length header: address, padding (there is no initial payload: SSH waits for the server)
+        QByteArray var = addr;
+        const int pad = 1 + int(randombytes_uniform(900));
+        putU16(var, pad);
+        QByteArray padding(pad, Qt::Uninitialized);
+        randombytes_buf(padding.data(), size_t(pad));
+        var += padding;
+        // fixed-length header: type 0 (client stream), timestamp, length of the variable header
+        QByteArray fixed;
+        fixed.append(char(0));
+        putU64(fixed, quint64(QDateTime::currentSecsSinceEpoch()));
+        putU16(fixed, int(var.size()));
+        const QByteArray f = m_enc->seal(fixed.constData(), int(fixed.size()));
+        const QByteArray v = m_enc->seal(var.constData(), int(var.size()));
+        if (f.isEmpty() || v.isEmpty())
+            return false;
+        out += f;
+        out += v;
+        return sendAll(m_server, out);
     }
 
+    // empty result = encryption failed (never sent half-encrypted)
     QByteArray seal(const QByteArray &plain)
     {
         QByteArray out;
         for (int off = 0; off < plain.size(); off += kMaxPayload) {
             const int n = std::min<int>(kMaxPayload, int(plain.size()) - off);
             const char len[2] = {char((n >> 8) & 0xff), char(n & 0xff)};
-            out += m_enc->seal(len, 2);
-            out += m_enc->seal(plain.constData() + off, n);
+            const QByteArray l = m_enc->seal(len, 2), p = m_enc->seal(plain.constData() + off, n);
+            if (l.isEmpty() || p.isEmpty())
+                return {};
+            out += l;
+            out += p;
         }
         return out;
     }
-    bool send(const char *data, int len) { return sendAll(m_server, seal(QByteArray::fromRawData(data, len))); }
+    bool send(const char *data, int len)
+    {
+        const QByteArray c = seal(QByteArray::fromRawData(data, len));
+        return !c.isEmpty() && sendAll(m_server, c);
+    }
 
     // feed bytes from the server; returns false when they cannot be authenticated
     bool receive(const char *data, int len, QByteArray *plain)
     {
         m_in.append(data, len);
         if (!m_dec) {
-            if (m_in.size() < m_key.size())
+            if (m_in.size() < keyLen())
                 return true;
-            m_dec = std::make_unique<Aead>(m_method, hkdfSha1(m_key, m_in.left(m_key.size()), "ss-subkey", m_key.size()));
-            m_in.remove(0, m_key.size());
+            m_dec = std::make_unique<Aead>(m_cipher.chacha, subkey(m_in.left(keyLen())));
+            m_in.remove(0, keyLen());
+            m_wantHeader = m_cipher.sip022;
         }
         for (;;) {
+            if (m_wantHeader) {   // SIP022 response header: type 1, timestamp, our salt, first chunk length
+                const int fixedLen = 1 + 8 + keyLen() + 2;
+                if (m_in.size() < fixedLen + kTagLen)
+                    return true;
+                QByteArray hdr;
+                if (!m_dec->open(m_in.constData(), fixedLen + kTagLen, &hdr)) {
+                    m_error = QObject::tr("the answer could not be decrypted — wrong key or cipher.");
+                    return false;
+                }
+                m_in.remove(0, fixedLen + kTagLen);
+                const qint64 skew = qint64(getU64(hdr.constData() + 1)) - QDateTime::currentSecsSinceEpoch();
+                if (uchar(hdr.at(0)) != 1) {
+                    m_error = QObject::tr("the server's answer has a wrong type.");
+                    return false;
+                }
+                if (skew > kMaxTimeSkew || skew < -kMaxTimeSkew) {
+                    m_error = QObject::tr("the server's clock differs from this computer's by %1 s (at most %2 s are allowed).")
+                                  .arg(skew).arg(kMaxTimeSkew);
+                    return false;
+                }
+                if (m_requestSalt.size() != keyLen()
+                    || sodium_memcmp(hdr.constData() + 9, m_requestSalt.constData(), size_t(keyLen())) != 0) {
+                    m_error = QObject::tr("the server's answer does not belong to this connection.");
+                    return false;
+                }
+                m_want = (uchar(hdr.at(9 + keyLen())) << 8) | uchar(hdr.at(10 + keyLen()));
+                m_wantHeader = false;
+            }
             if (m_want < 0) {   // waiting for the length chunk
                 if (m_in.size() < 2 + kTagLen)
                     return true;
                 QByteArray len;
-                if (!m_dec->open(m_in.constData(), 2 + kTagLen, &len))
+                if (!m_dec->open(m_in.constData(), 2 + kTagLen, &len)) {
+                    m_error = QObject::tr("the answer could not be decrypted — wrong password or cipher.");
                     return false;
+                }
                 m_in.remove(0, 2 + kTagLen);
-                m_want = ((uchar(len[0]) << 8) | uchar(len[1])) & kMaxPayload;
+                m_want = (uchar(len[0]) << 8) | uchar(len[1]);
+                if (!m_cipher.sip022)
+                    m_want &= kMaxPayload;
             }
+            if (m_want > kMaxPayload2022)
+                return false;
             if (m_in.size() < m_want + kTagLen)
                 return true;
             QByteArray chunk;
-            if (!m_dec->open(m_in.constData(), m_want + kTagLen, &chunk))
+            if (!m_dec->open(m_in.constData(), m_want + kTagLen, &chunk)) {
+                m_error = QObject::tr("the answer could not be decrypted — wrong password or cipher.");
                 return false;
+            }
             m_in.remove(0, m_want + kTagLen);
             m_want = -1;
             plain->append(chunk);
@@ -241,14 +388,18 @@ public:
     }
 
     native_socket server() const { return m_server; }
+    void setRequestSalt(const QByteArray &salt) { m_requestSalt = salt; }   // for fuzzing only
 
 private:
     native_socket m_server;
-    QString m_method;
-    QByteArray m_key;
+    const CipherInfo &m_cipher;
+    QList<QByteArray> m_keys;
+    QByteArray m_requestSalt;
     std::unique_ptr<Aead> m_enc, m_dec;
     QByteArray m_in;
     int m_want = -1;
+    bool m_wantHeader = false;
+    QString m_error;
 };
 
 // Copies between the loopback end (libssh) and the encrypted server connection.
@@ -266,7 +417,7 @@ void relay(std::shared_ptr<Session> s, native_socket local, QByteArray pending)
         if (fromLocal) {
             const int n = int(::recv(local, buf, sizeof buf, 0));
             if (n <= 0 || !s->send(buf, n))
-                break;
+                break;   // libssh closed its end: the session is over, so is this thread
         }
         if (fromServer) {
             const int n = int(::recv(s->server(), buf, sizeof buf, 0));
@@ -311,15 +462,72 @@ QByteArray hkdfSha1(const QByteArray &key, const QByteArray &salt, const QByteAr
     return out.left(len);
 }
 
+QByteArray decodeServerBytesForFuzzing(const QString &method, const QString &password, const QByteArray &bytes, bool *ok)
+{
+    const CipherInfo *cipher = cipherOf(method);
+    *ok = false;
+    if (!cipher || !keyProblem(method, password).isEmpty())
+        return {};
+    QList<QByteArray> keys;
+    if (cipher->sip022) {
+        for (const QString &k : password.split(QLatin1Char(':')))
+            keys << QByteArray::fromBase64(k.toLatin1());
+    } else {
+        keys << masterKey(password.toUtf8(), cipher->keyLen);
+    }
+    Session s(native_socket(kInvalidSocket), *cipher, keys);
+    s.setRequestSalt(QByteArray(cipher->keyLen, '\x42'));
+    QByteArray plain;
+    // in pieces of different sizes, as they arrive from a socket
+    int off = 0, step = 1;
+    *ok = true;
+    while (off < bytes.size() && *ok) {
+        const int n = std::min<int>(step, int(bytes.size()) - off);
+        *ok = s.receive(bytes.constData() + off, n, &plain);
+        off += n;
+        step = step * 3 % 4093 + 1;
+    }
+    return plain;
+}
+
+QString keyProblem(const QString &method, const QString &password)
+{
+    const CipherInfo *c = cipherOf(method);
+    if (!c)
+        return QObject::tr("The cipher \"%1\" is not supported (use %2).").arg(method, methods().join(QStringLiteral(", ")));
+    if (password.isEmpty())
+        return QObject::tr("Enter the Shadowsocks password.");
+    if (!c->sip022)
+        return {};
+    const QStringList parts = password.split(QLatin1Char(':'));
+    if (parts.size() > 1 && c->chacha)
+        return QObject::tr("Several keys (key:key) work only with the 2022-blake3-aes ciphers.");
+    for (const QString &k : parts) {
+        const QByteArray raw = QByteArray::fromBase64(k.trimmed().toLatin1(), QByteArray::AbortOnBase64DecodingErrors);
+        if (raw.size() != c->keyLen)
+            return QObject::tr("For %1 the password is a key: %2 random bytes in base64 (e.g. from \"openssl rand -base64 %2\"), "
+                               "as written in the server's config.").arg(method).arg(c->keyLen);
+    }
+    return {};
+}
+
 sw_socket_t open(const ProxyConfig &server, const QString &targetHost, int targetPort,
                  int timeoutMs, bool waitForData, QString *error)
 {
-    const int keyLen = keyLenOf(server.method);
-    if (!keyLen) {
+    const CipherInfo *cipher = cipherOf(server.method);
+    if (const QString problem = keyProblem(server.method, server.password); !problem.isEmpty()) {
         if (error)
-            *error = QObject::tr("Shadowsocks: the cipher \"%1\" is not supported (use %2).")
-                         .arg(server.method, methods().join(QStringLiteral(", ")));
+            *error = QObject::tr("Shadowsocks: %1").arg(problem);
         return kInvalidSocket;
+    }
+    QList<QByteArray> keys;
+    if (cipher->sip022) {
+        for (const QString &k : server.password.split(QLatin1Char(':')))
+            keys << QByteArray::fromBase64(k.trimmed().toLatin1());
+    } else {
+        QByteArray pw = server.password.toUtf8();
+        keys << masterKey(pw, cipher->keyLen);
+        secure::wipe(pw);
     }
     QString err;
     const sw_socket_t fd = proxytunnel::connectDirect(server.host, server.port, timeoutMs, &err);
@@ -328,9 +536,9 @@ sw_socket_t open(const ProxyConfig &server, const QString &targetHost, int targe
             *error = QObject::tr("Shadowsocks server %1:%2: %3").arg(server.host).arg(server.port).arg(err);
         return kInvalidSocket;
     }
-    QByteArray pw = server.password.toUtf8();
-    auto session = std::make_shared<Session>(native_socket(fd), server.method, masterKey(pw, keyLen));
-    secure::wipe(pw);
+    auto session = std::make_shared<Session>(native_socket(fd), *cipher, keys);
+    for (QByteArray &k : keys)
+        secure::wipe(k);
     if (!session->start(targetHost, targetPort)) {
         if (error)
             *error = QObject::tr("Shadowsocks: could not send the request.");
@@ -353,13 +561,17 @@ sw_socket_t open(const ProxyConfig &server, const QString &targetHost, int targe
             const int n = int(::recv(native_socket(fd), buf, sizeof buf, 0));
             if (n <= 0) {
                 if (error)
-                    *error = QObject::tr("Shadowsocks: the server closed the connection — wrong password or cipher, or it cannot reach %1:%2.")
-                                 .arg(targetHost).arg(targetPort);
+                    *error = cipher->sip022
+                        ? QObject::tr("Shadowsocks: the server closed the connection — wrong key or cipher, this computer's clock is off by more than 30 s, or it cannot reach %1:%2.")
+                              .arg(targetHost).arg(targetPort)
+                        : QObject::tr("Shadowsocks: the server closed the connection — wrong password or cipher, or it cannot reach %1:%2.")
+                              .arg(targetHost).arg(targetPort);
                 return kInvalidSocket;
             }
             if (!session->receive(buf, n, &first)) {
                 if (error)
-                    *error = QObject::tr("Shadowsocks: the answer could not be decrypted — wrong password or cipher.");
+                    *error = QObject::tr("Shadowsocks: %1").arg(session->error().isEmpty()
+                                 ? QObject::tr("the answer could not be decrypted — wrong password or cipher.") : session->error());
                 return kInvalidSocket;
             }
         }

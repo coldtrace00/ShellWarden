@@ -361,34 +361,74 @@ bool probe(const ProxyConfig &proxy, int timeoutMs, QString *error)
 bool loopbackPair(sw_socket_t *a, sw_socket_t *b, QString *error)
 {
     initSockets();
-    native_socket listener = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (listener == native_socket(kInvalidSocket)) {
+    auto fail = [error](native_socket l, native_socket c, native_socket sv) {
+        for (native_socket s : {l, c, sv})
+            if (s != native_socket(kInvalidSocket))
+                SW_CLOSE(s);
         if (error)
             *error = QObject::tr("Cannot create a local socket.");
         return false;
-    }
+    };
+    native_socket listener = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (listener == native_socket(kInvalidSocket))
+        return fail(listener, kInvalidSocket, kInvalidSocket);
+#ifdef _WIN32
+    // nobody else may bind the same port while it is open
+    BOOL excl = TRUE;
+    setsockopt(listener, SOL_SOCKET, SO_EXCLUSIVEADDRUSE, reinterpret_cast<const char *>(&excl), sizeof excl);
+#endif
     sockaddr_in addr{};
     addr.sin_family = AF_INET;
     addr.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
     addr.sin_port = 0;
     socklen_t len = sizeof addr;
-    native_socket client = native_socket(kInvalidSocket), server = native_socket(kInvalidSocket);
-    if (::bind(listener, reinterpret_cast<sockaddr *>(&addr), sizeof addr) == 0
-        && ::listen(listener, 1) == 0
-        && ::getsockname(listener, reinterpret_cast<sockaddr *>(&addr), &len) == 0) {
-        client = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-        if (client != native_socket(kInvalidSocket)
-            && ::connect(client, reinterpret_cast<sockaddr *>(&addr), sizeof addr) == 0)
-            server = ::accept(listener, nullptr, nullptr);
+    if (::bind(listener, reinterpret_cast<sockaddr *>(&addr), sizeof addr) != 0
+        || ::listen(listener, 4) != 0
+        || ::getsockname(listener, reinterpret_cast<sockaddr *>(&addr), &len) != 0)
+        return fail(listener, kInvalidSocket, kInvalidSocket);
+    native_socket client = ::socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
+    if (client == native_socket(kInvalidSocket)
+        || ::connect(client, reinterpret_cast<sockaddr *>(&addr), sizeof addr) != 0)
+        return fail(listener, client, kInvalidSocket);
+    // Which address did our own connect() get? Another local program could
+    // connect to the port first: accept() would then return ITS connection.
+    sockaddr_in mine{};
+    socklen_t mineLen = sizeof mine;
+    if (::getsockname(client, reinterpret_cast<sockaddr *>(&mine), &mineLen) != 0)
+        return fail(listener, client, kInvalidSocket);
+
+    native_socket server = native_socket(kInvalidSocket);
+    const auto deadline = Clock::now() + std::chrono::seconds(5);
+    for (int tries = 0; tries < 16 && server == native_socket(kInvalidSocket); ++tries) {
+        const int left = int(std::chrono::duration_cast<std::chrono::milliseconds>(deadline - Clock::now()).count());
+        if (left <= 0)
+            break;
+#ifdef _WIN32
+        WSAPOLLFD p{};
+        p.fd = listener;
+        p.events = POLLRDNORM;
+        if (WSAPoll(&p, 1, left) <= 0)
+            break;
+#else
+        pollfd p{};
+        p.fd = listener;
+        p.events = POLLIN;
+        if (::poll(&p, 1, left) <= 0)
+            break;
+#endif
+        sockaddr_in peer{};
+        socklen_t peerLen = sizeof peer;
+        const native_socket s = ::accept(listener, reinterpret_cast<sockaddr *>(&peer), &peerLen);
+        if (s == native_socket(kInvalidSocket))
+            break;
+        if (peer.sin_port == mine.sin_port && peer.sin_addr.s_addr == mine.sin_addr.s_addr)
+            server = s;
+        else
+            SW_CLOSE(s);   // someone else's connection: drop it and wait for ours
     }
     SW_CLOSE(listener);
-    if (server == native_socket(kInvalidSocket)) {
-        if (client != native_socket(kInvalidSocket))
-            SW_CLOSE(client);
-        if (error)
-            *error = QObject::tr("Cannot create a local socket.");
-        return false;
-    }
+    if (server == native_socket(kInvalidSocket))
+        return fail(kInvalidSocket, client, kInvalidSocket);
     int one = 1;
     setsockopt(client, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<const char *>(&one), sizeof one);
     setsockopt(server, IPPROTO_TCP, TCP_NODELAY, reinterpret_cast<const char *>(&one), sizeof one);

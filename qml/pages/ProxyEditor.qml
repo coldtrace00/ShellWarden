@@ -14,6 +14,7 @@ Drawer {
     readonly property bool isSs: typeBox.currentIndex === 4
     readonly property var types: ["socks5", "http", "tor", "cloudflare", "shadowsocks"]
     readonly property var ssMethods: App.shadowsocksMethods()
+    readonly property bool ss2022: isSs && String(ssMethods[ssMethod.currentIndex] || "").indexOf("2022-") === 0
     readonly property var torModes: ["auto", "browser", "service", "exe"]
     property string torMode: "auto"
     property var torInfo: ({})
@@ -40,7 +41,7 @@ Drawer {
         const p = id ? App.proxy(id) : ({})
         name.text = p.name || ""
         typeBox.currentIndex = Math.max(0, types.indexOf(p.type || "socks5"))
-        ssMethod.currentIndex = Math.max(0, ssMethods.indexOf(p.method || "chacha20-ietf-poly1305"))
+        ssMethod.currentIndex = Math.max(0, ssMethods.indexOf(p.method || "2022-blake3-aes-256-gcm"))
         ssLink.text = ""; ssLinkErr.text = ""
         cfPath.text = p.cfPath || ""
         torMode = p.torMode || "auto"
@@ -91,6 +92,7 @@ Drawer {
             Layout.margins: 24
             Layout.bottomMargin: 8
             Text {
+                textFormat: Text.PlainText
                 text: root.proxyId ? qsTr("Edit proxy") : qsTr("New proxy")
                 color: Theme.text; font.pixelSize: 20; font.weight: Font.DemiBold
                 Layout.fillWidth: true
@@ -113,7 +115,7 @@ Drawer {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 5
-                Text { text: qsTr("Type"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; text: qsTr("Type"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                 AppCombo {
                     id: typeBox
                     Layout.fillWidth: true
@@ -132,7 +134,7 @@ Drawer {
                 visible: root.isTor
                 Layout.fillWidth: true
                 spacing: 8
-                Text { text: qsTr("Which Tor to use"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; text: qsTr("Which Tor to use"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                 Repeater {
                     model: [
                         { m: "auto", t: qsTr("Automatically"), d: qsTr("Tor Browser if it is open, otherwise the Tor service") },
@@ -162,8 +164,8 @@ Drawer {
                                 Layout.fillWidth: true
                                 Layout.rightMargin: 10
                                 spacing: 1
-                                Text { text: modelData.t; color: Theme.text; font.pixelSize: 13 }
-                                Text { Layout.fillWidth: true; text: modelData.d; color: modeBtn.on ? Theme.text : Theme.textDim; opacity: modeBtn.on ? 0.85 : 1; font.pixelSize: 11; wrapMode: Text.WordWrap }
+                                Text { textFormat: Text.PlainText; text: modelData.t; color: Theme.text; font.pixelSize: 13 }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.d; color: modeBtn.on ? Theme.text : Theme.textDim; opacity: modeBtn.on ? 0.85 : 1; font.pixelSize: 11; wrapMode: Text.WordWrap }
                             }
                         }
                     }
@@ -210,6 +212,7 @@ Drawer {
                         anchors.margins: 10
                         spacing: 8
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             wrapMode: Text.WordWrap
                             color: Theme.text
@@ -226,6 +229,7 @@ Drawer {
                     }
                 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     font.pixelSize: 11
@@ -271,6 +275,7 @@ Drawer {
                     onAccepted: cfPath.text = decodeURIComponent(String(selectedFile).replace(/^file:\/{2,3}/, Qt.platform.os === "windows" ? "" : "/"))
                 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     font.pixelSize: 11
@@ -285,6 +290,7 @@ Drawer {
                 Layout.fillWidth: true
                 spacing: 6
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.textFaint; font.pixelSize: 11
@@ -311,9 +317,19 @@ Drawer {
                         }
                     }
                 }
-                Text { id: ssLinkErr; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 11 }
-                Text { text: qsTr("Cipher"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; id: ssLinkErr; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 11 }
+                Text { textFormat: Text.PlainText; text: qsTr("Cipher"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                 AppCombo { id: ssMethod; Layout.fillWidth: true; model: root.ssMethods }
+                Text {
+                    textFormat: Text.PlainText
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    font.pixelSize: 11
+                    color: root.ss2022 ? Theme.textFaint : Theme.warn
+                    text: root.ss2022
+                          ? qsTr("Shadowsocks 2022: protected against replayed connections, the key is used as is. The server's clock must be right (±30 s).")
+                          : qsTr("Older Shadowsocks (2017): the key comes from the password through MD5, there is no protection against replayed connections, and some censors can detect it by probing the server. Use a 2022-blake3 cipher if your server supports it.")
+                }
             }
 
             RowLayout {
@@ -324,7 +340,7 @@ Drawer {
                 AppField { id: port; Layout.preferredWidth: 90; label: qsTr("Port"); mono: true; field.validator: IntValidator { bottom: 1; top: 65535 } }
             }
             AppField { id: user; visible: !root.isTor && !root.isSs; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client ID (optional)") : qsTr("Username (optional)"); mono: true }
-            AppField { id: pass; visible: !root.isTor; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client Secret (optional)") : root.isSs ? qsTr("Password") : qsTr("Password (optional)"); secret: true; hint: qsTr("Stored encrypted in the vault.") }
+            AppField { id: pass; visible: !root.isTor; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client Secret (optional)") : root.ss2022 ? qsTr("Key (base64, from the server's config)") : root.isSs ? qsTr("Password") : qsTr("Password (optional)"); secret: true; hint: qsTr("Stored encrypted in the vault.") }
 
             // Test result
             Rectangle {
@@ -340,12 +356,14 @@ Drawer {
                     anchors.margins: 12
                     spacing: 4
                     Text {
+                        textFormat: Text.PlainText
                         text: root.testing ? qsTr("Testing the proxy…")
                               : root.testResult && root.testResult.cloudflare ? (root.testResult.ok ? qsTr("cloudflared is ready") : qsTr("cloudflared is missing"))
                               : (root.testResult && root.testResult.ok ? qsTr("Proxy works") : qsTr("Proxy does not work"))
                         color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold
                     }
                     Text {
+                        textFormat: Text.PlainText
                         visible: !root.testing && root.testResult !== null
                         Layout.fillWidth: true
                         wrapMode: Text.WordWrap
@@ -370,7 +388,7 @@ Drawer {
                 }
             }
 
-            Text { id: err; visible: text !== ""; Layout.fillWidth: true; color: Theme.danger; font.pixelSize: 12; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; id: err; visible: text !== ""; Layout.fillWidth: true; color: Theme.danger; font.pixelSize: 12; wrapMode: Text.WordWrap }
         }
 
         }

@@ -27,4 +27,15 @@ int removeHost(const QString &path, const QString &host, int port);
 // Host pattern as OpenSSH writes it: "host" for 22, "[host]:port" otherwise.
 QString hostPattern(const QString &host, int port);
 
+// Does a host field from the file (plain or hashed "|1|salt|hmac") name host:port?
+bool matches(const QString &hostsField, const QString &host, int port);
+
+// Like OpenSSH's HashKnownHosts: host names in the file are replaced by
+// "|1|salt|HMAC-SHA1(salt, name)", so the file no longer tells where you
+// connect; checking a given host still works. Lines with several names become
+// one line per name; wildcard patterns and @markers are left alone.
+// Returns how many names were hashed (-1 if the file could not be written).
+int hashFile(const QString &path);
+QByteArray hashedName(const QString &pattern, const QByteArray &salt);   // salt empty = random
+
 } // namespace knownhosts

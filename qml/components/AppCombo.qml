@@ -22,6 +22,7 @@ ComboBox {
         leftPadding: 12
         rightPadding: 28
         contentItem: Text {
+            textFormat: Text.PlainText
             text: control.textAt(index)
             color: index === control.currentIndex ? Theme.accent : Theme.text
             font.pixelSize: 13

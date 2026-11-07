@@ -18,8 +18,8 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 2
-                Text { text: qsTr("Snippets"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
-                Text { text: qsTr("Saved commands and scripts — send them from the terminal toolbar or from here. Stored encrypted in the vault, newest first."); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+                Text { textFormat: Text.PlainText; text: qsTr("Snippets"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: qsTr("Saved commands and scripts — send them from the terminal toolbar or from here. Stored encrypted in the vault, newest first."); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
             }
             AppButton { text: qsTr("New snippet"); glyph: Theme.iconAdd; variant: "primary"; onClicked: editor.openFor("") }
         }
@@ -54,22 +54,23 @@ Item {
                         spacing: 4
                         RowLayout {
                             spacing: 8
-                            Text { text: model.name; color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold }
+                            Text { textFormat: Text.PlainText; text: model.name; color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold }
                             Rectangle {
                                 visible: !!model.group
                                 radius: 4; color: Theme.surface2
                                 implicitWidth: grp.implicitWidth + 10; implicitHeight: 18
-                                Text { id: grp; anchors.centerIn: parent; text: model.group || ""; color: Theme.textDim; font.pixelSize: 10 }
+                                Text { textFormat: Text.PlainText; id: grp; anchors.centerIn: parent; text: model.group || ""; color: Theme.textDim; font.pixelSize: 10 }
                             }
                             Rectangle {
                                 visible: !!model.script
                                 radius: 4; color: Theme.accentDim
                                 implicitWidth: scr.implicitWidth + 10; implicitHeight: 18
-                                Text { id: scr; anchors.centerIn: parent; text: qsTr("script"); color: Theme.accent; font.pixelSize: 10 }
+                                Text { textFormat: Text.PlainText; id: scr; anchors.centerIn: parent; text: qsTr("script"); color: Theme.accent; font.pixelSize: 10 }
                             }
-                            Text { visible: model.autoRun && !model.script; text: "↵ " + qsTr("runs on send"); color: Theme.textFaint; font.pixelSize: 10 }
+                            Text { textFormat: Text.PlainText; visible: model.autoRun && !model.script; text: "↵ " + qsTr("runs on send"); color: Theme.textFaint; font.pixelSize: 10 }
                         }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             text: model.command
                             color: Theme.textDim
@@ -109,8 +110,8 @@ Item {
                 anchors.centerIn: parent
                 spacing: 12
                 IconLabel { Layout.alignment: Qt.AlignHCenter; glyph: Theme.iconSnippet; size: 40; color: Theme.textFaint }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No snippets yet"); color: Theme.text; font.pixelSize: 16 }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("e.g. \"sudo apt update && sudo apt upgrade -y\" or \"docker ps -a\""); color: Theme.textDim; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("No snippets yet"); color: Theme.text; font.pixelSize: 16 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("e.g. \"sudo apt update && sudo apt upgrade -y\" or \"docker ps -a\""); color: Theme.textDim; font.pixelSize: 12 }
                 AppButton { Layout.alignment: Qt.AlignHCenter; text: qsTr("New snippet"); glyph: Theme.iconAdd; variant: "primary"; onClicked: editor.openFor("") }
             }
         }
@@ -159,13 +160,14 @@ Item {
             spacing: 5
             RowLayout {
                 Layout.fillWidth: true
-                Text { Layout.fillWidth: true; text: scriptMode.checked ? qsTr("Script") : qsTr("Command"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: scriptMode.checked ? qsTr("Script") : qsTr("Command"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
                 AppButton { text: qsTr("Import .sh file…"); glyph: Theme.iconUpload; compact: true; variant: "ghost"; onClicked: shDlg.open() }
             }
             ScrollView {
                 Layout.fillWidth: true
                 Layout.preferredHeight: scriptMode.checked ? 240 : 140
                 TextArea {
+                    textFormat: TextArea.PlainText
                     id: cmd
                     color: Theme.text
                     font.family: Theme.monoFont
@@ -184,8 +186,9 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 2
-                Text { Layout.fillWidth: true; text: qsTr("Run as a script"); color: Theme.text; font.pixelSize: 13 }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("Run as a script"); color: Theme.text; font.pixelSize: 13 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     text: qsTr("For multi-line scripts (.sh): the whole text is sent in one go and run by the interpreter from its #! line (sh if there is none). Off: the text is typed into the terminal as is.")
@@ -195,7 +198,7 @@ Item {
             AppSwitch { id: scriptMode }
         }
         AppCheckBox { id: autoRun; visible: !scriptMode.checked; text: qsTr("Press Enter after sending (run immediately)"); checked: true }
-        Text { id: err; visible: text !== ""; color: Theme.danger; font.pixelSize: 12 }
+        Text { textFormat: Text.PlainText; id: err; visible: text !== ""; color: Theme.danger; font.pixelSize: 12 }
         RowLayout {
             Layout.fillWidth: true
             Item { Layout.fillWidth: true }

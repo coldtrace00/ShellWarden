@@ -29,6 +29,7 @@ MenuItem {
             }
         }
         Text {
+            textFormat: Text.PlainText
             Layout.fillWidth: true
             text: item.text
             color: item.enabled ? Theme.text : Theme.textFaint
@@ -36,7 +37,7 @@ MenuItem {
             elide: Text.ElideRight
             verticalAlignment: Text.AlignVCenter
         }
-        Text {   // submenu arrow
+        Text { textFormat: Text.PlainText;   // submenu arrow
             visible: item.subMenu !== null
             text: "›"
             color: Theme.textDim
@@ -44,6 +45,7 @@ MenuItem {
             Layout.leftMargin: 12
         }
         Text {
+            textFormat: Text.PlainText
             visible: item.shortcutText !== ""
             text: item.shortcutText
             color: Theme.textFaint

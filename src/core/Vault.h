@@ -34,6 +34,11 @@ public:
     void lock();
     // Re-checks the master password of the unlocked vault (constant time).
     bool verifyPassword(const QString &password) const;
+    // Argon2id with this vault's own cost settings but another salt: keys that
+    // come from the master password without being the vault key (protected
+    // hosts). Never cheaper than the vault key, so it is no shortcut for guessing.
+    bool deriveWithVaultCost(const QString &password, const QByteArray &salt16, unsigned char *out32,
+                             QString *error) const;
 
     QJsonObject &data() { return m_data; }
     const QJsonObject &data() const { return m_data; }

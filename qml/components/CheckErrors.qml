@@ -32,6 +32,7 @@ ColumnLayout {
         Repeater {
             model: root.count
             delegate: Text {
+                textFormat: Text.PlainText
                 Layout.row: index; Layout.column: 1
                 text: root.errors[index].service
                 color: Theme.text
@@ -42,6 +43,7 @@ ColumnLayout {
         Repeater {
             model: root.count
             delegate: Text {
+                textFormat: Text.PlainText
                 Layout.row: index; Layout.column: 2
                 Layout.fillWidth: true
                 text: root.errors[index].error
@@ -52,6 +54,7 @@ ColumnLayout {
         }
     }
     Text {
+        textFormat: Text.PlainText
         visible: root.hint !== ""
         Layout.fillWidth: true
         text: root.hint

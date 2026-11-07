@@ -42,6 +42,7 @@ AbstractButton {
             Behavior on x { NumberAnimation { duration: 160; easing.type: Easing.OutCubic } }
         }
         Text {
+            textFormat: Text.PlainText
             anchors.left: ic.right
             anchors.leftMargin: 12
             anchors.right: badgeBox.visible ? badgeBox.left : parent.right
@@ -65,6 +66,7 @@ AbstractButton {
             implicitWidth: badgeText.implicitWidth + 12
             implicitHeight: 18
             Text {
+                textFormat: Text.PlainText
                 id: badgeText
                 anchors.centerIn: parent
                 text: root.badge

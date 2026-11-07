@@ -160,8 +160,8 @@ ApplicationWindow {
                         spacing: 0
                         Layout.fillWidth: true
                         Layout.alignment: Qt.AlignVCenter
-                        Text { text: App.appName; color: Theme.text; font.pixelSize: 16; font.weight: Font.DemiBold }
-                        Text { text: "v" + App.version + (App.portable ? " · portable" : ""); color: Theme.textFaint; font.pixelSize: 10 }
+                        Text { textFormat: Text.PlainText; text: App.appName; color: Theme.text; font.pixelSize: 16; font.weight: Font.DemiBold }
+                        Text { textFormat: Text.PlainText; text: "v" + App.version + (App.portable ? " · portable" : ""); color: Theme.textFaint; font.pixelSize: 10 }
                     }
                     AbstractButton {
                         id: collapseBtn
@@ -242,6 +242,7 @@ ApplicationWindow {
                         spacing: 8
                         IconLabel { glyph: Theme.iconUpdate; color: Theme.accent; size: 16 }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             text: qsTr("Update %1 available").arg(String(App.updater.latestVersion).replace(/^v/i, ""))
                             color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight
@@ -284,8 +285,9 @@ ApplicationWindow {
                         ColumnLayout {
                             spacing: 0
                             Layout.fillWidth: true
-                            Text { text: qsTr("Kill switch"); color: Theme.text; font.pixelSize: 12; font.weight: Font.Medium }
+                            Text { textFormat: Text.PlainText; text: qsTr("Kill switch"); color: Theme.text; font.pixelSize: 12; font.weight: Font.Medium }
                             Text {
+                                textFormat: Text.PlainText
                                 Layout.fillWidth: true
                                 elide: Text.ElideRight
                                 text: App.settings.killSwitch ? (App.firewallActive ? qsTr("On · firewall lock") : qsTr("On · proxy only")) : qsTr("Off")
@@ -347,7 +349,7 @@ ApplicationWindow {
                                 anchors.centerIn: parent
                                 spacing: 8
                                 IconLabel { glyph: App.vaultUnlocked ? Theme.iconUnlock : Theme.iconLock; size: 15; color: Theme.accent }
-                                Text { text: qsTr("Vault"); color: Theme.text; font.pixelSize: 12 }
+                                Text { textFormat: Text.PlainText; text: qsTr("Vault"); color: Theme.text; font.pixelSize: 12 }
                             }
                         }
                     }
@@ -471,7 +473,7 @@ ApplicationWindow {
                     visible: win.currentTab < 0 && !App.vaultUnlocked && ["known", "settings", "log"].indexOf(win.page) < 0
                     spacing: 14
                     IconLabel { anchors.horizontalCenter: parent.horizontalCenter; glyph: Theme.iconLock; size: 38; color: Theme.textFaint }
-                    Text { text: qsTr("The vault is locked. Open sessions keep running."); color: Theme.textDim; font.pixelSize: 14 }
+                    Text { textFormat: Text.PlainText; text: qsTr("The vault is locked. Open sessions keep running."); color: Theme.textDim; font.pixelSize: 14 }
                     AppButton {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: qsTr("Unlock"); variant: "primary"; glyph: Theme.iconUnlock
@@ -521,7 +523,7 @@ ApplicationWindow {
                     visible: win.currentSession && win.currentSession.detached && !win.splitActive
                     spacing: 14
                     IconLabel { anchors.horizontalCenter: parent.horizontalCenter; glyph: Theme.iconPopout; size: 38; color: Theme.textFaint }
-                    Text { anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("This session is open in a separate window."); color: Theme.textDim; font.pixelSize: 14 }
+                    Text { textFormat: Text.PlainText; anchors.horizontalCenter: parent.horizontalCenter; text: qsTr("This session is open in a separate window."); color: Theme.textDim; font.pixelSize: 14 }
                     AppButton {
                         anchors.horizontalCenter: parent.horizontalCenter
                         text: qsTr("Bring back"); glyph: Theme.iconDock; variant: "primary"
@@ -631,7 +633,7 @@ ApplicationWindow {
             secret: true
             onAccepted: challenge.submit()
         }
-        Text { id: chErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+        Text { textFormat: Text.PlainText; id: chErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
         RowLayout {
             Layout.fillWidth: true
             Item { Layout.fillWidth: true }
@@ -652,7 +654,7 @@ ApplicationWindow {
             secret: true
             onAccepted: App.unlockVault(text)
         }
-        Text { id: unlockErr; color: Theme.danger; visible: text !== ""; font.pixelSize: 12 }
+        Text { textFormat: Text.PlainText; id: unlockErr; color: Theme.danger; visible: text !== ""; font.pixelSize: 12 }
         RowLayout {
             Layout.fillWidth: true
             Item { Layout.fillWidth: true }
@@ -707,7 +709,7 @@ ApplicationWindow {
                     color: Theme.text
                     linkColor: Theme.accent
                     font.pixelSize: 13
-                    onLinkActivated: (link) => Qt.openUrlExternally(link)
+                    onLinkActivated: (link) => { if (String(link).indexOf("https://") === 0) Qt.openUrlExternally(link) }
                 }
             }
         }
@@ -717,6 +719,7 @@ ApplicationWindow {
             value: updateDialog.up.progress
         }
         Text {
+            textFormat: Text.PlainText
             visible: updateDialog.mode === "available" && (updateDialog.up.state === "downloading" || updateDialog.up.state === "error")
             text: updateDialog.up.state === "error" ? updateDialog.up.error
                                                     : qsTr("Downloading… %1%").arg(Math.round(updateDialog.up.progress * 100))
@@ -796,6 +799,7 @@ ApplicationWindow {
         z: 1000
         Behavior on opacity { NumberAnimation { duration: 180 } }
         Text {
+            textFormat: Text.PlainText
             id: toastText
             anchors.centerIn: parent
             width: parent.width - 40

@@ -122,7 +122,7 @@ bool Vault::unlock(const QString &password, QString *error)
 
     // Refuse absurd parameters so a tampered file can't make us allocate GBs.
     if (ops < crypto_pwhash_OPSLIMIT_MIN || ops > 64
-        || mem < crypto_pwhash_MEMLIMIT_MIN || mem > (quint64(2) << 30)) {
+        || mem < crypto_pwhash_MEMLIMIT_MIN || mem > (quint64(1) << 30)) {
         if (error)
             *error = QObject::tr("The vault file has invalid key-derivation parameters.");
         return false;
@@ -194,6 +194,17 @@ bool Vault::changePassword(const QString &oldPassword, const QString &newPasswor
     return writeFile(error);
 }
 
+bool Vault::deriveWithVaultCost(const QString &password, const QByteArray &salt16, unsigned char *out32,
+                                QString *error) const
+{
+    if (!m_key || salt16.size() != kSaltLen || kKeyLen != 32) {
+        if (error)
+            *error = QObject::tr("The vault is locked.");
+        return false;
+    }
+    return deriveKey(password, reinterpret_cast<const unsigned char *>(salt16.constData()), m_ops, m_mem, out32, error);
+}
+
 bool Vault::verifyPassword(const QString &password) const
 {
     if (!m_key)
@@ -252,11 +263,19 @@ bool Vault::writeFile(QString *error)
         nullptr, nonce, m_key);
     cipher.resize(int(cipherLen));
 
-    // Keep the previous version as a backup, then replace atomically.
+    // Keep the previous version as a backup, then replace atomically. The backup
+    // itself is replaced atomically too: there is never a moment without one.
     if (QFileInfo::exists(m_path)) {
-        const QString bak = m_path + QStringLiteral(".bak");
-        QFile::remove(bak);
-        QFile::copy(m_path, bak);
+        QFile cur(m_path);
+        if (cur.open(QIODevice::ReadOnly)) {
+            const QByteArray previous = cur.readAll();
+            cur.close();
+            QSaveFile bak(m_path + QStringLiteral(".bak"));
+            if (bak.open(QIODevice::WriteOnly)) {
+                bak.write(previous);
+                bak.commit();
+            }
+        }
     }
 
     QSaveFile out(m_path);

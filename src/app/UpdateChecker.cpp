@@ -44,12 +44,68 @@ int UpdateChecker::compareVersions(const QString &a, const QString &b)
     return 0;
 }
 
+QString UpdateChecker::releaseProblem(const QString &tag, const QString &assetName, const QString &trustedComment,
+                                      bool signedBuild, const QString &current)
+{
+    QString ver = tag.trimmed();
+    if (ver.startsWith(QLatin1Char('v')) || ver.startsWith(QLatin1Char('V')))
+        ver.remove(0, 1);
+    static const QRegularExpression plain(QStringLiteral("^[0-9]+(\\.[0-9]+){1,3}$"));
+    if (!plain.match(ver).hasMatch())
+        return tr("The release tag \"%1\" is not a version number.").arg(tag);
+    if (compareVersions(ver, current) <= 0)
+        return tr("The release %1 is not newer than the installed %2.").arg(ver, current);
+    if (!assetName.contains(QLatin1Char('-') + ver + QLatin1Char('-')))
+        return tr("The file %1 does not belong to version %2.").arg(assetName, ver);
+    if (signedBuild) {
+        static const QRegularExpression signedVer(QStringLiteral("^\\S+ ([0-9]+(\\.[0-9]+){1,3})( |$)"));
+        const QRegularExpressionMatch m = signedVer.match(trustedComment.trimmed());
+        if (!m.hasMatch())
+            return tr("The signature does not say which version it is for.");
+        if (m.captured(1) != ver)
+            return tr("The signature is for version %1, but the release is %2.").arg(m.captured(1), ver);
+    }
+    return {};
+}
+
+QString UpdateChecker::checksumFor(const QByteArray &sums, const QString &fileName)
+{
+    static const QRegularExpression hex(QStringLiteral("^[0-9a-fA-F]{64}$"));
+    QString found;
+    for (const QByteArray &line : sums.split('\n')) {
+        const QList<QByteArray> parts = line.simplified().split(' ');
+        if (parts.size() != 2)
+            continue;
+        QString name = QString::fromUtf8(parts.at(1));
+        if (name.startsWith(QLatin1Char('*')))   // "binary mode" marker of sha256sum
+            name.remove(0, 1);
+        if (name != fileName || !hex.match(QString::fromLatin1(parts.at(0))).hasMatch())
+            continue;
+        if (!found.isEmpty() && found != QString::fromLatin1(parts.at(0)).toLower())
+            return {};   // two different sums for one file: refuse
+        found = QString::fromLatin1(parts.at(0)).toLower();
+    }
+    return found;
+}
+
 void UpdateChecker::setLanguage(const QString &code)
 {
     if (m_lang == code)
         return;
     m_lang = code;
     emit changed();
+}
+
+QString UpdateChecker::safeNotes(const QString &markdown)
+{
+    QString t = markdown;
+    static const QRegularExpression image(QStringLiteral("!\\[[^\\]]*\\]\\([^)]*\\)"));
+    static const QRegularExpression refImage(QStringLiteral("!\\[[^\\]]*\\]\\[[^\\]]*\\]"));
+    static const QRegularExpression html(QStringLiteral("<[^>\\n]*>"));
+    t.replace(image, QString());
+    t.replace(refImage, QString());
+    t.replace(html, QString());
+    return t;
 }
 
 QString UpdateChecker::pickNotes(const QString &body, const QString &lang)
@@ -150,8 +206,7 @@ void UpdateChecker::download()
         if (name == m_assetName)
             m_assetUrl = a.value(QStringLiteral("browser_download_url")).toString();
         if (name.compare(QStringLiteral("SHA256SUMS"), Qt::CaseInsensitive) == 0
-            || name.compare(QStringLiteral("SHA256SUMS.txt"), Qt::CaseInsensitive) == 0
-            || name == m_assetName + QStringLiteral(".sha256"))
+            || name.compare(QStringLiteral("SHA256SUMS.txt"), Qt::CaseInsensitive) == 0)
             m_sumsUrl = a.value(QStringLiteral("browser_download_url")).toString();
         if (name.compare(QStringLiteral("SHA256SUMS.minisig"), Qt::CaseInsensitive) == 0
             || name.compare(QStringLiteral("SHA256SUMS.txt.minisig"), Qt::CaseInsensitive) == 0)
@@ -183,6 +238,12 @@ void UpdateChecker::fetchChecksums()
         const QByteArray sums = r->readAll();
         const QString pubKey = QStringLiteral(APP_UPDATE_PUBKEY);
         if (pubKey.isEmpty()) {   // a build without a release key (forks, own builds): checksum only
+            const QString problem = releaseProblem(m_latest, m_assetName, QString(), false,
+                                                   QCoreApplication::applicationVersion());
+            if (!problem.isEmpty()) {
+                setState(QStringLiteral("error"), problem + QLatin1Char(' ') + tr("Update not installed."));
+                return;
+            }
             useChecksums(sums);
             return;
         }
@@ -204,6 +265,13 @@ void UpdateChecker::fetchChecksums()
                 setState(QStringLiteral("error"), tr("Signature check failed: %1 Update not installed.").arg(err));
                 return;
             }
+            // the signed comment names the version: an old signed release under a new tag is refused
+            const QString problem = releaseProblem(m_latest, m_assetName, m_signedBy, true,
+                                                   QCoreApplication::applicationVersion());
+            if (!problem.isEmpty()) {
+                setState(QStringLiteral("error"), problem + QLatin1Char(' ') + tr("Update not installed."));
+                return;
+            }
             useChecksums(sums);
         });
     });
@@ -212,14 +280,8 @@ void UpdateChecker::fetchChecksums()
 void UpdateChecker::useChecksums(const QByteArray &sums)
 {
     {
-        m_expectedSha.clear();
-        for (const QByteArray &line : sums.split('\n')) {
-            const QList<QByteArray> parts = line.simplified().split(' ');
-            if (parts.size() >= 2 && QString::fromUtf8(parts.last()).remove(QLatin1Char('*')) == m_assetName)
-                m_expectedSha = QString::fromLatin1(parts.first()).toLower();
-            else if (parts.size() == 1 && parts.first().size() == 64)
-                m_expectedSha = QString::fromLatin1(parts.first()).toLower();
-        }
+        // only a line that names exactly this file counts
+        m_expectedSha = checksumFor(sums, m_assetName);
         if (m_expectedSha.size() != 64) {
             setState(QStringLiteral("error"), tr("No checksum for %1 in SHA256SUMS.").arg(m_assetName));
             return;

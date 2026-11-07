@@ -45,16 +45,16 @@ Rectangle {
         spacing: 3
         Row {
             spacing: 0
-            Text { text: "user@srv"; color: root.theme.ansi ? root.theme.ansi[10] : "#0f0"; font.family: Theme.monoFont; font.pixelSize: 10; font.bold: true }
-            Text { text: ":"; color: root.theme.fg || "#fff"; font.family: Theme.monoFont; font.pixelSize: 10 }
-            Text { text: "~$ "; color: root.theme.ansi ? root.theme.ansi[12] : "#00f"; font.family: Theme.monoFont; font.pixelSize: 10; font.bold: true }
-            Text { text: "ls -la"; color: root.theme.input || root.theme.fg || "#fff"; font.family: Theme.monoFont; font.pixelSize: 10 }
+            Text { textFormat: Text.PlainText; text: "user@srv"; color: root.theme.ansi ? root.theme.ansi[10] : "#0f0"; font.family: Theme.monoFont; font.pixelSize: 10; font.bold: true }
+            Text { textFormat: Text.PlainText; text: ":"; color: root.theme.fg || "#fff"; font.family: Theme.monoFont; font.pixelSize: 10 }
+            Text { textFormat: Text.PlainText; text: "~$ "; color: root.theme.ansi ? root.theme.ansi[12] : "#00f"; font.family: Theme.monoFont; font.pixelSize: 10; font.bold: true }
+            Text { textFormat: Text.PlainText; text: "ls -la"; color: root.theme.input || root.theme.fg || "#fff"; font.family: Theme.monoFont; font.pixelSize: 10 }
         }
         Row {
             spacing: 8
-            Text { text: "docs/"; color: root.theme.ansi ? root.theme.ansi[4] : "#00f"; font.family: Theme.monoFont; font.pixelSize: 10; font.bold: true }
-            Text { text: "run.sh"; color: root.theme.ansi ? root.theme.ansi[2] : "#0f0"; font.family: Theme.monoFont; font.pixelSize: 10 }
-            Text { text: "err.log"; color: root.theme.ansi ? root.theme.ansi[1] : "#f00"; font.family: Theme.monoFont; font.pixelSize: 10 }
+            Text { textFormat: Text.PlainText; text: "docs/"; color: root.theme.ansi ? root.theme.ansi[4] : "#00f"; font.family: Theme.monoFont; font.pixelSize: 10; font.bold: true }
+            Text { textFormat: Text.PlainText; text: "run.sh"; color: root.theme.ansi ? root.theme.ansi[2] : "#0f0"; font.family: Theme.monoFont; font.pixelSize: 10 }
+            Text { textFormat: Text.PlainText; text: "err.log"; color: root.theme.ansi ? root.theme.ansi[1] : "#f00"; font.family: Theme.monoFont; font.pixelSize: 10 }
         }
         Row {
             spacing: 2
@@ -65,6 +65,7 @@ Rectangle {
         }
         Item { width: 1; height: 2 }
         Text {
+            textFormat: Text.PlainText
             text: root.theme.name || ""
             color: root.theme.fg || "#fff"
             font.pixelSize: 11

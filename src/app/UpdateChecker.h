@@ -28,7 +28,7 @@ public:
     QString state() const { return m_state; }
     QString latestVersion() const { return m_latest; }
     QString notes() const { return m_notes; }
-    QString localizedNotes() const { return pickNotes(m_notes, m_lang); }
+    QString localizedNotes() const { return safeNotes(pickNotes(m_notes, m_lang)); }
     bool automatic() const { return m_automatic; }
     void setLanguage(const QString &code);
     QString pageUrl() const { return m_page; }
@@ -42,11 +42,23 @@ public:
     Q_INVOKABLE void openPage();
 
     static int compareVersions(const QString &a, const QString &b);
+    // A signed old release re-published under a new tag must not be installed:
+    // the version in the tag, in the file name and in the signed comment
+    // ("ShellWarden 0.3.3 2026-11-07") must agree and be newer than ours.
+    // trustedComment is empty for builds without a release key.
+    // Returns an empty string when the release may be installed.
+    static QString releaseProblem(const QString &tag, const QString &assetName, const QString &trustedComment,
+                                  bool signedBuild, const QString &current);
+    // The line "<sha256>  <file>" for exactly this file name; empty if missing.
+    static QString checksumFor(const QByteArray &sums, const QString &fileName);
     // Release notes may hold one section per language:
     //   <!-- lang:en --> … <!-- lang:uk --> … <!-- lang:ru --> …
     // Returns the section for `lang`, else English, else the first one;
     // notes without markers are returned as they are.
     static QString pickNotes(const QString &body, const QString &lang);
+    // Release notes are shown as Markdown: images (which would be loaded — a
+    // "\\\\host\\x.png" one even over SMB on Windows) and raw HTML are removed.
+    static QString safeNotes(const QString &markdown);
 
 signals:
     void changed();

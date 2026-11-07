@@ -31,8 +31,8 @@ Item {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 2
-                Text { text: qsTr("Hosts"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
-                Text { text: qsTr("Click a host to connect"); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+                Text { textFormat: Text.PlainText; text: qsTr("Hosts"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; text: qsTr("Click a host to connect"); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
             }
             TextField {
                 id: search
@@ -148,6 +148,7 @@ Item {
                                     width: 44; height: 44; radius: 10
                                     color: Theme.tint(model.color ? model.color : Theme.avatarColor(model.label), "2e")
                                     Text {
+                                        textFormat: Text.PlainText
                                         anchors.centerIn: parent
                                         text: model.type === "serial" ? "⏚" : Theme.initials(model.label)
                                         color: model.color ? model.color : Theme.avatarColor(model.label)
@@ -175,6 +176,7 @@ Item {
                                     Layout.fillWidth: true
                                     spacing: 3
                                     Text {
+                                        textFormat: Text.PlainText
                                         Layout.fillWidth: true
                                         text: model.label
                                         color: Theme.text
@@ -183,6 +185,7 @@ Item {
                                         elide: Text.ElideRight
                                     }
                                     Text {
+                                        textFormat: Text.PlainText
                                         Layout.fillWidth: true
                                         text: model.type === "serial" ? model.serialPort + " · " + (model.baud || 115200) + " baud"
                                               : model.type === "telnet" ? "telnet " + model.hostname : (model.username ? model.username + "@" : "") + model.hostname
@@ -207,6 +210,7 @@ Item {
                                         IconLabel { visible: !!model.jumpHostId; glyph: Theme.iconHop; size: 11; color: Theme.blue }
                                         IconLabel { visible: !!model.forwards && model.forwards.length > 0; glyph: Theme.iconTunnel; size: 11; color: Theme.textDim }
                                         Text {
+                                            textFormat: Text.PlainText
                                             visible: !!model.group
                                             text: model.group || ""
                                             color: Theme.textFaint
@@ -242,8 +246,9 @@ Item {
                 anchors.centerIn: parent
                 spacing: 12
                 IconLabel { Layout.alignment: Qt.AlignHCenter; glyph: Theme.iconServer; size: 40; color: Theme.textFaint }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No hosts yet"); color: Theme.text; font.pixelSize: 16 }
+                Text { textFormat: Text.PlainText; Layout.alignment: Qt.AlignHCenter; text: qsTr("No hosts yet"); color: Theme.text; font.pixelSize: 16 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.alignment: Qt.AlignHCenter
                     text: qsTr("Add a server or use quick connect at the top.")
                     color: Theme.textDim; font.pixelSize: 12

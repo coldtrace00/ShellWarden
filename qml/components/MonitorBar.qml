@@ -39,7 +39,7 @@ Rectangle {
         property real frac: -1        // 0..1 draws a small bar, <0 = no bar
         property string tip: ""
         spacing: 6
-        Text { text: g.title; color: Theme.textFaint; font.pixelSize: 11 }
+        Text { textFormat: Text.PlainText; text: g.title; color: Theme.textFaint; font.pixelSize: 11 }
         Rectangle {
             visible: g.frac >= 0
             implicitWidth: 42; implicitHeight: 6; radius: 3
@@ -47,7 +47,7 @@ Rectangle {
             Rectangle { width: Math.max(2, parent.width * Math.min(1, g.frac)); height: parent.height; radius: 3; color: root.level(g.frac)
                         Behavior on width { NumberAnimation { duration: 300 } } }
         }
-        Text { text: g.value; color: Theme.text; font.pixelSize: 11; font.family: Theme.monoFont }
+        Text { textFormat: Text.PlainText; text: g.value; color: Theme.text; font.pixelSize: 11; font.family: Theme.monoFont }
         HoverHandler { id: gh }
         ToolTip.visible: gh.hovered && g.tip !== ""
         ToolTip.text: g.tip
@@ -62,6 +62,7 @@ Rectangle {
         clip: true
 
         Text {
+            textFormat: Text.PlainText
             visible: !root.m.ok
             Layout.fillWidth: true
             text: root.m.error ? root.m.error : qsTr("Reading the server load…")
@@ -145,8 +146,8 @@ Rectangle {
             spacing: 10
             ColumnLayout {
                 spacing: 2
-                Text { text: qsTr("Server monitor"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold }
-                Text { Layout.fillWidth: true; text: qsTr("What to show on the strip"); color: Theme.textFaint; font.pixelSize: 11 }
+                Text { textFormat: Text.PlainText; text: qsTr("Server monitor"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: qsTr("What to show on the strip"); color: Theme.textFaint; font.pixelSize: 11 }
             }
             // a card with one tappable row per item
             Rectangle {
@@ -181,8 +182,8 @@ Rectangle {
                                     border.color: itemRow.on ? Theme.accent : Theme.textFaint
                                     IconLabel { anchors.centerIn: parent; visible: itemRow.on; glyph: Theme.iconCheck; size: 11; color: Theme.bg }
                                 }
-                                Text { Layout.fillWidth: true; text: modelData[1]; color: itemRow.on ? Theme.text : Theme.textDim; font.pixelSize: 12 }
-                                Text { Layout.rightMargin: 8; text: modelData[2]; color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData[1]; color: itemRow.on ? Theme.text : Theme.textDim; font.pixelSize: 12 }
+                                Text { textFormat: Text.PlainText; Layout.rightMargin: 8; text: modelData[2]; color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont }
                             }
                         }
                     }
@@ -191,7 +192,7 @@ Rectangle {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 6
-                Text { text: qsTr("Refresh every"); color: Theme.text; font.pixelSize: 12 }
+                Text { textFormat: Text.PlainText; text: qsTr("Refresh every"); color: Theme.text; font.pixelSize: 12 }
                 RowLayout {
                     Layout.fillWidth: true
                     spacing: 6
@@ -206,13 +207,14 @@ Rectangle {
                             onClicked: App.setSetting("monitorInterval", modelData)
                             background: Rectangle { radius: 6; color: ivBtn.on ? Theme.accentDim : (ivBtn.hovered ? Theme.surface2 : "transparent")
                                                     border.color: ivBtn.on ? Theme.accent : Theme.border }
-                            contentItem: Text { text: qsTr("%1 s").arg(modelData); color: ivBtn.on ? Theme.text : Theme.textDim; font.pixelSize: 11
+                            contentItem: Text { textFormat: Text.PlainText; text: qsTr("%1 s").arg(modelData); color: ivBtn.on ? Theme.text : Theme.textDim; font.pixelSize: 11
                                                 horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                         }
                     }
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 Layout.fillWidth: true
                 wrapMode: Text.WordWrap
                 color: Theme.textFaint

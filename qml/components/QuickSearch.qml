@@ -135,13 +135,14 @@ Popup {
                     ColumnLayout {
                         Layout.fillWidth: true
                         spacing: 1
-                        Text { Layout.fillWidth: true; text: modelData.title; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
-                        Text { Layout.fillWidth: true; text: modelData.sub; color: Theme.textFaint; font.pixelSize: 11; elide: Text.ElideRight }
+                        Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.title; color: Theme.text; font.pixelSize: 13; elide: Text.ElideRight }
+                        Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.sub; color: Theme.textFaint; font.pixelSize: 11; elide: Text.ElideRight }
                     }
-                    Text { visible: index === root.sel; text: "↵"; color: Theme.textDim; font.pixelSize: 13; Layout.rightMargin: 10 }
+                    Text { textFormat: Text.PlainText; visible: index === root.sel; text: "↵"; color: Theme.textDim; font.pixelSize: 13; Layout.rightMargin: 10 }
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: root.results.length === 0
                 text: qsTr("Nothing found")
@@ -149,6 +150,7 @@ Popup {
             }
         }
         Text {
+            textFormat: Text.PlainText
             Layout.fillWidth: true
             text: qsTr("↑↓ choose · Enter open · Esc close · works with part of a name or letters in order")
             color: Theme.textFaint

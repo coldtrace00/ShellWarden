@@ -8,6 +8,7 @@
 #include "core/HostImport.h"
 #include "core/KeyTools.h"
 #include "core/KnownHosts.h"
+#include "core/Protected.h"
 #include "core/PasswordTools.h"
 #include "core/Paths.h"
 #include "core/SecureBytes.h"
@@ -69,6 +70,7 @@ const QVariantMap &settingDefaults()
         {QStringLiteral("fontSize"), 11},
         {QStringLiteral("copyOnSelect"), true},
         {QStringLiteral("rightClickPaste"), true},
+        {QStringLiteral("pasteWarning"), true},                   // ask before pasting several lines
         {QStringLiteral("scrollback"), 10000},
         {QStringLiteral("autoLockMinutes"), 15},
         {QStringLiteral("keepaliveSeconds"), 30},
@@ -80,6 +82,7 @@ const QVariantMap &settingDefaults()
         {QStringLiteral("hostProbe"), false},                     // online dot on the host cards (opt-in)
         {QStringLiteral("commandHistory"), true},                 // remember commands per host (in the vault)
         {QStringLiteral("logEnabled"), true},
+        {QStringLiteral("logRetentionDays"), 30},                 // the journal is encrypted with the vault
         {QStringLiteral("killSwitchInterval"), 3},
         {QStringLiteral("firewallLock"), false},
         {QStringLiteral("bell"), QStringLiteral("off")},          // off | flash | sound
@@ -126,11 +129,11 @@ AppController::AppController(QObject *parent)
                QStringLiteral("type"), QStringLiteral("color"), QStringLiteral("theme"),
                QStringLiteral("serialPort"), QStringLiteral("baud"), QStringLiteral("forwards"),
                QStringLiteral("confirmMaster"), QStringLiteral("alwaysAskPassphrase"),
-               QStringLiteral("useAgent"), QStringLiteral("agentForward")},
+               QStringLiteral("useAgent"), QStringLiteral("agentForward"), QStringLiteral("protected")},
               {QStringLiteral("password"), QStringLiteral("notes")}),
       m_keys({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("type"),
               QStringLiteral("fingerprint"), QStringLiteral("publicKey"), QStringLiteral("encrypted"),
-              QStringLiteral("created")},
+              QStringLiteral("created"), QStringLiteral("protected")},
              {QStringLiteral("passphrase")}),
       m_proxies({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("type"),
                  QStringLiteral("host"), QStringLiteral("port"), QStringLiteral("username"),
@@ -144,6 +147,7 @@ AppController::AppController(QObject *parent)
       m_log(paths::logsDir())
 {
     m_log.setEnabled(m_settings.value(QStringLiteral("logEnabled"), true).toBool());
+    m_log.setRetentionDays(m_settings.value(QStringLiteral("logRetentionDays"), 30).toInt());   // drops whole old months
     TerminalEmulator::setCustomThemes(customThemes());
     dropRemovedThemes();
 
@@ -232,6 +236,7 @@ AppController::AppController(QObject *parent)
         secure::wipe(m_sensitiveClipboard);
     });
 
+    knownhosts::hashFile(m_knownHostsPath);   // older versions wrote plain host names
     refreshKnownHosts();
     logEvent(ActivityLog::Info, QStringLiteral("app"), tr("%1 %2 started").arg(appName(), version()),
              paths::isPortable() ? tr("portable mode · %1").arg(paths::dataDir()) : paths::dataDir());
@@ -464,6 +469,8 @@ void AppController::createVault(const QString &password, const QString &confirm)
             emit vaultError(err);
             return;
         }
+        if (const QString w = ensureVaultKeys(password); !w.isEmpty())
+            logEvent(ActivityLog::Warning, QStringLiteral("vault"), w);
         logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Vault created"), paths::vaultFile());
         reloadModels();
         restartAutoLock();
@@ -483,9 +490,15 @@ void AppController::unlockVault(const QString &password)
             emit vaultError(err);
             return;
         }
+        const QString warning = ensureVaultKeys(password);
         logEvent(ActivityLog::Success, QStringLiteral("vault"), tr("Vault unlocked"));
+        if (!warning.isEmpty())
+            logEvent(ActivityLog::Security, QStringLiteral("vault"), warning);
         migrateRemovedFeatures();
+        if (sealAllProtected())
+            persist();
         reloadModels();
+        refreshKnownHosts();
         restartAutoLock();
         emit vaultStateChanged();
     });
@@ -528,11 +541,13 @@ void AppController::lockVault()
     if (m_vault.isUnlocked())
         logEvent(ActivityLog::Info, QStringLiteral("vault"), tr("Vault locked"));
     m_vault.lock();
+    m_log.close();   // the journal can still be written, but not read
     m_hosts.reset({});
     m_keys.reset({});
     m_proxies.reset({});
     m_snippets.reset({});
     m_autoLock.stop();
+    refreshKnownHosts();
     emit vaultStateChanged();
 }
 
@@ -543,7 +558,63 @@ QString AppController::changeMasterPassword(const QString &oldPw, const QString 
     if (newPw.size() < passwordtools::kManualMinLength)
         return tr("The master password must be at least 8 characters.");
     QString err;
+    // Protected secrets are sealed for a key pair that comes from the master
+    // password: open them with the old one and seal them for the new one,
+    // in memory, before the vault is written with the new password.
+    const QJsonObject before = m_vault.data();
+    const QJsonObject prot = before.value(QStringLiteral("protect")).toObject();
+    if (!prot.isEmpty()) {
+        auto *oldSk = static_cast<unsigned char *>(sodium_malloc(protect::kSecretLen));
+        auto *newSk = static_cast<unsigned char *>(sodium_malloc(protect::kSecretLen));
+        auto *seed = static_cast<unsigned char *>(sodium_malloc(32));
+        auto freeAll = [&] { sodium_free(oldSk); sodium_free(newSk); sodium_free(seed); };
+        if (!oldSk || !newSk || !seed) {
+            freeAll();
+            return tr("Not enough secure memory.");
+        }
+        if (!deriveProtectSecret(oldPw, oldSk)) {
+            freeAll();
+            logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Master password change failed"), tr("Wrong master password."));
+            return tr("Wrong master password.");
+        }
+        QByteArray salt(protect::kSaltLen, Qt::Uninitialized);
+        randombytes_buf(salt.data(), size_t(salt.size()));
+        if (!m_vault.deriveWithVaultCost(newPw, salt, seed, &err)) {
+            freeAll();
+            return err;
+        }
+        QByteArray newPk;
+        protect::keypairFromSeed(seed, &newPk, newSk);
+        const QByteArray oldPk = QByteArray::fromBase64(prot.value(QStringLiteral("pk")).toString().toLatin1());
+        bool ok = true;
+        for (const QString &sec : {QString(kHosts), QString(kKeys)}) {
+            QJsonArray list = section(sec);
+            for (int i = 0; i < list.size(); ++i) {
+                QJsonObject o = list.at(i).toObject();
+                QJsonObject sealed = o.value(QStringLiteral("sealed")).toObject();
+                if (sealed.isEmpty())
+                    continue;
+                for (auto it = sealed.begin(); it != sealed.end(); ++it) {
+                    QByteArray plain;
+                    ok = protect::open(it.value().toString().toLatin1(), oldPk, oldSk, &plain) && ok;
+                    it.value() = QString::fromLatin1(protect::seal(plain, newPk));
+                    sodium_memzero(plain.data(), size_t(plain.size()));
+                }
+                o.insert(QStringLiteral("sealed"), sealed);
+                list.replace(i, o);
+            }
+            setSection(sec, list);
+        }
+        m_vault.data().insert(QStringLiteral("protect"), QJsonObject{{QStringLiteral("salt"), QString::fromLatin1(salt.toBase64())},
+                                                                    {QStringLiteral("pk"), QString::fromLatin1(newPk.toBase64())}});
+        freeAll();
+        if (!ok) {
+            m_vault.data() = before;
+            return tr("A protected secret could not be decrypted; nothing was changed.");
+        }
+    }
     if (!m_vault.changePassword(oldPw, newPw, &err)) {
+        m_vault.data() = before;   // keep the seals that match the (unchanged) password
         logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Master password change failed"), err);
         return err;
     }
@@ -762,7 +833,12 @@ QStringList AppController::serialPorts() const
 
 QVariantMap AppController::host(const QString &id) const
 {
-    return findIn(kHosts, id).toVariantMap();
+    QJsonObject h = findIn(kHosts, id);
+    // a protected password stays sealed: the editor only learns that there is one
+    if (isSealed(h, QStringLiteral("password")))
+        h.insert(QStringLiteral("passwordProtected"), true);
+    h.remove(QStringLiteral("sealed"));
+    return h.toVariantMap();
 }
 
 QString AppController::saveHost(const QVariantMap &h)
@@ -824,10 +900,36 @@ QString AppController::saveHost(const QVariantMap &h)
     // removed features: in-app 2FA (TOTP) — never stored again
     o.remove(QStringLiteral("require2fa"));
     o.remove(QStringLiteral("totpSecret"));
+    o.remove(QStringLiteral("passwordProtected"));
     const bool isNew = o.value(QStringLiteral("id")).toString().isEmpty();
     const QJsonObject before = findIn(kHosts, o.value(QStringLiteral("id")).toString());
+    // Turning "ask for the master password" off needs that password (unprotectHost) first.
+    if (!isNew && isSealed(before) && !o.value(QStringLiteral("confirmMaster")).toBool())
+        return tr("Enter the master password to turn off \"ask for the master password\".");
+    // A sealed password the editor could not show is kept unless a new one was typed
+    // or "remove the saved password" was chosen.
+    o.remove(QStringLiteral("sealed"));
+    o.remove(QStringLiteral("protected"));
+    const bool clearPassword = o.take(QStringLiteral("clearPassword")).toBool();
+    const bool keepPassword = o.take(QStringLiteral("keepPassword")).toBool();
+    if (o.value(QStringLiteral("password")).toString().isEmpty() && keepPassword && !clearPassword) {
+        if (isSealed(before, QStringLiteral("password"))) {
+            QJsonObject sealed;
+            sealed.insert(QStringLiteral("password"), before.value(QStringLiteral("sealed")).toObject().value(QStringLiteral("password")));
+            o.insert(QStringLiteral("sealed"), sealed);
+            o.insert(QStringLiteral("protected"), true);
+        } else {
+            o.insert(QStringLiteral("password"), before.value(QStringLiteral("password")));   // unprotected just now
+        }
+    }
+    if (o.value(QStringLiteral("confirmMaster")).toBool())
+        sealObject(o, {QStringLiteral("password")});
     if (!upsert(kHosts, o))
         return tr("Could not save the vault.");
+    if (o.value(QStringLiteral("confirmMaster")).toBool() && sealAllProtected())   // its key too
+        persist();
+    if (o.value(QStringLiteral("noHistory")).toBool() && !before.value(QStringLiteral("noHistory")).toBool())
+        clearCommandHistory(o.value(QStringLiteral("id")).toString());   // turned off: forget what was kept
     if (o.value(QStringLiteral("confirmMaster")).toBool() != before.value(QStringLiteral("confirmMaster")).toBool())
         logEvent(ActivityLog::Security, QStringLiteral("host"),
                  o.value(QStringLiteral("confirmMaster")).toBool() ? tr("Master password on connect enabled for host")
@@ -1183,12 +1285,27 @@ QString AppController::exportPublicKeyRfc4716(const QString &id, const QUrl &url
     return {};
 }
 
-QString AppController::exportPrivateKey(const QString &id, const QUrl &url)
+QString AppController::exportPrivateKey(const QString &id, const QUrl &url, const QString &masterPassword)
 {
     const QJsonObject k = findIn(kKeys, id);
     if (k.isEmpty())
         return tr("Key not found.");
-    QByteArray text = k.value(QStringLiteral("privateKey")).toString().toUtf8();
+    QString plain = k.value(QStringLiteral("privateKey")).toString();
+    if (isSealed(k, QStringLiteral("privateKey"))) {   // protected: the master password opens it for this export
+        auto *sk = static_cast<unsigned char *>(sodium_malloc(protect::kSecretLen));
+        QByteArray opened;
+        const bool ok = sk && deriveProtectSecret(masterPassword, sk)
+                        && protect::open(k.value(QStringLiteral("sealed")).toObject().value(QStringLiteral("privateKey")).toString().toLatin1(),
+                                         protectPublicKey(), sk, &opened);
+        if (sk)
+            sodium_free(sk);
+        if (!ok)
+            return tr("Wrong master password.");
+        plain = QString::fromUtf8(opened);
+        secure::wipe(opened);
+    }
+    QByteArray text = plain.toUtf8();
+    secure::wipe(plain);
     secure::ByteGuard g(text);
     QString err;
     if (!keytools::writeTextFile(url.toLocalFile(), text, true, &err))
@@ -1205,6 +1322,9 @@ QString AppController::setKeyPassphrase(const QString &id, const QString &passph
         QJsonObject o = keys.at(i).toObject();
         if (o.value(QStringLiteral("id")).toString() != id)
             continue;
+        if (isSealed(o))
+            return tr("This key is protected by the master password (a host that uses it asks for it). "
+                      "Its saved passphrase is protected the same way.");
         if (!keytools::checkPassphrase(o.value(QStringLiteral("privateKey")).toString().toUtf8(), passphrase))
             return tr("Wrong passphrase.");
         o.insert(QStringLiteral("passphrase"), save ? passphrase : QString());
@@ -1222,6 +1342,11 @@ void AppController::forgetKeyPassphrase(const QString &id)
         QJsonObject o = keys.at(i).toObject();
         if (o.value(QStringLiteral("id")).toString() == id) {
             o.insert(QStringLiteral("passphrase"), QString());
+            if (isSealed(o, QStringLiteral("passphrase"))) {   // a protected passphrase goes too
+                QJsonObject sealed = o.value(QStringLiteral("sealed")).toObject();
+                sealed.remove(QStringLiteral("passphrase"));
+                o.insert(QStringLiteral("sealed"), sealed);
+            }
             keys.replace(i, o);
             setSection(kKeys, keys);
             persist();
@@ -1362,8 +1487,9 @@ QString AppController::saveProxy(const QVariantMap &p)
     if (o.value(QStringLiteral("type")).toString() == QLatin1String("shadowsocks")) {
         if (!shadowsocks::isSupported(o.value(QStringLiteral("method")).toString()))
             return tr("Choose the Shadowsocks cipher.");
-        if (o.value(QStringLiteral("password")).toString().isEmpty())
-            return tr("Enter the Shadowsocks password.");
+        if (const QString p = shadowsocks::keyProblem(o.value(QStringLiteral("method")).toString(),
+                                                      o.value(QStringLiteral("password")).toString()); !p.isEmpty())
+            return p;
         o.remove(QStringLiteral("username"));
     } else {
         o.remove(QStringLiteral("method"));
@@ -1851,11 +1977,6 @@ TerminalSession *AppController::createSession(const QString &hostId, const QStri
     return s;
 }
 
-bool AppController::needsChallenge(const QJsonObject &h) const
-{
-    return h.value(QStringLiteral("confirmMaster")).toBool();
-}
-
 void AppController::openHost(const QString &id)
 {
     const QJsonObject h = findIn(kHosts, id);
@@ -1880,7 +2001,10 @@ QString AppController::answerChallenge(const QString &hostId, const QString &mas
 
     const QString label = h.value(QStringLiteral("label")).toString();
     QString err;
-    if (h.value(QStringLiteral("confirmMaster")).toBool() && !m_vault.verifyPassword(masterPassword))
+    Opened opened;
+    if (protectPublicKey().size() == protect::kPublicLen)
+        opened = openFor({hostId}, masterPassword, &err);   // proves the password and opens the sealed secrets
+    else if (!m_vault.verifyPassword(masterPassword))
         err = tr("Wrong master password.");
     if (!err.isEmpty()) {
         const int fails = m_challengeFails.value(hostId) + 1;
@@ -1895,10 +2019,13 @@ QString AppController::answerChallenge(const QString &hostId, const QString &mas
     m_challengeFails.remove(hostId);
     logEvent(ActivityLog::Security, QStringLiteral("session"), tr("Connection check passed (master password)"), QString(), label);
     const QPointer<TerminalSession> pending = m_pendingChallenge.take(hostId);
-    if (pending)
+    if (pending) {
+        pending->setOpenedSecrets(opened);
         startSession(pending, h);
-    else
-        openHostNow(hostId);
+    } else {
+        openHostNow(hostId, opened);
+    }
+    wipe(opened);
     return {};
 }
 
@@ -1946,7 +2073,7 @@ QString AppController::setHostRoute(const QString &id, const QString &route)
     return tr("This host no longer exists.");
 }
 
-void AppController::openHostNow(const QString &id)
+void AppController::openHostNow(const QString &id, const Opened &opened)
 {
     const QJsonObject h = findIn(kHosts, id);
     if (h.isEmpty())
@@ -1977,6 +2104,7 @@ void AppController::openHostNow(const QString &id)
         }
         startSession(s, fresh);
     });
+    s->setOpenedSecrets(opened);
     startSession(s, h);
 }
 
@@ -2044,7 +2172,7 @@ void AppController::duplicateSession(int index)
 }
 
 // Address, user, secrets and jump host of a saved host (no proxy, no tunnels).
-ConnectParams AppController::paramsFor(const QJsonObject &host, const QJsonObject &jumpHost) const
+ConnectParams AppController::paramsFor(const QJsonObject &host, const QJsonObject &jumpHost, const Opened &opened) const
 {
     ConnectParams p;
     p.host = host.value(QStringLiteral("hostname")).toString();
@@ -2052,7 +2180,7 @@ ConnectParams AppController::paramsFor(const QJsonObject &host, const QJsonObjec
     p.username = host.value(QStringLiteral("username")).toString();
     if (p.username.isEmpty())
         p.username = qEnvironmentVariable("USERNAME", qEnvironmentVariable("USER", QStringLiteral("root")));
-    p.password = host.value(QStringLiteral("password")).toString();
+    p.password = secretOf(host, QStringLiteral("password"), opened);
     p.knownHostsPath = m_knownHostsPath;
     p.keepaliveSeconds = m_settings.value(QStringLiteral("keepaliveSeconds"), 30).toInt();
     p.useAgent = host.value(QStringLiteral("useAgent")).toBool();
@@ -2060,9 +2188,9 @@ ConnectParams AppController::paramsFor(const QJsonObject &host, const QJsonObjec
 
     const QJsonObject key = findIn(kKeys, host.value(QStringLiteral("keyId")).toString());
     if (!key.isEmpty()) {
-        p.privateKey = key.value(QStringLiteral("privateKey")).toString().toUtf8();
+        p.privateKey = secretOf(key, QStringLiteral("privateKey"), opened).toUtf8();
         p.keyPassphrase = host.value(QStringLiteral("alwaysAskPassphrase")).toBool()
-                              ? QString() : key.value(QStringLiteral("passphrase")).toString();
+                              ? QString() : secretOf(key, QStringLiteral("passphrase"), opened);
     }
     QString jumpLabel;
     if (!jumpHost.isEmpty()) {
@@ -2074,11 +2202,11 @@ ConnectParams AppController::paramsFor(const QJsonObject &host, const QJsonObjec
         p.jump.username = jumpHost.value(QStringLiteral("username")).toString();
         if (p.jump.username.isEmpty())
             p.jump.username = p.username;
-        p.jump.password = jumpHost.value(QStringLiteral("password")).toString();
+        p.jump.password = secretOf(jumpHost, QStringLiteral("password"), opened);
         const QJsonObject jk = findIn(kKeys, jumpHost.value(QStringLiteral("keyId")).toString());
         if (!jk.isEmpty()) {
-            p.jump.privateKey = jk.value(QStringLiteral("privateKey")).toString().toUtf8();
-            p.jump.keyPassphrase = jk.value(QStringLiteral("passphrase")).toString();
+            p.jump.privateKey = secretOf(jk, QStringLiteral("privateKey"), opened).toUtf8();
+            p.jump.keyPassphrase = secretOf(jk, QStringLiteral("passphrase"), opened);
         }
     }
     return p;
@@ -2202,7 +2330,14 @@ void AppController::startSession(TerminalSession *s, const QJsonObject &host)
         }
     }
 
-    ConnectParams p = paramsFor(host, jumpHost);
+    Opened opened = s->takeOpenedSecrets();   // a protected host: opened with the master password just now
+    if (opened.isEmpty() && (isSealed(host) || isSealed(findIn(kKeys, host.value(QStringLiteral("keyId")).toString()))
+                             || isSealed(jumpHost) || isSealed(findIn(kKeys, jumpHost.value(QStringLiteral("keyId")).toString())))) {
+        s->abort(tr("This host asks for the master password."));
+        return;
+    }
+    ConnectParams p = paramsFor(host, jumpHost, opened);
+    wipe(opened);
     p.killSwitch = killSwitch;
     s->setCanSaveSecrets(m_vault.isUnlocked() && !s->hostId().isEmpty());
 
@@ -2460,6 +2595,8 @@ void AppController::rememberCommand(const QString &hostId, const QString &comman
 {
     if (hostId.isEmpty() || !m_vault.isUnlocked() || !m_settings.value(QStringLiteral("commandHistory"), true).toBool())
         return;
+    if (findIn(kHosts, hostId).value(QStringLiteral("noHistory")).toBool())
+        return;   // turned off for this host
     QStringList &list = m_history[hostId];
     list.removeAll(command);          // the same command again moves to the top
     list.prepend(command);
@@ -2515,6 +2652,9 @@ void AppController::onSecretVerified(const QString &hostId, int kind, const QStr
             if (h.value(QStringLiteral("id")).toString() == hostId) {
                 h.insert(QStringLiteral("password"), secret);
                 hosts.replace(i, h);
+                if (h.value(QStringLiteral("confirmMaster")).toBool())
+                    sealObject(h, {QStringLiteral("password")});
+                hosts.replace(i, h);
                 setSection(kHosts, hosts);
                 if (persist())
                     emit notify(tr("Password saved to the vault."), false);
@@ -2528,6 +2668,8 @@ void AppController::onSecretVerified(const QString &hostId, int kind, const QStr
             QJsonObject k = keys.at(i).toObject();
             if (k.value(QStringLiteral("id")).toString() == keyId) {
                 k.insert(QStringLiteral("passphrase"), secret);
+                if (isSealed(k))
+                    sealObject(k, {QStringLiteral("passphrase")});
                 keys.replace(i, k);
                 setSection(kKeys, keys);
                 if (persist())
@@ -2545,10 +2687,28 @@ void AppController::onSecretVerified(const QString &hostId, int kind, const QStr
 void AppController::refreshKnownHosts()
 {
     m_knownHosts.clear();
+    // Names in the file are hashed; while the vault is open, show which of your
+    // hosts an entry belongs to (the file itself never says).
+    const QJsonArray hosts = m_vault.isUnlocked() ? section(kHosts) : QJsonArray();
     for (const knownhosts::Entry &e : knownhosts::load(m_knownHostsPath)) {
+        QString name;
+        if (e.hosts.startsWith(QLatin1String("|1|"))) {
+            for (const QJsonValue &v : hosts) {
+                const QJsonObject h = v.toObject();
+                const QString hn = h.value(QStringLiteral("hostname")).toString();
+                const int port = h.value(QStringLiteral("port")).toInt(22);
+                if (!hn.isEmpty() && knownhosts::matches(e.hosts, hn, port)) {
+                    name = QStringLiteral("%1 · %2").arg(h.value(QStringLiteral("label")).toString(), knownhosts::hostPattern(hn, port));
+                    break;
+                }
+            }
+        } else {
+            name = e.hosts;
+        }
         m_knownHosts.append(QVariantMap{
             {QStringLiteral("line"), e.line},
             {QStringLiteral("hosts"), e.hosts},
+            {QStringLiteral("name"), name},
             {QStringLiteral("keyType"), e.keyType},
             {QStringLiteral("fingerprint"), e.fingerprint},
         });
@@ -2670,6 +2830,8 @@ void AppController::setSetting(const QString &key, const QVariant &value)
     }
     if (key == QLatin1String("logEnabled"))
         m_log.setEnabled(value.toBool());
+    if (key == QLatin1String("logRetentionDays"))
+        m_log.setRetentionDays(value.toInt());
     if (key == QLatin1String("monitorEnabled") || key == QLatin1String("monitorInterval")) {
         for (TerminalSession *s : m_sessions.items())
             s->setMonitorConfig(m_settings.value(QStringLiteral("monitorEnabled"), true).toBool(),
@@ -2820,20 +2982,23 @@ QString AppController::runOnHosts(const QVariantList &hostIds, const QString &co
     if (hostIds.isEmpty())
         return tr("Choose at least one host.");
     // one master password unlocks every "ask the master password" host of this run
-    const bool unlocked = !masterPassword.isEmpty() && m_vault.verifyPassword(masterPassword);
+    QString err;
+    Opened opened;
+    const bool unlocked = !masterPassword.isEmpty() && openWithMaster(hostIds, masterPassword, &opened, &err);
     if (!masterPassword.isEmpty() && !unlocked)
-        return tr("Wrong master password.");
+        return err;
     if (unlocked)
         logEvent(ActivityLog::Security, QStringLiteral("session"), tr("Protected hosts unlocked with the master password for a batch run"));
     QVector<BatchRunner::Job> jobs;
     QStringList names;
     for (const QVariant &v : hostIds) {
-        BatchRunner::Job j = batchJob(v.toString(), unlocked);
+        BatchRunner::Job j = batchJob(v.toString(), unlocked, opened);
         if (j.hostId.isEmpty())
             continue;
         names << j.label;
         jobs << j;
     }
+    wipe(opened);
     m_batch.run(jobs, command);
     for (QString &p : m_batchPass) secure::wipe(p);
     m_batchPass.clear();
@@ -2842,7 +3007,7 @@ QString AppController::runOnHosts(const QVariantList &hostIds, const QString &co
     return {};
 }
 
-BatchRunner::Job AppController::batchJob(const QString &hostId, bool protectedOk) const
+BatchRunner::Job AppController::batchJob(const QString &hostId, bool protectedOk, const Opened &opened) const
 {
     BatchRunner::Job j;
     const QJsonObject host = findIn(kHosts, hostId);
@@ -2859,12 +3024,12 @@ BatchRunner::Job AppController::batchJob(const QString &hostId, bool protectedOk
         j.skipReason = tr("Serial connection: not supported here.");
     else if (host.value(QStringLiteral("type")).toString() == QLatin1String("telnet"))
         j.skipReason = tr("Telnet host: commands can only be run over SSH.");
-    else if (!protectedOk && host.value(QStringLiteral("confirmMaster")).toBool())
+    else if (!protectedOk && hostNeedsMaster(host))
         j.skipReason = tr("Asks for the master password: enter it to include this host.");
     else if (killSwitch && proxyId.isEmpty())
         j.skipReason = tr("Kill switch: this host has no proxy.");
     else {
-        j.params = paramsFor(host, jumpHost);
+        j.params = paramsFor(host, jumpHost, opened);
         j.params.killSwitch = killSwitch;
         j.params.keepaliveSeconds = 0;
         // key passphrase typed once in the batch window (not saved anywhere)
@@ -2982,8 +3147,7 @@ QVariantMap AppController::agentStatus(bool withKeys) const
 
 bool AppController::hostIsProtected(const QString &hostId) const
 {
-    const QJsonObject h = findIn(kHosts, hostId);
-    return h.value(QStringLiteral("confirmMaster")).toBool();
+    return hostNeedsMaster(findIn(kHosts, hostId));
 }
 
 QString AppController::installKeys(const QVariantList &pairs, const QString &masterPassword, bool useForHost)
@@ -2992,9 +3156,14 @@ QString AppController::installKeys(const QVariantList &pairs, const QString &mas
         return tr("The vault is locked.");
     if (pairs.isEmpty())
         return tr("Choose at least one host.");
-    const bool unlocked = !masterPassword.isEmpty() && m_vault.verifyPassword(masterPassword);
+    QString err;
+    Opened opened;
+    QVariantList hostIds;
+    for (const QVariant &v : pairs)
+        hostIds << v.toMap().value(QStringLiteral("hostId"));
+    const bool unlocked = !masterPassword.isEmpty() && openWithMaster(hostIds, masterPassword, &opened, &err);
     if (!masterPassword.isEmpty() && !unlocked)
-        return tr("Wrong master password.");
+        return err;
     QVector<BatchRunner::Job> jobs;
     m_keyAssign.clear();
     QStringList names;
@@ -3004,7 +3173,7 @@ QString AppController::installKeys(const QVariantList &pairs, const QString &mas
         const QString keyId = m.value(QStringLiteral("keyId")).toString();
         QString line = publicKeyLine(keyId).trimmed();
         line.remove(QLatin1Char('\''));   // never break the shell quoting (a quote can only be in the comment)
-        BatchRunner::Job j = batchJob(hostId, unlocked);
+        BatchRunner::Job j = batchJob(hostId, unlocked, opened);
         if (j.hostId.isEmpty())
             continue;
         if (line.isEmpty()) {
@@ -3024,6 +3193,7 @@ QString AppController::installKeys(const QVariantList &pairs, const QString &mas
         names << j.label;
         jobs << j;
     }
+    wipe(opened);
     m_batch.run(jobs, QString());
     for (QString &p : m_batchPass) secure::wipe(p);
     m_batchPass.clear();
@@ -3044,12 +3214,34 @@ QString AppController::rotateKey(const QString &oldKeyId, const QString &newKeyI
     const QString newBlob = publicKeyLine(newKeyId).section(QLatin1Char(' '), 1, 1);
     if (oldKeyId == newKeyId || oldBlob.isEmpty() || oldBlob == newBlob)
         return tr("The new key must be a different key.");
-    if (newKey.value(QStringLiteral("privateKey")).toString().isEmpty())
+    if (newKey.value(QStringLiteral("privateKey")).toString().isEmpty() && !isSealed(newKey, QStringLiteral("privateKey")))
         return tr("Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.");
+    // the new key itself may be protected: opened with the master password, kept until step 3
+    Opened newOpened;
+    if (isSealed(newKey)) {
+        if (masterPassword.isEmpty())
+            return tr("The new key is protected by the master password: enter it.");
+        auto *sk = static_cast<unsigned char *>(sodium_malloc(protect::kSecretLen));
+        if (!sk || !deriveProtectSecret(masterPassword, sk)) {
+            if (sk) sodium_free(sk);
+            return tr("Wrong master password.");
+        }
+        const QJsonObject sealed = newKey.value(QStringLiteral("sealed")).toObject();
+        for (auto it = sealed.begin(); it != sealed.end(); ++it) {
+            QByteArray plain;
+            if (protect::open(it.value().toString().toLatin1(), protectPublicKey(), sk, &plain))
+                newOpened.insert(newKeyId + QLatin1Char('/') + it.key(), QString::fromUtf8(plain));
+            secure::wipe(plain);
+        }
+        sodium_free(sk);
+    }
+    secure::wipe(m_rotateNewKey);
+    m_rotateNewKey = secretOf(newKey, QStringLiteral("privateKey"), newOpened).toUtf8();
     // the new key's passphrase is needed again in step 2, after installKeys() forgets the typed ones
     m_rotateNewPass = m_batchPass.value(newKeyId);
     if (m_rotateNewPass.isEmpty())
-        m_rotateNewPass = newKey.value(QStringLiteral("passphrase")).toString();
+        m_rotateNewPass = secretOf(newKey, QStringLiteral("passphrase"), newOpened);
+    wipe(newOpened);
     if (newKey.value(QStringLiteral("encrypted")).toBool() && m_rotateNewPass.isEmpty())
         return tr("Enter the passphrase of the new key: it is needed to check that the new key works.");
     QVariantList pairs;
@@ -3058,6 +3250,7 @@ QString AppController::rotateKey(const QString &oldKeyId, const QString &newKeyI
     const QString err = installKeys(pairs, masterPassword, false);
     if (!err.isEmpty()) {
         secure::wipe(m_rotateNewPass);
+        secure::wipe(m_rotateNewKey);
         return err;
     }
     m_rotateOld = oldKeyId;
@@ -3088,7 +3281,7 @@ void AppController::rotateNewKeyStep(const QString &phase, const QString &script
         if (m.value(QStringLiteral("state")).toString() != QLatin1String("ok")) {
             j.skipReason = failedBefore.arg(m.value(QStringLiteral("error")).toString());
         } else if (j.skipReason.isEmpty()) {
-            j.params.privateKey = newKey.value(QStringLiteral("privateKey")).toString().toUtf8();
+            j.params.privateKey = m_rotateNewKey;
             j.params.keyPassphrase = m_rotateNewPass;
             secure::wipe(j.params.password);
             j.params.useAgent = false;
@@ -3149,12 +3342,14 @@ void AppController::rotateFinish()
     }
     if (changed) {
         setSection(kHosts, hosts);
+        sealAllProtected();   // a protected host's new key is protected too
         persist();
         m_hosts.reset(section(kHosts));
     }
     logEvent(ActivityLog::Security, QStringLiteral("key"), tr("Key replaced on %n server(s)", nullptr, changed),
              tr("%1 of %2 servers").arg(changed).arg(m_batch.results().size()));
     secure::wipe(m_rotateNewPass);
+    secure::wipe(m_rotateNewKey);
     m_rotatePhase = QStringLiteral("done");
     emit rotateChanged();
 }
@@ -3235,7 +3430,8 @@ QVariantList AppController::batchKeyNeeds(const QVariantList &hostIds, const QVa
         const QJsonObject k = findIn(kKeys, v.toString());
         if (k.isEmpty() || seen.contains(v.toString()))
             continue;
-        if (k.value(QStringLiteral("encrypted")).toBool() && k.value(QStringLiteral("passphrase")).toString().isEmpty()) {
+        if (k.value(QStringLiteral("encrypted")).toBool() && k.value(QStringLiteral("passphrase")).toString().isEmpty()
+            && !isSealed(k, QStringLiteral("passphrase"))) {
             seen.insert(v.toString());
             out << QVariantMap{{QStringLiteral("keyId"), v.toString()}, {QStringLiteral("name"), k.value(QStringLiteral("name")).toString()}};
         }
@@ -3249,7 +3445,8 @@ QVariantList AppController::batchKeyNeeds(const QVariantList &hostIds, const QVa
         if (k.isEmpty())
             continue;
         const bool encrypted = k.value(QStringLiteral("encrypted")).toBool();
-        const bool saved = !k.value(QStringLiteral("passphrase")).toString().isEmpty() && !h.value(QStringLiteral("alwaysAskPassphrase")).toBool();
+        const bool saved = (!k.value(QStringLiteral("passphrase")).toString().isEmpty() || isSealed(k, QStringLiteral("passphrase")))
+                           && !h.value(QStringLiteral("alwaysAskPassphrase")).toBool();
         if (encrypted && !saved) {
             seen.insert(keyId);
             out << QVariantMap{{QStringLiteral("keyId"), keyId}, {QStringLiteral("name"), k.value(QStringLiteral("name")).toString()}};
@@ -3267,7 +3464,9 @@ QString AppController::setBatchPassphrases(const QVariantMap &map)
         const QJsonObject k = findIn(kKeys, it.key());
         if (pass.isEmpty())
             continue;
-        if (!keytools::checkPassphrase(k.value(QStringLiteral("privateKey")).toString().toUtf8(), pass))
+        // a protected key cannot be checked before the master password opens it: it is checked at login
+        if (!isSealed(k, QStringLiteral("privateKey"))
+            && !keytools::checkPassphrase(k.value(QStringLiteral("privateKey")).toString().toUtf8(), pass))
             return tr("Wrong passphrase for the key \"%1\".").arg(k.value(QStringLiteral("name")).toString());
         m_batchPass.insert(it.key(), pass);
     }

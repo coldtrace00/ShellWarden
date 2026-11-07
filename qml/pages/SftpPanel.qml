@@ -169,7 +169,7 @@ Item {
             Layout.margins: 10
             spacing: 6
             IconLabel { glyph: Theme.iconFolder; size: 16; color: Theme.accent }
-            Text { text: qsTr("Files"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold; Layout.fillWidth: true }
+            Text { textFormat: Text.PlainText; text: qsTr("Files"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold; Layout.fillWidth: true }
             AppButton {
                 id: transferBtn
                 glyph: Theme.iconUpload; compact: true; text: qsTr("Transfer ▾")
@@ -249,13 +249,14 @@ Item {
                         if (modelData.endsWith("/")) root.startCompletion()
                     }
                     background: Rectangle { radius: 5; color: cand.hovered ? Theme.surfaceHover : Theme.surface2; border.color: Theme.border }
-                    contentItem: Text { id: candText; text: modelData; color: modelData.endsWith("/") ? Theme.accent : Theme.text
+                    contentItem: Text { textFormat: Text.PlainText; id: candText; text: modelData; color: modelData.endsWith("/") ? Theme.accent : Theme.text
                                         font.family: Theme.monoFont; font.pixelSize: 11; horizontalAlignment: Text.AlignHCenter; verticalAlignment: Text.AlignVCenter }
                 }
             }
         }
 
         Text {
+            textFormat: Text.PlainText
             visible: root.error !== ""
             Layout.fillWidth: true
             Layout.margins: 10
@@ -303,6 +304,7 @@ Item {
                         IconLabel { glyph: modelData.isDir ? Theme.iconFolder : Theme.iconFile; size: 15
                                     color: modelData.isDir ? Theme.accent : Theme.textDim }
                         Text {
+                            textFormat: Text.PlainText
                             Layout.fillWidth: true
                             text: modelData.name + (modelData.isLink ? " ↗" : "")
                             color: Theme.text
@@ -310,11 +312,13 @@ Item {
                             elide: Text.ElideMiddle
                         }
                         Text {
+                            textFormat: Text.PlainText
                             text: modelData.isDir ? "" : App.formatBytes(modelData.size)
                             color: Theme.textDim
                             font.pixelSize: 11
                         }
                         Text {
+                            textFormat: Text.PlainText
                             visible: list.width > 400
                             text: root.permString(modelData.perms || 0, modelData.isDir)
                             color: Theme.textFaint
@@ -322,6 +326,7 @@ Item {
                             font.family: Theme.monoFont
                         }
                         Text {
+                            textFormat: Text.PlainText
                             visible: list.width > 330
                             text: modelData.mtime
                             color: Theme.textFaint
@@ -334,6 +339,7 @@ Item {
 
             BusyIndicator { anchors.centerIn: parent; running: root.loading; visible: root.loading }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: !root.loading && root.entries.length === 0 && root.error === ""
                 text: qsTr("Empty folder")
@@ -362,7 +368,7 @@ Item {
                     anchors.centerIn: parent
                     spacing: 8
                     IconLabel { anchors.horizontalCenter: parent.horizontalCenter; glyph: Theme.iconUpload; size: 30; color: Theme.accent }
-                    Text { text: qsTr("Drop to send to the server, into %1").arg(root.path); color: Theme.text; font.pixelSize: 13 }
+                    Text { textFormat: Text.PlainText; text: qsTr("Drop to send to the server, into %1").arg(root.path); color: Theme.text; font.pixelSize: 13 }
                 }
             }
         }
@@ -382,11 +388,13 @@ Item {
                 anchors.leftMargin: 12; anchors.rightMargin: 12
                 spacing: 2
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     text: details.e ? root.joinPath(root.path, details.e.name) : ""
                     color: Theme.text; font.pixelSize: 11; font.family: Theme.monoFont; elide: Text.ElideMiddle
                 }
                 Text {
+                    textFormat: Text.PlainText
                     Layout.fillWidth: true
                     wrapMode: Text.WordWrap
                     color: Theme.textDim; font.pixelSize: 11
@@ -418,7 +426,7 @@ Item {
                     spacing: 8
                     RowLayout {
                         Layout.fillWidth: true
-                        Text { text: qsTr("Transfers"); color: Theme.textDim; font.pixelSize: 11; font.weight: Font.Medium; Layout.fillWidth: true }
+                        Text { textFormat: Text.PlainText; text: qsTr("Transfers"); color: Theme.textDim; font.pixelSize: 11; font.weight: Font.Medium; Layout.fillWidth: true }
                         AppButton { text: qsTr("Clear finished"); compact: true; variant: "ghost"; onClicked: root.session.clearFinishedTransfers() }
                     }
                     Repeater {
@@ -431,8 +439,9 @@ Item {
                                 spacing: 6
                                 IconLabel { glyph: modelData.upload ? Theme.iconUpload : Theme.iconSave; size: 13
                                             color: modelData.state === 2 ? Theme.danger : (modelData.state === 1 ? Theme.ok : Theme.accent) }
-                                Text { Layout.fillWidth: true; text: modelData.name; color: Theme.text; font.pixelSize: 11; elide: Text.ElideMiddle }
+                                Text { textFormat: Text.PlainText; Layout.fillWidth: true; text: modelData.name; color: Theme.text; font.pixelSize: 11; elide: Text.ElideMiddle }
                                 Text {
+                                    textFormat: Text.PlainText
                                     text: modelData.state === 0 ? modelData.sizeText + " · " + modelData.speedText
                                           : modelData.state === 1 ? qsTr("done") : modelData.state === 3 ? qsTr("cancelled") : qsTr("failed")
                                     color: modelData.state === 2 ? Theme.danger : Theme.textDim
@@ -458,7 +467,7 @@ Item {
                                     Behavior on width { NumberAnimation { duration: 200 } }
                                 }
                             }
-                            Text { visible: modelData.error !== ""; text: modelData.error; color: Theme.danger; font.pixelSize: 10; wrapMode: Text.WordWrap; Layout.fillWidth: true }
+                            Text { textFormat: Text.PlainText; visible: modelData.error !== ""; text: modelData.error; color: Theme.danger; font.pixelSize: 10; wrapMode: Text.WordWrap; Layout.fillWidth: true }
                         }
                     }
                 }

@@ -602,7 +602,9 @@ int TerminalEmulator::cbSetTermProp(VTermProp prop, VTermValue *val, void *user)
 #if VTERM_VERSION_MAJOR > 0 || VTERM_VERSION_MINOR >= 2
         if (val->string.initial)
             self->m_titleBuf.clear();
-        self->m_titleBuf.append(val->string.str, int(val->string.len));
+        // a server can send a title that never ends: keep at most 4 KB of it
+        if (self->m_titleBuf.size() < 4096)
+            self->m_titleBuf.append(val->string.str, int(std::min<size_t>(val->string.len, size_t(4096 - self->m_titleBuf.size()))));
         if (val->string.final) {
             self->m_title = QString::fromUtf8(self->m_titleBuf).left(200);
             emit self->titleChanged();

@@ -29,7 +29,7 @@ Modal {
         ColumnLayout {
             Layout.fillWidth: true
             spacing: 5
-            Text { text: qsTr("Type"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+            Text { textFormat: Text.PlainText; text: qsTr("Type"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
             AppCombo {
                 id: typeBox
                 Layout.fillWidth: true
@@ -67,7 +67,7 @@ Modal {
         checked: true
     }
 
-    Text { id: err; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 12 }
+    Text { textFormat: Text.PlainText; id: err; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 12 }
 
     RowLayout {
         Layout.fillWidth: true

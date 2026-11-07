@@ -93,10 +93,10 @@ Popup {
             ColumnLayout {
                 Layout.fillWidth: true
                 spacing: 0
-                Text { text: root.fileName + (root.modified ? "  •" : ""); color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold; elide: Text.ElideMiddle; Layout.fillWidth: true }
-                Text { text: (root.session ? root.session.label + ":" : "") + root.path; color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont; elide: Text.ElideMiddle; Layout.fillWidth: true }
+                Text { textFormat: Text.PlainText; text: root.fileName + (root.modified ? "  •" : ""); color: Theme.text; font.pixelSize: 15; font.weight: Font.DemiBold; elide: Text.ElideMiddle; Layout.fillWidth: true }
+                Text { textFormat: Text.PlainText; text: (root.session ? root.session.label + ":" : "") + root.path; color: Theme.textFaint; font.pixelSize: 11; font.family: Theme.monoFont; elide: Text.ElideMiddle; Layout.fillWidth: true }
             }
-            Text { visible: root.status !== "" && !root.modified; text: root.status; color: Theme.ok; font.pixelSize: 12 }
+            Text { textFormat: Text.PlainText; visible: root.status !== "" && !root.modified; text: root.status; color: Theme.ok; font.pixelSize: 12 }
             BusyIndicator { visible: root.loading || root.saving; running: visible; implicitWidth: 22; implicitHeight: 22 }
             AppButton { text: qsTr("Save") + "  ·  Ctrl+S"; variant: "primary"; glyph: Theme.iconSave; enabled: root.modified && !root.saving; onClicked: root.save() }
             AppButton { glyph: Theme.iconClose; variant: "ghost"; compact: true; onClicked: root.tryClose() }
@@ -106,7 +106,7 @@ Popup {
             Layout.fillWidth: true
             implicitHeight: errText.implicitHeight + 16
             color: Theme.dangerDim
-            Text { id: errText; anchors.fill: parent; anchors.margins: 8; anchors.leftMargin: 16; text: root.error; color: Theme.text; font.pixelSize: 12; wrapMode: Text.WordWrap }
+            Text { textFormat: Text.PlainText; id: errText; anchors.fill: parent; anchors.margins: 8; anchors.leftMargin: 16; text: root.error; color: Theme.text; font.pixelSize: 12; wrapMode: Text.WordWrap }
         }
         Rectangle { Layout.fillWidth: true; height: 1; color: Theme.border }
         // text with line numbers
@@ -127,6 +127,7 @@ Popup {
                         Repeater {
                             model: editor.lineCount
                             delegate: Text {
+                                textFormat: Text.PlainText
                                 width: gutter.width - 10
                                 horizontalAlignment: Text.AlignRight
                                 text: index + 1
@@ -138,6 +139,7 @@ Popup {
                         }
                     }
                     TextArea {
+                        textFormat: TextArea.PlainText
                         id: editor
                         width: Math.max(scroll.width - gutter.width - 2, implicitWidth)
                         readOnly: root.loading || root.error !== "" && root.original === ""
@@ -164,6 +166,7 @@ Popup {
                 }
             }
             Text {
+                textFormat: Text.PlainText
                 anchors.centerIn: parent
                 visible: root.loading
                 text: qsTr("Opening…")
@@ -177,14 +180,14 @@ Popup {
             Layout.margins: 8
             Layout.leftMargin: 14
             spacing: 14
-            Text { text: qsTr("%1 lines").arg(editor.lineCount); color: Theme.textFaint; font.pixelSize: 11 }
-            Text { text: "UTF-8"; color: Theme.textFaint; font.pixelSize: 11 }
-            Text { text: highlighter.language; color: Theme.textFaint; font.pixelSize: 11 }
-            Text { text: qsTr("Ln %1, Col %2").arg(editor.lineCount > 0 ? Math.round(editor.cursorRectangle.y / (editor.contentHeight / editor.lineCount)) + 1 : 1)
+            Text { textFormat: Text.PlainText; text: qsTr("%1 lines").arg(editor.lineCount); color: Theme.textFaint; font.pixelSize: 11 }
+            Text { textFormat: Text.PlainText; text: "UTF-8"; color: Theme.textFaint; font.pixelSize: 11 }
+            Text { textFormat: Text.PlainText; text: highlighter.language; color: Theme.textFaint; font.pixelSize: 11 }
+            Text { textFormat: Text.PlainText; text: qsTr("Ln %1, Col %2").arg(editor.lineCount > 0 ? Math.round(editor.cursorRectangle.y / (editor.contentHeight / editor.lineCount)) + 1 : 1)
                                               .arg(editor.cursorPosition - editor.text.lastIndexOf("\n", editor.cursorPosition - 1))
                    color: Theme.textFaint; font.pixelSize: 11 }
             Item { Layout.fillWidth: true }
-            Text { text: qsTr("Ctrl+S save · Esc close · the file keeps its permissions"); color: Theme.textFaint; font.pixelSize: 11 }
+            Text { textFormat: Text.PlainText; text: qsTr("Ctrl+S save · Esc close · the file keeps its permissions"); color: Theme.textFaint; font.pixelSize: 11 }
         }
     }
 

@@ -398,7 +398,10 @@ ImportResult importPpk(const QByteArray &text, const QString &passphrase, const 
             const unsigned long long passes = h.value("Argon2-Passes").toULongLong();
             const int par = h.value("Argon2-Parallelism").toInt();
             const QByteArray salt = QByteArray::fromHex(h.value("Argon2-Salt"));
-            if (par != 1 || salt.size() != crypto_pwhash_SALTBYTES || mem == 0 || passes == 0 || mem > (1ull << 31)) {
+            // the file decides how much memory and time the key derivation takes: a hostile
+            // file must not make it allocate gigabytes or run for minutes
+            if (par != 1 || salt.size() != crypto_pwhash_SALTBYTES || mem == 0 || passes == 0
+                || mem > (1ull << 30) || passes > 100 || double(mem) * double(passes) > double(4ull << 30)) {
                 *error = QObject::tr("This PuTTY key uses Argon2 parameters that are not supported (parallelism must be 1).");
                 return ImportResult::Invalid;
             }
