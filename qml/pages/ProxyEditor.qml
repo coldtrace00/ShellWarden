@@ -11,6 +11,9 @@ Drawer {
     property bool testing: false
     readonly property bool isTor: typeBox.currentIndex === 2
     readonly property bool isCf: typeBox.currentIndex === 3
+    readonly property bool isSs: typeBox.currentIndex === 4
+    readonly property var types: ["socks5", "http", "tor", "cloudflare", "shadowsocks"]
+    readonly property var ssMethods: App.shadowsocksMethods()
     readonly property var torModes: ["auto", "browser", "service", "exe"]
     property string torMode: "auto"
     property var torInfo: ({})
@@ -36,7 +39,9 @@ Drawer {
         root.proxyId = id
         const p = id ? App.proxy(id) : ({})
         name.text = p.name || ""
-        typeBox.currentIndex = p.type === "http" ? 1 : p.type === "tor" ? 2 : p.type === "cloudflare" ? 3 : 0
+        typeBox.currentIndex = Math.max(0, types.indexOf(p.type || "socks5"))
+        ssMethod.currentIndex = Math.max(0, ssMethods.indexOf(p.method || "chacha20-ietf-poly1305"))
+        ssLink.text = ""; ssLinkErr.text = ""
         cfPath.text = p.cfPath || ""
         torMode = p.torMode || "auto"
         torPath.text = p.torPath || ""
@@ -56,13 +61,14 @@ Drawer {
         return {
             id: root.proxyId,
             name: name.text.trim(),
-            type: ["socks5", "http", "tor", "cloudflare"][typeBox.currentIndex],
+            type: root.types[typeBox.currentIndex],
+            method: root.isSs ? root.ssMethods[ssMethod.currentIndex] : "",
             cfPath: cfPath.text.trim(),
             torMode: root.torMode,
             torPath: torPath.text.trim(),
             host: root.isCf ? "cloudflared" : host.text.trim(),
             port: root.isCf ? 1 : (parseInt(port.text) || 0),
-            username: user.text,
+            username: root.isSs ? "" : user.text,
             password: pass.text
         }
     }
@@ -111,8 +117,9 @@ Drawer {
                 AppCombo {
                     id: typeBox
                     Layout.fillWidth: true
-                    model: [qsTr("SOCKS5 (remote DNS)"), qsTr("HTTP CONNECT"), qsTr("Tor"), qsTr("Cloudflare Tunnel")]
+                    model: [qsTr("SOCKS5 (remote DNS)"), qsTr("HTTP CONNECT"), qsTr("Tor"), qsTr("Cloudflare Tunnel"), qsTr("Shadowsocks (encrypted, hard to block)")]
                     onActivated: (i) => {
+                        if (i === 4 && (port.text === "1080" || port.text === "8080")) port.text = "8388"
                         if (port.text === "1080" && i === 1) port.text = "8080"; else if (port.text === "8080" && i === 0) port.text = "1080"
                         if (i === 2) { if (name.text.trim() === "") name.text = "Tor"; root.refreshTor() }
                         if (i === 3 && name.text.trim() === "") name.text = "Cloudflare Tunnel"
@@ -272,15 +279,52 @@ Drawer {
                 }
             }
 
+            // ---------------- Shadowsocks ----------------
+            ColumnLayout {
+                visible: root.isSs
+                Layout.fillWidth: true
+                spacing: 6
+                Text {
+                    Layout.fillWidth: true
+                    wrapMode: Text.WordWrap
+                    color: Theme.textFaint; font.pixelSize: 11
+                    text: qsTr("Everything up to the Shadowsocks server is encrypted and looks like random bytes: the network in between sees neither which server you connect to nor that it is SSH. You need your own Shadowsocks server (for example Outline).")
+                }
+                RowLayout {
+                    Layout.fillWidth: true
+                    spacing: 8
+                    AppField { id: ssLink; Layout.fillWidth: true; label: qsTr("ss:// link (optional)"); placeholder: "ss://…"; mono: true
+                               onAccepted: ssFill.clicked() }
+                    AppButton {
+                        id: ssFill
+                        Layout.alignment: Qt.AlignBottom
+                        text: qsTr("Fill in"); compact: true
+                        enabled: ssLink.text.trim() !== ""
+                        onClicked: {
+                            const r = App.parseShadowsocksLink(ssLink.text)
+                            ssLinkErr.text = r.ok ? "" : r.error
+                            if (!r.ok) return
+                            host.text = r.host; port.text = String(r.port); pass.text = r.password
+                            ssMethod.currentIndex = Math.max(0, root.ssMethods.indexOf(r.method))
+                            if (name.text.trim() === "" && r.name) name.text = r.name
+                            ssLink.text = ""
+                        }
+                    }
+                }
+                Text { id: ssLinkErr; visible: text !== ""; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.danger; font.pixelSize: 11 }
+                Text { text: qsTr("Cipher"); color: Theme.textDim; font.pixelSize: 12; font.weight: Font.Medium }
+                AppCombo { id: ssMethod; Layout.fillWidth: true; model: root.ssMethods }
+            }
+
             RowLayout {
                 visible: !root.isTor && !root.isCf
                 Layout.fillWidth: true
                 spacing: 10
-                AppField { id: host; Layout.fillWidth: true; label: qsTr("Address"); placeholder: "proxy.example.com"; mono: true }
+                AppField { id: host; Layout.fillWidth: true; label: root.isSs ? qsTr("Server") : qsTr("Address"); placeholder: root.isSs ? "ss.example.com" : "proxy.example.com"; mono: true }
                 AppField { id: port; Layout.preferredWidth: 90; label: qsTr("Port"); mono: true; field.validator: IntValidator { bottom: 1; top: 65535 } }
             }
-            AppField { id: user; visible: !root.isTor; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client ID (optional)") : qsTr("Username (optional)"); mono: true }
-            AppField { id: pass; visible: !root.isTor; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client Secret (optional)") : qsTr("Password (optional)"); secret: true; hint: qsTr("Stored encrypted in the vault.") }
+            AppField { id: user; visible: !root.isTor && !root.isSs; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client ID (optional)") : qsTr("Username (optional)"); mono: true }
+            AppField { id: pass; visible: !root.isTor; Layout.fillWidth: true; label: root.isCf ? qsTr("Service token Client Secret (optional)") : root.isSs ? qsTr("Password") : qsTr("Password (optional)"); secret: true; hint: qsTr("Stored encrypted in the vault.") }
 
             // Test result
             Rectangle {

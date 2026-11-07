@@ -50,6 +50,7 @@ qt_add_executable(ShellWardenApp WIN32
     src/core/SecureBytes.h
     src/core/Vault.h            src/core/Vault.cpp
     src/core/Minisign.h         src/core/Minisign.cpp
+    src/core/Shadowsocks.h      src/core/Shadowsocks.cpp
     src/core/KeyTools.h         src/core/KeyTools.cpp
     src/core/KnownHosts.h       src/core/KnownHosts.cpp
     src/core/SshWorker.h        src/core/SshWorker.cpp
@@ -123,7 +124,6 @@ qt_add_qml_module(ShellWardenApp
         qml/pages/SettingsPage.qml
         qml/pages/TerminalPage.qml
         qml/pages/SftpPanel.qml
-        qml/pages/LocalFilesPane.qml
         qml/pages/TunnelsPanel.qml
         qml/pages/SnippetsPage.qml
         qml/pages/LogPage.qml

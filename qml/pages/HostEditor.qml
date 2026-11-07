@@ -380,7 +380,8 @@ Drawer {
                             const items = [App.settings.killSwitch ? qsTr("Default proxy (kill switch)") : qsTr("Direct connection")]
                             for (let i = 0; i < App.proxies.count; ++i) {
                                 const p = App.proxies.get(i)
-                                items.push(p.name + "  ·  " + (p.type === "http" ? "HTTP" : p.type === "tor" ? "Tor" : p.type === "cloudflare" ? "Cloudflare" : "SOCKS5"))
+                                items.push(p.name + "  ·  " + (p.type === "http" ? "HTTP" : p.type === "tor" ? "Tor" : p.type === "cloudflare" ? "Cloudflare" : p.type === "shadowsocks" ? "Shadowsocks" : "SOCKS5")
+                                           + (p.disabled ? "  ·  " + qsTr("turned off") : ""))
                             }
                             return items
                         }
@@ -393,6 +394,10 @@ Drawer {
                                ? Theme.danger : Theme.textFaint
                         text: proxyBox.currentIndex > 0 && App.proxies.get(proxyBox.currentIndex - 1).type === "cloudflare"
                               ? qsTr("Through Cloudflare Tunnel: the address above must be the hostname published in Cloudflare (e.g. ssh.example.com); cloudflared is started automatically. The port is not used.")
+                              : proxyBox.currentIndex > 0 && App.proxies.get(proxyBox.currentIndex - 1).disabled
+                              ? (App.settings.killSwitch
+                                 ? qsTr("This proxy is turned off (Proxies page). While it is off the host uses the default proxy; with no default proxy it is blocked by the kill switch.")
+                                 : qsTr("This proxy is turned off (Proxies page). While it is off the host connects directly, from your real IP."))
                               : proxyBox.currentIndex > 0
                               ? qsTr("All traffic to this host goes through the proxy. If the proxy fails the connection fails — it never falls back to direct.")
                               : (App.settings.killSwitch

@@ -268,7 +268,7 @@ Item {
             if (r === "direct") return qsTr("Direct")
             for (let i = 0; i < App.proxies.count; ++i) {
                 const p = App.proxies.get(i)
-                if (p.id === r) return p.name
+                if (p.id === r) return p.disabled ? qsTr("%1 (turned off)").arg(p.name) : p.name
             }
             return qsTr("Direct")
         }
@@ -276,7 +276,7 @@ Item {
         // once, through another route (this tab only; reconnects keep it)
         AppMenu {
             id: viaMenu
-            title: qsTr("Connect via")
+            title: qsTr("Connect once via")
             enabled: hostMenu.routable
             AppMenuItem {
                 text: qsTr("Direct") + (hostMenu.route === "direct" ? "  ·  " + qsTr("saved") : "")
@@ -286,9 +286,10 @@ Item {
             Instantiator {
                 model: App.proxies
                 delegate: AppMenuItem {
-                    text: model.name + (hostMenu.route === model.id ? "  ·  " + qsTr("saved") : "")
+                    text: model.name + (model.disabled ? "  ·  " + qsTr("turned off")
+                                        : hostMenu.route === model.id ? "  ·  " + qsTr("saved") : "")
                     glyph: model.type === "tor" ? Theme.iconShield : Theme.iconGlobe
-                    enabled: !(hostMenu.hostType === "telnet" && model.type === "cloudflare")
+                    enabled: !model.disabled && !(hostMenu.hostType === "telnet" && model.type === "cloudflare")
                     onTriggered: { hostMenu.close(); App.openHostVia(hostMenu.hostId, model.id) }
                 }
                 onObjectAdded: (index, object) => viaMenu.insertItem(index + 1, object)
@@ -298,7 +299,7 @@ Item {
         // keep it: the host connects this way from now on (same as "Proxy" in the host editor)
         AppMenu {
             id: routeMenu
-            title: qsTr("Route: %1").arg(hostMenu.routeName(hostMenu.route))
+            title: qsTr("Always connect via: %1").arg(hostMenu.routeName(hostMenu.route))
             enabled: hostMenu.routable
             AppMenuItem {
                 text: qsTr("Direct")
@@ -308,7 +309,7 @@ Item {
             Instantiator {
                 model: App.proxies
                 delegate: AppMenuItem {
-                    text: model.name
+                    text: model.name + (model.disabled ? "  ·  " + qsTr("turned off") : "")
                     glyph: hostMenu.route === model.id ? Theme.iconCheck : ""
                     enabled: !(hostMenu.hostType === "telnet" && model.type === "cloudflare")
                     onTriggered: { hostMenu.close(); App.setHostRoute(hostMenu.hostId, model.id) }

@@ -4,94 +4,94 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/app/AppController.cpp" line="210" />
+        <location filename="../src/app/AppController.cpp" line="209" />
         <source>Vault locked after inactivity.</source>
         <translation>Coffre verrouillé après inactivité.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="454" />
+        <location filename="../src/app/AppController.cpp" line="453" />
         <source>Passwords do not match.</source>
         <translation>Les mots de passe ne correspondent pas.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="542" />
+        <location filename="../src/app/AppController.cpp" line="541" />
         <source>New passwords do not match.</source>
         <translation>Les nouveaux mots de passe ne correspondent pas.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="823" />
-        <location filename="../src/app/AppController.cpp" line="974" />
-        <location filename="../src/app/AppController.cpp" line="1098" />
-        <location filename="../src/app/AppController.cpp" line="1141" />
-        <location filename="../src/app/AppController.cpp" line="1380" />
-        <location filename="../src/app/AppController.cpp" line="1734" />
-        <location filename="../src/app/AppController.cpp" line="2769" />
-        <location filename="../src/app/AppController.cpp" line="2845" />
-        <location filename="../src/app/AppController.cpp" line="2944" />
+        <location filename="../src/app/AppController.cpp" line="770" />
+        <location filename="../src/app/AppController.cpp" line="921" />
+        <location filename="../src/app/AppController.cpp" line="1045" />
+        <location filename="../src/app/AppController.cpp" line="1088" />
+        <location filename="../src/app/AppController.cpp" line="1342" />
+        <location filename="../src/app/AppController.cpp" line="1756" />
+        <location filename="../src/app/AppController.cpp" line="2805" />
+        <location filename="../src/app/AppController.cpp" line="2881" />
+        <location filename="../src/app/AppController.cpp" line="2980" />
         <source>The vault is locked.</source>
         <translation>Le coffre est verrouillé.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="844" />
+        <location filename="../src/app/AppController.cpp" line="791" />
         <source>Enter a host name or IP address.</source>
         <translation>Saisissez un nom d'hôte ou une adresse IP.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="849" />
+        <location filename="../src/app/AppController.cpp" line="796" />
         <source>The host name must not contain spaces.</source>
         <translation>Le nom d'hôte ne doit pas contenir d'espaces.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="852" />
-        <location filename="../src/app/AppController.cpp" line="1404" />
+        <location filename="../src/app/AppController.cpp" line="799" />
+        <location filename="../src/app/AppController.cpp" line="1375" />
         <source>Port must be between 1 and 65535.</source>
         <translation>Le port doit être compris entre 1 et 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="581" />
-        <location filename="../src/app/AppController.cpp" line="837" />
-        <location filename="../src/app/AppController.cpp" line="882" />
-        <location filename="../src/app/AppController.cpp" line="1129" />
-        <location filename="../src/app/AppController.cpp" line="1187" />
-        <location filename="../src/app/AppController.cpp" line="1265" />
-        <location filename="../src/app/AppController.cpp" line="1430" />
-        <location filename="../src/app/AppController.cpp" line="1740" />
-        <location filename="../src/app/AppController.cpp" line="3173" />
+        <location filename="../src/app/AppController.cpp" line="580" />
+        <location filename="../src/app/AppController.cpp" line="784" />
+        <location filename="../src/app/AppController.cpp" line="829" />
+        <location filename="../src/app/AppController.cpp" line="1076" />
+        <location filename="../src/app/AppController.cpp" line="1134" />
+        <location filename="../src/app/AppController.cpp" line="1212" />
+        <location filename="../src/app/AppController.cpp" line="1403" />
+        <location filename="../src/app/AppController.cpp" line="1762" />
+        <location filename="../src/app/AppController.cpp" line="3209" />
         <source>Could not save the vault.</source>
         <translation>Impossible d'enregistrer le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="222" />
+        <location filename="../src/app/AppController.cpp" line="221" />
         <source>Vault locked: the computer went to sleep</source>
         <translation>Coffre verrouillé : l'ordinateur s'est mis en veille</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="223" />
+        <location filename="../src/app/AppController.cpp" line="222" />
         <source>Vault locked: the computer was locked</source>
         <translation>Coffre verrouillé : l'ordinateur a été verrouillé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="236" />
+        <location filename="../src/app/AppController.cpp" line="235" />
         <source>%1 %2 started</source>
         <translation>%1 %2 démarré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="237" />
+        <location filename="../src/app/AppController.cpp" line="236" />
         <source>portable mode · %1</source>
         <translation>mode portable · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="329" />
+        <location filename="../src/app/AppController.cpp" line="328" />
         <source>My theme</source>
         <translation>Mon thème</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="339" />
+        <location filename="../src/app/AppController.cpp" line="338" />
         <source>Image not found: %1</source>
         <translation>Image introuvable : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="341" />
+        <location filename="../src/app/AppController.cpp" line="340" />
         <source>The image is too large (max 25 MB).</source>
         <translation>L'image est trop grande (25 Mo max).</translation>
     </message>
@@ -100,265 +100,299 @@
         <translation>Ce fichier n'est pas une image.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="346" />
+        <location filename="../src/app/AppController.cpp" line="345" />
         <source>Cannot copy the image to %1</source>
         <translation>Impossible de copier l'image vers %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="467" />
+        <location filename="../src/app/AppController.cpp" line="466" />
         <source>Vault created</source>
         <translation>Coffre créé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="482" />
+        <location filename="../src/app/AppController.cpp" line="481" />
         <source>Failed unlock attempt</source>
         <translation>Échec de déverrouillage</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="486" />
+        <location filename="../src/app/AppController.cpp" line="485" />
         <source>Vault unlocked</source>
         <translation>Coffre déverrouillé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="529" />
+        <location filename="../src/app/AppController.cpp" line="528" />
         <source>Vault locked</source>
         <translation>Coffre verrouillé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="544" />
+        <location filename="../src/app/AppController.cpp" line="543" />
         <source>The master password must be at least 8 characters.</source>
         <translation>Le mot de passe maître doit comporter au moins 8 caractères.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="547" />
+        <location filename="../src/app/AppController.cpp" line="546" />
         <source>Master password change failed</source>
         <translation>Échec du changement de mot de passe maître</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="550" />
+        <location filename="../src/app/AppController.cpp" line="549" />
         <source>Master password changed</source>
         <translation>Mot de passe maître modifié</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="656" />
+        <location filename="../src/app/AppController.cpp" line="655" />
         <source>Choose a file.</source>
         <translation>Choisissez un fichier.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="659" />
+        <location filename="../src/app/AppController.cpp" line="658" />
         <source>Cannot write %1</source>
         <translation>Impossible d'écrire %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="660" />
+        <location filename="../src/app/AppController.cpp" line="659" />
         <source>Vault backup saved</source>
         <translation>Sauvegarde du coffre enregistrée</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="667" />
+        <location filename="../src/app/AppController.cpp" line="666" />
         <source>Lock the vault first.</source>
         <translation>Verrouillez d'abord le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="674" />
+        <location filename="../src/app/AppController.cpp" line="673" />
         <source>Cannot move the old vault: %1</source>
         <translation>Impossible de déplacer l'ancien coffre : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="679" />
+        <location filename="../src/app/AppController.cpp" line="678" />
         <source>Started over with a new vault</source>
         <translation>Nouveau départ avec un nouveau coffre</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="680" />
+        <location filename="../src/app/AppController.cpp" line="679" />
         <source>Old vault kept as %1</source>
         <translation>Ancien coffre conservé sous %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="702" />
+        <location filename="../src/app/AppController.cpp" line="701" />
         <source>Cannot replace the vault file.</source>
         <translation>Impossible de remplacer le fichier du coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="710" />
+        <location filename="../src/app/AppController.cpp" line="709" />
         <source>Vault restored from backup</source>
         <translation>Coffre restauré depuis une sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="729" />
+        <location filename="../src/app/AppController.cpp" line="728" />
         <source>shorter than 19 characters</source>
         <translation>moins de 19 caractères</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="730" />
+        <location filename="../src/app/AppController.cpp" line="729" />
         <source>contains a very common password</source>
         <translation>contient un mot de passe très courant</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="731" />
+        <location filename="../src/app/AppController.cpp" line="730" />
         <source>keyboard or alphabet sequence</source>
         <translation>suite de touches ou de lettres</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="732" />
+        <location filename="../src/app/AppController.cpp" line="731" />
         <source>too many repeated characters</source>
         <translation>trop de caractères répétés</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="733" />
+        <location filename="../src/app/AppController.cpp" line="732" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>mélangez majuscules, minuscules, chiffres et symboles</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="734" />
         <source>Very weak</source>
         <translation>Très faible</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="734" />
         <source>Weak</source>
         <translation>Faible</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="734" />
         <source>Fair</source>
         <translation>Moyen</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="736" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Good</source>
         <translation>Bon</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="736" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Strong</source>
         <translation>Fort</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="757" />
         <source>Folder not found: %1</source>
         <translation>Dossier introuvable : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="762" />
         <source>No access to %1</source>
         <translation>Pas d'accès à %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="792" />
         <source>Home</source>
         <translation>Dossier personnel</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="793" />
         <source>Downloads</source>
         <translation>Téléchargements</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="794" />
         <source>Desktop</source>
         <translation>Bureau</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="795" />
         <source>Documents</source>
         <translation>Documents</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="829" />
-        <location filename="../src/app/AppController.cpp" line="1982" />
+        <location filename="../src/app/AppController.cpp" line="776" />
+        <location filename="../src/app/AppController.cpp" line="2004" />
         <source>Choose a serial port.</source>
         <translation>Choisissez un port série.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="838" />
-        <location filename="../src/app/AppController.cpp" line="888" />
+        <location filename="../src/app/AppController.cpp" line="785" />
+        <location filename="../src/app/AppController.cpp" line="835" />
         <source>Host added</source>
         <translation>Hôte ajouté</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="838" />
-        <location filename="../src/app/AppController.cpp" line="888" />
+        <location filename="../src/app/AppController.cpp" line="785" />
+        <location filename="../src/app/AppController.cpp" line="835" />
         <source>Host changed</source>
         <translation>Hôte modifié</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="847" />
+        <location filename="../src/app/AppController.cpp" line="794" />
         <source>A host cannot be its own jump host.</source>
         <translation>Un hôte ne peut pas être son propre hôte de rebond.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="885" />
+        <location filename="../src/app/AppController.cpp" line="832" />
         <source>Master password on connect enabled for host</source>
         <translation>Mot de passe maître à la connexion activé pour l'hôte</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="886" />
+        <location filename="../src/app/AppController.cpp" line="833" />
         <source>Master password on connect disabled for host</source>
         <translation>Mot de passe maître à la connexion désactivé pour l'hôte</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1865" />
+        <location filename="../src/app/AppController.cpp" line="1363" />
+        <source>Choose the Shadowsocks cipher.</source>
+        <translation>Choisissez le chiffrement Shadowsocks.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1365" />
+        <source>Enter the Shadowsocks password.</source>
+        <translation>Saisissez le mot de passe Shadowsocks.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1593" />
+        <source>Proxy turned on</source>
+        <translation>Proxy activé</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1593" />
+        <source>Proxy turned off</source>
+        <translation>Proxy désactivé</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1594" />
+        <source>hosts that use it connect directly (or through the default proxy while the kill switch is on)</source>
+        <translation>les hôtes qui l'utilisent se connectent en direct (ou via le proxy par défaut quand le kill switch est actif)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1887" />
         <source>Connection check passed (master password)</source>
         <translation>Vérification de connexion réussie (mot de passe maître)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1879" />
+        <location filename="../src/app/AppController.cpp" line="1901" />
         <source>Connection cancelled: the master password was not entered.</source>
         <translation>Connexion annulée : le mot de passe maître n'a pas été saisi.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1903" />
+        <location filename="../src/app/AppController.cpp" line="1925" />
         <source>This proxy no longer exists.</source>
         <translation>Ce proxy n'existe plus.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1909" />
+        <location filename="../src/app/AppController.cpp" line="1931" />
         <source>direct</source>
         <translation>en direct</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1910" />
+        <location filename="../src/app/AppController.cpp" line="1932" />
         <source>Route of the host changed: %1</source>
         <translation>Route de l'hôte modifiée : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1912" />
+        <location filename="../src/app/AppController.cpp" line="1934" />
         <source>%1 now connects: %2</source>
         <translation>%1 se connecte désormais : %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2309" />
+        <location filename="../src/app/AppController.cpp" line="2111" />
+        <source>Kill switch is on: proxy "%1" is turned off and no default proxy is set. Direct connection blocked.</source>
+        <translation>Kill switch actif : le proxy « %1 » est désactivé et aucun proxy par défaut n'est défini. Connexion directe bloquée.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2127" />
+        <source>The Shadowsocks route is for SSH hosts.</source>
+        <translation>La route Shadowsocks est réservée aux hôtes SSH.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2221" />
+        <source>Direct · proxy "%1" is off</source>
+        <translation>Direct · le proxy « %1 » est désactivé</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2345" />
         <source>Behind a jump host: checked only when you connect.</source>
         <translation>Derrière un hôte de rebond : vérifié seulement à la connexion.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2322" />
+        <location filename="../src/app/AppController.cpp" line="2358" />
         <source>Kill switch is on: not checked directly.</source>
         <translation>Kill switch actif : pas de vérification directe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2329" />
+        <location filename="../src/app/AppController.cpp" line="2365" />
         <source>Via Tor: not checked in the background.</source>
         <translation>Via Tor : pas de vérification en arrière-plan.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2330" />
+        <location filename="../src/app/AppController.cpp" line="2366" />
         <source>Via Cloudflare Tunnel: checked only when you connect.</source>
         <translation>Via Cloudflare Tunnel : vérifié seulement à la connexion.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2335" />
+        <location filename="../src/app/AppController.cpp" line="2371" />
         <source>The proxy of this host is not complete.</source>
         <translation>Le proxy de cet hôte est incomplet.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2360" />
+        <location filename="../src/app/AppController.cpp" line="2396" />
         <source>The port is open, but no SSH server answered.</source>
         <translation>Le port est ouvert, mais aucun serveur SSH n'a répondu.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2815" />
+        <location filename="../src/app/AppController.cpp" line="2851" />
         <source>Asks for the master password: enter it to include this host.</source>
         <translation>Demande le mot de passe maître : saisissez-le pour inclure cet hôte.</translation>
     </message>
@@ -375,81 +409,81 @@
         <translation>2FA désactivée pour l'hôte</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="940" />
+        <location filename="../src/app/AppController.cpp" line="887" />
         <source>Tunnels updated in %n open session(s) — no reconnect needed.</source>
         <translation><numerusform>Tunnels mis à jour dans %n session ouverte — inutile de se reconnecter.</numerusform><numerusform>Tunnels mis à jour dans %n sessions ouvertes — inutile de se reconnecter.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1048" />
+        <location filename="../src/app/AppController.cpp" line="995" />
         <source>Hosts imported</source>
         <translation>Hôtes importés</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1048" />
+        <location filename="../src/app/AppController.cpp" line="995" />
         <source>%1 hosts, %2 keys</source>
         <translation>%1 hôtes, %2 clés</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1049" />
+        <location filename="../src/app/AppController.cpp" line="996" />
         <source>Imported %1 host(s) and %2 key(s).</source>
         <translation>%1 hôte(s) et %2 clé(s) importés.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1051" />
+        <location filename="../src/app/AppController.cpp" line="998" />
         <source>Keys with a passphrase were not imported — add them in Keychain → Import: %1</source>
         <translation>Les clés avec phrase secrète n'ont pas été importées — ajoutez-les dans Trousseau → Importer : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1057" />
+        <location filename="../src/app/AppController.cpp" line="1004" />
         <source>Host deleted</source>
         <translation>Hôte supprimé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1083" />
+        <location filename="../src/app/AppController.cpp" line="1030" />
         <source> (copy)</source>
         <translation> (copie)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1100" />
+        <location filename="../src/app/AppController.cpp" line="1047" />
         <source>Passphrases do not match.</source>
         <translation>Les phrases secrètes ne correspondent pas.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1130" />
+        <location filename="../src/app/AppController.cpp" line="1077" />
         <source>Key generated</source>
         <translation>Clé générée</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1131" />
+        <location filename="../src/app/AppController.cpp" line="1078" />
         <source> · no passphrase</source>
         <translation> · sans phrase secrète</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1150" />
+        <location filename="../src/app/AppController.cpp" line="1097" />
         <source>This key is protected. Enter its passphrase.</source>
         <translation>Cette clé est protégée. Saisissez sa phrase secrète.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1154" />
-        <location filename="../src/app/AppController.cpp" line="1261" />
+        <location filename="../src/app/AppController.cpp" line="1101" />
+        <location filename="../src/app/AppController.cpp" line="1208" />
         <source>Wrong passphrase.</source>
         <translation>Phrase secrète incorrecte.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1165" />
+        <location filename="../src/app/AppController.cpp" line="1112" />
         <source>This key is already in the keychain ("%1").</source>
         <translation>Cette clé est déjà dans le trousseau (« %1 »).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1191" />
+        <location filename="../src/app/AppController.cpp" line="1138" />
         <source>Key imported</source>
         <translation>Clé importée</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1219" />
-        <location filename="../src/app/AppController.cpp" line="1231" />
-        <location filename="../src/app/AppController.cpp" line="1242" />
-        <location filename="../src/app/AppController.cpp" line="1267" />
+        <location filename="../src/app/AppController.cpp" line="1166" />
+        <location filename="../src/app/AppController.cpp" line="1178" />
+        <location filename="../src/app/AppController.cpp" line="1189" />
+        <location filename="../src/app/AppController.cpp" line="1214" />
         <source>Key not found.</source>
         <translation>Clé introuvable.</translation>
     </message>
@@ -458,99 +492,99 @@
         <translation>Cette clé est protégée par OpenPGP. Retirez d'abord la protection (le PIN sera demandé).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1248" />
+        <location filename="../src/app/AppController.cpp" line="1195" />
         <source>Private key exported</source>
         <translation>Clé privée exportée</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1304" />
+        <location filename="../src/app/AppController.cpp" line="1251" />
         <source>Key deleted</source>
         <translation>Clé supprimée</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1402" />
+        <location filename="../src/app/AppController.cpp" line="1373" />
         <source>Enter the proxy address.</source>
         <translation>Saisissez l'adresse du proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1431" />
+        <location filename="../src/app/AppController.cpp" line="1404" />
         <source>Proxy changed</source>
         <translation>Proxy modifié</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1431" />
+        <location filename="../src/app/AppController.cpp" line="1404" />
         <source>Proxy added</source>
         <translation>Proxy ajouté</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1440" />
+        <location filename="../src/app/AppController.cpp" line="1413" />
         <source>Proxy deleted</source>
         <translation>Proxy supprimé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1514" />
+        <location filename="../src/app/AppController.cpp" line="1487" />
         <source>cloudflared was not found. Install it (winget install Cloudflare.cloudflared) or choose cloudflared.exe.</source>
         <translation>cloudflared est introuvable. Installez-le (winget install Cloudflare.cloudflared) ou choisissez cloudflared.exe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1516" />
+        <location filename="../src/app/AppController.cpp" line="1489" />
         <source>%1 does not run.</source>
         <translation>%1 ne démarre pas.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1518" />
+        <location filename="../src/app/AppController.cpp" line="1491" />
         <source>via Cloudflare · %1</source>
         <translation>via Cloudflare · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1560" />
+        <location filename="../src/app/AppController.cpp" line="1533" />
         <source>Enter the proxy address and port.</source>
         <translation>Saisissez l'adresse et le port du proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1605" />
+        <location filename="../src/app/AppController.cpp" line="1627" />
         <source>Kill switch fired</source>
         <translation>Kill switch déclenché</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1645" />
-        <location filename="../src/app/AppController.cpp" line="1674" />
+        <location filename="../src/app/AppController.cpp" line="1667" />
+        <location filename="../src/app/AppController.cpp" line="1696" />
         <source>Kill switch: proxy "%1" stopped responding (%2). Session closed.</source>
         <translation>Kill switch : le proxy « %1 » ne répond plus (%2). Session fermée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1646" />
+        <location filename="../src/app/AppController.cpp" line="1668" />
         <source>no answer</source>
         <translation>pas de réponse</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1678" />
+        <location filename="../src/app/AppController.cpp" line="1700" />
         <source>Kill switch: proxy "%1" now exits from your real IP. Session closed.</source>
         <translation>Kill switch : le proxy « %1 » sort désormais par votre IP réelle. Session fermée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1698" />
+        <location filename="../src/app/AppController.cpp" line="1720" />
         <source>Firewall lock failed</source>
         <translation>Échec du verrouillage pare-feu</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1705" />
+        <location filename="../src/app/AppController.cpp" line="1727" />
         <source>Firewall lock enabled</source>
         <translation>Verrouillage pare-feu activé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1718" />
+        <location filename="../src/app/AppController.cpp" line="1740" />
         <source>Firewall lock removed</source>
         <translation>Verrouillage pare-feu retiré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1737" />
-        <location filename="../src/app/AppController.cpp" line="2771" />
+        <location filename="../src/app/AppController.cpp" line="1759" />
+        <location filename="../src/app/AppController.cpp" line="2807" />
         <source>Enter a command.</source>
         <translation>Saisissez une commande.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="1799" />
+        <location filename="../src/app/AppController.cpp" line="1821" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Extrait envoyé à %n session</numerusform><numerusform>Extrait envoyé à %n sessions</numerusform></translation>
     </message>
@@ -563,22 +597,22 @@
         <translation>serveur</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1845" />
-        <location filename="../src/app/AppController.cpp" line="1915" />
-        <location filename="../src/app/AppController.cpp" line="1939" />
-        <location filename="../src/app/AppController.cpp" line="3177" />
+        <location filename="../src/app/AppController.cpp" line="1867" />
+        <location filename="../src/app/AppController.cpp" line="1937" />
+        <location filename="../src/app/AppController.cpp" line="1961" />
+        <location filename="../src/app/AppController.cpp" line="3213" />
         <source>This host no longer exists.</source>
         <translation>Cet hôte n'existe plus.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1848" />
+        <location filename="../src/app/AppController.cpp" line="1870" />
         <source>Too many wrong attempts. Try again in %1 s.</source>
         <translation>Trop de tentatives incorrectes. Réessayez dans %1 s.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1853" />
-        <location filename="../src/app/AppController.cpp" line="2777" />
-        <location filename="../src/app/AppController.cpp" line="2949" />
+        <location filename="../src/app/AppController.cpp" line="1875" />
+        <location filename="../src/app/AppController.cpp" line="2813" />
+        <location filename="../src/app/AppController.cpp" line="2985" />
         <source>Wrong master password.</source>
         <translation>Mot de passe maître incorrect.</translation>
     </message>
@@ -587,7 +621,7 @@
         <translation>Code 2FA incorrect ou expiré.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1861" />
+        <location filename="../src/app/AppController.cpp" line="1883" />
         <source>Connection check failed</source>
         <translation>Échec de la vérification de connexion</translation>
     </message>
@@ -600,7 +634,7 @@
         <translation>Connexion annulée : la vérification 2FA / mot de passe maître n'a pas abouti.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1939" />
+        <location filename="../src/app/AppController.cpp" line="1961" />
         <source>Unlock the vault to reconnect.</source>
         <translation>Déverrouillez le coffre pour vous reconnecter.</translation>
     </message>
@@ -609,68 +643,68 @@
         <translation>En attente du PIN OpenPGP (Kleopatra)…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1957" />
+        <location filename="../src/app/AppController.cpp" line="1979" />
         <source>Use the form user@host or user@host:port</source>
         <translation>Utilisez la forme user@hôte ou user@hôte:port</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1963" />
+        <location filename="../src/app/AppController.cpp" line="1985" />
         <source>Invalid port.</source>
         <translation>Port invalide.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2069" />
+        <location filename="../src/app/AppController.cpp" line="2091" />
         <source>Serial</source>
         <translation>Série</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2086" />
+        <location filename="../src/app/AppController.cpp" line="2109" />
         <source>Blocked by kill switch</source>
         <translation>Bloqué par le kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2087" />
+        <location filename="../src/app/AppController.cpp" line="2114" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch actif : cet hôte n'a pas de proxy et aucun proxy par défaut n'est défini. Connexion directe bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2096" />
+        <location filename="../src/app/AppController.cpp" line="2123" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>La route Cloudflare Tunnel est pour les hôtes SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2102" />
+        <location filename="../src/app/AppController.cpp" line="2133" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor démarre — appuyez sur Reconnecter dans un instant.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2106" />
+        <location filename="../src/app/AppController.cpp" line="2137" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · direct · non chiffré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2107" />
+        <location filename="../src/app/AppController.cpp" line="2138" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · non chiffré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2119" />
+        <location filename="../src/app/AppController.cpp" line="2150" />
         <source>Starting Tor…</source>
         <translation>Démarrage de Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2126" />
+        <location filename="../src/app/AppController.cpp" line="2157" />
         <source>Tor: %1</source>
         <translation>Tor : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2140" />
+        <location filename="../src/app/AppController.cpp" line="2171" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Démarrage de cloudflared… (la première fois, le navigateur peut demander une connexion à Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2153" />
-        <location filename="../src/app/AppController.cpp" line="2159" />
+        <location filename="../src/app/AppController.cpp" line="2184" />
+        <location filename="../src/app/AppController.cpp" line="2190" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel : %1</translation>
     </message>
@@ -679,124 +713,124 @@
         <translation>La clé SSH est protégée par OpenPGP : appuyez sur Reconnecter et saisissez votre PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2185" />
+        <location filename="../src/app/AppController.cpp" line="2216" />
         <source> → jump %1</source>
         <translation> → rebond %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2188" />
+        <location filename="../src/app/AppController.cpp" line="2222" />
         <source>Direct</source>
         <translation>Direct</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2189" />
+        <location filename="../src/app/AppController.cpp" line="2224" />
         <source>Connecting…</source>
         <translation>Connexion…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2190" />
         <location filename="../src/app/AppController.cpp" line="2225" />
+        <location filename="../src/app/AppController.cpp" line="2261" />
         <source>checking…</source>
         <translation>vérification…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2198" />
+        <location filename="../src/app/AppController.cpp" line="2233" />
         <source>unknown</source>
         <translation>inconnue</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2209" />
+        <location filename="../src/app/AppController.cpp" line="2244" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel : cloudflared ne tourne pas. Cliquez sur Reconnecter.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2216" />
+        <location filename="../src/app/AppController.cpp" line="2251" />
         <source>Connecting through Cloudflare…</source>
         <translation>Connexion via Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2224" />
+        <location filename="../src/app/AppController.cpp" line="2260" />
         <source>Checking proxy…</source>
         <translation>Vérification du proxy…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2248" />
+        <location filename="../src/app/AppController.cpp" line="2284" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch : le proxy sort par votre IP réelle (%1). Connexion bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2252" />
+        <location filename="../src/app/AppController.cpp" line="2288" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch : échec de la vérification du proxy (%1). Connexion bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2256" />
+        <location filename="../src/app/AppController.cpp" line="2292" />
         <source>proxy check failed: %1</source>
         <translation>échec de la vérification du proxy : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2472" />
+        <location filename="../src/app/AppController.cpp" line="2508" />
         <source>Password saved to the vault.</source>
         <translation>Mot de passe enregistré dans le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2486" />
+        <location filename="../src/app/AppController.cpp" line="2522" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Phrase secrète de la clé enregistrée dans le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2641" />
+        <location filename="../src/app/AppController.cpp" line="2677" />
         <source>Kill switch enabled</source>
         <translation>Kill switch activé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2641" />
+        <location filename="../src/app/AppController.cpp" line="2677" />
         <source>Kill switch disabled</source>
         <translation>Kill switch désactivé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2648" />
+        <location filename="../src/app/AppController.cpp" line="2684" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch activé : session directe fermée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2653" />
+        <location filename="../src/app/AppController.cpp" line="2689" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>Le kill switch a fermé %1 session(s) directe(s).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2756" />
+        <location filename="../src/app/AppController.cpp" line="2792" />
         <source>Tor: new identity</source>
         <translation>Tor : nouvelle identité</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2759" />
+        <location filename="../src/app/AppController.cpp" line="2795" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Nouvelle identité Tor : les nouvelles connexions utilisent une autre sortie. Les sessions ouvertes gardent leur route jusqu'à la reconnexion.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2773" />
-        <location filename="../src/app/AppController.cpp" line="2946" />
+        <location filename="../src/app/AppController.cpp" line="2809" />
+        <location filename="../src/app/AppController.cpp" line="2982" />
         <source>Choose at least one host.</source>
         <translation>Choisissez au moins un hôte.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2779" />
+        <location filename="../src/app/AppController.cpp" line="2815" />
         <source>Protected hosts unlocked with the master password for a batch run</source>
         <translation>Hôtes protégés déverrouillés par le mot de passe maître pour une exécution groupée</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2792" />
+        <location filename="../src/app/AppController.cpp" line="2828" />
         <source>Command run on %n host(s)</source>
         <translation><numerusform>Commande exécutée sur %n hôte</numerusform><numerusform>Commande exécutée sur %n hôtes</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2811" />
+        <location filename="../src/app/AppController.cpp" line="2847" />
         <source>Serial connection: not supported here.</source>
         <translation>Connexion série : non prise en charge ici.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2813" />
+        <location filename="../src/app/AppController.cpp" line="2849" />
         <source>Telnet host: commands can only be run over SSH.</source>
         <translation>Hôte Telnet : les commandes ne passent que par SSH.</translation>
     </message>
@@ -805,72 +839,72 @@
         <translation>Protégé par 2FA / mot de passe maître : saisissez le mot de passe maître pour l'inclure.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2963" />
+        <location filename="../src/app/AppController.cpp" line="2999" />
         <source>Choose a key.</source>
         <translation>Choisissez une clé.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2982" />
+        <location filename="../src/app/AppController.cpp" line="3018" />
         <source>Public keys sent to %n server(s)</source>
         <translation><numerusform>Clés publiques envoyées à %n serveur</numerusform><numerusform>Clés publiques envoyées à %n serveurs</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2991" />
+        <location filename="../src/app/AppController.cpp" line="3027" />
         <source>Another run is still going.</source>
         <translation>Une autre exécution est en cours.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2994" />
+        <location filename="../src/app/AppController.cpp" line="3030" />
         <source>Choose the old and the new key.</source>
         <translation>Choisissez l'ancienne et la nouvelle clé.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2998" />
+        <location filename="../src/app/AppController.cpp" line="3034" />
         <source>The new key must be a different key.</source>
         <translation>La nouvelle clé doit être une autre clé.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3000" />
+        <location filename="../src/app/AppController.cpp" line="3036" />
         <source>Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.</source>
         <translation>Seule la partie publique de la nouvelle clé est dans le trousseau : ShellWarden ne peut pas se connecter avec. Choisissez une clé avec sa partie privée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3006" />
+        <location filename="../src/app/AppController.cpp" line="3042" />
         <source>Enter the passphrase of the new key: it is needed to check that the new key works.</source>
         <translation>Saisissez la phrase secrète de la nouvelle clé : elle sert à vérifier que la nouvelle clé fonctionne.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3021" />
+        <location filename="../src/app/AppController.cpp" line="3057" />
         <source>Key replacement started</source>
         <translation>Remplacement de clé lancé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3068" />
+        <location filename="../src/app/AppController.cpp" line="3104" />
         <source>The new key could not be added, nothing changed: %1</source>
         <translation>Impossible d'ajouter la nouvelle clé, rien n'a changé : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3081" />
+        <location filename="../src/app/AppController.cpp" line="3117" />
         <source>The new key did not work here, so the old key was kept: %1</source>
         <translation>La nouvelle clé n'a pas fonctionné ici, l'ancienne est donc conservée : %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3107" />
+        <location filename="../src/app/AppController.cpp" line="3143" />
         <source>Key replaced on %n server(s)</source>
         <translation><numerusform>Clé remplacée sur %n serveur</numerusform><numerusform>Clé remplacée sur %n serveurs</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3108" />
+        <location filename="../src/app/AppController.cpp" line="3144" />
         <source>%1 of %2 servers</source>
         <translation>%1 sur %2 serveurs</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3152" />
+        <location filename="../src/app/AppController.cpp" line="3188" />
         <source>The key is now used to log in on %n server(s).</source>
         <translation><numerusform>La clé sert maintenant à se connecter sur %n serveur.</numerusform><numerusform>La clé sert maintenant à se connecter sur %n serveurs.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3223" />
+        <location filename="../src/app/AppController.cpp" line="3259" />
         <source>Wrong passphrase for the key "%1".</source>
         <translation>Phrase secrète incorrecte pour la clé « %1 ».</translation>
     </message>
@@ -883,47 +917,47 @@
         <translation>La clé est protégée par OpenPGP : ouvrez-le dans un onglet.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2817" />
+        <location filename="../src/app/AppController.cpp" line="2853" />
         <source>Kill switch: this host has no proxy.</source>
         <translation>Kill switch : cet hôte n'a pas de proxy.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2832" />
+        <location filename="../src/app/AppController.cpp" line="2868" />
         <source>Cloudflare Tunnel is not started: open this host in a tab once.</source>
         <translation>Cloudflare Tunnel n'est pas démarré : ouvrez une fois cet hôte dans un onglet.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2847" />
+        <location filename="../src/app/AppController.cpp" line="2883" />
         <source>Enter the file path.</source>
         <translation>Saisissez le chemin du fichier.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2851" />
+        <location filename="../src/app/AppController.cpp" line="2887" />
         <source>Choose two hosts.</source>
         <translation>Choisissez deux hôtes.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2874" />
+        <location filename="../src/app/AppController.cpp" line="2910" />
         <source>Command Prompt (cmd)</source>
         <translation>Invite de commandes (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2883" />
+        <location filename="../src/app/AppController.cpp" line="2919" />
         <source>Default shell (%1)</source>
         <translation>Shell par défaut (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2897" />
+        <location filename="../src/app/AppController.cpp" line="2933" />
         <source>No shell found on this computer.</source>
         <translation>Aucun shell trouvé sur cet ordinateur.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2909" />
+        <location filename="../src/app/AppController.cpp" line="2945" />
         <source>this computer</source>
         <translation>cet ordinateur</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2912" />
+        <location filename="../src/app/AppController.cpp" line="2948" />
         <source>Local terminal opened</source>
         <translation>Terminal local ouvert</translation>
     </message>
@@ -940,7 +974,7 @@
         <translation>Clé SSH déverrouillée avec OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2926" />
+        <location filename="../src/app/AppController.cpp" line="2962" />
         <source>The agent did not answer.</source>
         <translation>L'agent n'a pas répondu.</translation>
     </message>
@@ -1448,7 +1482,7 @@
     </message>
     <message>
         <location filename="../qml/pages/HostEditor.qml" line="178" />
-        <location filename="../qml/pages/HostEditor.qml" line="682" />
+        <location filename="../qml/pages/HostEditor.qml" line="687" />
         <source>New host</source>
         <translation>Nouvel hôte</translation>
     </message>
@@ -1589,92 +1623,107 @@
         <translation>Stocké chiffré dans le coffre.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="395" />
+        <location filename="../qml/pages/HostEditor.qml" line="384" />
+        <source>turned off</source>
+        <translation>désactivé</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostEditor.qml" line="396" />
         <source>Through Cloudflare Tunnel: the address above must be the hostname published in Cloudflare (e.g. ssh.example.com); cloudflared is started automatically. The port is not used.</source>
         <translation>Via Cloudflare Tunnel : l'adresse ci-dessus doit être le nom publié dans Cloudflare (ex. ssh.example.com) ; cloudflared est démarré automatiquement. Le port n'est pas utilisé.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="429" />
+        <location filename="../qml/pages/HostEditor.qml" line="399" />
+        <source>This proxy is turned off (Proxies page). While it is off the host uses the default proxy; with no default proxy it is blocked by the kill switch.</source>
+        <translation>Ce proxy est désactivé (page Proxys). Tant qu'il l'est, l'hôte passe par le proxy par défaut ; sans proxy par défaut, le kill switch le bloque.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostEditor.qml" line="400" />
+        <source>This proxy is turned off (Proxies page). While it is off the host connects directly, from your real IP.</source>
+        <translation>Ce proxy est désactivé (page Proxys). Tant qu'il l'est, l'hôte se connecte en direct, depuis votre vraie IP.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostEditor.qml" line="434" />
         <source>TUNNELS</source>
         <translation>TUNNELS</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="470" />
+        <location filename="../qml/pages/HostEditor.qml" line="475" />
         <source>auto</source>
         <translation>auto</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="470" />
+        <location filename="../qml/pages/HostEditor.qml" line="475" />
         <source>manual</source>
         <translation>manuel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="473" />
+        <location filename="../qml/pages/HostEditor.qml" line="478" />
         <source>Opens by itself on connect. Click: start it by hand from the Tunnels panel instead.</source>
         <translation>S'ouvre tout seul à la connexion. Cliquez pour le démarrer à la main depuis le panneau Tunnels.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="474" />
+        <location filename="../qml/pages/HostEditor.qml" line="479" />
         <source>Started by hand: in the tab press the Tunnels button → Start. Click: open it by itself on connect.</source>
         <translation>Démarré à la main : dans l'onglet, bouton Tunnels → Démarrer. Cliquez pour l'ouvrir tout seul à la connexion.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="499" />
+        <location filename="../qml/pages/HostEditor.qml" line="504" />
         <source>L — open a server port on this PC</source>
         <translation>L — ouvrir un port du serveur sur ce PC</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="499" />
+        <location filename="../qml/pages/HostEditor.qml" line="504" />
         <source>R — open a port of this PC on the server</source>
         <translation>R — ouvrir un port de ce PC sur le serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="499" />
+        <location filename="../qml/pages/HostEditor.qml" line="504" />
         <source>D — SOCKS5 proxy through the server</source>
         <translation>D — proxy SOCKS5 via le serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="506" />
+        <location filename="../qml/pages/HostEditor.qml" line="511" />
         <source>Port on the server</source>
         <translation>Port sur le serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="506" />
+        <location filename="../qml/pages/HostEditor.qml" line="511" />
         <source>Port on this PC</source>
         <translation>Port sur ce PC</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="517" />
+        <location filename="../qml/pages/HostEditor.qml" line="522" />
         <source>Goes to (address:port on this PC's side)</source>
         <translation>Vers (adresse:port côté ce PC)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="517" />
+        <location filename="../qml/pages/HostEditor.qml" line="522" />
         <source>Goes to (address:port as the server sees it)</source>
         <translation>Vers (adresse:port vue par le serveur)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="525" />
+        <location filename="../qml/pages/HostEditor.qml" line="530" />
         <source>Open by itself on connect</source>
         <translation>Ouvrir tout seul à la connexion</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="531" />
+        <location filename="../qml/pages/HostEditor.qml" line="536" />
         <source>Add tunnel</source>
         <translation>Ajouter le tunnel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="542" />
+        <location filename="../qml/pages/HostEditor.qml" line="547" />
         <source>Example: port 8080, goes to 127.0.0.1:80 — then http://127.0.0.1:8080 in your browser opens the web site that runs on the server itself. Or port 18090 → 127.0.0.1:22 and then "ssh -p 18090 user@127.0.0.1" reaches the server's SSH through the tunnel.</source>
         <translation>Exemple : port 8080 vers 127.0.0.1:80 — alors http://127.0.0.1:8080 dans le navigateur ouvre le site qui tourne sur le serveur. Ou port 18090 → 127.0.0.1:22, puis « ssh -p 18090 utilisateur@127.0.0.1 » atteint le SSH du serveur par le tunnel.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="544" />
+        <location filename="../qml/pages/HostEditor.qml" line="549" />
         <source>Example: port 9000 on the server, goes to 127.0.0.1:3000 — programs on the server can then reach a service running on your PC at 127.0.0.1:9000.</source>
         <translation>Exemple : port 9000 sur le serveur vers 127.0.0.1:3000 — les programmes du serveur atteignent alors un service de votre PC à 127.0.0.1:9000.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="545" />
+        <location filename="../qml/pages/HostEditor.qml" line="550" />
         <source>Example: port 1080 — set SOCKS5 proxy 127.0.0.1:1080 in the browser and it browses from the server's IP.</source>
         <translation>Exemple : port 1080 — indiquez le proxy SOCKS5 127.0.0.1:1080 dans le navigateur : il navigue avec l'IP du serveur.</translation>
     </message>
@@ -1748,37 +1797,37 @@
         <translation>Connexion directe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="397" />
+        <location filename="../qml/pages/HostEditor.qml" line="402" />
         <source>All traffic to this host goes through the proxy. If the proxy fails the connection fails — it never falls back to direct.</source>
         <translation>Tout le trafic vers cet hôte passe par le proxy. Si le proxy échoue, la connexion échoue : jamais de repli en direct.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="399" />
+        <location filename="../qml/pages/HostEditor.qml" line="404" />
         <source>Kill switch is on: the default proxy will be used.</source>
         <translation>Kill switch actif : le proxy par défaut sera utilisé.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="400" />
+        <location filename="../qml/pages/HostEditor.qml" line="405" />
         <source>Kill switch is on and no default proxy is set: connecting will be blocked.</source>
         <translation>Kill switch actif sans proxy par défaut : la connexion sera bloquée.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="401" />
+        <location filename="../qml/pages/HostEditor.qml" line="406" />
         <source>Connects directly from your IP.</source>
         <translation>Connexion directe depuis votre IP.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="408" />
+        <location filename="../qml/pages/HostEditor.qml" line="413" />
         <source>Jump host (ProxyJump)</source>
         <translation>Hôte de rebond (ProxyJump)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="413" />
+        <location filename="../qml/pages/HostEditor.qml" line="418" />
         <source>None — connect to the host itself</source>
         <translation>Aucun — connexion directe à l'hôte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="424" />
+        <location filename="../qml/pages/HostEditor.qml" line="429" />
         <source>Route: proxy (if any) → jump host → this host. The jump host uses its own saved password/key; connect to it directly once to trust its key.</source>
         <translation>Itinéraire : proxy (le cas échéant) → hôte de rebond → cet hôte. L'hôte de rebond utilise ses propres mot de passe/clé enregistrés ; connectez-vous-y une fois directement pour approuver sa clé.</translation>
     </message>
@@ -1795,7 +1844,7 @@
         <translation>L : un port de ce PC atteint hôte:port via le serveur. R : un port du serveur atteint hôte:port depuis ce PC. D : proxy SOCKS5 sur ce PC qui sort par le serveur.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="568" />
+        <location filename="../qml/pages/HostEditor.qml" line="573" />
         <source>ADVANCED SECURITY</source>
         <translation>SÉCURITÉ AVANCÉE</translation>
     </message>
@@ -1834,72 +1883,72 @@
         <translation>Code incorrect. Vérifiez l'heure du téléphone.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="580" />
+        <location filename="../qml/pages/HostEditor.qml" line="585" />
         <source>Ask for the master password to connect</source>
         <translation>Demander le mot de passe maître pour se connecter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="582" />
+        <location filename="../qml/pages/HostEditor.qml" line="587" />
         <source>Even when the vault is unlocked. Good for production servers.</source>
         <translation>Même quand le coffre est déverrouillé. Idéal pour les serveurs de production.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="593" />
+        <location filename="../qml/pages/HostEditor.qml" line="598" />
         <source>Always ask the key passphrase</source>
         <translation>Toujours demander la phrase secrète de la clé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="595" />
+        <location filename="../qml/pages/HostEditor.qml" line="600" />
         <source>Ignore a passphrase saved in the vault for this host.</source>
         <translation>Ignorer la phrase secrète enregistrée dans le coffre pour cet hôte.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="606" />
+        <location filename="../qml/pages/HostEditor.qml" line="611" />
         <source>Use keys from the SSH agent</source>
         <translation>Utiliser les clés de l'agent SSH</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="608" />
+        <location filename="../qml/pages/HostEditor.qml" line="613" />
         <source>Found: %1.</source>
         <translation>Trouvé : %1.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="609" />
+        <location filename="../qml/pages/HostEditor.qml" line="614" />
         <source>No agent is running right now.</source>
         <translation>Aucun agent ne tourne pour l'instant.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="610" />
+        <location filename="../qml/pages/HostEditor.qml" line="615" />
         <source>Pageant, the Windows OpenSSH agent, ssh-agent, KeePassXC, a YubiKey… are tried before the key above.</source>
         <translation>Pageant, l'agent OpenSSH de Windows, ssh-agent, KeePassXC, une YubiKey… sont essayés avant la clé ci-dessus.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="621" />
+        <location filename="../qml/pages/HostEditor.qml" line="626" />
         <source>Agent forwarding (ssh -A)</source>
         <translation>Transfert d'agent (ssh -A)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="623" />
+        <location filename="../qml/pages/HostEditor.qml" line="628" />
         <source>From this server you can go further (git pull, ssh to the next server) with your keys, which never leave this computer. Only for servers you trust: while you are connected, root there can use your agent.</source>
         <translation>Depuis ce serveur vous pouvez aller plus loin (git pull, ssh vers le serveur suivant) avec vos clés, qui ne quittent jamais cet ordinateur. Seulement pour des serveurs de confiance : pendant la connexion, root peut y utiliser votre agent.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="631" />
+        <location filename="../qml/pages/HostEditor.qml" line="636" />
         <source>NOTES</source>
         <translation>NOTES</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="651" />
+        <location filename="../qml/pages/HostEditor.qml" line="656" />
         <source>e.g. what runs here, who to call, where the backups are, links to docs…</source>
         <translation>ex. ce qui tourne ici, qui appeler, où sont les sauvegardes, liens vers la doc…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="660" />
+        <location filename="../qml/pages/HostEditor.qml" line="665" />
         <source>Stored encrypted in the vault, like passwords. In an open tab: the notes button in the toolbar.</source>
         <translation>Stockées chiffrées dans le coffre, comme les mots de passe. Dans un onglet ouvert : le bouton notes de la barre d'outils.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="665" />
+        <location filename="../qml/pages/HostEditor.qml" line="670" />
         <source>APPEARANCE</source>
         <translation>APPARENCE</translation>
     </message>
@@ -1908,22 +1957,22 @@
         <translation>Couleur (soulignement de l'onglet et avatar ; A = automatique selon le nom)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="756" />
+        <location filename="../qml/pages/HostEditor.qml" line="761" />
         <source>Any colour…</source>
         <translation>Autre couleur…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="762" />
+        <location filename="../qml/pages/HostEditor.qml" line="767" />
         <source>Host colour</source>
         <translation>Couleur de l'hôte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="709" />
+        <location filename="../qml/pages/HostEditor.qml" line="714" />
         <source>Colour</source>
         <translation>Couleur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="766" />
+        <location filename="../qml/pages/HostEditor.qml" line="771" />
         <source>Terminal theme</source>
         <translation>Thème du terminal</translation>
     </message>
@@ -1933,47 +1982,47 @@
     </message>
     <message>
         <location filename="../qml/pages/HostEditor.qml" line="189" />
-        <location filename="../qml/pages/HostEditor.qml" line="846" />
+        <location filename="../qml/pages/HostEditor.qml" line="851" />
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="555" />
+        <location filename="../qml/pages/HostEditor.qml" line="560" />
         <source>Press "Add tunnel" (or Save — it is added for you).</source>
         <translation>Appuyez sur « Ajouter un tunnel » (ou Enregistrer — il est ajouté pour vous).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="563" />
+        <location filename="../qml/pages/HostEditor.qml" line="568" />
         <source>"auto" — opens together with the connection. "manual" — stays closed; during the session press the Tunnels button in the tab and Start / Stop it whenever you need.</source>
         <translation>« auto » — s'ouvre avec la connexion. « manuel » — reste fermé ; pendant la session, bouton Tunnels de l'onglet puis Démarrer / Arrêter quand vous voulez.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="705" />
+        <location filename="../qml/pages/HostEditor.qml" line="710" />
         <source>preview</source>
         <translation>aperçu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="756" />
+        <location filename="../qml/pages/HostEditor.qml" line="761" />
         <source>Automatic: picked from the name</source>
         <translation>Automatique : d'après le nom</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="782" />
+        <location filename="../qml/pages/HostEditor.qml" line="787" />
         <source>Default</source>
         <translation>Par défaut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="843" />
+        <location filename="../qml/pages/HostEditor.qml" line="848" />
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="842" />
+        <location filename="../qml/pages/HostEditor.qml" line="847" />
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="839" />
+        <location filename="../qml/pages/HostEditor.qml" line="844" />
         <source>Save &amp; connect</source>
         <translation>Enregistrer et se connecter</translation>
     </message>
@@ -2056,12 +2105,28 @@
         <translation>Le mot de passe maître est demandé avant la connexion</translation>
     </message>
     <message>
+        <location filename="../qml/pages/HostsPage.qml" line="279" />
+        <source>Connect once via</source>
+        <translation>Se connecter une fois via</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="289" />
+        <location filename="../qml/pages/HostsPage.qml" line="312" />
+        <source>turned off</source>
+        <translation>désactivé</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="302" />
+        <source>Always connect via: %1</source>
+        <translation>Toujours se connecter via : %1</translation>
+    </message>
+    <message>
         <source>2FA code is asked before connecting</source>
         <translation>Le code 2FA est demandé avant la connexion</translation>
     </message>
     <message>
         <location filename="../qml/pages/HostsPage.qml" line="226" />
-        <location filename="../qml/pages/HostsPage.qml" line="321" />
+        <location filename="../qml/pages/HostsPage.qml" line="322" />
         <source>Edit</source>
         <translation>Modifier</translation>
     </message>
@@ -2089,9 +2154,14 @@
         <location filename="../qml/pages/HostsPage.qml" line="268" />
         <location filename="../qml/pages/HostsPage.qml" line="273" />
         <location filename="../qml/pages/HostsPage.qml" line="282" />
-        <location filename="../qml/pages/HostsPage.qml" line="304" />
+        <location filename="../qml/pages/HostsPage.qml" line="305" />
         <source>Direct</source>
         <translation>Direct</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="271" />
+        <source>%1 (turned off)</source>
+        <translation>%1 (désactivé)</translation>
     </message>
     <message>
         <location filename="../qml/pages/HostsPage.qml" line="275" />
@@ -2099,38 +2169,36 @@
         <translation>Se connecter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="279" />
         <source>Connect via</source>
         <translation>Se connecter via</translation>
     </message>
     <message>
         <location filename="../qml/pages/HostsPage.qml" line="282" />
-        <location filename="../qml/pages/HostsPage.qml" line="289" />
+        <location filename="../qml/pages/HostsPage.qml" line="290" />
         <source>saved</source>
         <translation>enregistré</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="301" />
         <source>Route: %1</source>
         <translation>Route : %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="322" />
+        <location filename="../qml/pages/HostsPage.qml" line="323" />
         <source>Duplicate</source>
         <translation>Dupliquer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="323" />
+        <location filename="../qml/pages/HostsPage.qml" line="324" />
         <source>Run a command…</source>
         <translation>Exécuter une commande…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="324" />
+        <location filename="../qml/pages/HostsPage.qml" line="325" />
         <source>Compare a file with another server…</source>
         <translation>Comparer un fichier avec un autre serveur…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="326" />
+        <location filename="../qml/pages/HostsPage.qml" line="327" />
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
@@ -2918,32 +2986,26 @@
 <context>
     <name>LocalFilesPane</name>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="59" />
         <source>This computer</source>
         <translation>Cet ordinateur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="65" />
         <source>Places</source>
         <translation>Emplacements</translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="74" />
         <source>Up one folder</source>
         <translation>Dossier parent</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/LocalFilesPane.qml" line="128" />
         <source>%n files</source>
         <translation><numerusform>%n fichier</numerusform><numerusform>%n fichiers</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="151" />
         <source>Empty folder</source>
         <translation>Dossier vide</translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="176" />
         <source>Drop to save to this PC in %1</source>
         <translation>Déposez pour enregistrer sur ce PC dans %1</translation>
     </message>
@@ -3647,7 +3709,6 @@
         <translation>SOCKS5, HTTP CONNECT et Tor. Les noms d'hôte sont résolus par le proxy, pas localement — les adresses .onion fonctionnent via Tor.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="39" />
         <source>SOCKS5, HTTP CONNECT, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor.</source>
         <translation>SOCKS5, HTTP CONNECT, Tor et Cloudflare Tunnel. Les noms d'hôtes sont résolus par le proxy, pas localement : les adresses .onion passent par Tor.</translation>
     </message>
@@ -3677,138 +3738,175 @@
         <translation>Il n'y a jamais de repli vers une connexion directe.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="106" />
         <source>Default proxy for hosts without one</source>
         <translation>Proxy par défaut pour les hôtes sans proxy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="112" />
         <source>A host can have its own proxy (in its settings). Hosts without one either go through the proxy chosen here, or — with "None" — are not allowed to connect while the kill switch is on.</source>
         <translation>Un hôte peut avoir son propre proxy (dans ses réglages). Les hôtes sans proxy passent par celui choisi ici, ou — avec « Aucun » — ne peuvent pas se connecter tant que le kill switch est actif.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="119" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="39" />
+        <source>SOCKS5, HTTP CONNECT, Shadowsocks, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor.</source>
+        <translation>SOCKS5, HTTP CONNECT, Shadowsocks, Tor et Cloudflare Tunnel. Les noms d'hôtes sont résolus par le proxy, pas localement — les adresses .onion fonctionnent via Tor.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="107" />
+        <source>Kill switch: proxy for hosts without one</source>
+        <translation>Kill switch : proxy pour les hôtes sans proxy</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="113" />
+        <source>Only used while the kill switch is on, because then nothing may connect directly. Hosts with no proxy of their own (or whose proxy is turned off) go through the proxy chosen here; with "None" they are blocked. With the kill switch off such hosts simply connect directly.</source>
+        <translation>Utilisé seulement quand le kill switch est actif, car alors rien ne peut se connecter en direct. Les hôtes sans proxy propre (ou dont le proxy est désactivé) passent par le proxy choisi ici ; avec « Aucun », ils sont bloqués. Kill switch désactivé, ces hôtes se connectent simplement en direct.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="120" />
         <source>None — block those hosts</source>
         <translation>Aucun — bloquer ces hôtes</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="139" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="140" />
         <source>Your real (direct) IP:</source>
         <translation>Votre IP réelle (directe) :</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="141" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="142" />
         <source>checking…</source>
         <translation>vérification…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="143" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
         <source>unavailable: </source>
         <translation>indisponible : </translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="143" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
         <source>not checked</source>
         <translation>non vérifiée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="160" />
-        <location filename="../qml/pages/ProxiesPage.qml" line="328" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="161" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="335" />
         <source>Check</source>
         <translation>Vérifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="167" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="168" />
         <source>Used for the leak check: a proxy whose exit IP equals this address is treated as broken.</source>
         <translation>Sert à détecter les fuites : un proxy dont l'IP de sortie est égale à cette adresse est considéré comme défaillant.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="200" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="201" />
         <source>Firewall lock</source>
         <translation>Verrouillage pare-feu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="206" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
         <source>active</source>
         <translation>actif</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="206" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
         <source>off</source>
         <translation>désactivé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="215" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="216" />
         <source>The strongest protection: a Windows Defender Firewall rule lets %1 connect ONLY to your proxies (and localhost). Even a bug in the program could not reveal your real IP — Windows drops the packets. Needs administrator rights (UAC). Update the rule after adding or changing proxies.</source>
         <translation>La protection la plus forte : une règle du Pare-feu Windows Defender n'autorise %1 à se connecter QU'À vos proxys (et localhost). Même un bogue du programme ne pourrait révéler votre IP réelle : Windows rejette les paquets. Nécessite les droits administrateur (UAC). Mettez la règle à jour après avoir ajouté ou modifié des proxys.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="228" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="229" />
         <source>Remove rule</source>
         <translation>Supprimer la règle</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="232" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
         <source>Update rule</source>
         <translation>Mettre à jour la règle</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="232" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
         <source>Enable firewall lock</source>
         <translation>Activer le verrouillage pare-feu</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="291" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="294" />
         <source>default</source>
         <translation>par défaut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="293" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="296" />
         <source>cloudflared access tcp → the host's address</source>
         <translation>cloudflared access tcp → l'adresse de l'hôte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="307" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="310" />
+        <source>Turned off · its hosts use the default proxy; with no default proxy they are blocked (kill switch is on)</source>
+        <translation>Désactivé · ses hôtes passent par le proxy par défaut ; sans lui ils sont bloqués (kill switch actif)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="311" />
+        <source>Turned off · its hosts connect directly, from your real IP</source>
+        <translation>Désactivé · ses hôtes se connectent en direct, depuis votre vraie IP</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="314" />
         <source>Ready · %1</source>
         <translation>Prêt · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="308" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="315" />
         <source>Working · exit IP %1%2 · %3 ms · checked %4</source>
         <translation>Fonctionne · IP de sortie %1%2 · %3 ms · vérifié à %4</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="312" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="319" />
         <source>Not working: %1 · checked %2</source>
         <translation>Ne fonctionne pas : %1 · vérifié à %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="313" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="320" />
         <source>Checking…</source>
         <translation>Vérification…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="314" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="321" />
         <source>Not checked yet</source>
         <translation>Pas encore vérifié</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="323" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="330" />
         <source>New identity</source>
         <translation>Nouvelle identité</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="326" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="333" />
         <source>Switch to new Tor circuits: a different exit IP for new connections</source>
         <translation>Passer à de nouveaux circuits Tor : une autre IP de sortie pour les nouvelles connexions</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="339" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="342" />
+        <source>Turn this proxy off without deleting it: hosts that use it will connect directly (with the kill switch on — through the default proxy, never directly). Open sessions are not touched.</source>
+        <translation>Désactiver ce proxy sans le supprimer : les hôtes qui l'utilisent se connecteront en direct (avec le kill switch actif — via le proxy par défaut, jamais en direct). Les sessions ouvertes ne sont pas touchées.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="343" />
+        <source>Turn this proxy back on</source>
+        <translation>Réactiver ce proxy</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="355" />
         <source>No proxies yet</source>
         <translation>Aucun proxy pour l'instant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="340" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="356" />
+        <source>Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default.</source>
+        <translation>Ajoutez un proxy SOCKS5, HTTP, Shadowsocks ou Tor, puis attribuez-le à des hôtes ou faites-en le proxy par défaut.</translation>
+    </message>
+    <message>
         <source>Add a SOCKS5, HTTP or Tor proxy, then assign it to hosts or make it the default.</source>
         <translation>Ajoutez un proxy SOCKS5, HTTP ou Tor, puis attribuez-le aux hôtes ou faites-en le proxy par défaut.</translation>
     </message>
@@ -3820,278 +3918,318 @@
 <context>
     <name>ProxyChecker</name>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="74" />
+        <location filename="../src/app/ProxyChecker.cpp" line="142" />
         <source>Unexpected answer from the IP service</source>
         <translation>Réponse inattendue du service IP</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="156" />
+        <source>no IP service answered (%1)</source>
+        <translation>aucun service IP n'a répondu (%1)</translation>
     </message>
 </context>
 <context>
     <name>ProxyEditor</name>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="88" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="94" />
         <source>Edit proxy</source>
         <translation>Modifier le proxy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="88" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="94" />
         <source>New proxy</source>
         <translation>Nouveau proxy</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="105" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="111" />
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="105" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="111" />
         <source>e.g. NL exit</source>
         <translation>ex. Sortie NL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="110" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="116" />
         <source>Type</source>
         <translation>Type</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>SOCKS5 (remote DNS)</source>
         <translation>SOCKS5 (DNS distant)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>HTTP CONNECT</source>
         <translation>HTTP CONNECT</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>Tor</source>
         <translation>Tor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>Cloudflare Tunnel</source>
         <translation>Cloudflare Tunnel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="128" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
+        <source>Shadowsocks (encrypted, hard to block)</source>
+        <translation>Shadowsocks (chiffré, difficile à bloquer)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="135" />
         <source>Which Tor to use</source>
         <translation>Quel Tor utiliser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="131" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="138" />
         <source>Automatically</source>
         <translation>Automatiquement</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="131" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="138" />
         <source>Tor Browser if it is open, otherwise the Tor service</source>
         <translation>Tor Browser s'il est ouvert, sinon le service Tor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="132" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="139" />
         <source>Tor Browser</source>
         <translation>Tor Browser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="132" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="139" />
         <source>Keep Tor Browser open while you work (port 9150)</source>
         <translation>Gardez Tor Browser ouvert pendant le travail (port 9150)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="133" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="140" />
         <source>Tor service</source>
         <translation>Service Tor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="133" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="140" />
         <source>Tor installed as a system service (port 9050)</source>
         <translation>Tor installé comme service système (port 9050)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="134" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="141" />
         <source>ShellWarden starts tor.exe</source>
         <translation>ShellWarden lance tor.exe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="134" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="141" />
         <source>Nothing to keep open: started when needed, stopped on exit</source>
         <translation>Rien à garder ouvert : lancé quand il faut, arrêté à la fermeture</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="172" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="179" />
         <source>Path to tor.exe</source>
         <translation>Chemin de tor.exe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="173" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="180" />
         <source>found automatically if next to ShellWarden</source>
         <translation>trouvé automatiquement s'il est à côté de ShellWarden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="174" />
-        <location filename="../qml/pages/ProxyEditor.qml" line="259" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="181" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="266" />
         <source>Browse…</source>
         <translation>Parcourir…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="184" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="191" />
         <source>Get the "Tor Expert Bundle" for your system at &lt;a href="https://www.torproject.org/download/tor/"&gt;torproject.org/download/tor&lt;/a&gt;, unpack it and choose tor.exe (or put the folder "tor" next to ShellWarden.exe).</source>
         <translation>Téléchargez le « Tor Expert Bundle » pour votre système sur &lt;a href="https://www.torproject.org/download/tor/"&gt;torproject.org/download/tor&lt;/a&gt;, décompressez-le et choisissez tor.exe (ou placez le dossier « tor » à côté de ShellWarden.exe).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="188" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="195" />
         <source>Choose tor.exe</source>
         <translation>Choisir tor.exe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="210" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="217" />
         <source>Looking for a running Tor…</source>
         <translation>Recherche d'un Tor en cours…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="211" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="218" />
         <source>Found: Tor Browser on 127.0.0.1:9150</source>
         <translation>Trouvé : Tor Browser sur 127.0.0.1:9150</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="212" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="219" />
         <source>Found: Tor service on 127.0.0.1:9050</source>
         <translation>Trouvé : service Tor sur 127.0.0.1:9050</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="213" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="220" />
         <source>Found: Tor started by ShellWarden</source>
         <translation>Trouvé : Tor lancé par ShellWarden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="214" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="221" />
         <source>Tor Browser is not running. Open it and wait until it says "Connected".</source>
         <translation>Tor Browser n'est pas lancé. Ouvrez-le et attendez « Connecté ».</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="215" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="222" />
         <source>The Tor service is not running on port 9050.</source>
         <translation>Le service Tor ne tourne pas sur le port 9050.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="216" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="223" />
         <source>No running Tor found. Open Tor Browser, start the Tor service, or choose "ShellWarden starts tor.exe".</source>
         <translation>Aucun Tor en cours. Ouvrez Tor Browser, lancez le service Tor ou choisissez « ShellWarden lance tor.exe ».</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="218" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="225" />
         <source>Check</source>
         <translation>Vérifier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="226" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="233" />
         <source>Tor is slow and many servers block Tor exits. .onion addresses work as host names. "New identity" on the Proxies page gives a new exit IP.</source>
         <translation>Tor est lent et beaucoup de serveurs bloquent ses sorties. Les adresses .onion fonctionnent comme noms d'hôte. « Nouvelle identité » sur la page Proxys donne une nouvelle IP de sortie.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="251" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="258" />
         <source>The server runs &lt;b&gt;cloudflared tunnel&lt;/b&gt; with a public hostname like &lt;b&gt;ssh.example.com → ssh://localhost:22&lt;/b&gt; (Cloudflare dashboard → Zero Trust → Networks → Tunnels). Port 22 can then be closed and the server IP stays hidden.&lt;br&gt;&lt;br&gt;In the host put that hostname as the address and choose this route. ShellWarden starts &lt;b&gt;cloudflared access tcp&lt;/b&gt; on this computer by itself. Free on the Cloudflare Free plan. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/"&gt;How to set up the server&lt;/a&gt;</source>
         <translation>Le serveur exécute &lt;b&gt;cloudflared tunnel&lt;/b&gt; avec un nom public comme &lt;b&gt;ssh.example.com → ssh://localhost:22&lt;/b&gt; (tableau de bord Cloudflare → Zero Trust → Networks → Tunnels). Le port 22 peut alors être fermé et l'IP du serveur reste cachée.&lt;br&gt;&lt;br&gt;Dans l'hôte, mettez ce nom comme adresse et choisissez cette route. ShellWarden lance lui-même &lt;b&gt;cloudflared access tcp&lt;/b&gt; sur cet ordinateur. Gratuit avec l'offre Cloudflare Free. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/"&gt;Configurer le serveur&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="257" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="264" />
         <source>Path to cloudflared (optional)</source>
         <translation>Chemin de cloudflared (facultatif)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="258" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="265" />
         <source>found automatically (winget, Program Files, PATH)</source>
         <translation>trouvé automatiquement (winget, Program Files, PATH)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="263" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="270" />
         <source>Choose cloudflared</source>
         <translation>Choisir cloudflared</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="271" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="278" />
         <source>Cloudflare Access (optional): without a token a browser window asks you to log in the first time. A service token logs in without a browser.</source>
         <translation>Cloudflare Access (facultatif) : sans jeton, le navigateur demande une connexion la première fois. Un jeton de service se connecte sans navigateur.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="279" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="291" />
+        <source>Everything up to the Shadowsocks server is encrypted and looks like random bytes: the network in between sees neither which server you connect to nor that it is SSH. You need your own Shadowsocks server (for example Outline).</source>
+        <translation>Tout jusqu'au serveur Shadowsocks est chiffré et ressemble à des octets aléatoires : le réseau intermédiaire ne voit ni le serveur visé ni qu'il s'agit de SSH. Il faut votre propre serveur Shadowsocks (par exemple Outline).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="296" />
+        <source>ss:// link (optional)</source>
+        <translation>Lien ss:// (facultatif)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="301" />
+        <source>Fill in</source>
+        <translation>Remplir</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="315" />
+        <source>Cipher</source>
+        <translation>Chiffrement</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="323" />
         <source>Address</source>
         <translation>Adresse</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="280" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="323" />
+        <source>Server</source>
+        <translation>Serveur</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="324" />
         <source>Port</source>
         <translation>Port</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="282" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="326" />
         <source>Username (optional)</source>
         <translation>Utilisateur (facultatif)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="282" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="326" />
         <source>Service token Client ID (optional)</source>
         <translation>Client ID du jeton de service (facultatif)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="283" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
         <source>Password (optional)</source>
         <translation>Mot de passe (facultatif)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="283" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
         <source>Stored encrypted in the vault.</source>
         <translation>Stocké chiffré dans le coffre.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="283" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
         <source>Service token Client Secret (optional)</source>
         <translation>Client Secret du jeton de service (facultatif)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="299" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
+        <source>Password</source>
+        <translation>Mot de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="343" />
         <source>Testing the proxy…</source>
         <translation>Test du proxy…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="300" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="344" />
         <source>cloudflared is ready</source>
         <translation>cloudflared est prêt</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="300" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="344" />
         <source>cloudflared is missing</source>
         <translation>cloudflared est absent</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="301" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="345" />
         <source>Proxy works</source>
         <translation>Le proxy fonctionne</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="301" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="345" />
         <source>Proxy does not work</source>
         <translation>Le proxy ne fonctionne pas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="313" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="357" />
         <source>Exit IP (what servers will see): %1
 %2Latency: %3 ms</source>
         <translation>IP de sortie (vue par les serveurs) : %1
 %2Latence : %3 ms</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="333" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="377" />
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="338" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="382" />
         <source>Test</source>
         <translation>Tester</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="343" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="387" />
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
@@ -4227,91 +4365,91 @@
         <translation>Impossible de se connecter au proxy %1:%2</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="107" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="108" />
         <source>Cannot resolve host %1</source>
         <translation>Impossible de résoudre l'hôte %1</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="141" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="142" />
         <source>Cannot connect to %1:%2</source>
         <translation>Impossible de se connecter à %1:%2</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="159" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="353" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="160" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="354" />
         <source>The proxy did not answer as a SOCKS5 server.</source>
         <translation>Le proxy n'a pas répondu comme un serveur SOCKS5.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="169" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="170" />
         <source>Proxy username or password is too long.</source>
         <translation>Nom d'utilisateur ou mot de passe du proxy trop long.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="180" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="347" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="181" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="348" />
         <source>The proxy rejected the username or password.</source>
         <translation>Le proxy a refusé le nom d'utilisateur ou le mot de passe.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="185" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="186" />
         <source>The proxy offers no supported authentication method.</source>
         <translation>Le proxy ne propose aucune méthode d'authentification prise en charge.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="186" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="351" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="187" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="352" />
         <source>The proxy requires a username and password.</source>
         <translation>Le proxy exige un nom d'utilisateur et un mot de passe.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="205" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="206" />
         <source>Host name is too long.</source>
         <translation>Nom d'hôte trop long.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="215" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="216" />
         <source>The proxy closed the connection.</source>
         <translation>Le proxy a fermé la connexion.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="225" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="226" />
         <source>Proxy could not reach %1:%2 (%3).</source>
         <translation>Le proxy n'a pas pu joindre %1:%2 (%3).</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="244" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="245" />
         <source>Malformed SOCKS5 reply.</source>
         <translation>Réponse SOCKS5 mal formée.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="270" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="271" />
         <source>Cannot send the request to the HTTP proxy.</source>
         <translation>Impossible d'envoyer la requête au proxy HTTP.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="280" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="281" />
         <source>The HTTP proxy did not answer.</source>
         <translation>Le proxy HTTP n'a pas répondu.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="290" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="291" />
         <source>The HTTP proxy requires authentication (407).</source>
         <translation>Le proxy HTTP exige une authentification (407).</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="292" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="293" />
         <source>The HTTP proxy refused the tunnel: %1</source>
         <translation>Le proxy HTTP a refusé le tunnel : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="366" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="388" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="367" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="389" />
         <source>Cannot create a local socket.</source>
         <translation>Impossible de créer un socket local.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="437" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="445" />
         <source>Proxy handshake timed out.</source>
         <translation>Délai dépassé pour la négociation avec le proxy.</translation>
     </message>
@@ -4433,6 +4571,72 @@
         <location filename="../src/core/AgentClient.cpp" line="233" />
         <source>Cannot reach the agent bridge.</source>
         <translation>Impossible de joindre le pont vers l'agent.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="320" />
+        <source>Shadowsocks: the cipher "%1" is not supported (use %2).</source>
+        <translation>Shadowsocks : le chiffrement « %1 » n'est pas pris en charge (utilisez %2).</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="328" />
+        <source>Shadowsocks server %1:%2: %3</source>
+        <translation>Serveur Shadowsocks %1:%2 : %3</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="336" />
+        <source>Shadowsocks: could not send the request.</source>
+        <translation>Shadowsocks : impossible d'envoyer la requête.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="350" />
+        <source>Shadowsocks: no answer from %1:%2 through the server — wrong password or cipher, or the server cannot reach it.</source>
+        <translation>Shadowsocks : pas de réponse de %1:%2 via le serveur — mauvais mot de passe ou chiffrement, ou le serveur ne peut pas l'atteindre.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="356" />
+        <source>Shadowsocks: the server closed the connection — wrong password or cipher, or it cannot reach %1:%2.</source>
+        <translation>Shadowsocks : le serveur a fermé la connexion — mauvais mot de passe ou chiffrement, ou il ne peut pas atteindre %1:%2.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="362" />
+        <source>Shadowsocks: the answer could not be decrypted — wrong password or cipher.</source>
+        <translation>Shadowsocks : la réponse n'a pas pu être déchiffrée — mauvais mot de passe ou chiffrement.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="383" />
+        <source>Not an ss:// link.</source>
+        <translation>Ce n'est pas un lien ss://.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="414" />
+        <location filename="../src/core/Shadowsocks.cpp" line="423" />
+        <location filename="../src/core/Shadowsocks.cpp" line="443" />
+        <source>The ss:// link could not be read.</source>
+        <translation>Impossible de lire le lien ss://.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="433" />
+        <source>This link needs a plugin (%1), which ShellWarden does not run.</source>
+        <translation>Ce lien nécessite un plugin (%1), que ShellWarden ne lance pas.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="438" />
+        <source>The cipher "%1" is not supported (use %2).</source>
+        <translation>Le chiffrement « %1 » n'est pas pris en charge (utilisez %2).</translation>
+    </message>
+    <message>
+        <source>No answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access</source>
+        <translation>Pas de réponse via le serveur Shadowsocks — mauvais mot de passe ou chiffrement, ou le serveur n'a pas accès à Internet</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="75" />
+        <source>no answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access</source>
+        <translation>pas de réponse via le serveur Shadowsocks — mauvais mot de passe ou chiffrement, ou le serveur n'a pas accès à Internet</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="76" />
+        <source>Unexpected answer from the IP service</source>
+        <translation>Réponse inattendue du service IP</translation>
     </message>
 </context>
 <context>
@@ -5250,6 +5454,7 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Télécharger vers…</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="172" />
         <source>Files</source>
         <translation>Fichiers</translation>
     </message>
@@ -5258,18 +5463,18 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Envoyer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="207" />
-        <location filename="../qml/pages/SftpPanel.qml" line="583" />
+        <location filename="../qml/pages/SftpPanel.qml" line="197" />
+        <location filename="../qml/pages/SftpPanel.qml" line="498" />
         <source>New folder</source>
         <translation>Nouveau dossier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="296" />
+        <location filename="../qml/pages/SftpPanel.qml" line="227" />
         <source>Type a path; Tab completes folder and file names, Enter opens.</source>
         <translation>Tapez un chemin ; Tab complète les noms de dossiers et fichiers, Entrée ouvre.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="418" />
+        <location filename="../qml/pages/SftpPanel.qml" line="339" />
         <source>Empty folder</source>
         <translation>Dossier vide</translation>
     </message>
@@ -5278,37 +5483,37 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Déposez pour envoyer vers %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="147" />
+        <location filename="../qml/pages/SftpPanel.qml" line="144" />
         <source>Send to the server — choose files</source>
         <translation>Envoyer au serveur — choisissez des fichiers</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SftpPanel.qml" line="154" />
+        <source>Save %n files to this PC — choose a folder</source>
+        <translation><numerusform>Enregistrer %n fichier sur ce PC — choisissez un dossier</numerusform><numerusform>Enregistrer %n fichiers sur ce PC — choisissez un dossier</numerusform></translation>
+    </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="157" />
+        <location filename="../qml/pages/SftpPanel.qml" line="155" />
         <source>Save to this PC — choose a folder</source>
         <translation>Enregistrer sur ce PC — choisissez un dossier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="174" />
         <source>This computer ⇄ server</source>
         <translation>Cet ordinateur ⇄ serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="174" />
         <source>Files on the server</source>
         <translation>Fichiers sur le serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="178" />
         <source>PC ⇄ server</source>
         <translation>PC ⇄ serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="181" />
         <source>Back to the server files only</source>
         <translation>Revenir aux fichiers du serveur seuls</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="181" />
         <source>Show this computer's files next to the server's: drag files between them or use the arrows</source>
         <translation>Afficher les fichiers de cet ordinateur à côté de ceux du serveur : glissez-les de l'un à l'autre ou utilisez les flèches</translation>
     </message>
@@ -5321,112 +5526,126 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Choisir des fichiers sur cet ordinateur et les envoyer au serveur, dans %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="185" />
+        <location filename="../qml/pages/SftpPanel.qml" line="175" />
         <source>Transfer ▾</source>
         <translation>Transférer ▾</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="188" />
         <source>Send files to the server or save a file from the server to this PC</source>
         <translation>Envoyer des fichiers au serveur ou enregistrer un fichier du serveur sur ce PC</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="195" />
+        <location filename="../qml/pages/SftpPanel.qml" line="184" />
         <source>To the server: choose files on this PC…</source>
         <translation>Vers le serveur : choisir des fichiers sur ce PC…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="201" />
+        <location filename="../qml/pages/SftpPanel.qml" line="190" />
         <source>To this PC: save "%1"…</source>
         <translation>Vers ce PC : enregistrer « %1 »…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="202" />
         <source>To this PC: select a file on the server first</source>
         <translation>Vers ce PC : choisissez d'abord un fichier sur le serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="243" />
         <source>Send the files selected on the left to the server (into %1)</source>
         <translation>Envoyer les fichiers choisis à gauche au serveur (dans %1)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="252" />
         <source>Save the file selected on the right to this PC (into %1)</source>
         <translation>Enregistrer le fichier choisi à droite sur ce PC (dans %1)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="268" />
         <source>Server</source>
         <translation>Serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="449" />
+        <location filename="../qml/pages/SftpPanel.qml" line="178" />
+        <source>Send files to the server or save files from the server to this PC</source>
+        <translation>Envoyer des fichiers au serveur ou enregistrer des fichiers du serveur sur ce PC</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SftpPanel.qml" line="191" />
+        <source>To this PC: save %n selected files…</source>
+        <translation><numerusform>Vers ce PC : enregistrer %n fichier sélectionné…</numerusform><numerusform>Vers ce PC : enregistrer %n fichiers sélectionnés…</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="192" />
+        <source>To this PC: select files on the server first</source>
+        <translation>Vers ce PC : sélectionnez d'abord des fichiers sur le serveur</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="365" />
         <source>Drop to send to the server, into %1</source>
         <translation>Déposez pour envoyer au serveur, dans %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="478" />
+        <location filename="../qml/pages/SftpPanel.qml" line="394" />
         <source>Folder</source>
         <translation>Dossier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="478" />
+        <location filename="../qml/pages/SftpPanel.qml" line="394" />
         <source>%1 (%2 bytes)</source>
         <translation>%1 (%2 octets)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="480" />
+        <location filename="../qml/pages/SftpPanel.qml" line="396" />
         <source>owner %1</source>
         <translation>propriétaire %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="482" />
+        <location filename="../qml/pages/SftpPanel.qml" line="398" />
         <source>symbolic link</source>
         <translation>lien symbolique</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="508" />
+        <location filename="../qml/pages/SftpPanel.qml" line="421" />
         <source>Transfers</source>
         <translation>Transferts</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="509" />
+        <location filename="../qml/pages/SftpPanel.qml" line="422" />
         <source>Clear finished</source>
         <translation>Effacer les terminés</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="524" />
+        <location filename="../qml/pages/SftpPanel.qml" line="437" />
         <source>done</source>
         <translation>terminé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="524" />
+        <location filename="../qml/pages/SftpPanel.qml" line="437" />
         <source>cancelled</source>
         <translation>annulé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="524" />
+        <location filename="../qml/pages/SftpPanel.qml" line="437" />
         <source>failed</source>
         <translation>échec</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="563" />
+        <location filename="../qml/pages/SftpPanel.qml" line="476" />
         <source>Edit here</source>
         <translation>Modifier ici</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="567" />
+        <location filename="../qml/pages/SftpPanel.qml" line="480" />
         <source>Open</source>
         <translation>Ouvrir</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SftpPanel.qml" line="481" />
+        <source>Save %n selected files to this PC…</source>
+        <translation><numerusform>Enregistrer %n fichier sélectionné sur ce PC…</numerusform><numerusform>Enregistrer %n fichiers sélectionnés sur ce PC…</numerusform></translation>
+    </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="567" />
         <source>Save to this PC</source>
         <translation>Enregistrer sur ce PC</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="567" />
+        <location filename="../qml/pages/SftpPanel.qml" line="482" />
         <source>Save to this PC…</source>
         <translation>Enregistrer sur ce PC…</translation>
     </message>
@@ -5435,54 +5654,54 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Télécharger…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="574" />
+        <location filename="../qml/pages/SftpPanel.qml" line="489" />
         <source>Copy path</source>
         <translation>Copier le chemin</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="575" />
+        <location filename="../qml/pages/SftpPanel.qml" line="490" />
         <source>Rename…</source>
         <translation>Renommer…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="577" />
-        <location filename="../qml/pages/SftpPanel.qml" line="612" />
+        <location filename="../qml/pages/SftpPanel.qml" line="492" />
+        <location filename="../qml/pages/SftpPanel.qml" line="527" />
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="583" />
+        <location filename="../qml/pages/SftpPanel.qml" line="498" />
         <source>Rename</source>
         <translation>Renommer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="585" />
+        <location filename="../qml/pages/SftpPanel.qml" line="500" />
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="589" />
-        <location filename="../qml/pages/SftpPanel.qml" line="610" />
+        <location filename="../qml/pages/SftpPanel.qml" line="504" />
+        <location filename="../qml/pages/SftpPanel.qml" line="525" />
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="592" />
+        <location filename="../qml/pages/SftpPanel.qml" line="507" />
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="605" />
+        <location filename="../qml/pages/SftpPanel.qml" line="520" />
         <source>Delete "%1" on the server?</source>
         <translation>Supprimer « %1 » sur le serveur ?</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="606" />
+        <location filename="../qml/pages/SftpPanel.qml" line="521" />
         <source>Only empty folders can be deleted.</source>
         <translation>Seuls les dossiers vides peuvent être supprimés.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="606" />
+        <location filename="../qml/pages/SftpPanel.qml" line="521" />
         <source>This cannot be undone.</source>
         <translation>Action irréversible.</translation>
     </message>
@@ -6000,272 +6219,312 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Via l'hôte de rebond %1 : le serveur voit l'adresse de l'hôte de rebond.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="364" />
+        <location filename="../qml/pages/TerminalPage.qml" line="365" />
         <source>The two differ: the proxy may use a different exit for SSH than for HTTPS.</source>
         <translation>Les deux diffèrent : le proxy peut utiliser une autre sortie pour SSH que pour HTTPS.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="377" />
+        <location filename="../qml/pages/TerminalPage.qml" line="366" />
+        <source>The two differ: a VPN or another network route on this computer sends SSH differently than web traffic (for example IPv6 for one and IPv4 for the other).</source>
+        <translation>Les deux diffèrent : un VPN ou une autre route réseau sur cet ordinateur fait passer SSH autrement que le trafic web (par exemple IPv6 pour l'un et IPv4 pour l'autre).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="398" />
+        <source>via proxy · %1</source>
+        <translation>via le proxy · %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="398" />
+        <source>via proxy</source>
+        <translation>via le proxy</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="399" />
+        <source>via jump host</source>
+        <translation>via l'hôte de rebond</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="400" />
+        <source>direct</source>
+        <translation>en direct</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="408" />
+        <source>This session goes through the proxy "%1" — the server sees the proxy's address, not yours.</source>
+        <translation>Cette session passe par le proxy « %1 » — le serveur voit l'adresse du proxy, pas la vôtre.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="410" />
+        <source>This session goes through the jump host %1 — the server sees the jump host's address.</source>
+        <translation>Cette session passe par l'hôte de rebond %1 — le serveur voit l'adresse de l'hôte de rebond.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="411" />
+        <source>No proxy: this session connects directly, so the server sees your real IP (or your VPN's, if one is on).</source>
+        <translation>Sans proxy : cette session se connecte en direct, le serveur voit donc votre vraie IP (ou celle de votre VPN s'il est actif).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="422" />
         <source>Files (SFTP)</source>
         <translation>Fichiers (SFTP)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="388" />
+        <location filename="../qml/pages/TerminalPage.qml" line="433" />
         <source>Tunnels (port forwarding)</source>
         <translation>Tunnels (redirection de ports)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="407" />
+        <location filename="../qml/pages/TerminalPage.qml" line="452" />
         <source>Snippets</source>
         <translation>Extraits</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="414" />
+        <location filename="../qml/pages/TerminalPage.qml" line="459" />
         <source>Command history (Ctrl+Shift+H)</source>
         <translation>Historique des commandes (Ctrl+Maj+H)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="423" />
+        <location filename="../qml/pages/TerminalPage.qml" line="468" />
         <source>Saving the session to %1 — click to stop</source>
         <translation>Enregistrement de la session dans %1 — cliquez pour arrêter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="431" />
+        <location filename="../qml/pages/TerminalPage.qml" line="476" />
         <source>Broadcast is on — click to turn it off</source>
         <translation>Diffusion active — cliquez pour la désactiver</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="437" />
+        <location filename="../qml/pages/TerminalPage.qml" line="482" />
         <source>Find in the terminal (Ctrl+Shift+F)</source>
         <translation>Rechercher dans le terminal (Ctrl+Shift+F)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="447" />
+        <location filename="../qml/pages/TerminalPage.qml" line="492" />
         <source>Notes for this host</source>
         <translation>Notes de cet hôte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="447" />
+        <location filename="../qml/pages/TerminalPage.qml" line="492" />
         <source>Add notes for this host</source>
         <translation>Ajouter des notes à cet hôte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="452" />
-        <location filename="../qml/pages/TerminalPage.qml" line="1009" />
+        <location filename="../qml/pages/TerminalPage.qml" line="497" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1050" />
         <source>Colour theme for this tab</source>
         <translation>Thème de couleurs de cet onglet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="458" />
+        <location filename="../qml/pages/TerminalPage.qml" line="503" />
         <source>More</source>
         <translation>Plus</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="463" />
+        <location filename="../qml/pages/TerminalPage.qml" line="508" />
         <source>Back to the main window</source>
         <translation>Revenir à la fenêtre principale</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="463" />
+        <location filename="../qml/pages/TerminalPage.qml" line="508" />
         <source>Open in a separate window</source>
         <translation>Ouvrir dans une fenêtre séparée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="470" />
+        <location filename="../qml/pages/TerminalPage.qml" line="515" />
         <source>Disconnect</source>
         <translation>Déconnecter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="476" />
-        <location filename="../qml/pages/TerminalPage.qml" line="861" />
+        <location filename="../qml/pages/TerminalPage.qml" line="521" />
+        <location filename="../qml/pages/TerminalPage.qml" line="906" />
         <source>Reconnect</source>
         <translation>Se reconnecter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="553" />
+        <location filename="../qml/pages/TerminalPage.qml" line="598" />
         <source>Find…</source>
         <translation>Rechercher…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="565" />
+        <location filename="../qml/pages/TerminalPage.qml" line="610" />
         <source>no matches</source>
         <translation>aucun résultat</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="574" />
+        <location filename="../qml/pages/TerminalPage.qml" line="619" />
         <source>Match case</source>
         <translation>Respecter la casse</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="580" />
+        <location filename="../qml/pages/TerminalPage.qml" line="625" />
         <source>Older (Enter)</source>
         <translation>Plus ancien (Entrée)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="581" />
+        <location filename="../qml/pages/TerminalPage.qml" line="626" />
         <source>Newer (Shift+Enter)</source>
         <translation>Plus récent (Maj+Entrée)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="582" />
+        <location filename="../qml/pages/TerminalPage.qml" line="627" />
         <source>Close (Esc)</source>
         <translation>Fermer (Échap)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="604" />
+        <location filename="../qml/pages/TerminalPage.qml" line="649" />
         <source>Broadcast: typing goes to %1 tab(s)</source>
         <translation>Diffusion : la saisie va dans %1 onglet(s)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="643" />
+        <location filename="../qml/pages/TerminalPage.qml" line="688" />
         <source>Exit IP: %1  %2</source>
         <translation>IP de sortie : %1  %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="651" />
-        <location filename="../qml/pages/TerminalPage.qml" line="756" />
-        <location filename="../qml/pages/TerminalPage.qml" line="823" />
+        <location filename="../qml/pages/TerminalPage.qml" line="696" />
+        <location filename="../qml/pages/TerminalPage.qml" line="801" />
+        <location filename="../qml/pages/TerminalPage.qml" line="868" />
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="688" />
+        <location filename="../qml/pages/TerminalPage.qml" line="733" />
         <source>First connection to this server</source>
         <translation>Première connexion à ce serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="689" />
+        <location filename="../qml/pages/TerminalPage.qml" line="734" />
         <source>WARNING: the server's host key has CHANGED</source>
         <translation>ATTENTION : la clé d'hôte du serveur a CHANGÉ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="698" />
+        <location filename="../qml/pages/TerminalPage.qml" line="743" />
         <source>Compare the fingerprint with the one shown by the server admin (ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub) before trusting it.</source>
         <translation>Comparez l'empreinte avec celle fournie par l'administrateur (ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub) avant de lui faire confiance.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="699" />
+        <location filename="../qml/pages/TerminalPage.qml" line="744" />
         <source>Someone could be intercepting the connection (man-in-the-middle), or the server was reinstalled. Only continue if you know why the key changed.</source>
         <translation>Quelqu'un intercepte peut-être la connexion (attaque de l'homme du milieu), ou le serveur a été réinstallé. Ne continuez que si vous savez pourquoi la clé a changé.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="744" />
+        <location filename="../qml/pages/TerminalPage.qml" line="789" />
         <source>Checking DNS (SSHFP)…</source>
         <translation>Vérification du DNS (SSHFP)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="746" />
+        <location filename="../qml/pages/TerminalPage.qml" line="791" />
         <source>DNS confirms this key (SSHFP, signed with DNSSEC). It is safe to trust it.</source>
         <translation>Le DNS confirme cette clé (SSHFP, signé DNSSEC). Vous pouvez lui faire confiance.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="747" />
+        <location filename="../qml/pages/TerminalPage.qml" line="792" />
         <source>DNS has the same key (SSHFP), but the domain is not signed with DNSSEC, so this is only a hint.</source>
         <translation>Le DNS a la même clé (SSHFP), mais le domaine n'est pas signé DNSSEC : ce n'est qu'un indice.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="748" />
+        <location filename="../qml/pages/TerminalPage.qml" line="793" />
         <source>DNS (SSHFP) lists a DIFFERENT key for this server. Do not connect unless you know why.</source>
         <translation>Le DNS (SSHFP) indique une AUTRE clé pour ce serveur. Ne vous connectez pas sans savoir pourquoi.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="749" />
+        <location filename="../qml/pages/TerminalPage.qml" line="794" />
         <source>This domain publishes no SSHFP records — compare the fingerprint another way.</source>
         <translation>Ce domaine ne publie pas d'enregistrements SSHFP — comparez l'empreinte autrement.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="750" />
+        <location filename="../qml/pages/TerminalPage.qml" line="795" />
         <source>Could not check DNS (SSHFP).</source>
         <translation>Impossible de vérifier le DNS (SSHFP).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="758" />
+        <location filename="../qml/pages/TerminalPage.qml" line="803" />
         <source>Replace key and connect</source>
         <translation>Remplacer la clé et se connecter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="758" />
+        <location filename="../qml/pages/TerminalPage.qml" line="803" />
         <source>Trust and connect</source>
         <translation>Faire confiance et se connecter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="790" />
+        <location filename="../qml/pages/TerminalPage.qml" line="835" />
         <source>Key passphrase</source>
         <translation>Phrase secrète de la clé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="792" />
+        <location filename="../qml/pages/TerminalPage.qml" line="837" />
         <source>Server asks</source>
         <translation>Le serveur demande</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="792" />
+        <location filename="../qml/pages/TerminalPage.qml" line="837" />
         <source>Server 2FA code</source>
         <translation>Code 2FA du serveur</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="793" />
+        <location filename="../qml/pages/TerminalPage.qml" line="838" />
         <source>Password</source>
         <translation>Mot de passe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="816" />
+        <location filename="../qml/pages/TerminalPage.qml" line="861" />
         <source>Save passphrase in the vault</source>
         <translation>Enregistrer la phrase secrète dans le coffre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="816" />
+        <location filename="../qml/pages/TerminalPage.qml" line="861" />
         <source>Save password in the vault</source>
         <translation>Enregistrer le mot de passe dans le coffre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="818" />
+        <location filename="../qml/pages/TerminalPage.qml" line="863" />
         <source>Saved only after the server accepts it.</source>
         <translation>Enregistré uniquement après acceptation par le serveur.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="824" />
+        <location filename="../qml/pages/TerminalPage.qml" line="869" />
         <source>Continue</source>
         <translation>Continuer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="855" />
+        <location filename="../qml/pages/TerminalPage.qml" line="900" />
         <source>Reconnecting in %1 s (attempt %2 of %3)…</source>
         <translation>Reconnexion dans %1 s (tentative %2 sur %3)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="860" />
+        <location filename="../qml/pages/TerminalPage.qml" line="905" />
         <source>Stop</source>
         <translation>Arrêter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="862" />
+        <location filename="../qml/pages/TerminalPage.qml" line="907" />
         <source>Close tab</source>
         <translation>Fermer l'onglet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="920" />
+        <location filename="../qml/pages/TerminalPage.qml" line="961" />
         <source>No snippets yet — add them in the Snippets page</source>
         <translation>Aucun extrait : ajoutez-en dans la page Extraits</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="950" />
+        <location filename="../qml/pages/TerminalPage.qml" line="991" />
         <source>Notes · %1</source>
         <translation>Notes · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="952" />
+        <location filename="../qml/pages/TerminalPage.qml" line="993" />
         <source>encrypted</source>
         <translation>chiffré</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="969" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1010" />
         <source>What runs here, who to call, where the backups are…</source>
         <translation>Ce qui tourne ici, qui appeler, où sont les sauvegardes…</translation>
     </message>
     <message>
         <location filename="../qml/pages/TerminalPage.qml" line="163" />
-        <location filename="../qml/pages/TerminalPage.qml" line="979" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1020" />
         <source>Close</source>
         <translation>Fermer</translation>
     </message>
@@ -6315,12 +6574,12 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Exécuter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="981" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1022" />
         <source>Save</source>
         <translation>Enregistrer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="1010" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1051" />
         <source>Create your own</source>
         <translation>Créer le vôtre</translation>
     </message>

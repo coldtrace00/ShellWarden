@@ -4,94 +4,94 @@
 <context>
     <name>AppController</name>
     <message>
-        <location filename="../src/app/AppController.cpp" line="210" />
+        <location filename="../src/app/AppController.cpp" line="209" />
         <source>Vault locked after inactivity.</source>
         <translation>Сховище заблоковано через бездіяльність.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="454" />
+        <location filename="../src/app/AppController.cpp" line="453" />
         <source>Passwords do not match.</source>
         <translation>Паролі не збігаються.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="542" />
+        <location filename="../src/app/AppController.cpp" line="541" />
         <source>New passwords do not match.</source>
         <translation>Нові паролі не збігаються.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="823" />
-        <location filename="../src/app/AppController.cpp" line="974" />
-        <location filename="../src/app/AppController.cpp" line="1098" />
-        <location filename="../src/app/AppController.cpp" line="1141" />
-        <location filename="../src/app/AppController.cpp" line="1380" />
-        <location filename="../src/app/AppController.cpp" line="1734" />
-        <location filename="../src/app/AppController.cpp" line="2769" />
-        <location filename="../src/app/AppController.cpp" line="2845" />
-        <location filename="../src/app/AppController.cpp" line="2944" />
+        <location filename="../src/app/AppController.cpp" line="770" />
+        <location filename="../src/app/AppController.cpp" line="921" />
+        <location filename="../src/app/AppController.cpp" line="1045" />
+        <location filename="../src/app/AppController.cpp" line="1088" />
+        <location filename="../src/app/AppController.cpp" line="1342" />
+        <location filename="../src/app/AppController.cpp" line="1756" />
+        <location filename="../src/app/AppController.cpp" line="2805" />
+        <location filename="../src/app/AppController.cpp" line="2881" />
+        <location filename="../src/app/AppController.cpp" line="2980" />
         <source>The vault is locked.</source>
         <translation>Сховище заблоковане.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="844" />
+        <location filename="../src/app/AppController.cpp" line="791" />
         <source>Enter a host name or IP address.</source>
         <translation>Введіть ім'я хоста або IP-адресу.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="849" />
+        <location filename="../src/app/AppController.cpp" line="796" />
         <source>The host name must not contain spaces.</source>
         <translation>Ім'я хоста не може містити пробілів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="852" />
-        <location filename="../src/app/AppController.cpp" line="1404" />
+        <location filename="../src/app/AppController.cpp" line="799" />
+        <location filename="../src/app/AppController.cpp" line="1375" />
         <source>Port must be between 1 and 65535.</source>
         <translation>Порт має бути від 1 до 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="581" />
-        <location filename="../src/app/AppController.cpp" line="837" />
-        <location filename="../src/app/AppController.cpp" line="882" />
-        <location filename="../src/app/AppController.cpp" line="1129" />
-        <location filename="../src/app/AppController.cpp" line="1187" />
-        <location filename="../src/app/AppController.cpp" line="1265" />
-        <location filename="../src/app/AppController.cpp" line="1430" />
-        <location filename="../src/app/AppController.cpp" line="1740" />
-        <location filename="../src/app/AppController.cpp" line="3173" />
+        <location filename="../src/app/AppController.cpp" line="580" />
+        <location filename="../src/app/AppController.cpp" line="784" />
+        <location filename="../src/app/AppController.cpp" line="829" />
+        <location filename="../src/app/AppController.cpp" line="1076" />
+        <location filename="../src/app/AppController.cpp" line="1134" />
+        <location filename="../src/app/AppController.cpp" line="1212" />
+        <location filename="../src/app/AppController.cpp" line="1403" />
+        <location filename="../src/app/AppController.cpp" line="1762" />
+        <location filename="../src/app/AppController.cpp" line="3209" />
         <source>Could not save the vault.</source>
         <translation>Не вдалося зберегти сховище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="222" />
+        <location filename="../src/app/AppController.cpp" line="221" />
         <source>Vault locked: the computer went to sleep</source>
         <translation>Сховище заблоковано: комп'ютер заснув</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="223" />
+        <location filename="../src/app/AppController.cpp" line="222" />
         <source>Vault locked: the computer was locked</source>
         <translation>Сховище заблоковано: комп'ютер заблоковано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="236" />
+        <location filename="../src/app/AppController.cpp" line="235" />
         <source>%1 %2 started</source>
         <translation>%1 %2 запущено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="237" />
+        <location filename="../src/app/AppController.cpp" line="236" />
         <source>portable mode · %1</source>
         <translation>портативний режим · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="329" />
+        <location filename="../src/app/AppController.cpp" line="328" />
         <source>My theme</source>
         <translation>Моя тема</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="339" />
+        <location filename="../src/app/AppController.cpp" line="338" />
         <source>Image not found: %1</source>
         <translation>Зображення не знайдено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="341" />
+        <location filename="../src/app/AppController.cpp" line="340" />
         <source>The image is too large (max 25 MB).</source>
         <translation>Зображення завелике (максимум 25 МБ).</translation>
     </message>
@@ -100,265 +100,299 @@
         <translation>Цей файл не є зображенням.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="346" />
+        <location filename="../src/app/AppController.cpp" line="345" />
         <source>Cannot copy the image to %1</source>
         <translation>Не вдається скопіювати зображення в %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="467" />
+        <location filename="../src/app/AppController.cpp" line="466" />
         <source>Vault created</source>
         <translation>Сховище створено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="482" />
+        <location filename="../src/app/AppController.cpp" line="481" />
         <source>Failed unlock attempt</source>
         <translation>Невдала спроба розблокування</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="486" />
+        <location filename="../src/app/AppController.cpp" line="485" />
         <source>Vault unlocked</source>
         <translation>Сховище розблоковано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="529" />
+        <location filename="../src/app/AppController.cpp" line="528" />
         <source>Vault locked</source>
         <translation>Сховище заблоковано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="544" />
+        <location filename="../src/app/AppController.cpp" line="543" />
         <source>The master password must be at least 8 characters.</source>
         <translation>Майстер-пароль має містити щонайменше 8 символів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="547" />
+        <location filename="../src/app/AppController.cpp" line="546" />
         <source>Master password change failed</source>
         <translation>Не вдалося змінити майстер-пароль</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="550" />
+        <location filename="../src/app/AppController.cpp" line="549" />
         <source>Master password changed</source>
         <translation>Майстер-пароль змінено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="656" />
+        <location filename="../src/app/AppController.cpp" line="655" />
         <source>Choose a file.</source>
         <translation>Виберіть файл.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="659" />
+        <location filename="../src/app/AppController.cpp" line="658" />
         <source>Cannot write %1</source>
         <translation>Не вдається записати %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="660" />
+        <location filename="../src/app/AppController.cpp" line="659" />
         <source>Vault backup saved</source>
         <translation>Резервну копію сховища збережено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="667" />
+        <location filename="../src/app/AppController.cpp" line="666" />
         <source>Lock the vault first.</source>
         <translation>Спершу заблокуйте сховище.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="674" />
+        <location filename="../src/app/AppController.cpp" line="673" />
         <source>Cannot move the old vault: %1</source>
         <translation>Не вдається перемістити старе сховище: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="679" />
+        <location filename="../src/app/AppController.cpp" line="678" />
         <source>Started over with a new vault</source>
         <translation>Почато заново з новим сховищем</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="680" />
+        <location filename="../src/app/AppController.cpp" line="679" />
         <source>Old vault kept as %1</source>
         <translation>Старе сховище збережено як %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="702" />
+        <location filename="../src/app/AppController.cpp" line="701" />
         <source>Cannot replace the vault file.</source>
         <translation>Не вдається замінити файл сховища.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="710" />
+        <location filename="../src/app/AppController.cpp" line="709" />
         <source>Vault restored from backup</source>
         <translation>Сховище відновлено з резервної копії</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="729" />
+        <location filename="../src/app/AppController.cpp" line="728" />
         <source>shorter than 19 characters</source>
         <translation>коротший за 19 символів</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="730" />
+        <location filename="../src/app/AppController.cpp" line="729" />
         <source>contains a very common password</source>
         <translation>містить дуже поширений пароль</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="731" />
+        <location filename="../src/app/AppController.cpp" line="730" />
         <source>keyboard or alphabet sequence</source>
         <translation>послідовність клавіш або літер абетки</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="732" />
+        <location filename="../src/app/AppController.cpp" line="731" />
         <source>too many repeated characters</source>
         <translation>забагато повторюваних символів</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="733" />
+        <location filename="../src/app/AppController.cpp" line="732" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>поєднуйте великі й малі літери, цифри та символи</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="734" />
         <source>Very weak</source>
         <translation>Дуже слабкий</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="734" />
         <source>Weak</source>
         <translation>Слабкий</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="735" />
+        <location filename="../src/app/AppController.cpp" line="734" />
         <source>Fair</source>
         <translation>Середній</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="736" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Good</source>
         <translation>Добрий</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="736" />
+        <location filename="../src/app/AppController.cpp" line="735" />
         <source>Strong</source>
         <translation>Надійний</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="757" />
         <source>Folder not found: %1</source>
         <translation>Папку не знайдено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="762" />
         <source>No access to %1</source>
         <translation>Немає доступу до %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="792" />
         <source>Home</source>
         <translation>Домашня папка</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="793" />
         <source>Downloads</source>
         <translation>Завантаження</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="794" />
         <source>Desktop</source>
         <translation>Робочий стіл</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="795" />
         <source>Documents</source>
         <translation>Документи</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="829" />
-        <location filename="../src/app/AppController.cpp" line="1982" />
+        <location filename="../src/app/AppController.cpp" line="776" />
+        <location filename="../src/app/AppController.cpp" line="2004" />
         <source>Choose a serial port.</source>
         <translation>Виберіть послідовний порт.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="838" />
-        <location filename="../src/app/AppController.cpp" line="888" />
+        <location filename="../src/app/AppController.cpp" line="785" />
+        <location filename="../src/app/AppController.cpp" line="835" />
         <source>Host added</source>
         <translation>Хост додано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="838" />
-        <location filename="../src/app/AppController.cpp" line="888" />
+        <location filename="../src/app/AppController.cpp" line="785" />
+        <location filename="../src/app/AppController.cpp" line="835" />
         <source>Host changed</source>
         <translation>Хост змінено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="847" />
+        <location filename="../src/app/AppController.cpp" line="794" />
         <source>A host cannot be its own jump host.</source>
         <translation>Хост не може бути власним jump-хостом.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="885" />
+        <location filename="../src/app/AppController.cpp" line="832" />
         <source>Master password on connect enabled for host</source>
         <translation>Майстер-пароль при підключенні увімкнено для хоста</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="886" />
+        <location filename="../src/app/AppController.cpp" line="833" />
         <source>Master password on connect disabled for host</source>
         <translation>Майстер-пароль при підключенні вимкнено для хоста</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1865" />
+        <location filename="../src/app/AppController.cpp" line="1363" />
+        <source>Choose the Shadowsocks cipher.</source>
+        <translation>Виберіть шифр Shadowsocks.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1365" />
+        <source>Enter the Shadowsocks password.</source>
+        <translation>Введіть пароль Shadowsocks.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1593" />
+        <source>Proxy turned on</source>
+        <translation>Проксі увімкнено</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1593" />
+        <source>Proxy turned off</source>
+        <translation>Проксі вимкнено</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1594" />
+        <source>hosts that use it connect directly (or through the default proxy while the kill switch is on)</source>
+        <translation>хости, що його використовують, підключаються напряму (або через проксі за замовчуванням, коли kill switch увімкнено)</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="1887" />
         <source>Connection check passed (master password)</source>
         <translation>Перевірку перед підключенням пройдено (майстер-пароль)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1879" />
+        <location filename="../src/app/AppController.cpp" line="1901" />
         <source>Connection cancelled: the master password was not entered.</source>
         <translation>Підключення скасовано: майстер-пароль не введено.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1903" />
+        <location filename="../src/app/AppController.cpp" line="1925" />
         <source>This proxy no longer exists.</source>
         <translation>Цього проксі вже немає.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1909" />
+        <location filename="../src/app/AppController.cpp" line="1931" />
         <source>direct</source>
         <translation>напряму</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1910" />
+        <location filename="../src/app/AppController.cpp" line="1932" />
         <source>Route of the host changed: %1</source>
         <translation>Маршрут хоста змінено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1912" />
+        <location filename="../src/app/AppController.cpp" line="1934" />
         <source>%1 now connects: %2</source>
         <translation>%1 тепер підключається: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2309" />
+        <location filename="../src/app/AppController.cpp" line="2111" />
+        <source>Kill switch is on: proxy "%1" is turned off and no default proxy is set. Direct connection blocked.</source>
+        <translation>Kill switch увімкнено: проксі «%1» вимкнено, а проксі за замовчуванням не вибрано. Пряме підключення заблоковано.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2127" />
+        <source>The Shadowsocks route is for SSH hosts.</source>
+        <translation>Маршрут Shadowsocks — лише для SSH-хостів.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2221" />
+        <source>Direct · proxy "%1" is off</source>
+        <translation>Напряму · проксі «%1» вимкнено</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="2345" />
         <source>Behind a jump host: checked only when you connect.</source>
         <translation>Через jump-хост: перевіряється лише під час підключення.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2322" />
+        <location filename="../src/app/AppController.cpp" line="2358" />
         <source>Kill switch is on: not checked directly.</source>
         <translation>Kill switch увімкнено: напряму не перевіряється.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2329" />
+        <location filename="../src/app/AppController.cpp" line="2365" />
         <source>Via Tor: not checked in the background.</source>
         <translation>Через Tor: у фоні не перевіряється.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2330" />
+        <location filename="../src/app/AppController.cpp" line="2366" />
         <source>Via Cloudflare Tunnel: checked only when you connect.</source>
         <translation>Через Cloudflare Tunnel: перевіряється лише під час підключення.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2335" />
+        <location filename="../src/app/AppController.cpp" line="2371" />
         <source>The proxy of this host is not complete.</source>
         <translation>Проксі цього хоста налаштовано не повністю.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2360" />
+        <location filename="../src/app/AppController.cpp" line="2396" />
         <source>The port is open, but no SSH server answered.</source>
         <translation>Порт відкритий, але SSH-сервер не відповів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2815" />
+        <location filename="../src/app/AppController.cpp" line="2851" />
         <source>Asks for the master password: enter it to include this host.</source>
         <translation>Питає майстер-пароль: введіть його, щоб додати цей хост.</translation>
     </message>
@@ -375,81 +409,81 @@
         <translation>2FA вимкнено для хоста</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="940" />
+        <location filename="../src/app/AppController.cpp" line="887" />
         <source>Tunnels updated in %n open session(s) — no reconnect needed.</source>
         <translation><numerusform>Тунелі оновлено в %n відкритій сесії — перепідключатися не треба.</numerusform><numerusform>Тунелі оновлено в %n відкритих сесіях — перепідключатися не треба.</numerusform><numerusform>Тунелі оновлено в %n відкритих сесіях — перепідключатися не треба.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1048" />
+        <location filename="../src/app/AppController.cpp" line="995" />
         <source>Hosts imported</source>
         <translation>Хости імпортовано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1048" />
+        <location filename="../src/app/AppController.cpp" line="995" />
         <source>%1 hosts, %2 keys</source>
         <translation>хостів: %1, ключів: %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1049" />
+        <location filename="../src/app/AppController.cpp" line="996" />
         <source>Imported %1 host(s) and %2 key(s).</source>
         <translation>Імпортовано хостів: %1, ключів: %2.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1051" />
+        <location filename="../src/app/AppController.cpp" line="998" />
         <source>Keys with a passphrase were not imported — add them in Keychain → Import: %1</source>
         <translation>Ключі з паролем не імпортовано — додайте їх у «Ключі» → «Імпорт»: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1057" />
+        <location filename="../src/app/AppController.cpp" line="1004" />
         <source>Host deleted</source>
         <translation>Хост видалено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1083" />
+        <location filename="../src/app/AppController.cpp" line="1030" />
         <source> (copy)</source>
         <translation> (копія)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1100" />
+        <location filename="../src/app/AppController.cpp" line="1047" />
         <source>Passphrases do not match.</source>
         <translation>Паролі ключа не збігаються.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1130" />
+        <location filename="../src/app/AppController.cpp" line="1077" />
         <source>Key generated</source>
         <translation>Ключ створено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1131" />
+        <location filename="../src/app/AppController.cpp" line="1078" />
         <source> · no passphrase</source>
         <translation> · без пароля</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1150" />
+        <location filename="../src/app/AppController.cpp" line="1097" />
         <source>This key is protected. Enter its passphrase.</source>
         <translation>Ключ захищений. Введіть його пароль.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1154" />
-        <location filename="../src/app/AppController.cpp" line="1261" />
+        <location filename="../src/app/AppController.cpp" line="1101" />
+        <location filename="../src/app/AppController.cpp" line="1208" />
         <source>Wrong passphrase.</source>
         <translation>Неправильний пароль ключа.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1165" />
+        <location filename="../src/app/AppController.cpp" line="1112" />
         <source>This key is already in the keychain ("%1").</source>
         <translation>Цей ключ уже є у сховищі ключів («%1»).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1191" />
+        <location filename="../src/app/AppController.cpp" line="1138" />
         <source>Key imported</source>
         <translation>Ключ імпортовано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1219" />
-        <location filename="../src/app/AppController.cpp" line="1231" />
-        <location filename="../src/app/AppController.cpp" line="1242" />
-        <location filename="../src/app/AppController.cpp" line="1267" />
+        <location filename="../src/app/AppController.cpp" line="1166" />
+        <location filename="../src/app/AppController.cpp" line="1178" />
+        <location filename="../src/app/AppController.cpp" line="1189" />
+        <location filename="../src/app/AppController.cpp" line="1214" />
         <source>Key not found.</source>
         <translation>Ключ не знайдено.</translation>
     </message>
@@ -458,99 +492,99 @@
         <translation>Цей ключ захищено OpenPGP. Спочатку зніміть захист (буде запит PIN).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1248" />
+        <location filename="../src/app/AppController.cpp" line="1195" />
         <source>Private key exported</source>
         <translation>Приватний ключ експортовано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1304" />
+        <location filename="../src/app/AppController.cpp" line="1251" />
         <source>Key deleted</source>
         <translation>Ключ видалено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1402" />
+        <location filename="../src/app/AppController.cpp" line="1373" />
         <source>Enter the proxy address.</source>
         <translation>Введіть адресу проксі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1431" />
+        <location filename="../src/app/AppController.cpp" line="1404" />
         <source>Proxy changed</source>
         <translation>Проксі змінено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1431" />
+        <location filename="../src/app/AppController.cpp" line="1404" />
         <source>Proxy added</source>
         <translation>Проксі додано</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1440" />
+        <location filename="../src/app/AppController.cpp" line="1413" />
         <source>Proxy deleted</source>
         <translation>Проксі видалено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1514" />
+        <location filename="../src/app/AppController.cpp" line="1487" />
         <source>cloudflared was not found. Install it (winget install Cloudflare.cloudflared) or choose cloudflared.exe.</source>
         <translation>cloudflared не знайдено. Встановіть його (winget install Cloudflare.cloudflared) або виберіть cloudflared.exe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1516" />
+        <location filename="../src/app/AppController.cpp" line="1489" />
         <source>%1 does not run.</source>
         <translation>%1 не запускається.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1518" />
+        <location filename="../src/app/AppController.cpp" line="1491" />
         <source>via Cloudflare · %1</source>
         <translation>через Cloudflare · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1560" />
+        <location filename="../src/app/AppController.cpp" line="1533" />
         <source>Enter the proxy address and port.</source>
         <translation>Введіть адресу і порт проксі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1605" />
+        <location filename="../src/app/AppController.cpp" line="1627" />
         <source>Kill switch fired</source>
         <translation>Спрацював kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1645" />
-        <location filename="../src/app/AppController.cpp" line="1674" />
+        <location filename="../src/app/AppController.cpp" line="1667" />
+        <location filename="../src/app/AppController.cpp" line="1696" />
         <source>Kill switch: proxy "%1" stopped responding (%2). Session closed.</source>
         <translation>Kill switch: проксі «%1» перестав відповідати (%2). Сесію закрито.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1646" />
+        <location filename="../src/app/AppController.cpp" line="1668" />
         <source>no answer</source>
         <translation>немає відповіді</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1678" />
+        <location filename="../src/app/AppController.cpp" line="1700" />
         <source>Kill switch: proxy "%1" now exits from your real IP. Session closed.</source>
         <translation>Kill switch: проксі «%1» тепер виходить з вашого реального IP. Сесію закрито.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1698" />
+        <location filename="../src/app/AppController.cpp" line="1720" />
         <source>Firewall lock failed</source>
         <translation>Не вдалося ввімкнути блокування брандмауером</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1705" />
+        <location filename="../src/app/AppController.cpp" line="1727" />
         <source>Firewall lock enabled</source>
         <translation>Блокування брандмауером увімкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1718" />
+        <location filename="../src/app/AppController.cpp" line="1740" />
         <source>Firewall lock removed</source>
         <translation>Блокування брандмауером знято</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1737" />
-        <location filename="../src/app/AppController.cpp" line="2771" />
+        <location filename="../src/app/AppController.cpp" line="1759" />
+        <location filename="../src/app/AppController.cpp" line="2807" />
         <source>Enter a command.</source>
         <translation>Введіть команду.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="1799" />
+        <location filename="../src/app/AppController.cpp" line="1821" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Сніпет надіслано в %n сесію</numerusform><numerusform>Сніпет надіслано в %n сесії</numerusform><numerusform>Сніпет надіслано в %n сесій</numerusform></translation>
     </message>
@@ -563,22 +597,22 @@
         <translation>сервер</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1845" />
-        <location filename="../src/app/AppController.cpp" line="1915" />
-        <location filename="../src/app/AppController.cpp" line="1939" />
-        <location filename="../src/app/AppController.cpp" line="3177" />
+        <location filename="../src/app/AppController.cpp" line="1867" />
+        <location filename="../src/app/AppController.cpp" line="1937" />
+        <location filename="../src/app/AppController.cpp" line="1961" />
+        <location filename="../src/app/AppController.cpp" line="3213" />
         <source>This host no longer exists.</source>
         <translation>Цього хоста більше не існує.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1848" />
+        <location filename="../src/app/AppController.cpp" line="1870" />
         <source>Too many wrong attempts. Try again in %1 s.</source>
         <translation>Забагато невдалих спроб. Спробуйте через %1 с.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1853" />
-        <location filename="../src/app/AppController.cpp" line="2777" />
-        <location filename="../src/app/AppController.cpp" line="2949" />
+        <location filename="../src/app/AppController.cpp" line="1875" />
+        <location filename="../src/app/AppController.cpp" line="2813" />
+        <location filename="../src/app/AppController.cpp" line="2985" />
         <source>Wrong master password.</source>
         <translation>Неправильний майстер-пароль.</translation>
     </message>
@@ -587,7 +621,7 @@
         <translation>Неправильний або прострочений код 2FA.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1861" />
+        <location filename="../src/app/AppController.cpp" line="1883" />
         <source>Connection check failed</source>
         <translation>Перевірку перед підключенням не пройдено</translation>
     </message>
@@ -600,7 +634,7 @@
         <translation>Підключення скасовано: перевірку 2FA / майстер-пароля не завершено.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1939" />
+        <location filename="../src/app/AppController.cpp" line="1961" />
         <source>Unlock the vault to reconnect.</source>
         <translation>Розблокуйте сховище, щоб перепідключитися.</translation>
     </message>
@@ -609,68 +643,68 @@
         <translation>Очікую PIN OpenPGP (Kleopatra)…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1957" />
+        <location filename="../src/app/AppController.cpp" line="1979" />
         <source>Use the form user@host or user@host:port</source>
         <translation>Формат: user@host або user@host:port</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1963" />
+        <location filename="../src/app/AppController.cpp" line="1985" />
         <source>Invalid port.</source>
         <translation>Неправильний порт.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2069" />
+        <location filename="../src/app/AppController.cpp" line="2091" />
         <source>Serial</source>
         <translation>Serial</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2086" />
+        <location filename="../src/app/AppController.cpp" line="2109" />
         <source>Blocked by kill switch</source>
         <translation>Заблоковано kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2087" />
+        <location filename="../src/app/AppController.cpp" line="2114" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch увімкнений: у цього хоста немає проксі, і проксі за замовчуванням не задано. Пряме з'єднання заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2096" />
+        <location filename="../src/app/AppController.cpp" line="2123" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>Маршрут Cloudflare Tunnel — для SSH-хостів.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2102" />
+        <location filename="../src/app/AppController.cpp" line="2133" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor запускається — за мить натисніть «Перепідключитися».</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2106" />
+        <location filename="../src/app/AppController.cpp" line="2137" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · напряму · без шифрування</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2107" />
+        <location filename="../src/app/AppController.cpp" line="2138" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · без шифрування</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2119" />
+        <location filename="../src/app/AppController.cpp" line="2150" />
         <source>Starting Tor…</source>
         <translation>Запуск Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2126" />
+        <location filename="../src/app/AppController.cpp" line="2157" />
         <source>Tor: %1</source>
         <translation>Tor: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2140" />
+        <location filename="../src/app/AppController.cpp" line="2171" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Запуск cloudflared… (першого разу браузер може попросити увійти в Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2153" />
-        <location filename="../src/app/AppController.cpp" line="2159" />
+        <location filename="../src/app/AppController.cpp" line="2184" />
+        <location filename="../src/app/AppController.cpp" line="2190" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel: %1</translation>
     </message>
@@ -679,124 +713,124 @@
         <translation>SSH-ключ захищено OpenPGP: натисніть «Перепідключитися» і введіть PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2185" />
+        <location filename="../src/app/AppController.cpp" line="2216" />
         <source> → jump %1</source>
         <translation> → через %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2188" />
+        <location filename="../src/app/AppController.cpp" line="2222" />
         <source>Direct</source>
         <translation>Напряму</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2189" />
+        <location filename="../src/app/AppController.cpp" line="2224" />
         <source>Connecting…</source>
         <translation>Підключення…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2190" />
         <location filename="../src/app/AppController.cpp" line="2225" />
+        <location filename="../src/app/AppController.cpp" line="2261" />
         <source>checking…</source>
         <translation>перевірка…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2198" />
+        <location filename="../src/app/AppController.cpp" line="2233" />
         <source>unknown</source>
         <translation>невідомо</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2209" />
+        <location filename="../src/app/AppController.cpp" line="2244" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel: cloudflared не запущений. Натисніть «Перепідключитися».</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2216" />
+        <location filename="../src/app/AppController.cpp" line="2251" />
         <source>Connecting through Cloudflare…</source>
         <translation>Підключення через Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2224" />
+        <location filename="../src/app/AppController.cpp" line="2260" />
         <source>Checking proxy…</source>
         <translation>Перевірка проксі…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2248" />
+        <location filename="../src/app/AppController.cpp" line="2284" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch: проксі виходить з вашого реального IP (%1). З'єднання заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2252" />
+        <location filename="../src/app/AppController.cpp" line="2288" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch: перевірка проксі не пройшла (%1). З'єднання заблоковано.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2256" />
+        <location filename="../src/app/AppController.cpp" line="2292" />
         <source>proxy check failed: %1</source>
         <translation>перевірка проксі не пройшла: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2472" />
+        <location filename="../src/app/AppController.cpp" line="2508" />
         <source>Password saved to the vault.</source>
         <translation>Пароль збережено у сховищі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2486" />
+        <location filename="../src/app/AppController.cpp" line="2522" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Пароль ключа збережено у сховищі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2641" />
+        <location filename="../src/app/AppController.cpp" line="2677" />
         <source>Kill switch enabled</source>
         <translation>Kill switch увімкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2641" />
+        <location filename="../src/app/AppController.cpp" line="2677" />
         <source>Kill switch disabled</source>
         <translation>Kill switch вимкнено</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2648" />
+        <location filename="../src/app/AppController.cpp" line="2684" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch увімкнено: пряму сесію закрито.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2653" />
+        <location filename="../src/app/AppController.cpp" line="2689" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>Kill switch закрив прямих сесій: %1.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2756" />
+        <location filename="../src/app/AppController.cpp" line="2792" />
         <source>Tor: new identity</source>
         <translation>Tor: нова особа</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2759" />
+        <location filename="../src/app/AppController.cpp" line="2795" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Нова особа Tor: нові підключення підуть через інший вихід. Відкриті сесії зберігають маршрут до перепідключення.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2773" />
-        <location filename="../src/app/AppController.cpp" line="2946" />
+        <location filename="../src/app/AppController.cpp" line="2809" />
+        <location filename="../src/app/AppController.cpp" line="2982" />
         <source>Choose at least one host.</source>
         <translation>Виберіть хоча б один хост.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2779" />
+        <location filename="../src/app/AppController.cpp" line="2815" />
         <source>Protected hosts unlocked with the master password for a batch run</source>
         <translation>Захищені хости відкрито майстер-паролем для групового запуску</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2792" />
+        <location filename="../src/app/AppController.cpp" line="2828" />
         <source>Command run on %n host(s)</source>
         <translation><numerusform>Команду виконано на %n сервері</numerusform><numerusform>Команду виконано на %n серверах</numerusform><numerusform>Команду виконано на %n серверах</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2811" />
+        <location filename="../src/app/AppController.cpp" line="2847" />
         <source>Serial connection: not supported here.</source>
         <translation>Послідовний порт: тут не підтримується.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2813" />
+        <location filename="../src/app/AppController.cpp" line="2849" />
         <source>Telnet host: commands can only be run over SSH.</source>
         <translation>Telnet-хост: команди можна виконувати лише через SSH.</translation>
     </message>
@@ -805,72 +839,72 @@
         <translation>Захищений 2FA / майстер-паролем: введіть майстер-пароль, щоб додати його.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2963" />
+        <location filename="../src/app/AppController.cpp" line="2999" />
         <source>Choose a key.</source>
         <translation>Виберіть ключ.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="2982" />
+        <location filename="../src/app/AppController.cpp" line="3018" />
         <source>Public keys sent to %n server(s)</source>
         <translation><numerusform>Публічні ключі надіслано на %n сервер</numerusform><numerusform>Публічні ключі надіслано на %n сервери</numerusform><numerusform>Публічні ключі надіслано на %n серверів</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2991" />
+        <location filename="../src/app/AppController.cpp" line="3027" />
         <source>Another run is still going.</source>
         <translation>Ще триває попередній запуск.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2994" />
+        <location filename="../src/app/AppController.cpp" line="3030" />
         <source>Choose the old and the new key.</source>
         <translation>Виберіть старий і новий ключ.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2998" />
+        <location filename="../src/app/AppController.cpp" line="3034" />
         <source>The new key must be a different key.</source>
         <translation>Новий ключ має бути іншим ключем.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3000" />
+        <location filename="../src/app/AppController.cpp" line="3036" />
         <source>Only the public part of the new key is in the keychain, so ShellWarden cannot log in with it. Choose a key with its private part.</source>
         <translation>У сховищі лише публічна частина нового ключа, тож ShellWarden не може ним увійти. Виберіть ключ разом із приватною частиною.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3006" />
+        <location filename="../src/app/AppController.cpp" line="3042" />
         <source>Enter the passphrase of the new key: it is needed to check that the new key works.</source>
         <translation>Введіть пароль нового ключа: він потрібен, щоб перевірити, що новий ключ працює.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3021" />
+        <location filename="../src/app/AppController.cpp" line="3057" />
         <source>Key replacement started</source>
         <translation>Почато заміну ключа</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3068" />
+        <location filename="../src/app/AppController.cpp" line="3104" />
         <source>The new key could not be added, nothing changed: %1</source>
         <translation>Новий ключ не вдалося додати, нічого не змінено: %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3081" />
+        <location filename="../src/app/AppController.cpp" line="3117" />
         <source>The new key did not work here, so the old key was kept: %1</source>
         <translation>Новий ключ тут не спрацював, тому старий лишився: %1</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3107" />
+        <location filename="../src/app/AppController.cpp" line="3143" />
         <source>Key replaced on %n server(s)</source>
         <translation><numerusform>Ключ замінено на %n сервері</numerusform><numerusform>Ключ замінено на %n серверах</numerusform><numerusform>Ключ замінено на %n серверах</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3108" />
+        <location filename="../src/app/AppController.cpp" line="3144" />
         <source>%1 of %2 servers</source>
         <translation>%1 з %2 серверів</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="3152" />
+        <location filename="../src/app/AppController.cpp" line="3188" />
         <source>The key is now used to log in on %n server(s).</source>
         <translation><numerusform>Тепер ключ використовується для входу на %n сервер.</numerusform><numerusform>Тепер ключ використовується для входу на %n сервери.</numerusform><numerusform>Тепер ключ використовується для входу на %n серверів.</numerusform></translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="3223" />
+        <location filename="../src/app/AppController.cpp" line="3259" />
         <source>Wrong passphrase for the key "%1".</source>
         <translation>Неправильний пароль ключа «%1».</translation>
     </message>
@@ -883,47 +917,47 @@
         <translation>Ключ захищено OpenPGP: відкрийте хост у вкладці.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2817" />
+        <location filename="../src/app/AppController.cpp" line="2853" />
         <source>Kill switch: this host has no proxy.</source>
         <translation>Kill switch: у цього хоста немає проксі.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2832" />
+        <location filename="../src/app/AppController.cpp" line="2868" />
         <source>Cloudflare Tunnel is not started: open this host in a tab once.</source>
         <translation>Cloudflare Tunnel не запущено: один раз відкрийте цей хост у вкладці.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2847" />
+        <location filename="../src/app/AppController.cpp" line="2883" />
         <source>Enter the file path.</source>
         <translation>Вкажіть шлях до файлу.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2851" />
+        <location filename="../src/app/AppController.cpp" line="2887" />
         <source>Choose two hosts.</source>
         <translation>Виберіть два хости.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2874" />
+        <location filename="../src/app/AppController.cpp" line="2910" />
         <source>Command Prompt (cmd)</source>
         <translation>Командний рядок (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2883" />
+        <location filename="../src/app/AppController.cpp" line="2919" />
         <source>Default shell (%1)</source>
         <translation>Оболонка за замовчуванням (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2897" />
+        <location filename="../src/app/AppController.cpp" line="2933" />
         <source>No shell found on this computer.</source>
         <translation>На цьому комп'ютері не знайдено оболонки.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2909" />
+        <location filename="../src/app/AppController.cpp" line="2945" />
         <source>this computer</source>
         <translation>цей комп'ютер</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2912" />
+        <location filename="../src/app/AppController.cpp" line="2948" />
         <source>Local terminal opened</source>
         <translation>Відкрито локальний термінал</translation>
     </message>
@@ -940,7 +974,7 @@
         <translation>SSH-ключ розблоковано через OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="2926" />
+        <location filename="../src/app/AppController.cpp" line="2962" />
         <source>The agent did not answer.</source>
         <translation>Агент не відповів.</translation>
     </message>
@@ -1448,7 +1482,7 @@
     </message>
     <message>
         <location filename="../qml/pages/HostEditor.qml" line="178" />
-        <location filename="../qml/pages/HostEditor.qml" line="682" />
+        <location filename="../qml/pages/HostEditor.qml" line="687" />
         <source>New host</source>
         <translation>Новий хост</translation>
     </message>
@@ -1589,92 +1623,107 @@
         <translation>Зберігається зашифрованим у сховищі.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="395" />
+        <location filename="../qml/pages/HostEditor.qml" line="384" />
+        <source>turned off</source>
+        <translation>вимкнено</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostEditor.qml" line="396" />
         <source>Through Cloudflare Tunnel: the address above must be the hostname published in Cloudflare (e.g. ssh.example.com); cloudflared is started automatically. The port is not used.</source>
         <translation>Через Cloudflare Tunnel: адреса вище має бути іменем, опублікованим у Cloudflare (напр. ssh.example.com); cloudflared запускається автоматично. Порт не використовується.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="429" />
+        <location filename="../qml/pages/HostEditor.qml" line="399" />
+        <source>This proxy is turned off (Proxies page). While it is off the host uses the default proxy; with no default proxy it is blocked by the kill switch.</source>
+        <translation>Цей проксі вимкнено (сторінка «Проксі»). Поки він вимкнений, хост іде через проксі за замовчуванням; якщо його немає, kill switch блокує підключення.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostEditor.qml" line="400" />
+        <source>This proxy is turned off (Proxies page). While it is off the host connects directly, from your real IP.</source>
+        <translation>Цей проксі вимкнено (сторінка «Проксі»). Поки він вимкнений, хост підключається напряму, з вашого справжнього IP.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostEditor.qml" line="434" />
         <source>TUNNELS</source>
         <translation>ТУНЕЛІ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="470" />
+        <location filename="../qml/pages/HostEditor.qml" line="475" />
         <source>auto</source>
         <translation>авто</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="470" />
+        <location filename="../qml/pages/HostEditor.qml" line="475" />
         <source>manual</source>
         <translation>вручну</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="473" />
+        <location filename="../qml/pages/HostEditor.qml" line="478" />
         <source>Opens by itself on connect. Click: start it by hand from the Tunnels panel instead.</source>
         <translation>Відкривається сам під час підключення. Натисніть, щоб запускати вручну з панелі «Тунелі».</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="474" />
+        <location filename="../qml/pages/HostEditor.qml" line="479" />
         <source>Started by hand: in the tab press the Tunnels button → Start. Click: open it by itself on connect.</source>
         <translation>Запускається вручну: у вкладці кнопка «Тунелі» → «Запустити». Натисніть, щоб він відкривався сам під час підключення.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="499" />
+        <location filename="../qml/pages/HostEditor.qml" line="504" />
         <source>L — open a server port on this PC</source>
         <translation>L — відкрити порт сервера на цьому ПК</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="499" />
+        <location filename="../qml/pages/HostEditor.qml" line="504" />
         <source>R — open a port of this PC on the server</source>
         <translation>R — відкрити порт цього ПК на сервері</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="499" />
+        <location filename="../qml/pages/HostEditor.qml" line="504" />
         <source>D — SOCKS5 proxy through the server</source>
         <translation>D — SOCKS5-проксі через сервер</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="506" />
+        <location filename="../qml/pages/HostEditor.qml" line="511" />
         <source>Port on the server</source>
         <translation>Порт на сервері</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="506" />
+        <location filename="../qml/pages/HostEditor.qml" line="511" />
         <source>Port on this PC</source>
         <translation>Порт на цьому ПК</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="517" />
+        <location filename="../qml/pages/HostEditor.qml" line="522" />
         <source>Goes to (address:port on this PC's side)</source>
         <translation>Веде до (адреса:порт на боці цього ПК)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="517" />
+        <location filename="../qml/pages/HostEditor.qml" line="522" />
         <source>Goes to (address:port as the server sees it)</source>
         <translation>Веде до (адреса:порт, як бачить сервер)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="525" />
+        <location filename="../qml/pages/HostEditor.qml" line="530" />
         <source>Open by itself on connect</source>
         <translation>Відкривати сам під час підключення</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="531" />
+        <location filename="../qml/pages/HostEditor.qml" line="536" />
         <source>Add tunnel</source>
         <translation>Додати тунель</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="542" />
+        <location filename="../qml/pages/HostEditor.qml" line="547" />
         <source>Example: port 8080, goes to 127.0.0.1:80 — then http://127.0.0.1:8080 in your browser opens the web site that runs on the server itself. Or port 18090 → 127.0.0.1:22 and then "ssh -p 18090 user@127.0.0.1" reaches the server's SSH through the tunnel.</source>
         <translation>Приклад: порт 8080, веде до 127.0.0.1:80 — тоді http://127.0.0.1:8080 у браузері відкриє сайт, що працює на самому сервері. Або порт 18090 → 127.0.0.1:22, і тоді «ssh -p 18090 користувач@127.0.0.1» потрапить на SSH сервера через тунель.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="544" />
+        <location filename="../qml/pages/HostEditor.qml" line="549" />
         <source>Example: port 9000 on the server, goes to 127.0.0.1:3000 — programs on the server can then reach a service running on your PC at 127.0.0.1:9000.</source>
         <translation>Приклад: порт 9000 на сервері веде до 127.0.0.1:3000 — програми на сервері дістануться сервісу на вашому ПК за адресою 127.0.0.1:9000.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="545" />
+        <location filename="../qml/pages/HostEditor.qml" line="550" />
         <source>Example: port 1080 — set SOCKS5 proxy 127.0.0.1:1080 in the browser and it browses from the server's IP.</source>
         <translation>Приклад: порт 1080 — вкажіть SOCKS5-проксі 127.0.0.1:1080 у браузері, і він ходитиме в інтернет з IP сервера.</translation>
     </message>
@@ -1748,37 +1797,37 @@
         <translation>Пряме з'єднання</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="397" />
+        <location filename="../qml/pages/HostEditor.qml" line="402" />
         <source>All traffic to this host goes through the proxy. If the proxy fails the connection fails — it never falls back to direct.</source>
         <translation>Увесь трафік до цього хоста йде через проксі. Якщо проксі не працює, з'єднання не встановлюється — переходу на пряме з'єднання не буде ніколи.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="399" />
+        <location filename="../qml/pages/HostEditor.qml" line="404" />
         <source>Kill switch is on: the default proxy will be used.</source>
         <translation>Kill switch увімкнений: буде використано проксі за замовчуванням.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="400" />
+        <location filename="../qml/pages/HostEditor.qml" line="405" />
         <source>Kill switch is on and no default proxy is set: connecting will be blocked.</source>
         <translation>Kill switch увімкнений, а проксі за замовчуванням не задано: підключення буде заблоковано.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="401" />
+        <location filename="../qml/pages/HostEditor.qml" line="406" />
         <source>Connects directly from your IP.</source>
         <translation>Підключення напряму з вашого IP.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="408" />
+        <location filename="../qml/pages/HostEditor.qml" line="413" />
         <source>Jump host (ProxyJump)</source>
         <translation>Jump-хост (ProxyJump)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="413" />
+        <location filename="../qml/pages/HostEditor.qml" line="418" />
         <source>None — connect to the host itself</source>
         <translation>Немає — підключатися напряму до хоста</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="424" />
+        <location filename="../qml/pages/HostEditor.qml" line="429" />
         <source>Route: proxy (if any) → jump host → this host. The jump host uses its own saved password/key; connect to it directly once to trust its key.</source>
         <translation>Маршрут: проксі (якщо є) → jump-хост → цей хост. Jump-хост використовує власний збережений пароль/ключ; один раз підключіться до нього напряму, щоб довіритися його ключу.</translation>
     </message>
@@ -1795,7 +1844,7 @@
         <translation>L: порт на цьому ПК веде до host:port через сервер. R: порт на сервері веде до host:port з цього ПК. D: SOCKS5-проксі на цьому ПК з виходом із сервера.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="568" />
+        <location filename="../qml/pages/HostEditor.qml" line="573" />
         <source>ADVANCED SECURITY</source>
         <translation>РОЗШИРЕНИЙ ЗАХИСТ</translation>
     </message>
@@ -1834,72 +1883,72 @@
         <translation>Неправильний код. Перевірте, чи правильний час на телефоні.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="580" />
+        <location filename="../qml/pages/HostEditor.qml" line="585" />
         <source>Ask for the master password to connect</source>
         <translation>Запитувати майстер-пароль для підключення</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="582" />
+        <location filename="../qml/pages/HostEditor.qml" line="587" />
         <source>Even when the vault is unlocked. Good for production servers.</source>
         <translation>Навіть коли сховище розблоковане. Добре для продакшн-серверів.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="593" />
+        <location filename="../qml/pages/HostEditor.qml" line="598" />
         <source>Always ask the key passphrase</source>
         <translation>Завжди запитувати пароль ключа</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="595" />
+        <location filename="../qml/pages/HostEditor.qml" line="600" />
         <source>Ignore a passphrase saved in the vault for this host.</source>
         <translation>Ігнорувати збережений у сховищі пароль ключа для цього хоста.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="606" />
+        <location filename="../qml/pages/HostEditor.qml" line="611" />
         <source>Use keys from the SSH agent</source>
         <translation>Ключі з SSH-агента</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="608" />
+        <location filename="../qml/pages/HostEditor.qml" line="613" />
         <source>Found: %1.</source>
         <translation>Знайдено: %1.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="609" />
+        <location filename="../qml/pages/HostEditor.qml" line="614" />
         <source>No agent is running right now.</source>
         <translation>Зараз агент не запущений.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="610" />
+        <location filename="../qml/pages/HostEditor.qml" line="615" />
         <source>Pageant, the Windows OpenSSH agent, ssh-agent, KeePassXC, a YubiKey… are tried before the key above.</source>
         <translation>Pageant, агент OpenSSH у Windows, ssh-agent, KeePassXC, YubiKey… пробуються перед ключем вище.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="621" />
+        <location filename="../qml/pages/HostEditor.qml" line="626" />
         <source>Agent forwarding (ssh -A)</source>
         <translation>Переадресація агента (ssh -A)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="623" />
+        <location filename="../qml/pages/HostEditor.qml" line="628" />
         <source>From this server you can go further (git pull, ssh to the next server) with your keys, which never leave this computer. Only for servers you trust: while you are connected, root there can use your agent.</source>
         <translation>З цього сервера можна йти далі (git pull, ssh на наступний сервер) з вашими ключами, які не покидають цей комп'ютер. Лише для довірених серверів: поки ви підключені, root там може користуватися вашим агентом.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="631" />
+        <location filename="../qml/pages/HostEditor.qml" line="636" />
         <source>NOTES</source>
         <translation>НОТАТКИ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="651" />
+        <location filename="../qml/pages/HostEditor.qml" line="656" />
         <source>e.g. what runs here, who to call, where the backups are, links to docs…</source>
         <translation>напр. що тут працює, кому дзвонити, де бекапи, посилання на документацію…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="660" />
+        <location filename="../qml/pages/HostEditor.qml" line="665" />
         <source>Stored encrypted in the vault, like passwords. In an open tab: the notes button in the toolbar.</source>
         <translation>Зберігаються зашифрованими у сховищі, як паролі. У відкритій вкладці — кнопка нотаток на панелі.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="665" />
+        <location filename="../qml/pages/HostEditor.qml" line="670" />
         <source>APPEARANCE</source>
         <translation>ВИГЛЯД</translation>
     </message>
@@ -1908,22 +1957,22 @@
         <translation>Колір (підкреслення вкладки й аватар; A — автоматично за назвою)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="756" />
+        <location filename="../qml/pages/HostEditor.qml" line="761" />
         <source>Any colour…</source>
         <translation>Будь-який колір…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="762" />
+        <location filename="../qml/pages/HostEditor.qml" line="767" />
         <source>Host colour</source>
         <translation>Колір хоста</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="709" />
+        <location filename="../qml/pages/HostEditor.qml" line="714" />
         <source>Colour</source>
         <translation>Колір</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="766" />
+        <location filename="../qml/pages/HostEditor.qml" line="771" />
         <source>Terminal theme</source>
         <translation>Тема терміналу</translation>
     </message>
@@ -1933,47 +1982,47 @@
     </message>
     <message>
         <location filename="../qml/pages/HostEditor.qml" line="189" />
-        <location filename="../qml/pages/HostEditor.qml" line="846" />
+        <location filename="../qml/pages/HostEditor.qml" line="851" />
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="555" />
+        <location filename="../qml/pages/HostEditor.qml" line="560" />
         <source>Press "Add tunnel" (or Save — it is added for you).</source>
         <translation>Натисніть «Додати тунель» (або «Зберегти» — його буде додано автоматично).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="563" />
+        <location filename="../qml/pages/HostEditor.qml" line="568" />
         <source>"auto" — opens together with the connection. "manual" — stays closed; during the session press the Tunnels button in the tab and Start / Stop it whenever you need.</source>
         <translation>«авто» — відкривається разом із підключенням. «вручну» — закритий, поки ви його не запустите: під час сесії натисніть у вкладці кнопку «Тунелі» і «Запустити» / «Зупинити», коли потрібно.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="705" />
+        <location filename="../qml/pages/HostEditor.qml" line="710" />
         <source>preview</source>
         <translation>попередній перегляд</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="756" />
+        <location filename="../qml/pages/HostEditor.qml" line="761" />
         <source>Automatic: picked from the name</source>
         <translation>Автоматично: за назвою</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="782" />
+        <location filename="../qml/pages/HostEditor.qml" line="787" />
         <source>Default</source>
         <translation>За замовчуванням</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="843" />
+        <location filename="../qml/pages/HostEditor.qml" line="848" />
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="842" />
+        <location filename="../qml/pages/HostEditor.qml" line="847" />
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostEditor.qml" line="839" />
+        <location filename="../qml/pages/HostEditor.qml" line="844" />
         <source>Save &amp; connect</source>
         <translation>Зберегти й підключитися</translation>
     </message>
@@ -2056,12 +2105,28 @@
         <translation>Перед підключенням питається майстер-пароль</translation>
     </message>
     <message>
+        <location filename="../qml/pages/HostsPage.qml" line="279" />
+        <source>Connect once via</source>
+        <translation>Підключитися один раз через</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="289" />
+        <location filename="../qml/pages/HostsPage.qml" line="312" />
+        <source>turned off</source>
+        <translation>вимкнено</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="302" />
+        <source>Always connect via: %1</source>
+        <translation>Завжди підключатися через: %1</translation>
+    </message>
+    <message>
         <source>2FA code is asked before connecting</source>
         <translation>Перед підключенням питається код 2FA</translation>
     </message>
     <message>
         <location filename="../qml/pages/HostsPage.qml" line="226" />
-        <location filename="../qml/pages/HostsPage.qml" line="321" />
+        <location filename="../qml/pages/HostsPage.qml" line="322" />
         <source>Edit</source>
         <translation>Редагувати</translation>
     </message>
@@ -2089,9 +2154,14 @@
         <location filename="../qml/pages/HostsPage.qml" line="268" />
         <location filename="../qml/pages/HostsPage.qml" line="273" />
         <location filename="../qml/pages/HostsPage.qml" line="282" />
-        <location filename="../qml/pages/HostsPage.qml" line="304" />
+        <location filename="../qml/pages/HostsPage.qml" line="305" />
         <source>Direct</source>
         <translation>Напряму</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/HostsPage.qml" line="271" />
+        <source>%1 (turned off)</source>
+        <translation>%1 (вимкнено)</translation>
     </message>
     <message>
         <location filename="../qml/pages/HostsPage.qml" line="275" />
@@ -2099,38 +2169,36 @@
         <translation>Підключитися</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="279" />
         <source>Connect via</source>
         <translation>Підключитися через</translation>
     </message>
     <message>
         <location filename="../qml/pages/HostsPage.qml" line="282" />
-        <location filename="../qml/pages/HostsPage.qml" line="289" />
+        <location filename="../qml/pages/HostsPage.qml" line="290" />
         <source>saved</source>
         <translation>збережено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="301" />
         <source>Route: %1</source>
         <translation>Маршрут: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="322" />
+        <location filename="../qml/pages/HostsPage.qml" line="323" />
         <source>Duplicate</source>
         <translation>Дублювати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="323" />
+        <location filename="../qml/pages/HostsPage.qml" line="324" />
         <source>Run a command…</source>
         <translation>Виконати команду…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="324" />
+        <location filename="../qml/pages/HostsPage.qml" line="325" />
         <source>Compare a file with another server…</source>
         <translation>Порівняти файл з іншим сервером…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/HostsPage.qml" line="326" />
+        <location filename="../qml/pages/HostsPage.qml" line="327" />
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
@@ -2918,32 +2986,26 @@
 <context>
     <name>LocalFilesPane</name>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="59" />
         <source>This computer</source>
         <translation>Цей ПК</translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="65" />
         <source>Places</source>
         <translation>Місця</translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="74" />
         <source>Up one folder</source>
         <translation>На рівень вище</translation>
     </message>
     <message numerus="yes">
-        <location filename="../qml/pages/LocalFilesPane.qml" line="128" />
         <source>%n files</source>
         <translation><numerusform>%n файл</numerusform><numerusform>%n файли</numerusform><numerusform>%n файлів</numerusform></translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="151" />
         <source>Empty folder</source>
         <translation>Порожня тека</translation>
     </message>
     <message>
-        <location filename="../qml/pages/LocalFilesPane.qml" line="176" />
         <source>Drop to save to this PC in %1</source>
         <translation>Відпустіть, щоб зберегти на цей ПК у %1</translation>
     </message>
@@ -3647,7 +3709,6 @@
         <translation>SOCKS5, HTTP CONNECT і Tor. Імена хостів визначає проксі, а не ваш комп'ютер — адреси .onion працюють через Tor.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="39" />
         <source>SOCKS5, HTTP CONNECT, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor.</source>
         <translation>SOCKS5, HTTP CONNECT, Tor і Cloudflare Tunnel. Імена хостів визначає проксі, а не ваш комп'ютер — адреси .onion працюють через Tor.</translation>
     </message>
@@ -3677,138 +3738,175 @@
         <translation>Переходу на пряме з'єднання не буває ніколи.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="106" />
         <source>Default proxy for hosts without one</source>
         <translation>Проксі за замовчуванням для хостів без проксі</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="112" />
         <source>A host can have its own proxy (in its settings). Hosts without one either go through the proxy chosen here, or — with "None" — are not allowed to connect while the kill switch is on.</source>
         <translation>Хост може мати власний проксі (у його налаштуваннях). Хости без проксі або йдуть через вибраний тут проксі, або — з «Немає» — не можуть підключатися, поки kill switch увімкнено.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="119" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="39" />
+        <source>SOCKS5, HTTP CONNECT, Shadowsocks, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor.</source>
+        <translation>SOCKS5, HTTP CONNECT, Shadowsocks, Tor і Cloudflare Tunnel. Імена хостів визначає проксі, а не ваш комп'ютер — адреси .onion працюють через Tor.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="107" />
+        <source>Kill switch: proxy for hosts without one</source>
+        <translation>Kill switch: проксі для хостів без проксі</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="113" />
+        <source>Only used while the kill switch is on, because then nothing may connect directly. Hosts with no proxy of their own (or whose proxy is turned off) go through the proxy chosen here; with "None" they are blocked. With the kill switch off such hosts simply connect directly.</source>
+        <translation>Діє лише при ввімкненому kill switch, бо тоді напряму не можна підключатися нічому. Хости без власного проксі (або з вимкненим проксі) йдуть через вибраний тут проксі; з «Немає» вони блокуються. Коли kill switch вимкнений, такі хости просто підключаються напряму.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="120" />
         <source>None — block those hosts</source>
         <translation>Немає — блокувати такі хости</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="139" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="140" />
         <source>Your real (direct) IP:</source>
         <translation>Ваш реальний (прямий) IP:</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="141" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="142" />
         <source>checking…</source>
         <translation>перевірка…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="143" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
         <source>unavailable: </source>
         <translation>недоступно: </translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="143" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="144" />
         <source>not checked</source>
         <translation>не перевірено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="160" />
-        <location filename="../qml/pages/ProxiesPage.qml" line="328" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="161" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="335" />
         <source>Check</source>
         <translation>Перевірити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="167" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="168" />
         <source>Used for the leak check: a proxy whose exit IP equals this address is treated as broken.</source>
         <translation>Використовується для перевірки витоку: проксі, чий вихідний IP збігається з цією адресою, вважається несправним.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="200" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="201" />
         <source>Firewall lock</source>
         <translation>Блокування брандмауером</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="206" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
         <source>active</source>
         <translation>активне</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="206" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="207" />
         <source>off</source>
         <translation>вимкнено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="215" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="216" />
         <source>The strongest protection: a Windows Defender Firewall rule lets %1 connect ONLY to your proxies (and localhost). Even a bug in the program could not reveal your real IP — Windows drops the packets. Needs administrator rights (UAC). Update the rule after adding or changing proxies.</source>
         <translation>Найсильніший захист: правило брандмауера Windows Defender дозволяє %1 підключатися ЛИШЕ до ваших проксі (і localhost). Навіть помилка в програмі не розкриє ваш реальний IP — Windows відкине пакети. Потрібні права адміністратора (UAC). Оновлюйте правило після додавання чи зміни проксі.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="228" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="229" />
         <source>Remove rule</source>
         <translation>Видалити правило</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="232" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
         <source>Update rule</source>
         <translation>Оновити правило</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="232" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="233" />
         <source>Enable firewall lock</source>
         <translation>Увімкнути блокування брандмауером</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="291" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="294" />
         <source>default</source>
         <translation>за замовч.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="293" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="296" />
         <source>cloudflared access tcp → the host's address</source>
         <translation>cloudflared access tcp → адреса хоста</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="307" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="310" />
+        <source>Turned off · its hosts use the default proxy; with no default proxy they are blocked (kill switch is on)</source>
+        <translation>Вимкнено · його хости йдуть через проксі за замовчуванням; без нього вони блокуються (kill switch увімкнено)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="311" />
+        <source>Turned off · its hosts connect directly, from your real IP</source>
+        <translation>Вимкнено · його хости підключаються напряму, з вашого справжнього IP</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="314" />
         <source>Ready · %1</source>
         <translation>Готово · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="308" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="315" />
         <source>Working · exit IP %1%2 · %3 ms · checked %4</source>
         <translation>Працює · вихідний IP %1%2 · %3 мс · перевірено %4</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="312" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="319" />
         <source>Not working: %1 · checked %2</source>
         <translation>Не працює: %1 · перевірено %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="313" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="320" />
         <source>Checking…</source>
         <translation>Перевірка…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="314" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="321" />
         <source>Not checked yet</source>
         <translation>Ще не перевірено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="323" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="330" />
         <source>New identity</source>
         <translation>Нова особа</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="326" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="333" />
         <source>Switch to new Tor circuits: a different exit IP for new connections</source>
         <translation>Перейти на нові ланцюжки Tor: інший вихідний IP для нових підключень</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="339" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="342" />
+        <source>Turn this proxy off without deleting it: hosts that use it will connect directly (with the kill switch on — through the default proxy, never directly). Open sessions are not touched.</source>
+        <translation>Вимкнути цей проксі, не видаляючи: хости, що його використовують, підключатимуться напряму (з увімкненим kill switch — через проксі за замовчуванням, ніколи напряму). Відкриті сесії не зачіпаються.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="343" />
+        <source>Turn this proxy back on</source>
+        <translation>Знову увімкнути цей проксі</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxiesPage.qml" line="355" />
         <source>No proxies yet</source>
         <translation>Проксі поки немає</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxiesPage.qml" line="340" />
+        <location filename="../qml/pages/ProxiesPage.qml" line="356" />
+        <source>Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default.</source>
+        <translation>Додайте проксі SOCKS5, HTTP, Shadowsocks або Tor, а потім призначте його хостам або зробіть типовим.</translation>
+    </message>
+    <message>
         <source>Add a SOCKS5, HTTP or Tor proxy, then assign it to hosts or make it the default.</source>
         <translation>Додайте проксі SOCKS5, HTTP або Tor, потім призначте його хостам або зробіть типовим.</translation>
     </message>
@@ -3820,278 +3918,318 @@
 <context>
     <name>ProxyChecker</name>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="74" />
+        <location filename="../src/app/ProxyChecker.cpp" line="142" />
         <source>Unexpected answer from the IP service</source>
         <translation>Неочікувана відповідь від сервісу IP</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="156" />
+        <source>no IP service answered (%1)</source>
+        <translation>жоден сервіс IP не відповів (%1)</translation>
     </message>
 </context>
 <context>
     <name>ProxyEditor</name>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="88" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="94" />
         <source>Edit proxy</source>
         <translation>Редагувати проксі</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="88" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="94" />
         <source>New proxy</source>
         <translation>Новий проксі</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="105" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="111" />
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="105" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="111" />
         <source>e.g. NL exit</source>
         <translation>напр. Вихід NL</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="110" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="116" />
         <source>Type</source>
         <translation>Тип</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>SOCKS5 (remote DNS)</source>
         <translation>SOCKS5 (віддалений DNS)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>HTTP CONNECT</source>
         <translation>HTTP CONNECT</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>Tor</source>
         <translation>Tor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="114" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
         <source>Cloudflare Tunnel</source>
         <translation>Cloudflare Tunnel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="128" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="120" />
+        <source>Shadowsocks (encrypted, hard to block)</source>
+        <translation>Shadowsocks (зашифрований, важко заблокувати)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="135" />
         <source>Which Tor to use</source>
         <translation>Який Tor використовувати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="131" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="138" />
         <source>Automatically</source>
         <translation>Автоматично</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="131" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="138" />
         <source>Tor Browser if it is open, otherwise the Tor service</source>
         <translation>Tor Browser, якщо він відкритий, інакше служба Tor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="132" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="139" />
         <source>Tor Browser</source>
         <translation>Tor Browser</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="132" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="139" />
         <source>Keep Tor Browser open while you work (port 9150)</source>
         <translation>Тримайте Tor Browser відкритим, поки працюєте (порт 9150)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="133" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="140" />
         <source>Tor service</source>
         <translation>Служба Tor</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="133" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="140" />
         <source>Tor installed as a system service (port 9050)</source>
         <translation>Tor, встановлений як системна служба (порт 9050)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="134" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="141" />
         <source>ShellWarden starts tor.exe</source>
         <translation>ShellWarden запускає tor.exe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="134" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="141" />
         <source>Nothing to keep open: started when needed, stopped on exit</source>
         <translation>Нічого не треба тримати відкритим: запускається коли потрібно, зупиняється при виході</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="172" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="179" />
         <source>Path to tor.exe</source>
         <translation>Шлях до tor.exe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="173" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="180" />
         <source>found automatically if next to ShellWarden</source>
         <translation>знаходиться сам, якщо лежить поруч із ShellWarden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="174" />
-        <location filename="../qml/pages/ProxyEditor.qml" line="259" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="181" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="266" />
         <source>Browse…</source>
         <translation>Огляд…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="184" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="191" />
         <source>Get the "Tor Expert Bundle" for your system at &lt;a href="https://www.torproject.org/download/tor/"&gt;torproject.org/download/tor&lt;/a&gt;, unpack it and choose tor.exe (or put the folder "tor" next to ShellWarden.exe).</source>
         <translation>Завантажте «Tor Expert Bundle» для своєї системи з &lt;a href="https://www.torproject.org/download/tor/"&gt;torproject.org/download/tor&lt;/a&gt;, розпакуйте й виберіть tor.exe (або покладіть теку «tor» поруч із ShellWarden.exe).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="188" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="195" />
         <source>Choose tor.exe</source>
         <translation>Виберіть tor.exe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="210" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="217" />
         <source>Looking for a running Tor…</source>
         <translation>Шукаю запущений Tor…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="211" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="218" />
         <source>Found: Tor Browser on 127.0.0.1:9150</source>
         <translation>Знайдено: Tor Browser на 127.0.0.1:9150</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="212" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="219" />
         <source>Found: Tor service on 127.0.0.1:9050</source>
         <translation>Знайдено: служба Tor на 127.0.0.1:9050</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="213" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="220" />
         <source>Found: Tor started by ShellWarden</source>
         <translation>Знайдено: Tor, запущений ShellWarden</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="214" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="221" />
         <source>Tor Browser is not running. Open it and wait until it says "Connected".</source>
         <translation>Tor Browser не запущено. Відкрийте його й зачекайте, поки з'явиться «Підключено».</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="215" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="222" />
         <source>The Tor service is not running on port 9050.</source>
         <translation>Служба Tor не працює на порту 9050.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="216" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="223" />
         <source>No running Tor found. Open Tor Browser, start the Tor service, or choose "ShellWarden starts tor.exe".</source>
         <translation>Запущеного Tor не знайдено. Відкрийте Tor Browser, запустіть службу Tor або виберіть «ShellWarden запускає tor.exe».</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="218" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="225" />
         <source>Check</source>
         <translation>Перевірити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="226" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="233" />
         <source>Tor is slow and many servers block Tor exits. .onion addresses work as host names. "New identity" on the Proxies page gives a new exit IP.</source>
         <translation>Tor повільний, і багато серверів блокують його виходи. Адреси .onion працюють як імена хостів. «Нова особа» на сторінці «Проксі» дає новий вихідний IP.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="251" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="258" />
         <source>The server runs &lt;b&gt;cloudflared tunnel&lt;/b&gt; with a public hostname like &lt;b&gt;ssh.example.com → ssh://localhost:22&lt;/b&gt; (Cloudflare dashboard → Zero Trust → Networks → Tunnels). Port 22 can then be closed and the server IP stays hidden.&lt;br&gt;&lt;br&gt;In the host put that hostname as the address and choose this route. ShellWarden starts &lt;b&gt;cloudflared access tcp&lt;/b&gt; on this computer by itself. Free on the Cloudflare Free plan. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/"&gt;How to set up the server&lt;/a&gt;</source>
         <translation>На сервері працює &lt;b&gt;cloudflared tunnel&lt;/b&gt; з публічним іменем на кшталт &lt;b&gt;ssh.example.com → ssh://localhost:22&lt;/b&gt; (панель Cloudflare → Zero Trust → Networks → Tunnels). Тоді порт 22 можна закрити, а IP сервера залишається прихованим.&lt;br&gt;&lt;br&gt;У хості вкажіть це ім'я як адресу і виберіть цей маршрут. ShellWarden сам запускає &lt;b&gt;cloudflared access tcp&lt;/b&gt; на цьому комп'ютері. Безкоштовно на плані Cloudflare Free. &lt;a href="https://developers.cloudflare.com/cloudflare-one/connections/connect-networks/use-cases/ssh/"&gt;Як налаштувати сервер&lt;/a&gt;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="257" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="264" />
         <source>Path to cloudflared (optional)</source>
         <translation>Шлях до cloudflared (необов'язково)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="258" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="265" />
         <source>found automatically (winget, Program Files, PATH)</source>
         <translation>знаходиться автоматично (winget, Program Files, PATH)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="263" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="270" />
         <source>Choose cloudflared</source>
         <translation>Виберіть cloudflared</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="271" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="278" />
         <source>Cloudflare Access (optional): without a token a browser window asks you to log in the first time. A service token logs in without a browser.</source>
         <translation>Cloudflare Access (необов'язково): без токена першого разу браузер попросить увійти. Сервісний токен входить без браузера.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="279" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="291" />
+        <source>Everything up to the Shadowsocks server is encrypted and looks like random bytes: the network in between sees neither which server you connect to nor that it is SSH. You need your own Shadowsocks server (for example Outline).</source>
+        <translation>Усе до сервера Shadowsocks зашифровано й виглядає як випадкові байти: мережа між вами не бачить ні до якого сервера ви підключаєтесь, ні того, що це SSH. Потрібен власний сервер Shadowsocks (наприклад, Outline).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="296" />
+        <source>ss:// link (optional)</source>
+        <translation>Посилання ss:// (необов'язково)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="301" />
+        <source>Fill in</source>
+        <translation>Заповнити</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="315" />
+        <source>Cipher</source>
+        <translation>Шифр</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="323" />
         <source>Address</source>
         <translation>Адреса</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="280" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="323" />
+        <source>Server</source>
+        <translation>Сервер</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="324" />
         <source>Port</source>
         <translation>Порт</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="282" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="326" />
         <source>Username (optional)</source>
         <translation>Користувач (необов'язково)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="282" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="326" />
         <source>Service token Client ID (optional)</source>
         <translation>Client ID сервісного токена (необов'язково)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="283" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
         <source>Password (optional)</source>
         <translation>Пароль (необов'язково)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="283" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
         <source>Stored encrypted in the vault.</source>
         <translation>Зберігається зашифрованим у сховищі.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="283" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
         <source>Service token Client Secret (optional)</source>
         <translation>Client Secret сервісного токена (необов'язково)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="299" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="327" />
+        <source>Password</source>
+        <translation>Пароль</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/ProxyEditor.qml" line="343" />
         <source>Testing the proxy…</source>
         <translation>Перевірка проксі…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="300" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="344" />
         <source>cloudflared is ready</source>
         <translation>cloudflared готовий</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="300" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="344" />
         <source>cloudflared is missing</source>
         <translation>cloudflared не знайдено</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="301" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="345" />
         <source>Proxy works</source>
         <translation>Проксі працює</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="301" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="345" />
         <source>Proxy does not work</source>
         <translation>Проксі не працює</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="313" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="357" />
         <source>Exit IP (what servers will see): %1
 %2Latency: %3 ms</source>
         <translation>Вихідний IP (його бачитимуть сервери): %1
 %2Затримка: %3 мс</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="333" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="377" />
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="338" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="382" />
         <source>Test</source>
         <translation>Перевірити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/ProxyEditor.qml" line="343" />
+        <location filename="../qml/pages/ProxyEditor.qml" line="387" />
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
@@ -4227,91 +4365,91 @@
         <translation>Не вдалося підключитися до проксі %1:%2</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="107" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="108" />
         <source>Cannot resolve host %1</source>
         <translation>Не вдається визначити адресу хоста %1</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="141" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="142" />
         <source>Cannot connect to %1:%2</source>
         <translation>Не вдається підключитися до %1:%2</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="159" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="353" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="160" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="354" />
         <source>The proxy did not answer as a SOCKS5 server.</source>
         <translation>Проксі не відповів як SOCKS5-сервер.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="169" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="170" />
         <source>Proxy username or password is too long.</source>
         <translation>Ім'я або пароль проксі занадто довгі.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="180" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="347" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="181" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="348" />
         <source>The proxy rejected the username or password.</source>
         <translation>Проксі відхилив ім'я користувача або пароль.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="185" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="186" />
         <source>The proxy offers no supported authentication method.</source>
         <translation>Проксі не пропонує підтримуваного методу автентифікації.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="186" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="351" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="187" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="352" />
         <source>The proxy requires a username and password.</source>
         <translation>Проксі вимагає ім'я користувача і пароль.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="205" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="206" />
         <source>Host name is too long.</source>
         <translation>Ім'я хоста занадто довге.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="215" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="216" />
         <source>The proxy closed the connection.</source>
         <translation>Проксі закрив з'єднання.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="225" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="226" />
         <source>Proxy could not reach %1:%2 (%3).</source>
         <translation>Проксі не зміг дістатися %1:%2 (%3).</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="244" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="245" />
         <source>Malformed SOCKS5 reply.</source>
         <translation>Некоректна відповідь SOCKS5.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="270" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="271" />
         <source>Cannot send the request to the HTTP proxy.</source>
         <translation>Не вдалося надіслати запит HTTP-проксі.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="280" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="281" />
         <source>The HTTP proxy did not answer.</source>
         <translation>HTTP-проксі не відповів.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="290" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="291" />
         <source>The HTTP proxy requires authentication (407).</source>
         <translation>HTTP-проксі вимагає автентифікації (407).</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="292" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="293" />
         <source>The HTTP proxy refused the tunnel: %1</source>
         <translation>HTTP-проксі відмовив у тунелі: %1</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="366" />
-        <location filename="../src/core/ProxyTunnel.cpp" line="388" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="367" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="389" />
         <source>Cannot create a local socket.</source>
         <translation>Не вдається створити локальний сокет.</translation>
     </message>
     <message>
-        <location filename="../src/core/ProxyTunnel.cpp" line="437" />
+        <location filename="../src/core/ProxyTunnel.cpp" line="445" />
         <source>Proxy handshake timed out.</source>
         <translation>Час очікування рукостискання з проксі вичерпано.</translation>
     </message>
@@ -4433,6 +4571,72 @@
         <location filename="../src/core/AgentClient.cpp" line="233" />
         <source>Cannot reach the agent bridge.</source>
         <translation>Не вдається з'єднатися з мостом до агента.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="320" />
+        <source>Shadowsocks: the cipher "%1" is not supported (use %2).</source>
+        <translation>Shadowsocks: шифр «%1» не підтримується (використовуйте %2).</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="328" />
+        <source>Shadowsocks server %1:%2: %3</source>
+        <translation>Сервер Shadowsocks %1:%2: %3</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="336" />
+        <source>Shadowsocks: could not send the request.</source>
+        <translation>Shadowsocks: не вдалося надіслати запит.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="350" />
+        <source>Shadowsocks: no answer from %1:%2 through the server — wrong password or cipher, or the server cannot reach it.</source>
+        <translation>Shadowsocks: немає відповіді від %1:%2 через сервер — неправильний пароль чи шифр, або сервер не може до нього дістатися.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="356" />
+        <source>Shadowsocks: the server closed the connection — wrong password or cipher, or it cannot reach %1:%2.</source>
+        <translation>Shadowsocks: сервер закрив з'єднання — неправильний пароль чи шифр, або він не може дістатися до %1:%2.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="362" />
+        <source>Shadowsocks: the answer could not be decrypted — wrong password or cipher.</source>
+        <translation>Shadowsocks: відповідь не вдалося розшифрувати — неправильний пароль чи шифр.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="383" />
+        <source>Not an ss:// link.</source>
+        <translation>Це не посилання ss://.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="414" />
+        <location filename="../src/core/Shadowsocks.cpp" line="423" />
+        <location filename="../src/core/Shadowsocks.cpp" line="443" />
+        <source>The ss:// link could not be read.</source>
+        <translation>Не вдалося прочитати посилання ss://.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="433" />
+        <source>This link needs a plugin (%1), which ShellWarden does not run.</source>
+        <translation>Це посилання потребує плагіна (%1), а ShellWarden плагіни не запускає.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Shadowsocks.cpp" line="438" />
+        <source>The cipher "%1" is not supported (use %2).</source>
+        <translation>Шифр «%1» не підтримується (використовуйте %2).</translation>
+    </message>
+    <message>
+        <source>No answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access</source>
+        <translation>Немає відповіді через сервер Shadowsocks — неправильний пароль чи шифр, або сервер не має доступу до інтернету</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="75" />
+        <source>no answer through the Shadowsocks server — wrong password or cipher, or the server has no internet access</source>
+        <translation>немає відповіді через сервер Shadowsocks — неправильний пароль чи шифр, або сервер не має доступу до інтернету</translation>
+    </message>
+    <message>
+        <location filename="../src/app/ProxyChecker.cpp" line="76" />
+        <source>Unexpected answer from the IP service</source>
+        <translation>Неочікувана відповідь від сервісу IP</translation>
     </message>
 </context>
 <context>
@@ -5250,6 +5454,7 @@ libssh · libvterm · libsodium · Qt
         <translation>Завантажити до…</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="172" />
         <source>Files</source>
         <translation>Файли</translation>
     </message>
@@ -5258,18 +5463,18 @@ libssh · libvterm · libsodium · Qt
         <translation>Вивантажити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="207" />
-        <location filename="../qml/pages/SftpPanel.qml" line="583" />
+        <location filename="../qml/pages/SftpPanel.qml" line="197" />
+        <location filename="../qml/pages/SftpPanel.qml" line="498" />
         <source>New folder</source>
         <translation>Нова тека</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="296" />
+        <location filename="../qml/pages/SftpPanel.qml" line="227" />
         <source>Type a path; Tab completes folder and file names, Enter opens.</source>
         <translation>Введіть шлях; Tab доповнює назви тек і файлів, Enter відкриває.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="418" />
+        <location filename="../qml/pages/SftpPanel.qml" line="339" />
         <source>Empty folder</source>
         <translation>Порожня тека</translation>
     </message>
@@ -5278,37 +5483,37 @@ libssh · libvterm · libsodium · Qt
         <translation>Відпустіть, щоб вивантажити в %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="147" />
+        <location filename="../qml/pages/SftpPanel.qml" line="144" />
         <source>Send to the server — choose files</source>
         <translation>Надіслати на сервер — виберіть файли</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SftpPanel.qml" line="154" />
+        <source>Save %n files to this PC — choose a folder</source>
+        <translation><numerusform>Зберегти %n файл на цей комп'ютер — виберіть папку</numerusform><numerusform>Зберегти %n файли на цей комп'ютер — виберіть папку</numerusform><numerusform>Зберегти %n файлів на цей комп'ютер — виберіть папку</numerusform></translation>
+    </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="157" />
+        <location filename="../qml/pages/SftpPanel.qml" line="155" />
         <source>Save to this PC — choose a folder</source>
         <translation>Зберегти на цей ПК — виберіть папку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="174" />
         <source>This computer ⇄ server</source>
         <translation>Цей ПК ⇄ сервер</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="174" />
         <source>Files on the server</source>
         <translation>Файли на сервері</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="178" />
         <source>PC ⇄ server</source>
         <translation>ПК ⇄ сервер</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="181" />
         <source>Back to the server files only</source>
         <translation>Назад: лише файли сервера</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="181" />
         <source>Show this computer's files next to the server's: drag files between them or use the arrows</source>
         <translation>Показати файли цього ПК поруч із файлами сервера: перетягуйте між ними або користуйтеся стрілками</translation>
     </message>
@@ -5321,112 +5526,126 @@ libssh · libvterm · libsodium · Qt
         <translation>Вибрати файли на цьому ПК і надіслати на сервер, у %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="185" />
+        <location filename="../qml/pages/SftpPanel.qml" line="175" />
         <source>Transfer ▾</source>
         <translation>Передати ▾</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="188" />
         <source>Send files to the server or save a file from the server to this PC</source>
         <translation>Надіслати файли на сервер або зберегти файл із сервера на цей ПК</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="195" />
+        <location filename="../qml/pages/SftpPanel.qml" line="184" />
         <source>To the server: choose files on this PC…</source>
         <translation>На сервер: вибрати файли на цьому ПК…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="201" />
+        <location filename="../qml/pages/SftpPanel.qml" line="190" />
         <source>To this PC: save "%1"…</source>
         <translation>На цей ПК: зберегти «%1»…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="202" />
         <source>To this PC: select a file on the server first</source>
         <translation>На цей ПК: спершу виберіть файл на сервері</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="243" />
         <source>Send the files selected on the left to the server (into %1)</source>
         <translation>Надіслати файли, вибрані ліворуч, на сервер (у %1)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="252" />
         <source>Save the file selected on the right to this PC (into %1)</source>
         <translation>Зберегти файл, вибраний праворуч, на цей ПК (у %1)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="268" />
         <source>Server</source>
         <translation>Сервер</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="449" />
+        <location filename="../qml/pages/SftpPanel.qml" line="178" />
+        <source>Send files to the server or save files from the server to this PC</source>
+        <translation>Надіслати файли на сервер або зберегти файли з сервера на цей комп'ютер</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SftpPanel.qml" line="191" />
+        <source>To this PC: save %n selected files…</source>
+        <translation><numerusform>На цей комп'ютер: зберегти %n вибраний файл…</numerusform><numerusform>На цей комп'ютер: зберегти %n вибрані файли…</numerusform><numerusform>На цей комп'ютер: зберегти %n вибраних файлів…</numerusform></translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="192" />
+        <source>To this PC: select files on the server first</source>
+        <translation>На цей комп'ютер: спершу виберіть файли на сервері</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SftpPanel.qml" line="365" />
         <source>Drop to send to the server, into %1</source>
         <translation>Відпустіть, щоб надіслати на сервер у %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="478" />
+        <location filename="../qml/pages/SftpPanel.qml" line="394" />
         <source>Folder</source>
         <translation>Тека</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="478" />
+        <location filename="../qml/pages/SftpPanel.qml" line="394" />
         <source>%1 (%2 bytes)</source>
         <translation>%1 (%2 байт)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="480" />
+        <location filename="../qml/pages/SftpPanel.qml" line="396" />
         <source>owner %1</source>
         <translation>власник %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="482" />
+        <location filename="../qml/pages/SftpPanel.qml" line="398" />
         <source>symbolic link</source>
         <translation>символьне посилання</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="508" />
+        <location filename="../qml/pages/SftpPanel.qml" line="421" />
         <source>Transfers</source>
         <translation>Передавання</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="509" />
+        <location filename="../qml/pages/SftpPanel.qml" line="422" />
         <source>Clear finished</source>
         <translation>Прибрати завершені</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="524" />
+        <location filename="../qml/pages/SftpPanel.qml" line="437" />
         <source>done</source>
         <translation>готово</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="524" />
+        <location filename="../qml/pages/SftpPanel.qml" line="437" />
         <source>cancelled</source>
         <translation>скасовано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="524" />
+        <location filename="../qml/pages/SftpPanel.qml" line="437" />
         <source>failed</source>
         <translation>помилка</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="563" />
+        <location filename="../qml/pages/SftpPanel.qml" line="476" />
         <source>Edit here</source>
         <translation>Редагувати тут</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="567" />
+        <location filename="../qml/pages/SftpPanel.qml" line="480" />
         <source>Open</source>
         <translation>Відкрити</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SftpPanel.qml" line="481" />
+        <source>Save %n selected files to this PC…</source>
+        <translation><numerusform>Зберегти %n вибраний файл на цей комп'ютер…</numerusform><numerusform>Зберегти %n вибрані файли на цей комп'ютер…</numerusform><numerusform>Зберегти %n вибраних файлів на цей комп'ютер…</numerusform></translation>
+    </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="567" />
         <source>Save to this PC</source>
         <translation>Зберегти на цей ПК</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="567" />
+        <location filename="../qml/pages/SftpPanel.qml" line="482" />
         <source>Save to this PC…</source>
         <translation>Зберегти на цей ПК…</translation>
     </message>
@@ -5435,54 +5654,54 @@ libssh · libvterm · libsodium · Qt
         <translation>Завантажити…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="574" />
+        <location filename="../qml/pages/SftpPanel.qml" line="489" />
         <source>Copy path</source>
         <translation>Копіювати шлях</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="575" />
+        <location filename="../qml/pages/SftpPanel.qml" line="490" />
         <source>Rename…</source>
         <translation>Перейменувати…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="577" />
-        <location filename="../qml/pages/SftpPanel.qml" line="612" />
+        <location filename="../qml/pages/SftpPanel.qml" line="492" />
+        <location filename="../qml/pages/SftpPanel.qml" line="527" />
         <source>Delete</source>
         <translation>Видалити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="583" />
+        <location filename="../qml/pages/SftpPanel.qml" line="498" />
         <source>Rename</source>
         <translation>Перейменувати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="585" />
+        <location filename="../qml/pages/SftpPanel.qml" line="500" />
         <source>Name</source>
         <translation>Назва</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="589" />
-        <location filename="../qml/pages/SftpPanel.qml" line="610" />
+        <location filename="../qml/pages/SftpPanel.qml" line="504" />
+        <location filename="../qml/pages/SftpPanel.qml" line="525" />
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="592" />
+        <location filename="../qml/pages/SftpPanel.qml" line="507" />
         <source>OK</source>
         <translation>OK</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="605" />
+        <location filename="../qml/pages/SftpPanel.qml" line="520" />
         <source>Delete "%1" on the server?</source>
         <translation>Видалити «%1» на сервері?</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="606" />
+        <location filename="../qml/pages/SftpPanel.qml" line="521" />
         <source>Only empty folders can be deleted.</source>
         <translation>Видаляти можна лише порожні теки.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SftpPanel.qml" line="606" />
+        <location filename="../qml/pages/SftpPanel.qml" line="521" />
         <source>This cannot be undone.</source>
         <translation>Це не можна скасувати.</translation>
     </message>
@@ -6000,272 +6219,312 @@ libssh · libvterm · libsodium · Qt
         <translation>Через jump-хост %1: сервер бачить адресу jump-хоста.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="364" />
+        <location filename="../qml/pages/TerminalPage.qml" line="365" />
         <source>The two differ: the proxy may use a different exit for SSH than for HTTPS.</source>
         <translation>Адреси відрізняються: проксі може мати інший вихід для SSH, ніж для HTTPS.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="377" />
+        <location filename="../qml/pages/TerminalPage.qml" line="366" />
+        <source>The two differ: a VPN or another network route on this computer sends SSH differently than web traffic (for example IPv6 for one and IPv4 for the other).</source>
+        <translation>Адреси різні: VPN або інший мережевий маршрут на цьому комп'ютері пускає SSH інакше, ніж веб-трафік (наприклад, одне через IPv6, інше через IPv4).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="398" />
+        <source>via proxy · %1</source>
+        <translation>через проксі · %1</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="398" />
+        <source>via proxy</source>
+        <translation>через проксі</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="399" />
+        <source>via jump host</source>
+        <translation>через jump-хост</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="400" />
+        <source>direct</source>
+        <translation>напряму</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="408" />
+        <source>This session goes through the proxy "%1" — the server sees the proxy's address, not yours.</source>
+        <translation>Ця сесія йде через проксі «%1» — сервер бачить адресу проксі, а не вашу.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="410" />
+        <source>This session goes through the jump host %1 — the server sees the jump host's address.</source>
+        <translation>Ця сесія йде через jump-хост %1 — сервер бачить адресу jump-хоста.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="411" />
+        <source>No proxy: this session connects directly, so the server sees your real IP (or your VPN's, if one is on).</source>
+        <translation>Без проксі: ця сесія підключається напряму, тож сервер бачить ваш справжній IP (або IP вашого VPN, якщо він увімкнений).</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/TerminalPage.qml" line="422" />
         <source>Files (SFTP)</source>
         <translation>Файли (SFTP)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="388" />
+        <location filename="../qml/pages/TerminalPage.qml" line="433" />
         <source>Tunnels (port forwarding)</source>
         <translation>Тунелі (перенаправлення портів)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="407" />
+        <location filename="../qml/pages/TerminalPage.qml" line="452" />
         <source>Snippets</source>
         <translation>Сніпети</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="414" />
+        <location filename="../qml/pages/TerminalPage.qml" line="459" />
         <source>Command history (Ctrl+Shift+H)</source>
         <translation>Історія команд (Ctrl+Shift+H)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="423" />
+        <location filename="../qml/pages/TerminalPage.qml" line="468" />
         <source>Saving the session to %1 — click to stop</source>
         <translation>Сесія записується в %1 — клацніть, щоб зупинити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="431" />
+        <location filename="../qml/pages/TerminalPage.qml" line="476" />
         <source>Broadcast is on — click to turn it off</source>
         <translation>Трансляцію ввімкнено — клацніть, щоб вимкнути</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="437" />
+        <location filename="../qml/pages/TerminalPage.qml" line="482" />
         <source>Find in the terminal (Ctrl+Shift+F)</source>
         <translation>Пошук у терміналі (Ctrl+Shift+F)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="447" />
+        <location filename="../qml/pages/TerminalPage.qml" line="492" />
         <source>Notes for this host</source>
         <translation>Нотатки до цього хоста</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="447" />
+        <location filename="../qml/pages/TerminalPage.qml" line="492" />
         <source>Add notes for this host</source>
         <translation>Додати нотатки до хоста</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="452" />
-        <location filename="../qml/pages/TerminalPage.qml" line="1009" />
+        <location filename="../qml/pages/TerminalPage.qml" line="497" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1050" />
         <source>Colour theme for this tab</source>
         <translation>Колірна тема цієї вкладки</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="458" />
+        <location filename="../qml/pages/TerminalPage.qml" line="503" />
         <source>More</source>
         <translation>Ще</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="463" />
+        <location filename="../qml/pages/TerminalPage.qml" line="508" />
         <source>Back to the main window</source>
         <translation>Повернути в головне вікно</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="463" />
+        <location filename="../qml/pages/TerminalPage.qml" line="508" />
         <source>Open in a separate window</source>
         <translation>Відкрити в окремому вікні</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="470" />
+        <location filename="../qml/pages/TerminalPage.qml" line="515" />
         <source>Disconnect</source>
         <translation>Відключитися</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="476" />
-        <location filename="../qml/pages/TerminalPage.qml" line="861" />
+        <location filename="../qml/pages/TerminalPage.qml" line="521" />
+        <location filename="../qml/pages/TerminalPage.qml" line="906" />
         <source>Reconnect</source>
         <translation>Перепідключитися</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="553" />
+        <location filename="../qml/pages/TerminalPage.qml" line="598" />
         <source>Find…</source>
         <translation>Знайти…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="565" />
+        <location filename="../qml/pages/TerminalPage.qml" line="610" />
         <source>no matches</source>
         <translation>немає збігів</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="574" />
+        <location filename="../qml/pages/TerminalPage.qml" line="619" />
         <source>Match case</source>
         <translation>З урахуванням регістру</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="580" />
+        <location filename="../qml/pages/TerminalPage.qml" line="625" />
         <source>Older (Enter)</source>
         <translation>Старіше (Enter)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="581" />
+        <location filename="../qml/pages/TerminalPage.qml" line="626" />
         <source>Newer (Shift+Enter)</source>
         <translation>Новіше (Shift+Enter)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="582" />
+        <location filename="../qml/pages/TerminalPage.qml" line="627" />
         <source>Close (Esc)</source>
         <translation>Закрити (Esc)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="604" />
+        <location filename="../qml/pages/TerminalPage.qml" line="649" />
         <source>Broadcast: typing goes to %1 tab(s)</source>
         <translation>Трансляція: введення йде у вкладки: %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="643" />
+        <location filename="../qml/pages/TerminalPage.qml" line="688" />
         <source>Exit IP: %1  %2</source>
         <translation>Вихідний IP: %1  %2</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="651" />
-        <location filename="../qml/pages/TerminalPage.qml" line="756" />
-        <location filename="../qml/pages/TerminalPage.qml" line="823" />
+        <location filename="../qml/pages/TerminalPage.qml" line="696" />
+        <location filename="../qml/pages/TerminalPage.qml" line="801" />
+        <location filename="../qml/pages/TerminalPage.qml" line="868" />
         <source>Cancel</source>
         <translation>Скасувати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="688" />
+        <location filename="../qml/pages/TerminalPage.qml" line="733" />
         <source>First connection to this server</source>
         <translation>Перше підключення до цього сервера</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="689" />
+        <location filename="../qml/pages/TerminalPage.qml" line="734" />
         <source>WARNING: the server's host key has CHANGED</source>
         <translation>УВАГА: ключ хоста сервера ЗМІНИВСЯ</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="698" />
+        <location filename="../qml/pages/TerminalPage.qml" line="743" />
         <source>Compare the fingerprint with the one shown by the server admin (ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub) before trusting it.</source>
         <translation>Перед тим як довіряти, звірте відбиток з тим, що показує адміністратор сервера (ssh-keygen -lf /etc/ssh/ssh_host_*_key.pub).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="699" />
+        <location filename="../qml/pages/TerminalPage.qml" line="744" />
         <source>Someone could be intercepting the connection (man-in-the-middle), or the server was reinstalled. Only continue if you know why the key changed.</source>
         <translation>Хтось може перехоплювати з'єднання (атака «людина посередині»), або сервер перевстановили. Продовжуйте, лише якщо знаєте, чому змінився ключ.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="744" />
+        <location filename="../qml/pages/TerminalPage.qml" line="789" />
         <source>Checking DNS (SSHFP)…</source>
         <translation>Перевіряю DNS (SSHFP)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="746" />
+        <location filename="../qml/pages/TerminalPage.qml" line="791" />
         <source>DNS confirms this key (SSHFP, signed with DNSSEC). It is safe to trust it.</source>
         <translation>DNS підтверджує цей ключ (SSHFP, підписано DNSSEC). Йому можна довіряти.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="747" />
+        <location filename="../qml/pages/TerminalPage.qml" line="792" />
         <source>DNS has the same key (SSHFP), but the domain is not signed with DNSSEC, so this is only a hint.</source>
         <translation>У DNS той самий ключ (SSHFP), але домен не підписано DNSSEC, тож це лише підказка.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="748" />
+        <location filename="../qml/pages/TerminalPage.qml" line="793" />
         <source>DNS (SSHFP) lists a DIFFERENT key for this server. Do not connect unless you know why.</source>
         <translation>У DNS (SSHFP) для цього сервера ІНШИЙ ключ. Не підключайтеся, якщо не знаєте чому.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="749" />
+        <location filename="../qml/pages/TerminalPage.qml" line="794" />
         <source>This domain publishes no SSHFP records — compare the fingerprint another way.</source>
         <translation>Цей домен не публікує записів SSHFP — звірте відбиток іншим способом.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="750" />
+        <location filename="../qml/pages/TerminalPage.qml" line="795" />
         <source>Could not check DNS (SSHFP).</source>
         <translation>Не вдалося перевірити DNS (SSHFP).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="758" />
+        <location filename="../qml/pages/TerminalPage.qml" line="803" />
         <source>Replace key and connect</source>
         <translation>Замінити ключ і підключитися</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="758" />
+        <location filename="../qml/pages/TerminalPage.qml" line="803" />
         <source>Trust and connect</source>
         <translation>Довіряти й підключитися</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="790" />
+        <location filename="../qml/pages/TerminalPage.qml" line="835" />
         <source>Key passphrase</source>
         <translation>Пароль ключа</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="792" />
+        <location filename="../qml/pages/TerminalPage.qml" line="837" />
         <source>Server asks</source>
         <translation>Сервер запитує</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="792" />
+        <location filename="../qml/pages/TerminalPage.qml" line="837" />
         <source>Server 2FA code</source>
         <translation>Код 2FA сервера</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="793" />
+        <location filename="../qml/pages/TerminalPage.qml" line="838" />
         <source>Password</source>
         <translation>Пароль</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="816" />
+        <location filename="../qml/pages/TerminalPage.qml" line="861" />
         <source>Save passphrase in the vault</source>
         <translation>Зберегти пароль ключа у сховищі</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="816" />
+        <location filename="../qml/pages/TerminalPage.qml" line="861" />
         <source>Save password in the vault</source>
         <translation>Зберегти пароль у сховищі</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="818" />
+        <location filename="../qml/pages/TerminalPage.qml" line="863" />
         <source>Saved only after the server accepts it.</source>
         <translation>Зберігається лише після того, як сервер його прийме.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="824" />
+        <location filename="../qml/pages/TerminalPage.qml" line="869" />
         <source>Continue</source>
         <translation>Продовжити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="855" />
+        <location filename="../qml/pages/TerminalPage.qml" line="900" />
         <source>Reconnecting in %1 s (attempt %2 of %3)…</source>
         <translation>Перепідключення через %1 с (спроба %2 з %3)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="860" />
+        <location filename="../qml/pages/TerminalPage.qml" line="905" />
         <source>Stop</source>
         <translation>Зупинити</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="862" />
+        <location filename="../qml/pages/TerminalPage.qml" line="907" />
         <source>Close tab</source>
         <translation>Закрити вкладку</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="920" />
+        <location filename="../qml/pages/TerminalPage.qml" line="961" />
         <source>No snippets yet — add them in the Snippets page</source>
         <translation>Сніпетів ще немає — додайте їх на сторінці «Сніпети»</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="950" />
+        <location filename="../qml/pages/TerminalPage.qml" line="991" />
         <source>Notes · %1</source>
         <translation>Нотатки · %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="952" />
+        <location filename="../qml/pages/TerminalPage.qml" line="993" />
         <source>encrypted</source>
         <translation>зашифровано</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="969" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1010" />
         <source>What runs here, who to call, where the backups are…</source>
         <translation>Що тут працює, кому дзвонити, де бекапи…</translation>
     </message>
     <message>
         <location filename="../qml/pages/TerminalPage.qml" line="163" />
-        <location filename="../qml/pages/TerminalPage.qml" line="979" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1020" />
         <source>Close</source>
         <translation>Закрити</translation>
     </message>
@@ -6315,12 +6574,12 @@ libssh · libvterm · libsodium · Qt
         <translation>Виконати</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="981" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1022" />
         <source>Save</source>
         <translation>Зберегти</translation>
     </message>
     <message>
-        <location filename="../qml/pages/TerminalPage.qml" line="1010" />
+        <location filename="../qml/pages/TerminalPage.qml" line="1051" />
         <source>Create your own</source>
         <translation>Створити свою</translation>
     </message>

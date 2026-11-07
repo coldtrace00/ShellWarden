@@ -154,14 +154,13 @@ public:
     Q_INVOKABLE QString publicKeyLine(const QString &id) const;
     Q_INVOKABLE QUrl suggestedFile(const QString &fileName) const; // ~/.ssh/<name> when it exists
     Q_INVOKABLE QUrl homeFolder() const;
-    // Files of this computer for the two-pane SFTP view.
-    // listLocal: {path, parent, entries: [{name, isDir, size, mtime, path}], error}
-    Q_INVOKABLE QVariantMap listLocal(const QString &path) const;
-    Q_INVOKABLE QVariantList localPlaces() const;       // [{name, path}]: home, Downloads, Desktop, drives
-    Q_INVOKABLE QUrl localUrl(const QString &path) const { return QUrl::fromLocalFile(path); }
 
     // Proxies
     Q_INVOKABLE QVariantMap proxy(const QString &id) const;
+    Q_INVOKABLE void setProxyEnabled(const QString &id, bool on);
+    Q_INVOKABLE int hostsUsingProxy(const QString &id) const;
+    Q_INVOKABLE QVariantMap parseShadowsocksLink(const QString &uri) const;   // ss://… -> editor fields
+    Q_INVOKABLE QStringList shadowsocksMethods() const;
     Q_INVOKABLE QString saveProxy(const QVariantMap &proxy);
     Q_INVOKABLE void deleteProxy(const QString &id);
     Q_INVOKABLE void checkProxy(const QString &id);
@@ -303,6 +302,7 @@ private:
     void rotateNewKeyStep(const QString &phase, const QString &script, const QString &failedBefore);
     void rotateFinish();
     QHash<QString, QString> m_batchPass;     // keyId -> passphrase for the next batch run only   // hostId -> keyId to set after a key install
+    bool proxyUsable(const QString &id) const;
     QString effectiveProxyId(const QJsonObject &host) const;
     void runProbe();          // every 3 s: is each used proxy alive?
     void runExitIpCheck();    // every 60 s: does it still hide the real IP?

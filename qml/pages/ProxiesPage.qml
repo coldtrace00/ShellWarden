@@ -36,7 +36,7 @@ Item {
                     Layout.fillWidth: true
                     spacing: 2
                     Text { text: qsTr("Proxies & kill switch"); color: Theme.text; font.pixelSize: 24; font.weight: Font.DemiBold }
-                    Text { text: qsTr("SOCKS5, HTTP CONNECT, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor."); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+                    Text { text: qsTr("SOCKS5, HTTP CONNECT, Shadowsocks, Tor and Cloudflare Tunnel. Host names are resolved by the proxy, not locally — .onion addresses work through Tor."); color: Theme.textDim; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
                 }
                 AppButton { text: qsTr("Add proxy"); glyph: Theme.iconAdd; variant: "primary"; onClicked: editor.openFor("") }
             }
@@ -99,17 +99,18 @@ Item {
                     RowLayout {
                         Layout.fillWidth: true
                         spacing: 12
+                        opacity: App.settings.killSwitch ? 1 : 0.6
                         ColumnLayout {
                             Layout.fillWidth: true
                             Layout.preferredWidth: 200
                             spacing: 2
-                            Text { Layout.fillWidth: true; text: qsTr("Default proxy for hosts without one"); color: Theme.text; font.pixelSize: 13; wrapMode: Text.WordWrap }
+                            Text { Layout.fillWidth: true; text: qsTr("Kill switch: proxy for hosts without one"); color: Theme.text; font.pixelSize: 13; wrapMode: Text.WordWrap }
                             Text {
                                 Layout.fillWidth: true
                                 wrapMode: Text.WordWrap
                                 color: Theme.textFaint
                                 font.pixelSize: 11
-                                text: qsTr("A host can have its own proxy (in its settings). Hosts without one either go through the proxy chosen here, or — with \"None\" — are not allowed to connect while the kill switch is on.")
+                                text: qsTr("Only used while the kill switch is on, because then nothing may connect directly. Hosts with no proxy of their own (or whose proxy is turned off) go through the proxy chosen here; with \"None\" they are blocked. With the kill switch off such hosts simply connect directly.")
                             }
                         }
                         AppCombo {
@@ -135,14 +136,17 @@ Item {
                             Layout.fillWidth: true
                             spacing: 2
                             RowLayout {
+                                Layout.fillWidth: true
                                 spacing: 8
-                                Text { text: qsTr("Your real (direct) IP:"); color: Theme.textDim; font.pixelSize: 12 }
+                                Text { text: qsTr("Your real (direct) IP:"); color: Theme.textDim; font.pixelSize: 12; Layout.alignment: Qt.AlignTop }
                                 Text {
+                                    Layout.fillWidth: !App.directIp.ok
+                                    wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                                     text: App.directIp.checking ? qsTr("checking…")
                                           : (App.directIp.ok ? App.directIp.ip
                                                              : (App.directIp.error ? qsTr("unavailable: ") + App.directIp.error : qsTr("not checked")))
                                     color: Theme.text
-                                    font.pixelSize: 13
+                                    font.pixelSize: App.directIp.ok || !App.directIp.error ? 13 : 12
                                     font.family: Theme.monoFont
                                     font.bold: !!App.directIp.ok
                                 }
@@ -246,16 +250,19 @@ Item {
                     id: pcard
                     Layout.fillWidth: true
                     Layout.leftMargin: 28; Layout.rightMargin: 28
-                    implicitHeight: 76
+                    implicitHeight: Math.max(76, pcardRow.implicitHeight + 32)
                     radius: Theme.radius
                     color: Theme.surface
                     border.color: Theme.border
 
-                    readonly property color stateColor: model.checkState === "ok" ? Theme.ok
+                    opacity: model.disabled ? 0.75 : 1
+                    readonly property color stateColor: model.disabled ? Theme.textFaint
+                                                       : model.checkState === "ok" ? Theme.ok
                                                        : model.checkState === "fail" ? Theme.danger
                                                        : model.checkState === "checking" ? Theme.warn : Theme.textFaint
 
                     RowLayout {
+                        id: pcardRow
                         anchors.fill: parent
                         anchors.margins: 16
                         spacing: 14
@@ -282,7 +289,7 @@ Item {
                                 Rectangle {
                                     radius: 4; color: Theme.surface2
                                     implicitWidth: ptype.implicitWidth + 12; implicitHeight: 20
-                                    Text { id: ptype; anchors.centerIn: parent; text: model.type === "http" ? "HTTP" : model.type === "tor" ? "Tor" : model.type === "cloudflare" ? "Cloudflare" : "SOCKS5"; color: model.type === "tor" ? "#c58cff" : model.type === "cloudflare" ? "#f6a04d" : Theme.textDim; font.pixelSize: 11 }
+                                    Text { id: ptype; anchors.centerIn: parent; text: model.type === "http" ? "HTTP" : model.type === "tor" ? "Tor" : model.type === "cloudflare" ? "Cloudflare" : model.type === "shadowsocks" ? "Shadowsocks" : "SOCKS5"; color: model.type === "tor" ? "#c58cff" : model.type === "cloudflare" ? "#f6a04d" : model.type === "shadowsocks" ? "#5ec8ff" : Theme.textDim; font.pixelSize: 11 }
                                 }
                                 Rectangle {
                                     visible: App.settings.defaultProxyId === model.id
@@ -298,10 +305,17 @@ Item {
                             CountryBadge { code: model.checkState === "ok" ? (model.exitCountry || "") : ""; showName: false }
                             Text {
                                 Layout.fillWidth: true
+                                // a failure keeps its whole text (e.g. both IP services' errors)
+                                wrapMode: model.checkState === "fail" ? Text.WrapAtWordBoundaryOrAnywhere : Text.NoWrap
+                                maximumLineCount: 3
                                 elide: Text.ElideRight
                                 font.pixelSize: 12
                                 color: pcard.stateColor
                                 text: {
+                                    if (model.disabled)
+                                        return App.settings.killSwitch
+                                            ? qsTr("Turned off · its hosts use the default proxy; with no default proxy they are blocked (kill switch is on)")
+                                            : qsTr("Turned off · its hosts connect directly, from your real IP")
                                     switch (model.checkState) {
                                     case "ok":
                                         if (model.type === "cloudflare") return qsTr("Ready · %1").arg(model.location)
@@ -319,13 +333,22 @@ Item {
                         }
 
                         AppButton {
-                            visible: model.type === "tor"
+                            visible: model.type === "tor" && !model.disabled
                             text: root.width < 900 ? "" : qsTr("New identity"); glyph: Theme.iconRefresh; compact: true
                             onClicked: App.torNewIdentity(model.id)
                             ToolTip.visible: hovered
                             ToolTip.text: qsTr("Switch to new Tor circuits: a different exit IP for new connections")
                         }
-                        AppButton { text: qsTr("Check"); glyph: Theme.iconRefresh; compact: true; onClicked: App.checkProxy(model.id) }
+                        AppButton { visible: !model.disabled; text: qsTr("Check"); glyph: Theme.iconRefresh; compact: true; onClicked: App.checkProxy(model.id) }
+                        AppSwitch {
+                            checked: !model.disabled
+                            onToggled: App.setProxyEnabled(model.id, checked)
+                            HoverHandler { id: onHover }
+                            ToolTip.visible: onHover.hovered
+                            ToolTip.delay: 300
+                            ToolTip.text: checked ? qsTr("Turn this proxy off without deleting it: hosts that use it will connect directly (with the kill switch on — through the default proxy, never directly). Open sessions are not touched.")
+                                                  : qsTr("Turn this proxy back on")
+                        }
                         AppButton { glyph: Theme.iconEdit; compact: true; variant: "ghost"; onClicked: editor.openFor(model.id) }
                     }
                 }
@@ -337,7 +360,7 @@ Item {
                 Layout.topMargin: 30
                 spacing: 10
                 Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("No proxies yet"); color: Theme.text; font.pixelSize: 15 }
-                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("Add a SOCKS5, HTTP or Tor proxy, then assign it to hosts or make it the default."); color: Theme.textDim; font.pixelSize: 12 }
+                Text { Layout.alignment: Qt.AlignHCenter; text: qsTr("Add a SOCKS5, HTTP, Shadowsocks or Tor proxy, then assign it to hosts or make it the default."); color: Theme.textDim; font.pixelSize: 12 }
             }
 
             Item { height: 20 }

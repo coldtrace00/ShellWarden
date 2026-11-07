@@ -53,6 +53,7 @@ class TerminalSession : public QObject
     Q_PROPERTY(bool viaProxy READ viaProxy NOTIFY changed)
     Q_PROPERTY(bool viaJump READ viaJump NOTIFY changed)
     Q_PROPERTY(QString jumpLabel READ jumpLabel NOTIFY changed)
+    Q_PROPERTY(QString proxyId READ proxyId NOTIFY changed)
     Q_PROPERTY(bool killSwitch READ killSwitch NOTIFY changed)
     Q_PROPERTY(QString expectedIp READ expectedIp NOTIFY changed)
     Q_PROPERTY(QString expectedLocation READ expectedLocation NOTIFY changed)

@@ -13,12 +13,14 @@
 struct ProxyConfig
 {
     // Tcp: a local port that already leads to the server (cloudflared access tcp), no handshake
-    enum Type { None = 0, Socks5 = 1, Http = 2, Tcp = 3 };
+    // Shadowsocks: encrypted proxy (see Shadowsocks.h); password + method
+    enum Type { None = 0, Socks5 = 1, Http = 2, Tcp = 3, Shadowsocks = 4 };
     Type type = None;
     QString host;
     int port = 0;
     QString username;
     QString password;
+    QString method;     // Shadowsocks cipher, e.g. chacha20-ietf-poly1305
 
     bool isSet() const { return type != None && !host.isEmpty() && port > 0; }
 };
@@ -53,6 +55,7 @@ sw_socket_t connectDirect(const QString &host, int port, int timeoutMs, QString 
 // Reads what arrives within timeoutMs (at most len bytes). Returns the byte
 // count, 0 when nothing came or the peer closed, -1 on error.
 int readSome(sw_socket_t s, char *buf, int len, int timeoutMs);
+bool writeAll(sw_socket_t s, const QByteArray &data, int timeoutMs);
 
 // Call once per process before using sockets (WSAStartup on Windows).
 void initSockets();

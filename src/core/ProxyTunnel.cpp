@@ -1,5 +1,6 @@
 #include "ProxyTunnel.h"
 #include "SecureBytes.h"
+#include "Shadowsocks.h"
 
 #include <QByteArray>
 #include <QHostAddress>
@@ -409,6 +410,11 @@ sw_socket_t connectDirect(const QString &host, int port, int timeoutMs, QString 
     return sw_socket_t(s);
 }
 
+bool writeAll(sw_socket_t s, const QByteArray &data, int timeoutMs)
+{
+    return sendAll(native_socket(s), data, Clock::now() + std::chrono::milliseconds(timeoutMs));
+}
+
 int readSome(sw_socket_t s, char *buf, int len, int timeoutMs)
 {
     const auto deadline = Clock::now() + std::chrono::milliseconds(timeoutMs);
@@ -422,6 +428,8 @@ sw_socket_t open(const ProxyConfig &proxy, const QString &targetHost, int target
                  int timeoutMs, QString *error)
 {
     initSockets();
+    if (proxy.type == ProxyConfig::Shadowsocks)   // SSH servers greet first: wait for that to check the password
+        return shadowsocks::open(proxy, targetHost, targetPort, timeoutMs, true, error);
     const auto deadline = Clock::now() + std::chrono::milliseconds(timeoutMs);
 
     native_socket s = connectTcp(proxy.host, proxy.port, deadline, error);

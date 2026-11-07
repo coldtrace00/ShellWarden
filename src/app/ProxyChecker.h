@@ -25,5 +25,7 @@ public:
     void check(const ProxyConfig &proxy, Callback done, int timeoutMs = 10000);
 
 private:
-    void request(QNetworkAccessManager *nam, int endpoint, qint64 startedMs, Callback done, int timeoutMs);
+    void checkShadowsocks(const ProxyConfig &proxy, Callback done, int timeoutMs);
+    void request(QNetworkAccessManager *nam, int endpoint, qint64 startedMs, Callback done, int timeoutMs,
+                 const QString &earlierErrors = QString());
 };

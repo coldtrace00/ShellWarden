@@ -1,4 +1,5 @@
 #include "AppController.h"
+#include "core/Shadowsocks.h"
 #include "TerminalSession.h"
 #include "core/AgentClient.h"
 #include "DarkTitleBar.h"
@@ -77,8 +78,6 @@ const QVariantMap &settingDefaults()
         {QStringLiteral("updateRepo"), QStringLiteral(APP_GITHUB_REPO)},
         {QStringLiteral("autoCheckUpdates"), true},
         {QStringLiteral("hostProbe"), false},                     // online dot on the host cards (opt-in)
-        {QStringLiteral("sftpLocalFolder"), QString()},           // left half of the two-pane SFTP view
-        {QStringLiteral("sftpTwoPane"), false},
         {QStringLiteral("commandHistory"), true},                 // remember commands per host (in the vault)
         {QStringLiteral("logEnabled"), true},
         {QStringLiteral("killSwitchInterval"), 3},
@@ -136,7 +135,7 @@ AppController::AppController(QObject *parent)
       m_proxies({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("type"),
                  QStringLiteral("host"), QStringLiteral("port"), QStringLiteral("username"),
                  QStringLiteral("checkState"), QStringLiteral("exitIp"), QStringLiteral("location"),
-                 QStringLiteral("exitCountry"),
+                 QStringLiteral("exitCountry"), QStringLiteral("disabled"),
                  QStringLiteral("latencyMs"), QStringLiteral("checkError"), QStringLiteral("checkedAt")},
                 {QStringLiteral("password")}),
       m_snippets({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("command"),
@@ -746,58 +745,6 @@ QUrl AppController::homeFolder() const
     return QUrl::fromLocalFile(QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
 }
 
-QVariantMap AppController::listLocal(const QString &requested) const
-{
-    QString path = requested.trimmed();
-    if (path.isEmpty())
-        path = QStandardPaths::writableLocation(QStandardPaths::HomeLocation);
-    const QFileInfo fi(path);
-    QVariantMap out;
-    if (!fi.exists() || !fi.isDir()) {
-        out.insert(QStringLiteral("error"), tr("Folder not found: %1").arg(QDir::toNativeSeparators(path)));
-        return out;
-    }
-    QDir dir(fi.absoluteFilePath());
-    if (!dir.isReadable()) {
-        out.insert(QStringLiteral("error"), tr("No access to %1").arg(QDir::toNativeSeparators(dir.absolutePath())));
-        return out;
-    }
-    QVariantList entries;
-    // folders first, then files, by name; hidden files too (like the server side)
-    const QFileInfoList list = dir.entryInfoList(QDir::AllEntries | QDir::NoDotAndDotDot | QDir::Hidden | QDir::System,
-                                                 QDir::DirsFirst | QDir::Name | QDir::IgnoreCase);
-    for (const QFileInfo &e : list) {
-        entries << QVariantMap{{QStringLiteral("name"), e.fileName()},
-                               {QStringLiteral("isDir"), e.isDir()},
-                               {QStringLiteral("size"), e.isDir() ? 0 : e.size()},
-                               {QStringLiteral("mtime"), e.lastModified().toString(QStringLiteral("yyyy-MM-dd HH:mm"))},
-                               {QStringLiteral("path"), e.absoluteFilePath()}};
-    }
-    QDir up(dir);
-    const bool hasParent = up.cdUp();
-    out.insert(QStringLiteral("path"), dir.absolutePath());
-    out.insert(QStringLiteral("display"), QDir::toNativeSeparators(dir.absolutePath()));
-    out.insert(QStringLiteral("parent"), hasParent ? up.absolutePath() : QString());
-    out.insert(QStringLiteral("entries"), entries);
-    return out;
-}
-
-QVariantList AppController::localPlaces() const
-{
-    QVariantList out;
-    auto add = [&out](const QString &name, const QString &path) {
-        if (!path.isEmpty() && QFileInfo(path).isDir())
-            out << QVariantMap{{QStringLiteral("name"), name}, {QStringLiteral("path"), path}};
-    };
-    add(tr("Home"), QStandardPaths::writableLocation(QStandardPaths::HomeLocation));
-    add(tr("Downloads"), QStandardPaths::writableLocation(QStandardPaths::DownloadLocation));
-    add(tr("Desktop"), QStandardPaths::writableLocation(QStandardPaths::DesktopLocation));
-    add(tr("Documents"), QStandardPaths::writableLocation(QStandardPaths::DocumentsLocation));
-    for (const QFileInfo &d : QDir::drives())
-        add(QDir::toNativeSeparators(d.absoluteFilePath()), d.absoluteFilePath());
-    return out;
-}
-
 QStringList AppController::serialPorts() const
 {
     QStringList out;
@@ -1359,7 +1306,9 @@ ProxyConfig AppController::proxyConfig(const QJsonObject &p, const QString &firs
         c.password = QStringLiteral("tor");
         return c;
     }
-    c.type = type == QLatin1String("http") ? ProxyConfig::Http : ProxyConfig::Socks5;
+    c.type = type == QLatin1String("http") ? ProxyConfig::Http
+           : type == QLatin1String("shadowsocks") ? ProxyConfig::Shadowsocks : ProxyConfig::Socks5;
+    c.method = p.value(QStringLiteral("method")).toString();
     c.host = p.value(QStringLiteral("host")).toString().trimmed();
     c.port = p.value(QStringLiteral("port")).toVariant().toInt();
     c.username = p.value(QStringLiteral("username")).toString();
@@ -1367,6 +1316,19 @@ ProxyConfig AppController::proxyConfig(const QJsonObject &p, const QString &firs
     if (c.host.isEmpty() || c.port <= 0)
         c.type = ProxyConfig::None;
     return c;
+}
+
+QVariantMap AppController::parseShadowsocksLink(const QString &uri) const
+{
+    const shadowsocks::Link l = shadowsocks::parseLink(uri);
+    return {{QStringLiteral("ok"), l.ok}, {QStringLiteral("error"), l.error}, {QStringLiteral("name"), l.name},
+            {QStringLiteral("host"), l.host}, {QStringLiteral("port"), l.port},
+            {QStringLiteral("method"), l.method}, {QStringLiteral("password"), l.password}};
+}
+
+QStringList AppController::shadowsocksMethods() const
+{
+    return shadowsocks::methods();
 }
 
 QVariantMap AppController::proxy(const QString &id) const
@@ -1396,6 +1358,15 @@ QString AppController::saveProxy(const QVariantMap &p)
         o.remove(QStringLiteral("username"));
         o.remove(QStringLiteral("password"));
     }
+    if (o.value(QStringLiteral("type")).toString() == QLatin1String("shadowsocks")) {
+        if (!shadowsocks::isSupported(o.value(QStringLiteral("method")).toString()))
+            return tr("Choose the Shadowsocks cipher.");
+        if (o.value(QStringLiteral("password")).toString().isEmpty())
+            return tr("Enter the Shadowsocks password.");
+        o.remove(QStringLiteral("username"));
+    } else {
+        o.remove(QStringLiteral("method"));
+    }
     const QString host = o.value(QStringLiteral("host")).toString().trimmed();
     const int port = o.value(QStringLiteral("port")).toVariant().toInt();
     if (host.isEmpty())
@@ -1415,6 +1386,8 @@ QString AppController::saveProxy(const QVariantMap &p)
     bool replaced = false;
     for (int i = 0; !id.isEmpty() && i < list.size(); ++i) {
         if (list.at(i).toObject().value(QStringLiteral("id")).toString() == id) {
+            if (!o.contains(QStringLiteral("disabled")) && list.at(i).toObject().value(QStringLiteral("disabled")).toBool())
+                o.insert(QStringLiteral("disabled"), true);   // editing does not switch it back on
             list.replace(i, o);
             replaced = true;
             break;
@@ -1580,15 +1553,64 @@ void AppController::checkDirectIp()
 
 QString AppController::effectiveProxyId(const QJsonObject &host) const
 {
+    // A proxy that is turned off counts as "no proxy": the host connects directly,
+    // or, with the kill switch on, through the default proxy (never directly).
     const QString own = host.value(QStringLiteral("proxyId")).toString();
-    if (!own.isEmpty() && !findIn(kProxies, own).isEmpty())
+    if (proxyUsable(own))
         return own;
     if (m_settings.value(QStringLiteral("killSwitch"), false).toBool()) {
         const QString def = m_settings.value(QStringLiteral("defaultProxyId")).toString();
-        if (!def.isEmpty() && !findIn(kProxies, def).isEmpty())
+        if (proxyUsable(def))
             return def;
     }
     return {};
+}
+
+bool AppController::proxyUsable(const QString &id) const
+{
+    if (id.isEmpty())
+        return false;
+    const QJsonObject p = findIn(kProxies, id);
+    return !p.isEmpty() && !p.value(QStringLiteral("disabled")).toBool();
+}
+
+void AppController::setProxyEnabled(const QString &id, bool on)
+{
+    if (!m_vault.isUnlocked())
+        return;
+    QJsonArray list = section(kProxies);
+    for (int i = 0; i < list.size(); ++i) {
+        QJsonObject o = list.at(i).toObject();
+        if (o.value(QStringLiteral("id")).toString() != id)
+            continue;
+        if (on)
+            o.remove(QStringLiteral("disabled"));
+        else
+            o.insert(QStringLiteral("disabled"), true);
+        list.replace(i, o);
+        setSection(kProxies, list);
+        persist();
+        logEvent(ActivityLog::Info, QStringLiteral("proxy"), on ? tr("Proxy turned on") : tr("Proxy turned off"),
+                 on ? QString() : tr("hosts that use it connect directly (or through the default proxy while the kill switch is on)"),
+                 o.value(QStringLiteral("name")).toString());
+        if (on)
+            checkProxy(id);
+        else
+            m_proxies.setTransient(id, {{QStringLiteral("checkState"), QString()}});
+        return;
+    }
+}
+
+int AppController::hostsUsingProxy(const QString &id) const
+{
+    int n = 0;
+    const QJsonArray hosts = section(kHosts);
+    for (const QJsonValue &v : hosts)
+        if (v.toObject().value(QStringLiteral("proxyId")).toString() == id)
+            ++n;
+    if (m_settings.value(QStringLiteral("defaultProxyId")).toString() == id)
+        ++n;
+    return n;
 }
 
 void AppController::killSessionsVia(const QString &proxyId, const QString &reason)
@@ -2079,13 +2101,18 @@ void AppController::startSession(TerminalSession *s, const QJsonObject &host)
     // "Connect via" from the right-click menu wins for this tab.
     const QString override = s->routeOverride();
     const QString proxyId = override == QLatin1String("direct") ? QString()
-                          : (!override.isEmpty() && !findIn(kProxies, override).isEmpty()) ? override
+                          : proxyUsable(override) ? override
                           : effectiveProxyId(jumpHost.isEmpty() ? host : jumpHost);
 
     if (killSwitch && proxyId.isEmpty()) {
+        const QJsonObject own = findIn(kProxies, (jumpHost.isEmpty() ? host : jumpHost).value(QStringLiteral("proxyId")).toString());
         s->setRoute(tr("Blocked by kill switch"), false, QString(), true);
-        s->abort(tr("Kill switch is on: this host has no proxy and no default proxy is set. "
-                    "Direct connection blocked."));
+        if (!own.isEmpty() && own.value(QStringLiteral("disabled")).toBool())
+            s->abort(tr("Kill switch is on: proxy \"%1\" is turned off and no default proxy is set. "
+                        "Direct connection blocked.").arg(own.value(QStringLiteral("name")).toString()));
+        else
+            s->abort(tr("Kill switch is on: this host has no proxy and no default proxy is set. "
+                        "Direct connection blocked."));
         return;
     }
 
@@ -2094,6 +2121,10 @@ void AppController::startSession(TerminalSession *s, const QJsonObject &host)
         const QJsonObject px = findIn(kProxies, proxyId);
         if (px.value(QStringLiteral("type")).toString() == QLatin1String("cloudflare")) {
             s->abort(tr("The Cloudflare Tunnel route is for SSH hosts."));
+            return;
+        }
+        if (px.value(QStringLiteral("type")).toString() == QLatin1String("shadowsocks")) {
+            s->abort(tr("The Shadowsocks route is for SSH hosts."));
             return;
         }
         if (px.value(QStringLiteral("type")).toString() == QLatin1String("tor")
@@ -2185,7 +2216,11 @@ void AppController::startSession(TerminalSession *s, const QJsonObject &host)
     const QString viaJump = jumpLabel.isEmpty() ? QString() : tr(" → jump %1").arg(jumpLabel);
 
     if (proxyId.isEmpty()) {
-        s->setRoute(tr("Direct") + viaJump, false, QString(), false, jumpLabel);
+        const QJsonObject off = findIn(kProxies, (jumpHost.isEmpty() ? host : jumpHost).value(QStringLiteral("proxyId")).toString());
+        const QString direct = !off.isEmpty() && off.value(QStringLiteral("disabled")).toBool() && override != QLatin1String("direct")
+                                   ? tr("Direct · proxy \"%1\" is off").arg(off.value(QStringLiteral("name")).toString())
+                                   : tr("Direct");
+        s->setRoute(direct + viaJump, false, QString(), false, jumpLabel);
         s->setPreparing(tr("Connecting…"));
         s->setExpected(QString(), tr("checking…"));
         QPointer<TerminalSession> guard(s);
@@ -2218,7 +2253,8 @@ void AppController::startSession(TerminalSession *s, const QJsonObject &host)
         return;
     }
     const QString typeName = px.value(QStringLiteral("type")).toString() == QLatin1String("tor") ? QStringLiteral("Tor")
-                             : p.proxy.type == ProxyConfig::Http ? QStringLiteral("HTTP") : QStringLiteral("SOCKS5");
+                             : p.proxy.type == ProxyConfig::Http ? QStringLiteral("HTTP")
+                             : p.proxy.type == ProxyConfig::Shadowsocks ? QStringLiteral("Shadowsocks") : QStringLiteral("SOCKS5");
     s->setRoute(QStringLiteral("%1 · %2").arg(typeName, px.value(QStringLiteral("name")).toString()) + viaJump,
                 true, proxyId, killSwitch, jumpLabel);
     s->setPreparing(tr("Checking proxy…"));

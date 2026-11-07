@@ -361,9 +361,54 @@ Rectangle {
                             if (root.session.viaJump)
                                 t += "\n\n" + qsTr("Via jump host %1: the server sees the jump host's address.").arg(root.session.jumpLabel)
                             else if (root.ipMismatch)
-                                t += "\n\n" + qsTr("The two differ: the proxy may use a different exit for SSH than for HTTPS.")
+                                t += "\n\n" + (root.session.viaProxy
+                                      ? qsTr("The two differ: the proxy may use a different exit for SSH than for HTTPS.")
+                                      : qsTr("The two differ: a VPN or another network route on this computer sends SSH differently than web traffic (for example IPv6 for one and IPv4 for the other)."))
                             return t
                         }
+                    }
+                    // how this session reaches the server, right next to the address it sees
+                    Rectangle {
+                        radius: 7
+                        implicitHeight: 26
+                        implicitWidth: viaRow.implicitWidth + 14
+                        Layout.maximumWidth: 220
+                        color: root.session && root.session.viaProxy ? Theme.accentDim : Theme.surface2
+                        border.width: 1
+                        border.color: root.session && root.session.viaProxy ? Theme.accent : Theme.border
+                        RowLayout {
+                            id: viaRow
+                            anchors.fill: parent
+                            anchors.leftMargin: 7
+                            anchors.rightMargin: 7
+                            spacing: 5
+                            IconLabel {
+                                glyph: root.session && root.session.viaProxy ? Theme.iconShieldCheck
+                                       : root.session && root.session.viaJump ? Theme.iconHop : Theme.iconGlobe
+                                size: 12
+                                color: root.session && root.session.viaProxy ? Theme.accent : Theme.textDim
+                            }
+                            Text {
+                                Layout.fillWidth: true
+                                elide: Text.ElideRight
+                                font.pixelSize: 11
+                                color: root.session && root.session.viaProxy ? Theme.accent : Theme.textDim
+                                text: !root.session ? ""
+                                      : root.session.viaProxy
+                                        ? (root.width > 1100 ? qsTr("via proxy · %1").arg(App.proxy(root.session.proxyId).name || "") : qsTr("via proxy"))
+                                      : root.session.viaJump ? qsTr("via jump host")
+                                      : qsTr("direct")
+                            }
+                        }
+                        HoverHandler { id: viaHover }
+                        ToolTip.visible: viaHover.hovered
+                        ToolTip.delay: 300
+                        ToolTip.text: !root.session ? ""
+                                      : root.session.viaProxy
+                                        ? qsTr("This session goes through the proxy \"%1\" — the server sees the proxy's address, not yours.").arg(App.proxy(root.session.proxyId).name || "")
+                                      : root.session.viaJump
+                                        ? qsTr("This session goes through the jump host %1 — the server sees the jump host's address.").arg(root.session.jumpLabel)
+                                      : qsTr("No proxy: this session connects directly, so the server sees your real IP (or your VPN's, if one is on).")
                     }
                 }
 
@@ -867,9 +912,7 @@ Rectangle {
         // side panel
         Rectangle {
             Layout.fillHeight: true
-            Layout.preferredWidth: root.panel === "" ? 0
-                                 : root.panel === "sftp" && App.settings.sftpTwoPane ? Math.min(1100, root.width * 0.8)
-                                 : Math.min(420, root.width * 0.45)
+            Layout.preferredWidth: root.panel !== "" ? Math.min(420, root.width * 0.45) : 0
             visible: Layout.preferredWidth > 1
             color: Theme.surface
             clip: true
@@ -891,9 +934,7 @@ Rectangle {
         }
     }
 
-    Component { id: sftpComp; SftpPanel { session: root.session; wide: App.settings.sftpTwoPane
-                                          onWideToggled: App.setSetting("sftpTwoPane", !App.settings.sftpTwoPane)
-                                          onCloseRequested: root.panel = "" } }
+    Component { id: sftpComp; SftpPanel { session: root.session; onCloseRequested: root.panel = "" } }
     Component { id: tunnelsComp; TunnelsPanel { session: root.session; onCloseRequested: root.panel = "" } }
 
     AppMenu {

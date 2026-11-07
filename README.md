@@ -8,7 +8,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 
 **Connections**
 - **Hosts**: cards with colour and avatar, groups, search, quick connect `user@host:port`.
-- **Online dot** on each card (green / red, with the response time): while the host list is open, one short connection per host every 5 minutes, through the host's own proxy. Hosts via Tor, Cloudflare or a jump host, and direct ones while the kill switch is on, are not checked.
+- **Online dot** on each card (green / red, with the response time; off by default, Settings → *Show which hosts are online*): while the host list is open, one short connection per host every 5 minutes, through the host's own proxy. Hosts via Tor, Cloudflare or a jump host, and direct ones while the kill switch is on, are not checked.
 - **Tabs**:
   - drag to reorder;
   - status and host colour;
@@ -16,14 +16,13 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
   - context menu: duplicate, move to a separate window, split, close.
 - **Split view** (Ctrl+Shift+D): two sessions side by side.
 - **Separate window**: any session can be moved to its own window and back.
-- **Right-click a host**: *Connect via* (a route for this tab only) and *Route* (saved to the host).
+- **Right-click a host**: *Connect once via* (a route for this tab only) and *Always connect via* (saved to the host).
 - **Jump host (ProxyJump)**: proxy → jump → host.
 - **Tunnels** L / R / D (SOCKS5): defined in the host or opened on the fly. A panel with an animated flow diagram and traffic counters.
 - **SFTP panel** (works during the SSH session, over the same connection):
   - navigation; address bar with **Tab** completion;
   - permissions, owner, exact size of the selected file;
-  - **two panes "This computer ⇄ server"**: drag files from one side to the other or use the arrows; Explorer drag & drop still works;
-  - clear buttons: **To server…** and **Save to this PC…**;
+  - one **Transfer ▾** button: *To the server* (choose files on this PC) or *To this PC* (save the files selected on the server; select several with Ctrl / Shift + click); Explorer drag & drop also uploads;
   - **resume**: a broken transfer continues from where it stopped when you start it again (download → `.part` next to the file, upload → `<name>.swpart` on the server, renamed at the end, permissions kept);
   - rename, delete, new folder;
   - transfer queue with cancel;
@@ -48,7 +47,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - `.pub` is stored as **one OpenSSH line** (`ssh-ed25519 AAAA… comment`). RFC 4716 is available as a separate export.
 - Private keys are exported in OpenSSH format with permissions for the current user only.
 - **Deploy to servers**: public keys are added to `~/.ssh/authorized_keys` on many servers at once — one key for all or one per server; afterwards the host logs in with the key.
-- **Replace a key on servers** (Keychain → On servers → *Replace an old key*): in two safe steps per server — log in as now and add the new key, then log in with only the new key and remove the old one. Where the new key does not work, the old one stays, so you cannot lock yourself out. Afterwards the hosts log in with the new key.
+- **Replace a key on servers** (Keychain → On servers → *Replace an old key*): three safe steps per server — log in as now and add the new key; log in with **only** the new key and remove the old one; log in with only the new key once more and check that the old key is really gone. Where the new key does not work, the old one stays, so you cannot lock yourself out. Only servers that passed all three steps are switched to the new key.
 - **SSH agent**: Pageant, the Windows "OpenSSH Authentication Agent" service, ssh-agent, KeePassXC, YubiKey. Agent key login and **agent forwarding** (`ssh -A`) are enabled per host.
 
 **Security**
@@ -58,7 +57,10 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **Master password per connection** (host → *Advanced protection*): asked even when the vault is unlocked; 5 wrong attempts → 30 s lockout. For real 2FA, set it up on the server (PAM + Google Authenticator) — ShellWarden shows the server's code prompt.
 - **Known hosts**: fingerprint check, red warning when a host key changes; optional SSHFP (DNS) lookup.
 - **Host notes**: encrypted in the vault like passwords.
-- **Routes**: SOCKS5 / HTTP CONNECT / Tor / **Cloudflare Tunnel** (ShellWarden starts `cloudflared access tcp` itself, so port 22 can be closed on the server). DNS is resolved by the proxy. The check shows latency, exit IP and country.
+- **Routes**: SOCKS5 / HTTP CONNECT / **Shadowsocks** / Tor / **Cloudflare Tunnel** (ShellWarden starts `cloudflared access tcp` itself, so port 22 can be closed on the server). DNS is resolved by the proxy. The check shows latency, exit IP and country.
+  - **Shadowsocks** (built in, no extra program): AEAD ciphers chacha20-ietf-poly1305, aes-256-gcm, aes-128-gcm. Everything up to the Shadowsocks server is encrypted and looks like random bytes, so the network in between sees neither the target server nor that it is SSH — useful where SSH or proxies are blocked. Paste an `ss://` link (Outline and others) or fill in the fields. Links that need a plugin (`plugin=`) are not supported.
+  - Every proxy can be **turned off** without deleting it: its hosts then connect directly (with the kill switch on — through the kill-switch proxy, never directly).
+  - Next to "Server sees you as" the terminal shows how the session goes: *via proxy*, *via jump host* or *direct*.
 - **IP in the server logs**: `$SSH_CONNECTION` is read and the address that ends up in `auth.log` is shown.
 - **Kill switch**:
   - direct connections are forbidden;
@@ -73,6 +75,30 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **Languages**: English, Українська, Русский, Français, Español. Switch without restarting.
 - **Portable mode**: all data next to the .exe.
 
+## Network connections and external services
+
+ShellWarden has **no telemetry, analytics or crash reports**. Besides your own servers it talks only to the services below, and each of them for one reason.
+
+| Service | What for | When | What it learns |
+|---|---|---|---|
+| **ipinfo.io** (`https://ipinfo.io/json`) | Find out which IP address and country a route exits from. | Before each SSH connection (through the same route as the connection: through the proxy, or directly); when you press *Check* on a proxy or on "Your real IP"; with the kill switch on — every minute for each proxy in use, and once when the kill switch is turned on. | The IP the request comes from (the proxy's exit or yours) and the User-Agent `ShellWarden-SSH-Client`. Not which server you connect to. |
+| **api.ipify.org** (`https://api.ipify.org?format=json`) | The same, as a fallback. | Only when ipinfo.io did not answer. | The same as above. |
+| **dns.google** (`https://dns.google/resolve`, DNS over HTTPS) | Look up SSHFP records for a server's host key. | Only if *Check new host keys in DNS (SSHFP)* is on in Settings, and only when a host key is new or has changed. Goes through the host's proxy. | The server's host name. |
+| **api.github.com** and GitHub release downloads | Check for and download updates of ShellWarden (`coldtrace00/ShellWarden`). | 4 s after start if *Check for updates on start* is on (default), and when you press *Check now*. A download is verified with SHA-256 and the minisign signature before anything is installed. | Your IP and that you use ShellWarden. Turn the automatic check off in Settings if you do not want this. |
+
+Through a **Shadowsocks** proxy the IP check goes over plain HTTP (port 80): from your computer to the Shadowsocks server it is encrypted by Shadowsocks; only the short hop from that server to the IP service is unencrypted, and it carries nothing but the request "what is my IP".
+
+**Other connections, all to things you set up yourself:**
+- your servers (SSH, Telnet), the proxies you added, jump hosts;
+- the proxy check (with the kill switch on, every 3 s): only a TCP connection to the proxy itself, no request to the internet;
+- the online dot on host cards (off by default): one short connection to each of your hosts every 5 minutes, without logging in;
+- **Tor**: the `tor` program started by ShellWarden or your Tor Browser on 127.0.0.1 — Tor itself connects to the Tor network;
+- **Cloudflare Tunnel**: the `cloudflared` program started by ShellWarden connects to Cloudflare (and may open your browser for Cloudflare Access login).
+
+Links in the program (Tor download page, Cloudflare docs, this repository) open in your browser only when you click them.
+
+If ipinfo.io and api.ipify.org are both unreachable (blocked by your network or by the proxy), the check shows both errors, e.g. `no IP service answered (ipinfo.io: …; api.ipify.org: …)`. With the kill switch off the connection still goes ahead; with it on, a connection whose route cannot be checked is blocked.
+
 ## Technology stack
 
 | Layer | What is used |
@@ -83,7 +109,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 | Cryptography | **libsodium**: Argon2id, XChaCha20-Poly1305, BLAKE2b, Ed25519 (minisign signature check); **OpenSSL libcrypto** — only for PuTTY `.ppk` import |
 | Terminal | **libvterm** (xterm-256color, true colour, Unicode); rendered by a custom `QQuickItem` |
 | Code highlighting | custom `QSyntaxHighlighter` (Shell, Python, YAML, JSON, INI, nginx, Dockerfile, JS, C/C++, SQL, XML, Markdown) |
-| Networking | SOCKS5 / HTTP CONNECT / Tor (`tor`) / Cloudflare Tunnel (`cloudflared`); IP check via ipinfo.io / ipify |
+| Networking | SOCKS5 / HTTP CONNECT / Shadowsocks (own AEAD implementation: libsodium + OpenSSL) / Tor (`tor`) / Cloudflare Tunnel (`cloudflared`); IP check via ipinfo.io / ipify |
 | Windows APIs | Winsock, DWM (dark title bar), WTS (session lock), Windows Firewall via `netsh`, named pipe / WM_COPYDATA (OpenSSH agent, Pageant) |
 | Build | **CMake 3.21+**, **Ninja**; Windows — MinGW-w64 from the Qt kit, libraries from **MSYS2 UCRT64**, `windeployqt`; Linux — GCC/Clang and distribution packages |
 | Packaging | **Inno Setup 6/7** (`setup.exe`), portable `.zip`, CPack (`.deb`, `.tar.gz`), **AppImage** (linuxdeploy + Qt plugin) |
@@ -93,7 +119,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 
 ### How it fits together
 - The **UI thread** (QML + `AppController`) never blocks on the network: every SSH session has its own `SshWorker` in a separate thread, which also runs SFTP, tunnels, the agent and the server monitor (one persistent channel).
-- The **route** is a chain: `ProxyTunnel` (SOCKS5/HTTP/Tor/Cloudflare) → `JumpBridge` (jump host) → target server. The kill switch and `FirewallLock` make sure nothing goes out directly.
+- The **route** is a chain: `ProxyTunnel` (SOCKS5/HTTP/Shadowsocks/Tor/Cloudflare) → `JumpBridge` (jump host) → target server. The kill switch and `FirewallLock` make sure nothing goes out directly.
 - The **vault** (`Vault`) is a single encrypted file; secrets in memory live in `SecureBytes` and are wiped after use.
 - **Updates** (`UpdateChecker`): GitHub Releases API → pick the package for this system → verify `SHA256SUMS` and its minisign signature → run the installer.
 
