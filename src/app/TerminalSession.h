@@ -302,7 +302,9 @@ private:
         qint64 base = -1;    // bytes already there when it started (a resumed transfer)
     };
     void noteCommand(const QString &line);
-    int m_cmdLine = -1;          // line of a command whose Enter is not echoed yet
+    int m_cmdRow = -1;           // screen row of a command whose Enter is not echoed yet
+    quint64 m_cmdPushed = 0;     // TerminalEmulator::linesPushed() at that moment
+    QString m_cmdTyped;
     QElapsedTimer m_cmdSince;
     QVector<TransferInfo> m_transfers;
     int m_nextReq = 1;

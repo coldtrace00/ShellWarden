@@ -505,7 +505,9 @@ void TerminalSession::write(const QByteArray &data)
     // over a slow link the line holds everything that was typed, after editing and
     // Tab completion.
     if (data == "\r" && !m_hostId.isEmpty() && !m_emu.altScreen()) {
-        m_cmdLine = m_emu.cursorLineStart();
+        m_cmdRow = m_emu.cursorLineStart() - m_emu.scrollbackSize();   // row on the screen
+        m_cmdPushed = m_emu.linesPushed();
+        m_cmdTyped = m_emu.cursorLineText();   // what was there at the Enter: the fallback
         m_cmdSince.start();
     }
     if (m_pty) {
@@ -784,17 +786,22 @@ QVariantList TerminalSession::transfers() const
 void TerminalSession::incoming(const QByteArray &data)
 {
     m_emu.feed(data);
-    if (m_cmdLine >= 0) {
-        const int cursorAbs = m_emu.scrollbackSize() + m_emu.cursor().row;
-        if (m_cmdSince.elapsed() > 5000 || cursorAbs < m_cmdLine) {
-            m_cmdLine = -1;                       // no echo, or the screen was cleared
-        } else if (cursorAbs > m_cmdLine) {       // the Enter came back: the line is complete
+    if (m_cmdRow >= 0) {
+        // lines scrolled away since the Enter move our line up by the same amount
+        const int shift = int(m_emu.linesPushed() - m_cmdPushed);
+        const int row = m_cmdRow - shift;                     // < 0: now in the scrollback
+        const int abs = m_emu.scrollbackSize() + row;
+        if (m_emu.cursor().row + shift > m_cmdRow && abs >= 0) {   // the Enter came back: the line is complete
             bool full = false;
-            QString line = m_emu.lineText(m_cmdLine, &full);
-            for (int l = m_cmdLine + 1; full && l < cursorAbs; ++l)   // a long command wraps
+            QString line = m_emu.lineText(abs, &full);
+            const int cursorAbs = m_emu.scrollbackSize() + m_emu.cursor().row;
+            for (int l = abs + 1; full && l < cursorAbs; ++l)      // a long command wraps
                 line += m_emu.lineText(l, &full);
-            m_cmdLine = -1;
+            m_cmdRow = -1;
             noteCommand(line);
+        } else if (m_cmdSince.elapsed() > 5000 || abs < 0) {
+            m_cmdRow = -1;            // no echo in time (or the line is gone): use what was typed
+            noteCommand(m_cmdTyped);
         }
     }
     if (!m_record)

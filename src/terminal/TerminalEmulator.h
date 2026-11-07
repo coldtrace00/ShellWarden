@@ -86,6 +86,9 @@ public:
     // Same for any line (absLine as in cellAt); full = the last column is used (a wrapped row).
     QString lineText(int absLine, bool *full = nullptr) const;
     int cursorLineStart() const;   // absLine where the cursor's logical line begins
+    // Lines that ever scrolled off the top (also when the scrollback is full and
+    // drops its oldest line): tells how far the screen moved between two moments.
+    quint64 linesPushed() const { return m_linesPushed; }
     int mouseMode() const { return m_mouseMode; }
     QString title() const { return m_title; }
     void reset();
@@ -119,6 +122,7 @@ private:
     VTermPos m_cursor{0, 0};
     bool m_cursorVisible = true;
     bool m_altScreen = false;
+    quint64 m_linesPushed = 0;
     bool isContinuation(int row) const;
     int lastTextRow(int rows, int cols) const;
     int m_mouseMode = 0;

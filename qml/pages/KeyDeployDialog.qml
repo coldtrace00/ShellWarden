@@ -108,7 +108,7 @@ Popup {
                     wrapMode: Text.WordWrap
                     color: Theme.textDim; font.pixelSize: 12
                     text: root.replaceMode
-                          ? qsTr("Two safe steps on each server: 1) log in as now and add the new key; 2) log in with only the new key and, if that works, remove the old one. Where the new key does not work, the old key stays — you cannot lock yourself out. Then the hosts log in with the new key.")
+                          ? qsTr("Three steps on each server: 1) log in as now and add the new key; 2) log in with only the new key and, if that works, remove the old one; 3) log in once more with the new key and check that the old one is really gone. Where the new key does not work, the old key stays — you cannot lock yourself out. Only checked servers switch to the new key. Sessions that are open now stay open.")
                           : qsTr("The public key is added to ~/.ssh/authorized_keys on each server — no copying by hand. To get in this one time, each server uses what it already has (password or another key).")
                 }
             }
@@ -275,8 +275,9 @@ Popup {
             RowLayout {
                 spacing: 14
                 BusyIndicator { visible: root.batch.running; running: visible; implicitWidth: 22; implicitHeight: 22 }
-                Text { text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 2: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
-                           : root.replaceMode && App.rotatePhase === "removing" ? qsTr("Step 2 of 2: logging in with the new key, removing the old one… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                Text { text: root.replaceMode && App.rotatePhase === "adding" ? qsTr("Step 1 of 3: adding the new key… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                           : root.replaceMode && App.rotatePhase === "removing" ? qsTr("Step 2 of 3: logging in with the new key, removing the old one… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
+                           : root.replaceMode && App.rotatePhase === "verifying" ? qsTr("Step 3 of 3: a new login with the new key to check… %1 of %2").arg(root.batch.doneCount).arg(root.batch.results.length)
                            : root.batch.running ? qsTr("Installing… %1 of %2 done").arg(root.batch.doneCount).arg(root.batch.results.length) : qsTr("Finished")
                        color: Theme.text; font.pixelSize: 13; font.weight: Font.DemiBold }
                 Text { text: "✓ " + root.batch.okCount; color: Theme.ok; font.pixelSize: 13; font.weight: Font.DemiBold }
@@ -324,6 +325,7 @@ Popup {
                                     font.pixelSize: 11
                                     color: modelData.state === "ok" ? Theme.textDim : parent.parent.parent.tint
                                     text: modelData.state === "ok" ? (modelData.output.trim() === "the key was already there" ? qsTr("The key was already there")
+                                                                      : modelData.output.trim() === "verified" ? qsTr("Checked: a new login with the new key works, the old key is gone")
                                                                       : modelData.output.trim() === "old key removed" ? qsTr("The new key works, the old key was removed")
                                                                       : modelData.output.trim() === "the old key was not there" ? qsTr("The new key works (the old key was not on this server)")
                                                                       : qsTr("Key added"))
@@ -337,9 +339,9 @@ Popup {
             RowLayout {
                 Layout.fillWidth: true
                 AppButton { text: qsTr("Back"); glyph: Theme.iconBack; variant: "ghost"
-                            enabled: !root.batch.running && !(root.replaceMode && App.rotatePhase === "adding"); onClicked: root.showResults = false }
+                            enabled: !root.batch.running && !(root.replaceMode && (App.rotatePhase === "adding" || App.rotatePhase === "removing" || App.rotatePhase === "verifying")); onClicked: root.showResults = false }
                 Item { Layout.fillWidth: true }
-                AppButton { visible: !root.batch.running && !(root.replaceMode && (App.rotatePhase === "adding" || App.rotatePhase === "removing")); text: qsTr("Done"); variant: "primary"; onClicked: root.close() }
+                AppButton { visible: !root.batch.running && !(root.replaceMode && (App.rotatePhase === "adding" || App.rotatePhase === "removing" || App.rotatePhase === "verifying")); text: qsTr("Done"); variant: "primary"; onClicked: root.close() }
             }
         }
     }

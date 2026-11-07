@@ -203,7 +203,7 @@ public:
     // work keeps the old key, so nobody is locked out.
     Q_INVOKABLE QString rotateKey(const QString &oldKeyId, const QString &newKeyId, const QVariantList &hostIds,
                                   const QString &masterPassword);
-    Q_PROPERTY(QString rotatePhase READ rotatePhase NOTIFY rotateChanged)   // "" | adding | removing | done
+    Q_PROPERTY(QString rotatePhase READ rotatePhase NOTIFY rotateChanged)   // "" | adding | removing | verifying | done
     QString rotatePhase() const { return m_rotatePhase; }
     Q_PROPERTY(QObject *batch READ batchObject CONSTANT)
     QObject *batchObject() { return &m_batch; }
@@ -299,6 +299,8 @@ private:
     bool m_rotateUnlocked = false;
     QHash<QString, QString> m_rotateFailed;   // hostId -> why the new key could not be added
     void rotateSecondStep();
+    void rotateThirdStep();
+    void rotateNewKeyStep(const QString &phase, const QString &script, const QString &failedBefore);
     void rotateFinish();
     QHash<QString, QString> m_batchPass;     // keyId -> passphrase for the next batch run only   // hostId -> keyId to set after a key install
     QString effectiveProxyId(const QJsonObject &host) const;

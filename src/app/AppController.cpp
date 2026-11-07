@@ -76,7 +76,7 @@ const QVariantMap &settingDefaults()
         {QStringLiteral("sidebarCollapsed"), false},
         {QStringLiteral("updateRepo"), QStringLiteral(APP_GITHUB_REPO)},
         {QStringLiteral("autoCheckUpdates"), true},
-        {QStringLiteral("hostProbe"), true},                      // online dot on the host cards
+        {QStringLiteral("hostProbe"), false},                     // online dot on the host cards (opt-in)
         {QStringLiteral("sftpLocalFolder"), QString()},           // left half of the two-pane SFTP view
         {QStringLiteral("sftpTwoPane"), false},
         {QStringLiteral("commandHistory"), true},                 // remember commands per host (in the vault)
@@ -2273,7 +2273,7 @@ void AppController::checkForUpdates()
 
 void AppController::probeHosts()
 {
-    if (!m_vault.isUnlocked() || !m_settings.value(QStringLiteral("hostProbe"), true).toBool()) {
+    if (!m_vault.isUnlocked() || !m_settings.value(QStringLiteral("hostProbe"), false).toBool()) {
         if (!m_hostStatus.isEmpty()) {
             m_hostStatus.clear();
             emit hostStatusChanged();
@@ -3023,18 +3023,12 @@ QString AppController::rotateKey(const QString &oldKeyId, const QString &newKeyI
     return {};
 }
 
-void AppController::rotateSecondStep()
+// Runs a script on every server that passed the previous step, logged in with ONLY
+// the new key (no password, no agent, no old key). Servers that failed before are
+// listed as skipped with the reason.
+void AppController::rotateNewKeyStep(const QString &phase, const QString &script, const QString &failedBefore)
 {
     const QJsonObject newKey = findIn(kKeys, m_rotateNew);
-    const QString oldBlob = publicKeyLine(m_rotateOld).section(QLatin1Char(' '), 1, 1);
-    const QString newBlob = publicKeyLine(m_rotateNew).section(QLatin1Char(' '), 1, 1);
-    // removes the old key only when the new one is there (we just logged in with it)
-    const QString script = QStringLiteral(
-        "umask 077\n"
-        "f=~/.ssh/authorized_keys\n"
-        "grep -qF '%1' \"$f\" || { echo 'the new key is missing, the old key was kept'; exit 1; }\n"
-        "if grep -qF '%2' \"$f\"; then grep -vF '%2' \"$f\" > \"$f.sw\" && cat \"$f.sw\" > \"$f\" && rm -f \"$f.sw\" && echo 'old key removed'; "
-        "else echo 'the old key was not there'; fi\n").arg(newBlob, oldBlob);
     const QString command = QStringLiteral("echo %1 | base64 -d | sh").arg(QString::fromLatin1(script.toUtf8().toBase64()));
     QVector<BatchRunner::Job> jobs;
     for (const QVariant &r : m_batch.results()) {
@@ -3044,10 +3038,8 @@ void AppController::rotateSecondStep()
         if (j.hostId.isEmpty())
             continue;
         if (m.value(QStringLiteral("state")).toString() != QLatin1String("ok")) {
-            j.skipReason = tr("The new key could not be added, nothing changed: %1")
-                               .arg(m.value(QStringLiteral("error")).toString());
+            j.skipReason = failedBefore.arg(m.value(QStringLiteral("error")).toString());
         } else if (j.skipReason.isEmpty()) {
-            // log in with the new key only: no password, no agent, no old key
             j.params.privateKey = newKey.value(QStringLiteral("privateKey")).toString().toUtf8();
             j.params.keyPassphrase = m_rotateNewPass;
             secure::wipe(j.params.password);
@@ -3057,9 +3049,36 @@ void AppController::rotateSecondStep()
         }
         jobs << j;
     }
-    m_rotatePhase = QStringLiteral("removing");
+    m_rotatePhase = phase;
     emit rotateChanged();
     m_batch.run(jobs, QString());
+}
+
+void AppController::rotateSecondStep()
+{
+    const QString oldBlob = publicKeyLine(m_rotateOld).section(QLatin1Char(' '), 1, 1);
+    const QString newBlob = publicKeyLine(m_rotateNew).section(QLatin1Char(' '), 1, 1);
+    // we got in with the new key; remove the old one only when the new one is there
+    rotateNewKeyStep(QStringLiteral("removing"), QStringLiteral(
+        "umask 077\n"
+        "f=~/.ssh/authorized_keys\n"
+        "grep -qF '%1' \"$f\" || { echo 'the new key is missing, the old key was kept'; exit 1; }\n"
+        "if grep -qF '%2' \"$f\"; then grep -vF '%2' \"$f\" > \"$f.sw\" && cat \"$f.sw\" > \"$f\" && rm -f \"$f.sw\" && echo 'old key removed'; "
+        "else echo 'the old key was not there'; fi\n").arg(newBlob, oldBlob),
+        tr("The new key could not be added, nothing changed: %1"));
+}
+
+void AppController::rotateThirdStep()
+{
+    const QString oldBlob = publicKeyLine(m_rotateOld).section(QLatin1Char(' '), 1, 1);
+    const QString newBlob = publicKeyLine(m_rotateNew).section(QLatin1Char(' '), 1, 1);
+    // a fresh login with the new key: is the new key there and the old one really gone?
+    rotateNewKeyStep(QStringLiteral("verifying"), QStringLiteral(
+        "f=~/.ssh/authorized_keys\n"
+        "grep -qF '%1' \"$f\" || { echo 'the new key is missing'; exit 1; }\n"
+        "if grep -qF '%2' \"$f\"; then echo 'the old key is still there'; exit 1; fi\n"
+        "echo verified\n").arg(newBlob, oldBlob),
+        tr("The new key did not work here, so the old key was kept: %1"));
 }
 
 void AppController::rotateFinish()
@@ -3099,7 +3118,11 @@ void AppController::onBatchFinished()
         return;
     }
     if (m_rotatePhase == QLatin1String("removing")) {
-        rotateFinish();
+        QTimer::singleShot(0, this, &AppController::rotateThirdStep);
+        return;
+    }
+    if (m_rotatePhase == QLatin1String("verifying")) {
+        rotateFinish();   // only servers that passed the check switch to the new key
         return;
     }
     if (m_keyAssign.isEmpty())

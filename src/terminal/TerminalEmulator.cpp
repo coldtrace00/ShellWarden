@@ -627,6 +627,7 @@ int TerminalEmulator::cbBell(void *user)
 int TerminalEmulator::cbSbPushLine(int cols, const VTermScreenCell *cells, void *user)
 {
     auto *self = static_cast<TerminalEmulator *>(user);
+    ++self->m_linesPushed;
     if (self->m_scrollbackMax <= 0)
         return 1;
     self->m_scrollback.emplace_back(cells, cells + cols);

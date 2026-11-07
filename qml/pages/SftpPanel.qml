@@ -171,7 +171,7 @@ Item {
             Layout.margins: 10
             spacing: 6
             IconLabel { glyph: Theme.iconFolder; size: 16; color: Theme.accent }
-            Text { text: root.wide ? qsTr("This computer ⇄ server") : qsTr("Files on the server"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold
+            Text { text: root.wide ? qsTr("This computer ⇄ server") : qsTr("Files"); color: Theme.text; font.pixelSize: 14; font.weight: Font.DemiBold
                    Layout.fillWidth: true; elide: Text.ElideRight }
             AppButton {
                 glyph: Theme.iconColumns; compact: true; variant: root.wide ? "primary" : "ghost"
@@ -181,10 +181,27 @@ Item {
                 ToolTip.text: root.wide ? qsTr("Back to the server files only") : qsTr("Show this computer's files next to the server's: drag files between them or use the arrows")
             }
             AppButton {
-                visible: !root.wide
-                glyph: Theme.iconUpload; compact: true; text: qsTr("To server…"); onClicked: uploadDlg.open()
-                ToolTip.visible: hovered
-                ToolTip.text: qsTr("Choose files on this computer and send them to the server, into %1").arg(root.path)
+                id: transferBtn
+                glyph: Theme.iconUpload; compact: true; text: qsTr("Transfer ▾")
+                onClicked: transferMenu.popup(transferBtn, 0, transferBtn.height + 4)
+                ToolTip.visible: hovered && !transferMenu.visible
+                ToolTip.text: qsTr("Send files to the server or save a file from the server to this PC")
+            }
+            AppMenu {
+                id: transferMenu
+                readonly property var sel: root.selected >= 0 && root.selected < root.entries.length ? root.entries[root.selected] : null
+                AppMenuItem {
+                    glyph: Theme.iconUpload
+                    text: qsTr("To the server: choose files on this PC…")
+                    onTriggered: uploadDlg.open()
+                }
+                AppMenuItem {
+                    glyph: Theme.iconSave
+                    enabled: transferMenu.sel !== null && !transferMenu.sel.isDir
+                    text: transferMenu.sel && !transferMenu.sel.isDir ? qsTr("To this PC: save \"%1\"…").arg(transferMenu.sel.name)
+                                                                      : qsTr("To this PC: select a file on the server first")
+                    onTriggered: root.saveToPc(root.joinPath(root.path, transferMenu.sel.name))
+                }
             }
             AppButton { glyph: Theme.iconAdd; compact: true; variant: "ghost"; onClicked: { nameDlg.mode = "mkdir"; nameDlg.openWith("") }
                         ToolTip.visible: hovered; ToolTip.text: qsTr("New folder") }

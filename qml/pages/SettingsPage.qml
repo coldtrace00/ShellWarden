@@ -405,7 +405,15 @@ Item {
                 }
                 Row_ {
                     SettingLabel { label: qsTr("Show which hosts are online"); hint: qsTr("While the host list is open, every 5 minutes one short connection to each host (through its own proxy) shows a green or red dot on its card. Hosts via Tor, Cloudflare or a jump host, and direct ones while the kill switch is on, are not checked.") }
-                    AppSwitch { Layout.alignment: Qt.AlignRight | Qt.AlignVCenter; checked: App.settings.hostProbe; onToggled: { App.setSetting("hostProbe", checked); App.probeHosts() } }
+                    AppSwitch {
+                        id: probeSwitch
+                        Layout.alignment: Qt.AlignRight | Qt.AlignVCenter
+                        checked: App.settings.hostProbe
+                        onToggled: {
+                            if (checked) { checked = false; probeInfo.open() }   // turned on only after reading how it works
+                            else App.setSetting("hostProbe", false)
+                        }
+                    }
                 }
                 Row_ {
                     SettingLabel { label: qsTr("Lock together with the computer"); hint: qsTr("When you lock Windows (Win+L) or the computer goes to sleep, the vault locks too.") }
@@ -545,6 +553,7 @@ Item {
                             ["Ctrl+Shift+W", qsTr("Close the tab")],
                             ["Ctrl+Shift+T", qsTr("Back to the vault (hosts)")],
                             ["Ctrl+Shift+D", qsTr("Split view")],
+                            ["Ctrl+Shift+H", qsTr("Command history of this host")],
                             ["Ctrl+Shift+B", qsTr("Collapse / expand the side menu")],
                             ["Ctrl+Shift+C", qsTr("Copy")],
                             ["Ctrl+Shift+V", qsTr("Paste")],
@@ -600,6 +609,34 @@ Item {
             }
 
             Item { height: 20 }
+        }
+    }
+
+    // What the "online" dots really do, shown before they are turned on.
+    Modal {
+        id: probeInfo
+        title: qsTr("Show which hosts are online?")
+        width: Math.min(600, (parent ? parent.width : 600) - 40)
+        Text {
+            Layout.fillWidth: true
+            wrapMode: Text.WordWrap
+            color: Theme.text
+            font.pixelSize: 13
+            textFormat: Text.StyledText
+            text: qsTr("<b>This is not a ping.</b> While the host list is open, every 5 minutes ShellWarden opens one short TCP connection to the SSH port of each host, waits for the server's greeting (\"SSH-2.0-…\") and closes it right away.")
+                  + "<br><br>" + qsTr("• <b>No login:</b> no password, key or user name is sent, so it works without saved credentials and never counts as a failed login.")
+                  + "<br>" + qsTr("• <b>The server sees it:</b> each check is one line in its log (\"Connection closed … [preauth]\"). 12 per hour is far below what fail2ban treats as an attack, but very strict setups may still notice it.")
+                  + "<br>" + qsTr("• <b>Same route as a real connection:</b> through the host's proxy, never directly while the kill switch is on. Hosts via Tor, Cloudflare Tunnel or a jump host are not checked.")
+                  + "<br>" + qsTr("• <b>Green</b> = the SSH server answered (with the response time); <b>red</b> = no answer or not SSH.")
+        }
+        RowLayout {
+            Layout.fillWidth: true
+            Item { Layout.fillWidth: true }
+            AppButton { text: qsTr("Cancel"); variant: "ghost"; onClicked: probeInfo.close() }
+            AppButton {
+                text: qsTr("Turn on"); variant: "primary"
+                onClicked: { App.setSetting("hostProbe", true); probeSwitch.checked = true; probeInfo.close() }
+            }
         }
     }
 
