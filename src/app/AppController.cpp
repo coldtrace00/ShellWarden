@@ -152,6 +152,29 @@ AppController::AppController(QObject *parent)
     m_firewallActive = firewalllock::supported() && m_settings.value(QStringLiteral("firewallLock"), false).toBool()
                        && firewalllock::isActive();
     connect(&m_updater, &UpdateChecker::quitRequested, qApp, &QCoreApplication::quit, Qt::QueuedConnection);
+    connect(&m_updater, &UpdateChecker::changed, this, [this] {
+        const QString st = m_updater.state();
+        if (st == m_updaterState)
+            return;
+        m_updaterState = st;
+        if (!m_updater.automatic())
+            return;
+        if (st == QLatin1String("available")
+            && m_settings.value(QStringLiteral("skippedUpdate")).toString() != m_updater.latestVersion())
+            emit updateDialogRequested(QStringLiteral("available"));
+        else if (st == QLatin1String("uptodate") && m_justUpdated
+                 && UpdateChecker::compareVersions(m_updater.latestVersion(), version()) == 0
+                 && !m_updater.localizedNotes().isEmpty())
+            emit updateDialogRequested(QStringLiteral("updated"));
+        if (st == QLatin1String("uptodate") || st == QLatin1String("available"))
+            m_justUpdated = false;
+    });
+    {
+        // "What's new" once after an update (not on the very first start)
+        const QString last = m_settings.value(QStringLiteral("lastRunVersion")).toString();
+        m_justUpdated = !last.isEmpty() && UpdateChecker::compareVersions(last, version()) < 0;
+        m_settings.setValue(QStringLiteral("lastRunVersion"), version());
+    }
 
     m_autoLock.setSingleShot(true);
     connect(&m_autoLock, &QTimer::timeout, this, [this] {
@@ -186,7 +209,7 @@ AppController::AppController(QObject *parent)
     logEvent(ActivityLog::Info, QStringLiteral("app"), tr("%1 %2 started").arg(appName(), version()),
              paths::isPortable() ? tr("portable mode · %1").arg(paths::dataDir()) : paths::dataDir());
     if (m_settings.value(QStringLiteral("autoCheckUpdates"), true).toBool() && !updateRepo().isEmpty())
-        QTimer::singleShot(4000, this, &AppController::checkForUpdates);
+        QTimer::singleShot(4000, this, [this] { m_updater.check(updateRepo(), true); });
 }
 
 AppController::~AppController()
@@ -2163,6 +2186,11 @@ void AppController::checkForUpdates()
     m_updater.check(updateRepo());
 }
 
+void AppController::skipUpdate(const QString &version)
+{
+    m_settings.setValue(QStringLiteral("skippedUpdate"), version);
+}
+
 void AppController::onSecretVerified(const QString &hostId, int kind, const QString &secret)
 {
     if (!m_vault.isUnlocked())
@@ -2286,6 +2314,7 @@ void AppController::applyLanguage(const QString &requested)
     }
 
     m_language = code;
+    m_updater.setLanguage(code);
     if (m_engine)
         m_engine->retranslate();
     emit languageChanged();

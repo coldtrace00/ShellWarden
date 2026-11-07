@@ -214,6 +214,7 @@ public:
     Q_INVOKABLE void copyText(const QString &text, bool sensitive = false);
     Q_INVOKABLE void setLanguage(const QString &code);
     Q_INVOKABLE void checkForUpdates();
+    Q_INVOKABLE void skipUpdate(const QString &version);   // no pop-up for this version
     QString updateRepo() const;
     Q_INVOKABLE QString formatBytes(qint64 bytes) const;
     Q_INVOKABLE void beep() const;
@@ -224,6 +225,8 @@ public:
     Q_INVOKABLE QString inputColorCommand(const QString &color) const;   // bash line that colours what you type   // terminal bell "sound" (Windows system sound)
 
 signals:
+    // "available": a new version was found at start; "updated": first start after an update
+    void updateDialogRequested(const QString &mode);
     void vaultStateChanged();
     void vaultError(const QString &message);
     void busyChanged();
@@ -293,6 +296,8 @@ private:
     ProxyChecker m_checker;
     ActivityLog m_log;
     UpdateChecker m_updater;
+    QString m_updaterState;
+    bool m_justUpdated = false;   // first start of this version after an update
 
     QVariantMap m_directIp;
     QVariantList m_knownHosts;

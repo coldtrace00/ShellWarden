@@ -477,22 +477,130 @@ void SshWorker::onAuthenticated()
         emit finished(QString(), false);
         return;
     }
-    // $SSH_CONNECTION is read on a short exec channel BEFORE the shell. Besides the
-    // client address this keeps the screen clean: with PAM (Debian, Ubuntu) sshd hands
-    // the one-time login banner (motd) to the first session of the connection.
-    readClientAddress();
-    openShell();
+    // $SSH_CONNECTION is read on a short exec channel that the server handles BEFORE the
+    // shell. Besides the client address this keeps the screen clean: with PAM (Debian,
+    // Ubuntu) sshd hands the one-time login banner (motd) to the first session.
+    // Both channels are opened in parallel so this costs no extra round trips.
+    if (openPipelined()) {
+        finishShell();
+        return;
+    }
+    if (!m_done)
+        openShell();   // classic order: address first, then the shell
 }
 
-void SshWorker::readClientAddress()
+static const char kAddrCommand[] = "echo \"$SSH_CONNECTION\"";
+
+bool SshWorker::openPipelined()
+{
+    ssh_channel addr = ssh_channel_new(m_session);
+    m_channel = ssh_channel_new(m_session);
+    if (!addr || !m_channel) {
+        if (addr)
+            ssh_channel_free(addr);
+        if (m_channel)
+            ssh_channel_free(m_channel);
+        m_channel = nullptr;
+        readClientAddress();
+        return false;
+    }
+    const QByteArray term = m_p.term.toLatin1();
+    const qint64 limit = qint64(std::max(10, m_p.connectTimeoutSeconds)) * 1000;
+    QElapsedTimer t;
+    t.start();
+    ssh_set_blocking(m_session, 0);
+    // 1. open both channels: one round trip instead of two
+    int a = SSH_AGAIN, s = SSH_AGAIN;
+    while ((a == SSH_AGAIN || s == SSH_AGAIN) && t.elapsed() < limit) {
+        if (a == SSH_AGAIN)
+            a = ssh_channel_open_session(addr);
+        if (s == SSH_AGAIN)
+            s = ssh_channel_open_session(m_channel);
+        if (a == SSH_AGAIN || s == SSH_AGAIN)
+            QThread::msleep(1);
+    }
+    // 2. exec on the first channel (sent first, so sshd sets that session up first and
+    //    it takes the login banner), terminal on the shell channel, again in parallel
+    int ae = a == SSH_OK ? SSH_AGAIN : SSH_ERROR;
+    int sp = s == SSH_OK ? SSH_AGAIN : SSH_ERROR;
+    while ((ae == SSH_AGAIN || sp == SSH_AGAIN) && t.elapsed() < limit) {
+        if (ae == SSH_AGAIN)
+            ae = ssh_channel_request_exec(addr, kAddrCommand);
+        if (sp == SSH_AGAIN)
+            sp = ssh_channel_request_pty_size(m_channel, term.constData(), m_p.cols, m_p.rows);
+        if (ae == SSH_AGAIN || sp == SSH_AGAIN)
+            QThread::msleep(1);
+    }
+    ssh_set_blocking(m_session, 1);
+
+    if (ae == SSH_OK) {
+        m_addrCh = addr;
+        m_addrTimer.start();
+    } else {
+        if (ssh_channel_is_open(addr))
+            ssh_channel_close(addr);
+        ssh_channel_free(addr);
+    }
+    if (sp == SSH_OK)
+        return true;
+
+    // The shell channel failed (for example MaxSessions 1 refuses a second session):
+    // finish the address channel first, then open the shell the classic way.
+    if (ssh_channel_is_open(m_channel))
+        ssh_channel_close(m_channel);
+    ssh_channel_free(m_channel);
+    m_channel = nullptr;
+    if (!ssh_is_connected(m_session)) {
+        fail(tr("Cannot open a session channel: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
+        return false;
+    }
+    if (m_addrCh) {
+        readClientAddress(m_addrCh);
+        m_addrCh = nullptr;
+    }
+    return false;
+}
+
+void SshWorker::pumpAddress()
+{
+    if (!m_addrCh)
+        return;
+    char buf[256];
+    bool end = false;
+    for (int guard = 0; guard < 8; ++guard) {
+        const int n = ssh_channel_read_nonblocking(m_addrCh, buf, sizeof buf, 0);
+        if (n > 0)
+            m_addrBuf.append(buf, n);
+        if (n == SSH_ERROR || ssh_channel_is_eof(m_addrCh)) {
+            end = true;
+            break;
+        }
+        if (n <= 0)
+            break;
+    }
+    if (!end && !m_addrBuf.contains('\n') && m_addrBuf.size() < 1024 && m_addrTimer.elapsed() < 8000)
+        return;
+    const QStringList parts = QString::fromUtf8(m_addrBuf).simplified().split(QLatin1Char(' '));
+    if (parts.size() >= 4)
+        emit clientAddressSeen(parts.at(0), parts.at(1), parts.at(2));
+    m_addrBuf.clear();
+    if (ssh_channel_is_open(m_addrCh)) {
+        ssh_channel_send_eof(m_addrCh);
+        ssh_channel_close(m_addrCh);
+    }
+    ssh_channel_free(m_addrCh);
+    m_addrCh = nullptr;
+}
+
+void SshWorker::readClientAddress(ssh_channel existing)
 {
     // $SSH_CONNECTION = "<client ip> <client port> <server ip> <server port>".
     // This is exactly the address sshd writes into its auth log.
-    ssh_channel ch = ssh_channel_new(m_session);
+    ssh_channel ch = existing ? existing : ssh_channel_new(m_session);
     if (!ch)
         return;
-    if (ssh_channel_open_session(ch) == SSH_OK
-        && ssh_channel_request_exec(ch, "echo \"$SSH_CONNECTION\"") == SSH_OK) {
+    if (existing || (ssh_channel_open_session(ch) == SSH_OK
+                     && ssh_channel_request_exec(ch, kAddrCommand) == SSH_OK)) {
         QByteArray out;
         char buf[256];
         QElapsedTimer t;
@@ -509,16 +617,34 @@ void SshWorker::readClientAddress()
         const QStringList parts = QString::fromUtf8(out).simplified().split(QLatin1Char(' '));
         if (parts.size() >= 4)
             emit clientAddressSeen(parts.at(0), parts.at(1), parts.at(2));
+        // Let the command finish on the server: with MaxSessions 1 sshd frees the
+        // session only after that, and the shell needs that slot.
+        while (t.elapsed() < 4000 && !ssh_channel_is_eof(ch)) {
+            if (ssh_channel_read_timeout(ch, buf, sizeof buf, 0, 200) == SSH_ERROR)
+                break;
+        }
         ssh_channel_send_eof(ch);
     }
     ssh_channel_close(ch);
     ssh_channel_free(ch);
+    m_addrSequential = true;
 }
 
 void SshWorker::openShell()
 {
     m_channel = ssh_channel_new(m_session);
-    if (!m_channel || ssh_channel_open_session(m_channel) != SSH_OK) {
+    // right after the address channel a strict server may still count that session
+    for (int retry = 0; m_channel && m_addrSequential && retry < 5; ++retry) {
+        if (ssh_channel_open_session(m_channel) == SSH_OK)
+            break;
+        ssh_channel_free(m_channel);
+        m_channel = nullptr;
+        if (!ssh_is_connected(m_session))
+            break;
+        QThread::msleep(150);
+        m_channel = ssh_channel_new(m_session);
+    }
+    if (!m_channel || (!ssh_channel_is_open(m_channel) && ssh_channel_open_session(m_channel) != SSH_OK)) {
         fail(tr("Cannot open a session channel: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
         return;
     }
@@ -527,6 +653,11 @@ void SshWorker::openShell()
         fail(tr("The server refused a terminal: %1").arg(QString::fromUtf8(ssh_get_error(m_session))));
         return;
     }
+    finishShell();
+}
+
+void SshWorker::finishShell()
+{
     // Best effort; many servers only accept LANG/LC_* via AcceptEnv.
     ssh_channel_request_env(m_channel, "LANG", "en_US.UTF-8");
     if (m_p.agentForward) {
@@ -602,6 +733,7 @@ void SshWorker::pump()
     pumpTransfers();
     pumpAgentChannels();
     pumpMonitor();
+    pumpAddress();
     if (m_done)
         return;
 
@@ -700,6 +832,12 @@ void SshWorker::cleanup()
     delete m_keepalive;
     m_keepalive = nullptr;
 
+    if (m_addrCh) {
+        if (ssh_channel_is_open(m_addrCh))
+            ssh_channel_close(m_addrCh);
+        ssh_channel_free(m_addrCh);
+        m_addrCh = nullptr;
+    }
     if (m_monCh) {
         if (ssh_channel_is_open(m_monCh))
             ssh_channel_close(m_monCh);

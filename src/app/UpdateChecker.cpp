@@ -7,6 +7,7 @@
 #include <QDesktopServices>
 #include <QDir>
 #include <QFile>
+#include <QHash>
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
@@ -43,8 +44,47 @@ int UpdateChecker::compareVersions(const QString &a, const QString &b)
     return 0;
 }
 
-void UpdateChecker::check(const QString &repo)
+void UpdateChecker::setLanguage(const QString &code)
 {
+    if (m_lang == code)
+        return;
+    m_lang = code;
+    emit changed();
+}
+
+QString UpdateChecker::pickNotes(const QString &body, const QString &lang)
+{
+    static const QRegularExpression marker(QStringLiteral("<!--\\s*lang\\s*[:=]\\s*([A-Za-z_-]+)\\s*-->"));
+    QHash<QString, QString> sections;
+    QString first;
+    QRegularExpressionMatchIterator it = marker.globalMatch(body);
+    if (!it.hasNext())
+        return body.trimmed();
+    QRegularExpressionMatch m = it.next();
+    while (true) {
+        const QString code = m.captured(1).toLower().section(QLatin1Char('-'), 0, 0).section(QLatin1Char('_'), 0, 0);
+        const qsizetype start = m.capturedEnd();
+        const bool more = it.hasNext();
+        const QRegularExpressionMatch next = more ? it.next() : QRegularExpressionMatch();
+        const QString text = body.mid(start, more ? next.capturedStart() - start : -1).trimmed();
+        if (!sections.contains(code))
+            sections.insert(code, text);
+        if (first.isEmpty())
+            first = text;
+        if (!more)
+            break;
+        m = next;
+    }
+    if (sections.contains(lang))
+        return sections.value(lang);
+    if (sections.contains(QStringLiteral("en")))
+        return sections.value(QStringLiteral("en"));
+    return first;
+}
+
+void UpdateChecker::check(const QString &repo, bool automatic)
+{
+    m_automatic = automatic;
     static const QRegularExpression valid(QStringLiteral("^[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+$"));
     if (!valid.match(repo.trimmed()).hasMatch()) {
         setState(QStringLiteral("error"), tr("Set the GitHub repository (owner/name) in the update settings."));

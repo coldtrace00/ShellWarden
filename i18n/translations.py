@@ -1208,6 +1208,14 @@ T = [
 ('This proxy no longer exists.', 'Цього проксі вже немає.', 'Этого прокси больше нет.', "Ce proxy n'existe plus.", 'Este proxy ya no existe.'),
 ('direct', 'напряму', 'напрямую', 'en direct', 'directo'),
 ('saved', 'збережено', 'сохранено', 'enregistré', 'guardado'),
+("What's new in ShellWarden %1", "Що нового в ShellWarden %1", "Что нового в ShellWarden %1", "Nouveautés de ShellWarden %1", "Novedades de ShellWarden %1"),
+("ShellWarden %1 is available", "Доступна версія ShellWarden %1", "Доступна версия ShellWarden %1", "ShellWarden %1 est disponible", "ShellWarden %1 está disponible"),
+("ShellWarden was updated to version %1.", "ShellWarden оновлено до версії %1.", "ShellWarden обновлён до версии %1.", "ShellWarden a été mis à jour vers la version %1.", "ShellWarden se actualizó a la versión %1."),
+("You have version %1. The download is checked before it is installed.", "У вас версія %1. Завантаження перевіряється перед встановленням.", "У вас версия %1. Загрузка проверяется перед установкой.", "Vous avez la version %1. Le téléchargement est vérifié avant l'installation.", "Tiene la versión %1. La descarga se verifica antes de instalarla."),
+("No description for this release.", "Для цього релізу немає опису.", "У этого релиза нет описания.", "Aucune description pour cette version.", "Esta versión no tiene descripción."),
+("Skip this version", "Пропустити цю версію", "Пропустить эту версию", "Ignorer cette version", "Omitir esta versión"),
+("Later", "Пізніше", "Позже", "Plus tard", "Más tarde"),
+("Update now", "Оновити зараз", "Обновить сейчас", "Mettre à jour", "Actualizar ahora"),
 ]
 
 # Plural forms (numerus): uk/ru have 3 forms, fr/es 2.

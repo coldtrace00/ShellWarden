@@ -145,7 +145,19 @@ The program checks the **latest release** of `coldtrace00/ShellWarden` (built in
 
    Put the Linux build (`./build.sh appimage`) into the same folder and sign again: `tools/sign_release.sh <folder> 0.3.1` (it recomputes `SHA256SUMS` for all files).
 3. On GitHub: **Releases → Draft a new release → Choose a tag** → `v0.3.1` → *Create new tag*, drag in all files from `dist\release\`, click **Publish release**. Drafts and pre-releases are not seen by the program.
-4. In the program: *Settings → Updates →* **Check now** → **Download** → **Install**. The installer silently installs the new version into the same folder; `data\` (vault, keys, settings) is not touched. The portable version opens the folder with the verified zip — extract it over the old one.
+
+   The release description is what users see in the update window (and once more as *What's new* after the update). Write it once per language; the program shows the part in its own language, English if there is none:
+   ```
+   <!-- lang:en -->
+   ### What's new
+   - Faster connect
+
+   <!-- lang:uk -->
+   ### Що нового
+   - Швидше підключення
+   ```
+   Codes: `en`, `uk`, `ru`, `fr`, `es`. Notes without these markers are shown as they are.
+4. At start the program shows a window with the changes and **Update now** / **Later** / **Skip this version**. Or by hand: *Settings → Updates →* **Check now** → **Download** → **Install**. The installer silently installs the new version into the same folder; `data\` (vault, keys, settings) is not touched. The portable version opens the folder with the verified zip — extract it over the old one.
 
 The check also runs automatically 4 s after start (can be turned off in the same place).
 

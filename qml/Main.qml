@@ -234,7 +234,7 @@ ApplicationWindow {
                     radius: 9
                     color: Theme.accentDim
                     border.color: Theme.accent
-                    MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: { win.page = "settings"; win.currentTab = -1 } }
+                    MouseArea { anchors.fill: parent; cursorShape: Qt.PointingHandCursor; onClicked: updateDialog.show("available") }
                     RowLayout {
                         id: updRow
                         anchors.fill: parent
@@ -243,7 +243,7 @@ ApplicationWindow {
                         IconLabel { glyph: Theme.iconUpdate; color: Theme.accent; size: 16 }
                         Text {
                             Layout.fillWidth: true
-                            text: qsTr("Update %1 available").arg(App.updater.latestVersion)
+                            text: qsTr("Update %1 available").arg(String(App.updater.latestVersion).replace(/^v/i, ""))
                             color: Theme.text; font.pixelSize: 12; elide: Text.ElideRight
                         }
                     }
@@ -667,6 +667,107 @@ ApplicationWindow {
             target: App
             function onVaultError(message) { if (unlockPopup.opened) unlockErr.text = message }
             function onVaultStateChanged() { if (App.vaultUnlocked) unlockPopup.close() }
+        }
+    }
+
+    // New version found at start, or "what's new" after an update
+    Modal {
+        id: updateDialog
+        property string mode: "available"     // available | updated
+        property string pending: ""           // asked for while the vault was locked
+        readonly property var up: App.updater
+        readonly property string latest: String(up.latestVersion).replace(/^v/i, "")
+        title: mode === "updated" ? qsTr("What's new in ShellWarden %1").arg(App.version)
+                                  : qsTr("ShellWarden %1 is available").arg(latest)
+        subtitle: mode === "updated" ? qsTr("ShellWarden was updated to version %1.").arg(App.version)
+                                     : qsTr("You have version %1. The download is checked before it is installed.").arg(App.version)
+        width: Math.min(560, (parent ? parent.width : 560) - 40)
+        function show(m) { pending = ""; mode = m; open() }
+
+        Rectangle {
+            Layout.fillWidth: true
+            Layout.preferredHeight: Math.min(notesText.implicitHeight + 24, 320)
+            radius: 9
+            color: Theme.bg
+            border.color: Theme.border
+            ScrollView {
+                anchors.fill: parent
+                anchors.margins: 12
+                clip: true
+                contentWidth: availableWidth
+                Text {
+                    id: notesText
+                    width: parent.width
+                    text: updateDialog.up.localizedNotes !== "" ? updateDialog.up.localizedNotes
+                                                                : qsTr("No description for this release.")
+                    textFormat: Text.MarkdownText
+                    wrapMode: Text.WordWrap
+                    color: Theme.text
+                    linkColor: Theme.accent
+                    font.pixelSize: 13
+                    onLinkActivated: (link) => Qt.openUrlExternally(link)
+                }
+            }
+        }
+        ProgressBar {
+            visible: updateDialog.up.state === "downloading"
+            Layout.fillWidth: true
+            value: updateDialog.up.progress
+        }
+        Text {
+            visible: updateDialog.mode === "available" && (updateDialog.up.state === "downloading" || updateDialog.up.state === "error")
+            text: updateDialog.up.state === "error" ? updateDialog.up.error
+                                                    : qsTr("Downloading… %1%").arg(Math.round(updateDialog.up.progress * 100))
+            color: updateDialog.up.state === "error" ? Theme.danger : Theme.textDim
+            font.pixelSize: 12
+            Layout.fillWidth: true
+            wrapMode: Text.WordWrap
+        }
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: 8
+            AppButton {
+                visible: updateDialog.mode === "available" && updateDialog.up.state === "available"
+                text: qsTr("Skip this version"); variant: "ghost"; compact: true
+                onClicked: { App.skipUpdate(updateDialog.up.latestVersion); updateDialog.close() }
+            }
+            AppButton {
+                visible: updateDialog.up.pageUrl !== ""
+                text: qsTr("Release page"); variant: "ghost"; compact: true
+                onClicked: updateDialog.up.openPage()
+            }
+            Item { Layout.fillWidth: true }
+            AppButton {
+                visible: updateDialog.mode === "available"
+                text: qsTr("Later"); variant: "ghost"
+                onClicked: updateDialog.close()
+            }
+            AppButton {
+                visible: updateDialog.mode === "available" && (updateDialog.up.state === "available" || updateDialog.up.state === "error")
+                text: qsTr("Update now"); variant: "primary"; glyph: Theme.iconUpdate
+                onClicked: updateDialog.up.download()
+            }
+            AppButton {
+                visible: updateDialog.mode === "available" && updateDialog.up.state === "ready"
+                text: qsTr("Install"); variant: "primary"; glyph: Theme.iconUpdate
+                onClicked: updateDialog.up.install()
+            }
+            AppButton {
+                visible: updateDialog.mode === "updated"
+                text: qsTr("OK"); variant: "primary"
+                onClicked: updateDialog.close()
+            }
+        }
+        Connections {
+            target: App
+            // shown after the vault is unlocked, so it never gets in the way of the password
+            function onUpdateDialogRequested(mode) {
+                if (App.vaultUnlocked) updateDialog.show(mode)
+                else updateDialog.pending = mode
+            }
+            function onVaultStateChanged() {
+                if (App.vaultUnlocked && updateDialog.pending !== "") updateDialog.show(updateDialog.pending)
+            }
         }
     }
 

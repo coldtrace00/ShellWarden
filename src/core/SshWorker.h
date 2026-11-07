@@ -158,7 +158,10 @@ private:
     void kbdStep(int rc);
     void handleAuthResult(int rc, int method);
     void onAuthenticated();
-    void readClientAddress();
+    void readClientAddress(ssh_channel existing = nullptr);
+    bool openPipelined();
+    void pumpAddress();
+    void finishShell();
     int execOn(const QString &command, int timeoutMs, QByteArray *out, QString *error);
     void openShell();
     void pump();
@@ -204,6 +207,10 @@ private:
     bool m_shellOpen = false;
     bool m_agentTried = false;
     ssh_channel m_monCh = nullptr;
+    ssh_channel m_addrCh = nullptr;   // $SSH_CONNECTION, read while the shell starts
+    QByteArray m_addrBuf;
+    QElapsedTimer m_addrTimer;
+    bool m_addrSequential = false;    // the address was read on its own channel before the shell
     QByteArray m_monBuf;
     void pumpMonitor();
 
