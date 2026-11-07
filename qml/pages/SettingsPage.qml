@@ -507,11 +507,11 @@ Item {
                         }
                         ProgressBar { visible: App.updater.state === "downloading"; Layout.fillWidth: true; value: App.updater.progress }
                         Text {
-                            visible: App.updater.notes !== "" && (App.updater.state === "available" || App.updater.state === "ready")
+                            visible: App.updater.localizedNotes !== "" && (App.updater.state === "available" || App.updater.state === "ready")
                             Layout.fillWidth: true
                             Layout.maximumHeight: 120
                             clip: true
-                            text: App.updater.notes
+                            text: App.updater.localizedNotes
                             color: Theme.textDim
                             font.pixelSize: 11
                             wrapMode: Text.WordWrap
