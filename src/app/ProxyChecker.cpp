@@ -58,8 +58,8 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
             if (proxytunnel::writeAll(s, req, timeoutMs)) {
                 char buf[4096];
                 const qint64 until = QDateTime::currentMSecsSinceEpoch() + timeoutMs;
-                while (resp.size() < 65536 && QDateTime::currentMSecsSinceEpoch() < until) {
-                    const int n = proxytunnel::readSome(s, buf, sizeof buf, 1000);
+                while (resp.size() < 65536 && QDateTime::currentMSecsSinceEpoch() < until && !bgthreads::stopping()) {
+                    const int n = proxytunnel::readSome(s, buf, sizeof buf, 500);
                     if (n < 0 || (n == 0 && !resp.isEmpty()))
                         break;   // error, or the service closed the connection after its answer
                     resp.append(buf, n);

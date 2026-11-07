@@ -424,7 +424,9 @@ void relay(std::shared_ptr<Session> s, native_socket local, QByteArray pending)
     char buf[kMaxPayload];
     for (;;) {
         bool fromLocal = false, fromServer = false;
-        if (!waitReadable(local, s->server(), 30000, &fromLocal, &fromServer) || bgthreads::stopping())
+        // short waits: on Windows cutting a socket does not wake WSAPoll, so the
+        // thread looks at stopping() twice a second (no data = just loop again)
+        if (!waitReadable(local, s->server(), 500, &fromLocal, &fromServer) || bgthreads::stopping())
             break;
         if (fromLocal) {
             const int n = int(::recv(local, buf, sizeof buf, 0));

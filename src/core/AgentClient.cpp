@@ -165,6 +165,13 @@ int g_bridgePort = 0;
 bool recvAll(SOCKET s, char *buf, int len)
 {
     while (len > 0) {
+        // wait in short steps: on exit bgthreads::stopping() ends the client thread
+        WSAPOLLFD p = {};
+        p.fd = s;
+        p.events = POLLRDNORM;
+        const int r = WSAPoll(&p, 1, 500);
+        if (r < 0 || bgthreads::stopping()) return false;
+        if (r == 0) continue;
         const int n = recv(s, buf, len, 0);
         if (n <= 0) return false;
         buf += n; len -= n;

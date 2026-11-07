@@ -365,14 +365,29 @@ static void testBackgroundThreads()
     QString err;
     CHECK(proxytunnel::loopbackPair(&a, &b, &err) && proxytunnel::loopbackPair(&c, &d, &err), "socket pairs");
     std::atomic<int> left{0};
-    // one blocks in recv() forever, one loops until stopping()
+    // like the relays: waits on a socket in short steps and looks at stopping()
     CHECK(bgthreads::start([&left, b] {
               char x;
-              proxytunnel::readSome(b, &x, 1, 600000);   // "forever"
+              while (!bgthreads::stopping())
+                  if (proxytunnel::readSome(b, &x, 1, 500) < 0)
+                      break;
               ++left;
           }),
-          "a worker blocked on a socket starts");
+          "a worker waiting on a socket starts");
     bgthreads::watch(static_cast<long long>(b));
+#ifndef _WIN32
+    // Linux: cutting the socket wakes even a long wait at once
+    CHECK(bgthreads::start([&left, d] {
+              char x;
+              proxytunnel::readSome(d, &x, 1, 600000);
+              ++left;
+          }),
+          "a worker in a long wait starts");
+    bgthreads::watch(static_cast<long long>(d));
+    const int workers = 3;
+#else
+    const int workers = 2;
+#endif
     CHECK(bgthreads::start([&left] {
               while (!bgthreads::stopping())
                   std::this_thread::sleep_for(std::chrono::milliseconds(20));
@@ -380,11 +395,11 @@ static void testBackgroundThreads()
           }),
           "a looping worker starts");
     std::this_thread::sleep_for(std::chrono::milliseconds(100));
-    CHECK(bgthreads::running() == 2, "both are running");
+    CHECK(bgthreads::running() == workers, "all are running");
     QElapsedTimer t;
     t.start();
     const int still = bgthreads::shutdown(3000);
-    CHECK(still == 0 && left == 2, qPrintable(QStringLiteral("shutdown() stops both (%1 left)").arg(still)));
+    CHECK(still == 0 && left == workers, qPrintable(QStringLiteral("shutdown() stops them all (%1 left)").arg(still)));
     CHECK(t.elapsed() < 2000, qPrintable(QStringLiteral("quickly (%1 ms)").arg(t.elapsed())));
     CHECK(!bgthreads::start([] {}), "no new workers after shutdown");
     for (sw_socket_t s : {a, b, c, d})

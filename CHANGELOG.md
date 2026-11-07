@@ -5,7 +5,7 @@ While the major version is 0, a new MINOR may change behaviour; PATCH releases
 only fix things. Pre-releases are marked as such on GitHub and are not offered
 by the in-app updater.
 
-## 0.4.1 — 2026-11-07
+## 0.4.1 — 2026-11-08
 
 Fixes from the second review.
 
@@ -32,7 +32,8 @@ Fixes from the second review.
   is now checked against the key in memory; if the new file cannot be written,
   the old password stays in force. Unit tests for both.
 - Background threads (Shadowsocks relays, the Windows agent bridge, the
-  Shadowsocks IP check) are stopped and waited for when the program closes.
+  Shadowsocks IP check) are stopped and waited for when the program closes
+  (they wait in half-second steps: on Windows a cut socket does not wake them).
 - `tests/integration/setup.sh | tail` no longer hangs; `sodium_init()` is
   checked in all tests.
 
