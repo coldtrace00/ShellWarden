@@ -525,9 +525,14 @@ int main(int argc, char **argv)
         ForwardSpec R1; R1.id = "R"; R1.type = ForwardSpec::Remote; R1.bindHost = "127.0.0.1"; R1.bindPort = 18082; R1.destHost = "127.0.0.1"; R1.destPort = tport;
         p.forwards = {L1, D1, R1};
         runLive(p, [&](Live &Lv) {
-            waitUntil([&] { return Lv.forwards.size() == 3; }, 5000);
-            int active = 0;
-            for (const QVariant &f : Lv.forwards) active += f.toMap().value("state") == "active";
+            auto activeCount = [&] {
+                int n = 0;
+                for (const QVariant &f : Lv.forwards) n += f.toMap().value("state") == "active";
+                return n;
+            };
+            // the list appears before the listeners are up (slow under sanitizers)
+            waitUntil([&] { return activeCount() == 3; }, 15000);
+            const int active = activeCount();
             CHECK(active == 3, qPrintable(QString("all 3 tunnels active (%1)").arg(active)));
             CHECK(roundTrip(18080, {}, "hello-L") == "pong:hello-L", "local forward -L carries data");
             QByteArray req("\x05\x01\x00\x03", 4); req.append(char(9)); req.append("localhost");
