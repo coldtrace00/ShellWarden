@@ -78,7 +78,7 @@ done
 SSR_VER=1.21.2
 SSR_SHA=6f88280ab5aec46ceaed41f8882dc889061b8d334ce34bee98be1fc11eb32558
 if [ ! -x "$W/ssr/ssserver" ]; then
-    curl -sSLf --retry 5 --retry-all-errors --retry-delay 5 -o "$W/ssr.tar.xz" \
+    curl -sSLf --retry 10 --retry-all-errors --retry-delay 15 -o "$W/ssr.tar.xz" \
         "https://github.com/shadowsocks/shadowsocks-rust/releases/download/v$SSR_VER/shadowsocks-v$SSR_VER.x86_64-unknown-linux-gnu.tar.xz"
     echo "$SSR_SHA  $W/ssr.tar.xz" | sha256sum -c -
     mkdir -p "$W/ssr" && tar -xJf "$W/ssr.tar.xz" -C "$W/ssr"

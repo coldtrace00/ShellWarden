@@ -40,6 +40,13 @@ jobs:
         run: ./build/tests/unit_tests
       - name: Interface loads nothing from the network
         run: QT_QPA_PLATFORM=offscreen ./build/tests/qml_safety_tests
+      # shadowsocks-rust for the Shadowsocks 2022 tests: kept between runs, so a
+      # GitHub download hiccup (5xx) does not fail the tests; checked by sha256 in setup.sh
+      - name: Cache the test Shadowsocks 2022 server
+        uses: actions/cache@v4
+        with:
+          path: /tmp/sw-test/ssr
+          key: shadowsocks-rust-1.21.2-x86_64-linux-gnu
       - name: Test servers (sshd, proxies, Shadowsocks)
         run: sudo tests/integration/setup.sh
       - name: Integration tests
@@ -74,6 +81,13 @@ jobs:
         run: ./build/tests/unit_tests
       - name: Interface loads nothing from the network
         run: QT_QPA_PLATFORM=offscreen ASAN_OPTIONS=detect_leaks=0 ./build/tests/qml_safety_tests
+      # shadowsocks-rust for the Shadowsocks 2022 tests: kept between runs, so a
+      # GitHub download hiccup (5xx) does not fail the tests; checked by sha256 in setup.sh
+      - name: Cache the test Shadowsocks 2022 server
+        uses: actions/cache@v4
+        with:
+          path: /tmp/sw-test/ssr
+          key: shadowsocks-rust-1.21.2-x86_64-linux-gnu
       - name: Test servers
         run: sudo tests/integration/setup.sh
       - name: Integration tests
