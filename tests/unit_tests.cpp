@@ -10,6 +10,7 @@
 #include "core/Shadowsocks.h"
 #include "core/Vault.h"
 #include "core/SafeText.h"
+#include "core/KeyTools.h"
 #include "core/BackgroundThreads.h"
 #include "core/ProxyTunnel.h"
 #include "terminal/PasteGuard.h"
@@ -18,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QDir>
+#include <QFileInfo>
 #include <QFile>
 #include <QJsonArray>
 #include <QJsonDocument>
@@ -87,6 +89,33 @@ static void testVault(const QString &dir)
                   && again.data().value("hosts").toArray().size() == 1,
               "the file opens with the new password only, data kept");
         CHECK(again.changePassword("new password 42", "correct horse battery", &err), "and back");
+        QJsonObject d;
+        Vault::KeyCache cacheNew, cacheOld;   // one cache per password
+        CHECK(Vault::readFile(path + ".bak", "new password 42", &cacheNew, &d) == Vault::ReadResult::WrongPassword
+                  && Vault::readFile(path + ".bak", "correct horse battery", &cacheOld, &d) == Vault::ReadResult::Ok,
+              "after a change the .bak opens with the new password only");
+    }
+    {   // re-encrypting a backup: the old password stops opening it
+        const QString backup = dir + "/backup-copy.swv";
+        QFile::remove(backup);
+        QFile::copy(path, backup);
+        Vault v(path);
+        CHECK(v.unlock("correct horse battery", &err) && v.changePassword("correct horse battery", "third pass 333", &err),
+              "password changed (backup still under the old one)");
+        QJsonObject d;
+        Vault::KeyCache oldCache;
+        CHECK(Vault::readFile(backup, "correct horse battery", &oldCache, &d) == Vault::ReadResult::Ok
+                  && d.value("hosts").toArray().size() == 1, "the backup opens with the old password");
+        CHECK(v.writeCopy(backup, d, &err) && !QFileInfo::exists(backup + ".bak"), "re-encrypted in place, no .bak left");
+        Vault::KeyCache c2, c3;
+        QJsonObject d2;
+        CHECK(Vault::readFile(backup, "correct horse battery", &c2, &d2) == Vault::ReadResult::WrongPassword,
+              "the old password no longer opens it");
+        CHECK(Vault::readFile(backup, "third pass 333", &c3, &d2) == Vault::ReadResult::Ok
+                  && d2.value("hosts").toArray().size() == 1, "the new one does, data kept");
+        CHECK(Vault::readFile(dir + "/nothing.swv", "x", &c3, &d2) == Vault::ReadResult::Damaged, "a missing file is reported");
+        CHECK(v.changePassword("third pass 333", "correct horse battery", &err), "back to the test password");
+        QFile::remove(backup);
     }
     {   // every byte of header and ciphertext is authenticated
         QByteArray raw = readFile(path);
@@ -406,6 +435,37 @@ static void testBackgroundThreads()
         proxytunnel::closeSocket(s);
 }
 
+static void testKeyPassphrase()
+{
+    std::printf("[key passphrase: add, change, remove]\n");
+    using namespace keytools;
+    for (KeyType t : {KeyType::Ed25519, KeyType::EcdsaP256, KeyType::Rsa3072}) {
+        KeyMaterial km;
+        QString err;
+        CHECK(generate(t, "test", QString(), &km, &err) && !km.encrypted, "a key without passphrase");
+        QByteArray withPass, changed, without;
+        CHECK(changePassphrase(km.privateKey, QString(), "first pass", &withPass, &err) == PassphraseChange::Ok
+                  && isEncrypted(withPass) && checkPassphrase(withPass, "first pass") && !checkPassphrase(withPass, "nope"),
+              qPrintable(km.type + ": passphrase added"));
+        CHECK(changePassphrase(withPass, "wrong", "x", &changed, &err) == PassphraseChange::WrongPassphrase && changed.isEmpty(),
+              "a wrong current passphrase is refused");
+        CHECK(changePassphrase(withPass, "first pass", "second pass", &changed, &err) == PassphraseChange::Ok
+                  && checkPassphrase(changed, "second pass") && !checkPassphrase(changed, "first pass"),
+              "passphrase changed");
+        CHECK(changePassphrase(changed, "second pass", QString(), &without, &err) == PassphraseChange::Ok
+                  && !isEncrypted(without) && checkPassphrase(without, QString()),
+              "passphrase removed");
+        KeyMaterial a, b;
+        CHECK(importPrivateKey(changed, "second pass", "c", &a, &err) == ImportResult::Ok
+                  && importPrivateKey(without, QString(), "c", &b, &err) == ImportResult::Ok
+                  && a.fingerprint == km.fingerprint && b.fingerprint == km.fingerprint,
+              "the key itself (fingerprint) never changes");
+    }
+    QByteArray out;
+    QString err;
+    CHECK(changePassphrase("not a key", QString(), "x", &out, &err) == PassphraseChange::Invalid, "garbage is refused");
+}
+
 int main(int argc, char **argv)
 {
     QCoreApplication app(argc, argv);
@@ -417,6 +477,7 @@ int main(int argc, char **argv)
     testVault(tmp.path());
     testProtected();
     testSafeText();
+    testKeyPassphrase();
     testJournal(tmp.path());
     testFileNames();
     testPaste();

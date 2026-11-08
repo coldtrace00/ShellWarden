@@ -211,6 +211,9 @@ bool Vault::changePassword(const QString &oldPassword, const QString &newPasswor
     }
     sodium_free(oldKey);
     sodium_memzero(oldSalt, sizeof oldSalt);
+    // writeFile() kept the previous file (old password) as .bak: replace it with
+    // a copy under the new password, so the old password opens nothing here
+    writeCopy(m_path + QStringLiteral(".bak"), m_data, nullptr);
     return true;
 }
 
@@ -257,8 +260,10 @@ bool Vault::save(QString *error)
     return writeFile(error);
 }
 
-bool Vault::writeFile(QString *error)
+bool Vault::encrypt(const QJsonObject &data, QByteArray *out) const
 {
+    if (!m_key)
+        return false;
     QByteArray header;
     header.reserve(kHeaderLen);
     header.append(kMagic, 8);
@@ -270,7 +275,7 @@ bool Vault::writeFile(QString *error)
     randombytes_buf(nonce, sizeof nonce); // fresh nonce on every save
     header.append(reinterpret_cast<const char *>(nonce), kNonceLen);
 
-    QByteArray plain = QJsonDocument(m_data).toJson(QJsonDocument::Compact);
+    QByteArray plain = QJsonDocument(data).toJson(QJsonDocument::Compact);
     secure::ByteGuard plainGuard(plain);
 
     QByteArray cipher(plain.size() + int(crypto_aead_xchacha20poly1305_ietf_ABYTES), Qt::Uninitialized);
@@ -282,6 +287,18 @@ bool Vault::writeFile(QString *error)
         reinterpret_cast<const unsigned char *>(header.constData()), header.size(),
         nullptr, nonce, m_key);
     cipher.resize(int(cipherLen));
+    *out = header + cipher;
+    return true;
+}
+
+bool Vault::writeFile(QString *error)
+{
+    QByteArray blob;
+    if (!encrypt(m_data, &blob)) {
+        if (error)
+            *error = QObject::tr("The vault is locked.");
+        return false;
+    }
 
     // Keep the previous version as a backup, then replace atomically. The backup
     // itself is replaced atomically too: there is never a moment without one.
@@ -304,12 +321,88 @@ bool Vault::writeFile(QString *error)
             *error = QObject::tr("Cannot write vault: %1").arg(out.errorString());
         return false;
     }
-    out.write(header);
-    out.write(cipher);
+    out.write(blob);
     if (!out.commit()) {
         if (error)
             *error = QObject::tr("Cannot write vault: %1").arg(out.errorString());
         return false;
     }
     return true;
+}
+
+bool Vault::writeCopy(const QString &path, const QJsonObject &data, QString *error) const
+{
+    QByteArray blob;
+    if (!encrypt(data, &blob)) {
+        if (error)
+            *error = QObject::tr("The vault is locked.");
+        return false;
+    }
+    QSaveFile out(path);
+    if (!out.open(QIODevice::WriteOnly) || out.write(blob) != blob.size() || !out.commit()) {
+        if (error)
+            *error = QObject::tr("Cannot write %1").arg(path);
+        return false;
+    }
+    return true;
+}
+
+Vault::KeyCache::~KeyCache()
+{
+    for (Entry &e : m_entries)
+        if (e.key)
+            sodium_free(e.key);
+}
+
+Vault::ReadResult Vault::readFile(const QString &path, const QString &password, KeyCache *cache, QJsonObject *data)
+{
+    QFile f(path);
+    if (!f.open(QIODevice::ReadOnly))
+        return ReadResult::Damaged;
+    const QByteArray blob = f.readAll();
+    f.close();
+    if (blob.size() < kHeaderLen + int(crypto_aead_xchacha20poly1305_ietf_ABYTES)
+        || std::memcmp(blob.constData(), kMagic, 8) != 0)
+        return ReadResult::Damaged;
+    const char *p = blob.constData() + 8;
+    const quint64 ops = getU64(p);
+    const quint64 mem = getU64(p + 8);
+    const QByteArray salt(p + 16, kSaltLen);
+    const auto *nonce = reinterpret_cast<const unsigned char *>(p + 16 + kSaltLen);
+    if (ops < crypto_pwhash_OPSLIMIT_MIN || ops > 64 || mem < crypto_pwhash_MEMLIMIT_MIN || mem > (quint64(1) << 30))
+        return ReadResult::Damaged;
+
+    unsigned char *key = nullptr;
+    for (const KeyCache::Entry &e : cache->m_entries)
+        if (e.salt == salt && e.ops == ops && e.mem == mem)
+            key = e.key;
+    if (!key) {
+        key = static_cast<unsigned char *>(sodium_malloc(kKeyLen));
+        QByteArray pw = password.toUtf8();
+        secure::ByteGuard guard(pw);
+        if (!key || crypto_pwhash(key, kKeyLen, pw.constData(), static_cast<unsigned long long>(pw.size()),
+                                  reinterpret_cast<const unsigned char *>(salt.constData()), ops, size_t(mem),
+                                  crypto_pwhash_ALG_ARGON2ID13) != 0) {
+            if (key)
+                sodium_free(key);
+            return ReadResult::Damaged;
+        }
+        cache->m_entries.append({salt, ops, mem, key});
+    }
+
+    const auto cipherLen = static_cast<unsigned long long>(blob.size() - kHeaderLen);
+    QByteArray plain(int(cipherLen - crypto_aead_xchacha20poly1305_ietf_ABYTES), Qt::Uninitialized);
+    secure::ByteGuard plainGuard(plain);
+    unsigned long long plainLen = 0;
+    if (crypto_aead_xchacha20poly1305_ietf_decrypt(
+            reinterpret_cast<unsigned char *>(plain.data()), &plainLen, nullptr,
+            reinterpret_cast<const unsigned char *>(blob.constData() + kHeaderLen), cipherLen,
+            reinterpret_cast<const unsigned char *>(blob.constData()), kHeaderLen, nonce, key) != 0)
+        return ReadResult::WrongPassword;
+    QJsonParseError perr{};
+    const QJsonDocument doc = QJsonDocument::fromJson(plain.left(int(plainLen)), &perr);
+    if (perr.error != QJsonParseError::NoError || !doc.isObject())
+        return ReadResult::Damaged;
+    *data = doc.object();
+    return ReadResult::Ok;
 }

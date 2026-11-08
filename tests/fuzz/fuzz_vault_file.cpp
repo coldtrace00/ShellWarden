@@ -3,6 +3,7 @@
 #include "FuzzCommon.h"
 #include "core/Vault.h"
 #include <QFile>
+#include <QJsonObject>
 #include <QTemporaryDir>
 extern "C" int LLVMFuzzerTestOneInput(const uint8_t *d, size_t n)
 {
@@ -13,5 +14,9 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t *d, size_t n)
     Vault v(path);
     QString err;
     v.unlock(QStringLiteral("fuzz password"), &err);
+    // the same file read as a backup (re-encryption after a password change)
+    Vault::KeyCache cache;
+    QJsonObject data;
+    Vault::readFile(path, QStringLiteral("fuzz password"), &cache, &data);
     return 0;
 }

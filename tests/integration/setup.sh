@@ -54,6 +54,14 @@ tinyproxy -c "$W/tinyproxy.conf" </dev/null >/dev/null 2>&1
 head -c 2000000 /dev/urandom > "$W/www/big.bin"
 (cd "$W/www" && exec nohup python3 -m http.server 8766 --bind 127.0.0.1) </dev/null >/dev/null 2>&1 &
 
+# HTTPS "what is my IP" service with a test-only certificate for "localhost"
+# (the IP check through Shadowsocks speaks TLS inside the tunnel)
+mkdir -p "$W/tls"
+openssl req -x509 -newkey ec -pkeyopt ec_paramgen_curve:P-256 -nodes -days 2 \
+    -subj /CN=localhost -addext subjectAltName=DNS:localhost \
+    -keyout "$W/tls/key.pem" -out "$W/tls/cert.pem" >/dev/null 2>&1
+nohup python3 "$HERE/https_ip.py" 8767 "$W/tls/cert.pem" "$W/tls/key.pem" </dev/null >/dev/null 2>&1 &
+
 # Shadowsocks AEAD-2017 (shadowsocks-libev). The Debian/Ubuntu package starts
 # its own service on 8388 with a random password; stop it so ours gets the port.
 if command -v systemctl >/dev/null 2>&1; then
@@ -88,7 +96,7 @@ nohup "$W/ssr/ssserver" -c "$W/ss2022.json" </dev/null > "$W/ssserver.log" 2>&1 
 
 sleep 2
 # every test port must be ours and listening
-for p in 2222 1080 8888 8766 8388 8389 8390 8391 8392 8393 8394; do
+for p in 2222 1080 8888 8766 8767 8388 8389 8390 8391 8392 8393 8394; do
     ok=0
     for _ in $(seq 20); do
         if (exec 3<>/dev/tcp/127.0.0.1/$p) 2>/dev/null; then ok=1; break; fi

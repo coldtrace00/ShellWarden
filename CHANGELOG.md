@@ -5,6 +5,40 @@ While the major version is 0, a new MINOR may change behaviour; PATCH releases
 only fix things. Pre-releases are marked as such on GitHub and are not offered
 by the in-app updater.
 
+## 0.5.0 — 2026-11-08
+
+New features are why this is 0.5 and not 0.4.2 (see the versioning note above).
+
+### Added
+- **Key passphrase: add, change or remove** (Keys → ⋯). The key file is written
+  again with the new passphrase (OpenSSH format, bcrypt_pbkdf); the key itself
+  and its fingerprint stay the same, so nothing changes on the servers. A key
+  protected by the master password asks for it. Entries that hold only a public
+  key now say so instead of "No passphrase".
+- **The journal shows how you signed in**: `key "Work laptop" (SHA256:…)`, a key
+  from the SSH agent, password, keyboard-interactive — or several, when the
+  server asked for two factors.
+
+### Security
+- **SSH agent on Windows: no port open to other programs.** libssh got the agent
+  through a 127.0.0.1 port that any process — also another Windows user on the
+  same PC (RDP, terminal server) — could connect to and use the keys. Now every
+  agent connection is a private socket pair made for it (the other end is
+  checked); nothing listens.
+- **A changed master password also re-encrypts the backups** (`backups/*.swv`
+  and `vault.swv.bak`), protected secrets inside them included. Backups made
+  with an even older password are listed and can be deleted.
+- **The IP check through Shadowsocks uses HTTPS inside the tunnel**, with the
+  certificate checked, so the Shadowsocks server cannot fake the country or IP.
+- **Honest documentation of the rich-text limit.** Qt reads an image inside
+  rich text from `file://server/…` without asking the URL check (also in current
+  Qt), so only plain text protects there. README, `QmlSafety.h` and a test now
+  say exactly that; the test fails if Qt ever changes, so the docs can follow.
+
+### Fixed
+- The tunnels integration test could miss the forward states (a nested event
+  loop inside a slot); it now runs from the main loop. 8 of 8 runs pass.
+
 ## 0.4.1 — 2026-11-08
 
 Fixes from the second review.

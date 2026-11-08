@@ -290,6 +290,7 @@ private:
     bool m_saveRequested[3] = {false, false, false};
 
     QString m_route;
+    QString m_authWith;   // how the last login succeeded (for the journal)
     bool m_viaProxy = false;
     bool m_killSwitch = false;
     QString m_proxyId;

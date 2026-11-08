@@ -109,6 +109,12 @@ public:
     Q_INVOKABLE void unlockVault(const QString &password);
     Q_INVOKABLE void lockVault();
     Q_INVOKABLE QString changeMasterPassword(const QString &oldPw, const QString &newPw, const QString &confirm);
+    // After a successful change: {reencrypted: n, stale: [file names]} — the
+    // backups now under the new password, and those the old password did not
+    // open (made with an even older one, or damaged).
+    Q_INVOKABLE QVariantMap passwordChangeReport() const { return m_pwReport; }
+    // Deletes these backup files (names from passwordChangeReport().stale).
+    Q_INVOKABLE QString deleteBackups(const QStringList &names);
     Q_INVOKABLE QString backupVault(const QUrl &target);
     Q_INVOKABLE QString restoreVault(const QUrl &source, const QString &password);
     // Forgotten master password: the old vault is moved (not deleted) to the
@@ -153,6 +159,14 @@ public:
     Q_INVOKABLE QString unprotectHost(const QString &hostId, const QString &masterPassword);
     Q_INVOKABLE QString setKeyPassphrase(const QString &id, const QString &passphrase, bool save);
     Q_INVOKABLE void forgetKeyPassphrase(const QString &id);
+    // Adds, changes or removes the key's own passphrase (the key file is written
+    // again; the public key stays the same). `current` may be empty when the key
+    // has none or its passphrase is saved in the vault. `masterPassword` is needed
+    // only for a key protected by the master password. "" = done.
+    Q_INVOKABLE QString changeKeyPassphrase(const QString &id, const QString &current, const QString &newPassphrase,
+                                            const QString &confirm, bool saveNew, const QString &masterPassword = {});
+    // What the passphrase dialog needs: {encrypted, saved, protected}.
+    Q_INVOKABLE QVariantMap keyPassphraseState(const QString &id) const;
     Q_INVOKABLE void renameKey(const QString &id, const QString &name);
     Q_INVOKABLE void deleteKey(const QString &id);
     Q_INVOKABLE QString publicKeyLine(const QString &id) const;
@@ -287,6 +301,10 @@ private:
     void reloadModels();
     void setBusy(bool b);
     void dailyBackup();
+    // Re-encrypts every backup the old password opens with the vault's new
+    // password, re-sealing protected secrets for the new protect key.
+    QVariantMap reencryptBackups(const QString &oldPw);
+    QVariantMap m_pwReport;
     TerminalSession *createSession(const QString &hostId, const QString &label, const QString &endpoint,
                                    const QString &kind);
     void startSession(TerminalSession *s, const QJsonObject &host);

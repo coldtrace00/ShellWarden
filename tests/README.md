@@ -14,8 +14,13 @@ sudo ./build/tests/integration_tests
   from servers, paste guard, command history filters, known_hosts hashing,
   minisign, update checks (downgrade), Shadowsocks / BLAKE3 vectors, ss:// links,
   master password change, text from the other side, background threads.
-- `qml_safety_tests.cpp` — rich text, images and tooltips cannot load anything
-  from the network or from file://server/… (a control run shows the test sees loads).
+- `qml_safety_tests.cpp` — images, http in rich text and tooltips cannot load
+  anything from the network or from file://server/… (a control run shows the test
+  sees loads). It also checks the known limit: an image inside RichText/StyledText
+  from file://server/… is opened by Qt past the interceptor — that is why all
+  text must be plain (see src/app/QmlSafety.h).
+- `integration/https_ip.py` — a test-only HTTPS "what is my IP" service (self-signed
+  certificate for localhost made by setup.sh) for the IP check through Shadowsocks.
 - `check_qml_text.py` — no Text/Label without textFormat: PlainText, no raw
   Button/MenuItem/CheckBox… (their labels show HTML; use the App* wrappers).
 - `integration_tests.cpp` — real OpenSSH (sshd on 2222, ssh-keygen, ssh-agent),

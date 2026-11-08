@@ -55,6 +55,7 @@ struct ConnectParams
     QString username;
     QString password;          // may be empty → asked interactively
     QByteArray privateKey;     // OpenSSH/PEM text, may be empty
+    QString keyName;           // its name in the keychain (for the journal)
     QString keyPassphrase;     // may be empty → asked if the key is encrypted
     QString knownHostsPath;
     ProxyConfig proxy;         // first hop (target, or jump host when set)
@@ -131,6 +132,9 @@ signals:
     // A secret that worked; the UI may offer to store it in the vault.
     void secretAccepted(int kind, const QString &secret);
     void connected();
+    // How we got in, e.g. "key \"Work laptop\" (SHA256:…)" or "password", or
+    // "key … + keyboard-interactive" when the server wanted two factors.
+    void authenticatedWith(const QString &methods);
     // What the server sees as our address (from $SSH_CONNECTION on the server).
     void clientAddressSeen(const QString &ip, const QString &port, const QString &serverIp);
     void sftpResumed(int transferId, qint64 offset);   // continues an earlier, broken transfer
@@ -202,6 +206,7 @@ private:
     int m_passwordAttempts = 0;
     int m_pendingSecret = -1;
     int m_lastMethod = 0;
+    QStringList m_authSteps;   // the methods that succeeded, in order
     bool m_done = false;
     bool m_passwordFromUser = false;
     bool m_passphraseFromUser = false;

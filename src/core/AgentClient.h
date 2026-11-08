@@ -16,11 +16,10 @@ int identityCount(QString *error = nullptr);   // keys the agent offers, -1 on e
 // One request/response; both are full agent messages (4-byte length + body).
 QByteArray request(const QByteArray &message, QString *error);
 
-#ifdef _WIN32
-// libssh can only use an agent through a socket on Windows: this starts (once)
-// a tiny 127.0.0.1 bridge that relays to the agent, and returns a connected
-// socket for ssh_set_agent_socket(), or -1.
+// A connected socket for ssh_set_agent_socket() that relays to request(), or
+// -1. libssh can use an agent only through a socket, so on Windows (pipe /
+// Pageant window) every agent login gets one. No port is left listening: it
+// is a private pair made for this one call. Works everywhere (tested on Linux).
 long long bridgeSocket(QString *error);
-#endif
 
 } // namespace agent

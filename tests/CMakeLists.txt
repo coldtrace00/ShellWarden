@@ -14,7 +14,7 @@ add_library(sw_core_for_tests STATIC
     ${SW_SRC}/core/Paths.cpp ${SW_SRC}/core/PrivateDir.cpp ${SW_SRC}/core/PrivateDirWin.cpp ${SW_SRC}/core/FileNames.cpp
     ${SW_SRC}/core/DepVersions.cpp ${SW_SRC}/core/Protected.cpp ${SW_SRC}/core/CommandHistory.cpp
     ${SW_SRC}/core/PasswordTools.cpp ${SW_SRC}/core/ActivityLog.cpp ${SW_SRC}/core/ActivityLog.h ${SW_SRC}/core/FirewallLock.cpp
-    ${SW_SRC}/core/AgentClient.cpp ${SW_SRC}/core/HostImport.cpp ${SW_SRC}/core/BackgroundThreads.cpp
+    ${SW_SRC}/core/AgentClient.cpp ${SW_SRC}/core/HostImport.cpp ${SW_SRC}/core/BackgroundThreads.cpp ${SW_SRC}/core/HttpsOverSocket.cpp
     ${SW_SRC}/app/UpdateChecker.cpp ${SW_SRC}/app/UpdateChecker.h)
 set_target_properties(sw_core_for_tests PROPERTIES AUTOMOC ON)
 target_include_directories(sw_core_for_tests PUBLIC ${SW_SRC})

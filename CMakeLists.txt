@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(ShellWarden VERSION 0.4.1 LANGUAGES C CXX)
+project(ShellWarden VERSION 0.5.0 LANGUAGES C CXX)
 
 # ---- branding: change the product name in ONE place --------------------
 set(APP_NAME        "ShellWarden"  CACHE STRING "Product name (window, data folder, installer)")
@@ -52,6 +52,7 @@ qt_add_executable(ShellWardenApp WIN32
     src/core/Minisign.h         src/core/Minisign.cpp
     src/core/Shadowsocks.h      src/core/Shadowsocks.cpp
     src/core/BackgroundThreads.h src/core/BackgroundThreads.cpp
+    src/core/HttpsOverSocket.h src/core/HttpsOverSocket.cpp
     src/core/SafeText.h
     src/core/KeyTools.h         src/core/KeyTools.cpp
     src/core/KnownHosts.h       src/core/KnownHosts.cpp

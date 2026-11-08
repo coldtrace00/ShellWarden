@@ -121,15 +121,16 @@ Item {
                                 }
                                 Rectangle {
                                     radius: 4
-                                    color: !model.encrypted ? Theme.warnDim : (model.hasPassphrase ? Theme.okDim : Theme.surface2)
+                                    color: !model.hasPrivateKey ? Theme.surface2 : !model.encrypted ? Theme.warnDim : (model.hasPassphrase ? Theme.okDim : Theme.surface2)
                                     implicitWidth: ppText.implicitWidth + 12; implicitHeight: 20
                                     Text {
                                         textFormat: Text.PlainText
                                         id: ppText
                                         anchors.centerIn: parent
                                         font.pixelSize: 11
-                                        color: !model.encrypted ? Theme.warn : (model.hasPassphrase ? Theme.ok : Theme.textDim)
-                                        text: !model.encrypted ? qsTr("No passphrase")
+                                        color: !model.hasPrivateKey ? Theme.textDim : !model.encrypted ? Theme.warn : (model.hasPassphrase ? Theme.ok : Theme.textDim)
+                                        text: !model.hasPrivateKey ? qsTr("Only the public key")
+                                              : !model.encrypted ? qsTr("No passphrase")
                                                                : (model.hasPassphrase ? qsTr("Passphrase saved") : qsTr("Passphrase asked on connect"))
                                     }
                                 }
@@ -178,6 +179,7 @@ Item {
                             glyph: Theme.iconMore; compact: true; variant: "ghost"
                             onClicked: { keyMenu.keyId = model.id; keyMenu.keyType = model.type; keyMenu.keyName = model.name
                                          keyMenu.encrypted = model.encrypted; keyMenu.hasPassphrase = model.hasPassphrase
+                                         keyMenu.hasPrivate = !!model.hasPrivateKey
                                          keyMenu.popup() }
                         }
                     }
@@ -234,6 +236,7 @@ Item {
         property string keyName: ""
         property bool encrypted: false
         property bool hasPassphrase: false
+        property bool hasPrivate: true
         AppMenuItem {
             text: qsTr("Save public key (SSH2 format)…")
             onTriggered: {
@@ -249,6 +252,7 @@ Item {
         }
         MenuSeparator {}
         AppMenuItem {
+            enabled: keyMenu.hasPrivate
             text: qsTr("Save private key…")
             onTriggered: {
                 saveDlg.mode = "priv"; saveDlg.keyId = keyMenu.keyId
@@ -257,6 +261,11 @@ Item {
             }
         }
         MenuSeparator {}
+        AppMenuItem {
+            enabled: keyMenu.hasPrivate
+            text: keyMenu.encrypted ? qsTr("Change or remove the key passphrase…") : qsTr("Add a passphrase to the key…")
+            onTriggered: keyPassDlg.openFor(keyMenu.keyId, keyMenu.keyName)
+        }
         AppMenuItem {
             enabled: keyMenu.encrypted
             text: keyMenu.hasPassphrase ? qsTr("Change saved passphrase…") : qsTr("Save passphrase in vault…")
@@ -323,6 +332,61 @@ Item {
                 }
             }
         }
+    }
+
+    // the key's own passphrase: add, change, remove (the key file is written again)
+    Modal {
+        id: keyPassDlg
+        property string keyId: ""
+        property var st: ({})
+        readonly property bool enc: !!st.encrypted
+        title: enc ? qsTr("Key passphrase") : qsTr("Add a passphrase to the key")
+        subtitle: enc ? qsTr("Change the passphrase of \"%1\", or leave the new one empty to remove it.").arg(keyName)
+                      : qsTr("\"%1\" has no passphrase. With one, a copy of the key file is useless without it.").arg(keyName)
+        property string keyName: ""
+        function openFor(id, name) {
+            keyId = id; keyName = name; st = App.keyPassphraseState(id)
+            kpCurrent.text = ""; kpNew.text = ""; kpConfirm.text = ""; kpMaster.text = ""; kpErr.text = ""
+            kpSave.checked = !!st.saved
+            open()
+            if (kpCurrent.visible) kpCurrent.field.forceActiveFocus(); else kpNew.field.forceActiveFocus()
+        }
+        AppField { id: kpCurrent; visible: keyPassDlg.enc && !keyPassDlg.st.saved; Layout.fillWidth: true
+                   label: qsTr("Current passphrase"); secret: true; onAccepted: kpNew.field.forceActiveFocus() }
+        AppField { id: kpNew; Layout.fillWidth: true; label: qsTr("New passphrase"); secret: true
+                   hint: keyPassDlg.enc ? qsTr("Empty = no passphrase") : ""
+                   onAccepted: kpConfirm.field.forceActiveFocus() }
+        AppField { id: kpConfirm; Layout.fillWidth: true; label: qsTr("Repeat the new passphrase"); secret: true; onAccepted: kpApply.clicked() }
+        AppCheckBox { id: kpSave; Layout.fillWidth: true; enabled: kpNew.text !== ""
+                      text: qsTr("Save it in the vault (not asked on every connection)") }
+        AppField { id: kpMaster; visible: !!keyPassDlg.st.protected; Layout.fillWidth: true
+                   label: qsTr("Master password"); hint: qsTr("This key is protected by the master password.")
+                   secret: true; onAccepted: kpApply.clicked() }
+        Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+               text: qsTr("The key itself stays the same, so nothing changes on the servers. Copies saved earlier (exported files) keep their old passphrase.") }
+        Text { textFormat: Text.PlainText; id: kpErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+        RowLayout {
+            Layout.fillWidth: true
+            Item { Layout.fillWidth: true }
+            AppButton { text: qsTr("Cancel"); variant: "ghost"; onClicked: keyPassDlg.close() }
+            AppButton {
+                id: kpApply
+                text: kpNew.text === "" && keyPassDlg.enc ? qsTr("Remove passphrase") : qsTr("Save")
+                variant: kpNew.text === "" && keyPassDlg.enc ? "danger" : "primary"
+                enabled: kpNew.text !== "" || keyPassDlg.enc
+                onClicked: {
+                    const e = App.changeKeyPassphrase(keyPassDlg.keyId, kpCurrent.text, kpNew.text, kpConfirm.text,
+                                                      kpSave.checked, kpMaster.text)
+                    kpCurrent.text = ""; kpMaster.text = ""
+                    if (e !== "") { kpErr.text = e; return }
+                    const msg = kpNew.text === "" ? qsTr("Passphrase removed") : (keyPassDlg.enc ? qsTr("Passphrase changed") : qsTr("Passphrase added"))
+                    kpNew.text = ""; kpConfirm.text = ""
+                    keyPassDlg.close()
+                    toastLocal.show(msg)
+                }
+            }
+        }
+        onClosed: { kpCurrent.text = ""; kpNew.text = ""; kpConfirm.text = ""; kpMaster.text = "" }
     }
 
     Modal {

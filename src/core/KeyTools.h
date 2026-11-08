@@ -45,6 +45,17 @@ bool isEncrypted(const QByteArray &privateKeyText);
 // Checks that `passphrase` opens the key.
 bool checkPassphrase(const QByteArray &privateKeyText, const QString &passphrase);
 
+enum class PassphraseChange { Ok, WrongPassphrase, Invalid, Failed };
+
+// Adds, changes or removes the passphrase of a private key: opens it with
+// `oldPassphrase` (empty for a key without one) and writes it again in the
+// OpenSSH format, protected with `newPassphrase` (bcrypt_pbkdf + aes256-ctr),
+// or unprotected when that is empty. The key itself does not change: the
+// public key and fingerprint stay the same (checked), so nothing on the
+// servers needs updating. `out` gets the new private key text.
+PassphraseChange changePassphrase(const QByteArray &privateKeyText, const QString &oldPassphrase,
+                                  const QString &newPassphrase, QByteArray *out, QString *error);
+
 // RFC 4716 rendering of an OpenSSH public key line.
 QString toRfc4716(const QString &publicLine);
 

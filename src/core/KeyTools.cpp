@@ -572,6 +572,51 @@ bool checkPassphrase(const QByteArray &text, const QString &passphrase)
                                          nullptr, nullptr, &priv.key) == SSH_OK;
 }
 
+PassphraseChange changePassphrase(const QByteArray &text, const QString &oldPassphrase,
+                                  const QString &newPassphrase, QByteArray *out, QString *error)
+{
+    QByteArray oldPass = oldPassphrase.toUtf8(), newPass = newPassphrase.toUtf8();
+    secure::ByteGuard g1(oldPass), g2(newPass);
+    const QByteArray norm = normalizeNewlines(text);
+    KeyHolder priv;
+    if (ssh_pki_import_privkey_base64(norm.constData(), oldPass.isEmpty() ? nullptr : oldPass.constData(),
+                                      nullptr, nullptr, &priv.key) != SSH_OK || !priv.key) {
+        const bool enc = isEncrypted(norm);
+        if (error)
+            *error = enc ? QObject::tr("Wrong passphrase.") : QObject::tr("This is not a private key ShellWarden can read.");
+        return enc ? PassphraseChange::WrongPassphrase : PassphraseChange::Invalid;
+    }
+    KeyMaterial before;
+    if (!fillFromPrivate(priv.key, QString(), &before)) {
+        if (error)
+            *error = QObject::tr("Cannot derive the public key.");
+        return PassphraseChange::Failed;
+    }
+    CStr b64;
+    if (ssh_pki_export_privkey_base64(priv.key, newPass.isEmpty() ? nullptr : newPass.constData(),
+                                      nullptr, nullptr, &b64.p) != SSH_OK || !b64.p) {
+        if (error)
+            *error = QObject::tr("Cannot export the private key.");
+        return PassphraseChange::Failed;
+    }
+    QByteArray result = normalizeNewlines(QByteArray(b64.p));
+    sodium_memzero(b64.p, strlen(b64.p));
+    // read it back with the new passphrase: same key, and the passphrase really opens it
+    KeyHolder again;
+    KeyMaterial after;
+    if (ssh_pki_import_privkey_base64(result.constData(), newPass.isEmpty() ? nullptr : newPass.constData(),
+                                      nullptr, nullptr, &again.key) != SSH_OK
+        || !fillFromPrivate(again.key, QString(), &after) || after.fingerprint != before.fingerprint
+        || isEncrypted(result) != !newPass.isEmpty()) {
+        secure::wipe(result);
+        if (error)
+            *error = QObject::tr("The key could not be written again safely; nothing was changed.");
+        return PassphraseChange::Failed;
+    }
+    *out = std::move(result);   // one buffer, owned by the caller from now on
+    return PassphraseChange::Ok;
+}
+
 QString toRfc4716(const QString &publicLine)
 {
     const QStringList parts = publicLine.trimmed().split(QLatin1Char(' '), Qt::SkipEmptyParts);

@@ -70,7 +70,7 @@ AppController::AppController(QObject *parent)
       m_keys({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("type"),
               QStringLiteral("fingerprint"), QStringLiteral("publicKey"), QStringLiteral("encrypted"),
               QStringLiteral("created"), QStringLiteral("protected")},
-             {QStringLiteral("passphrase")}),
+             {QStringLiteral("passphrase"), QStringLiteral("privateKey")}),   // hasPrivateKey: not only a public key
       m_proxies({QStringLiteral("id"), QStringLiteral("name"), QStringLiteral("type"),
                  QStringLiteral("host"), QStringLiteral("port"), QStringLiteral("username"),
                  QStringLiteral("checkState"), QStringLiteral("exitIp"), QStringLiteral("location"),
@@ -554,8 +554,122 @@ QString AppController::changeMasterPassword(const QString &oldPw, const QString 
         logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Master password change failed"), err);
         return err;
     }
-    logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Master password changed"));
+    // The backups were made under the old password: a password changed because
+    // it may have leaked must not keep opening them.
+    m_pwReport = reencryptBackups(oldPw);
+    logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Master password changed"),
+             tr("%n backup(s) re-encrypted with the new password", "", m_pwReport.value(QStringLiteral("reencrypted")).toInt())
+                 + (m_pwReport.value(QStringLiteral("stale")).toList().isEmpty()
+                        ? QString()
+                        : QStringLiteral(" · ") + tr("%n older backup(s) not opened by the old password", "",
+                                                     int(m_pwReport.value(QStringLiteral("stale")).toList().size()))));
     return {};
+}
+
+QVariantMap AppController::reencryptBackups(const QString &oldPw)
+{
+    int done = 0;
+    QStringList stale;
+    const QJsonObject newProtect = m_vault.data().value(QStringLiteral("protect")).toObject();
+    const QByteArray newPk = QByteArray::fromBase64(newProtect.value(QStringLiteral("pk")).toString().toLatin1());
+    Vault::KeyCache cache;
+    // old protect secret keys by their salt (most backups share one)
+    QHash<QByteArray, unsigned char *> oldSks;
+    auto oldSkFor = [&](const QJsonObject &prot) -> unsigned char * {
+        const QByteArray salt = QByteArray::fromBase64(prot.value(QStringLiteral("salt")).toString().toLatin1());
+        const QByteArray pk = QByteArray::fromBase64(prot.value(QStringLiteral("pk")).toString().toLatin1());
+        if (salt.size() != protect::kSaltLen || pk.size() != protect::kPublicLen)
+            return nullptr;
+        if (oldSks.contains(salt))
+            return oldSks.value(salt);
+        auto *seed = static_cast<unsigned char *>(sodium_malloc(32));
+        auto *sk = static_cast<unsigned char *>(sodium_malloc(protect::kSecretLen));
+        QString err;
+        bool ok = seed && sk && m_vault.deriveWithVaultCost(oldPw, salt, seed, &err);
+        if (ok) {
+            QByteArray derived;
+            protect::keypairFromSeed(seed, &derived, sk);
+            ok = sodium_memcmp(derived.constData(), pk.constData(), protect::kPublicLen) == 0;
+        }
+        if (seed)
+            sodium_free(seed);
+        if (!ok && sk) {
+            sodium_free(sk);
+            sk = nullptr;
+        }
+        oldSks.insert(salt, sk);
+        return sk;
+    };
+
+    const QDir dir(paths::backupsDir());
+    const QFileInfoList files = dir.entryInfoList({QStringLiteral("*.swv"), QStringLiteral("*.swv.bak")}, QDir::Files, QDir::Name);
+    for (const QFileInfo &fi : files) {
+        QJsonObject data;
+        if (Vault::readFile(fi.absoluteFilePath(), oldPw, &cache, &data) != Vault::ReadResult::Ok) {
+            stale << fi.fileName();
+            continue;
+        }
+        // protected secrets inside: open with the old protect key, seal for the new one
+        bool ok = true;
+        const QJsonObject prot = data.value(QStringLiteral("protect")).toObject();
+        if (!prot.isEmpty()) {
+            unsigned char *sk = oldSkFor(prot);
+            const QByteArray oldPk = QByteArray::fromBase64(prot.value(QStringLiteral("pk")).toString().toLatin1());
+            ok = sk && newPk.size() == protect::kPublicLen;
+            for (const QString &sec : {QString(kHosts), QString(kKeys)}) {
+                QJsonArray list = data.value(sec).toArray();
+                for (int i = 0; ok && i < list.size(); ++i) {
+                    QJsonObject o = list.at(i).toObject();
+                    QJsonObject sealed = o.value(QStringLiteral("sealed")).toObject();
+                    if (sealed.isEmpty())
+                        continue;
+                    for (auto it = sealed.begin(); ok && it != sealed.end(); ++it) {
+                        QByteArray plain;
+                        ok = protect::open(it.value().toString().toLatin1(), oldPk, sk, &plain);
+                        if (ok) {
+                            const QByteArray box = protect::seal(plain, newPk);
+                            ok = !box.isEmpty();
+                            it.value() = QString::fromLatin1(box);
+                        }
+                        secure::wipe(plain);
+                    }
+                    o.insert(QStringLiteral("sealed"), sealed);
+                    list.replace(i, o);
+                }
+                data.insert(sec, list);
+            }
+            data.insert(QStringLiteral("protect"), newProtect);
+        }
+        if (!ok || !m_vault.writeCopy(fi.absoluteFilePath(), data, nullptr)) {
+            stale << fi.fileName();
+            continue;
+        }
+        ++done;
+    }
+    for (unsigned char *sk : std::as_const(oldSks))
+        if (sk)
+            sodium_free(sk);
+    QVariantList staleList;
+    for (const QString &n : std::as_const(stale))
+        staleList << n;
+    return {{QStringLiteral("reencrypted"), done}, {QStringLiteral("stale"), staleList}};
+}
+
+QString AppController::deleteBackups(const QStringList &names)
+{
+    const QDir dir(paths::backupsDir());
+    QStringList failed;
+    for (const QString &n : names) {
+        // only plain file names inside the backups folder
+        if (n.contains(QLatin1Char('/')) || n.contains(QLatin1Char('\\')) || n.startsWith(QLatin1Char('.'))
+            || !(n.endsWith(QLatin1String(".swv")) || n.endsWith(QLatin1String(".swv.bak"))))
+            continue;
+        if (!QFile::remove(dir.filePath(n)))
+            failed << n;
+    }
+    logEvent(ActivityLog::Security, QStringLiteral("vault"), tr("Old backups deleted"),
+             QString::number(names.size() - failed.size()));
+    return failed.isEmpty() ? QString() : tr("Could not delete: %1").arg(failed.join(QStringLiteral(", ")));
 }
 
 QJsonArray AppController::section(const QString &name) const

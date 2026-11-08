@@ -1,12 +1,11 @@
 #include "AgentClient.h"
 #include "BackgroundThreads.h"
+#include "ProxyTunnel.h"
 
 #include <QObject>
 #include <QtEndian>
 #include <cstdio>
 #include <cstring>
-#include <mutex>
-#include <thread>
 
 #ifdef _WIN32
 #  include <winsock2.h>
@@ -14,6 +13,8 @@
 #  include <windows.h>
 #else
 #  include <QLocalSocket>
+#  include <poll.h>
+#  include <sys/socket.h>
 #endif
 
 namespace agent {
@@ -154,32 +155,45 @@ int identityCount(QString *error)
     return int(qFromBigEndian<quint32>(r.constData() + 5));
 }
 
-#ifdef _WIN32
 // ---------------------------------------------------------------------------
-// 127.0.0.1 bridge for libssh (it wants a socket, Windows agents are a pipe / a window)
+// Socket for libssh (on Windows it can use an agent only through a socket, and
+// the Windows agents are a pipe / a window). No port stays open: each call
+// makes its own connected pair (proxytunnel::loopbackPair checks that the
+// other end is really ours), hands one end to libssh and serves the other.
+// Another program or another Windows user cannot get in between: there is
+// nothing to connect to.
 // ---------------------------------------------------------------------------
 namespace {
-std::once_flag g_bridgeOnce;
-int g_bridgePort = 0;
 
-bool recvAll(SOCKET s, char *buf, int len)
+// Waits in half-second steps so that bgthreads::stopping() ends the thread.
+bool recvAll(sw_socket_t s, char *buf, int len)
 {
     while (len > 0) {
-        // wait in short steps: on exit bgthreads::stopping() ends the client thread
+#ifdef _WIN32
         WSAPOLLFD p = {};
         p.fd = s;
         p.events = POLLRDNORM;
         const int r = WSAPoll(&p, 1, 500);
-        if (r < 0 || bgthreads::stopping()) return false;
-        if (r == 0) continue;
-        const int n = recv(s, buf, len, 0);
-        if (n <= 0) return false;
-        buf += n; len -= n;
+#else
+        pollfd p = {};
+        p.fd = int(s);
+        p.events = POLLIN;
+        const int r = ::poll(&p, 1, 500);
+#endif
+        if (r < 0 || bgthreads::stopping())
+            return false;
+        if (r == 0)
+            continue;
+        const int n = int(::recv(s, buf, len, 0));
+        if (n <= 0)
+            return false;
+        buf += n;
+        len -= n;
     }
     return true;
 }
 
-void serveClient(SOCKET c)
+void serveClient(sw_socket_t c)
 {
     for (;;) {
         char lenBuf[4];
@@ -195,69 +209,32 @@ void serveClient(SOCKET c)
             qToBigEndian<quint32>(1, reply.data());
             reply[4] = 5;
         }
-        if (send(c, reply.constData(), reply.size(), 0) != reply.size()) break;
+        if (!proxytunnel::writeAll(c, reply, 10000)) break;
     }
     bgthreads::unwatch(static_cast<long long>(c));
-    closesocket(c);
+    proxytunnel::closeSocket(c);
 }
 
-void startBridge()
-{
-    WSADATA wsa;
-    WSAStartup(MAKEWORD(2, 2), &wsa);
-    SOCKET srv = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    if (srv == INVALID_SOCKET) return;
-    sockaddr_in a = {};
-    a.sin_family = AF_INET;
-    a.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    a.sin_port = 0;
-    if (bind(srv, reinterpret_cast<sockaddr *>(&a), sizeof a) != 0 || listen(srv, 8) != 0) { closesocket(srv); return; }
-    int alen = sizeof a;
-    getsockname(srv, reinterpret_cast<sockaddr *>(&a), &alen);
-    g_bridgePort = ntohs(a.sin_port);
-    // on exit bgthreads::shutdown() closes srv and cuts the clients: the threads return
-    bgthreads::watch(static_cast<long long>(srv), true);
-    const bool started = bgthreads::start([srv] {
-        for (;;) {
-            SOCKET c = accept(srv, nullptr, nullptr);
-            if (c == INVALID_SOCKET || bgthreads::stopping()) {
-                if (c != INVALID_SOCKET) closesocket(c);
-                break;
-            }
-            bgthreads::watch(static_cast<long long>(c));
-            if (!bgthreads::start([c] { serveClient(c); })) {
-                bgthreads::unwatch(static_cast<long long>(c));
-                closesocket(c);
-            }
-        }
-    });
-    if (!started) {
-        bgthreads::unwatch(static_cast<long long>(srv));
-        closesocket(srv);
-        g_bridgePort = 0;
-    }
-}
 } // namespace
 
 long long bridgeSocket(QString *error)
 {
-    std::call_once(g_bridgeOnce, startBridge);
-    if (!g_bridgePort) {
-        if (error) *error = QObject::tr("Cannot start the agent bridge.");
+    proxytunnel::initSockets();
+    sw_socket_t ours = kInvalidSocket, theirs = kInvalidSocket;
+    QString err;
+    if (!proxytunnel::loopbackPair(&theirs, &ours, &err)) {
+        if (error) *error = QObject::tr("Cannot connect libssh to the SSH agent: %1").arg(err);
         return -1;
     }
-    SOCKET s = socket(AF_INET, SOCK_STREAM, IPPROTO_TCP);
-    sockaddr_in a = {};
-    a.sin_family = AF_INET;
-    a.sin_addr.s_addr = htonl(INADDR_LOOPBACK);
-    a.sin_port = htons(quint16(g_bridgePort));
-    if (s == INVALID_SOCKET || ::connect(s, reinterpret_cast<sockaddr *>(&a), sizeof a) != 0) {
-        if (s != INVALID_SOCKET) closesocket(s);
-        if (error) *error = QObject::tr("Cannot reach the agent bridge.");
+    bgthreads::watch(static_cast<long long>(ours));
+    if (!bgthreads::start([ours] { serveClient(ours); })) {
+        bgthreads::unwatch(static_cast<long long>(ours));
+        proxytunnel::closeSocket(ours);
+        proxytunnel::closeSocket(theirs);
+        if (error) *error = QObject::tr("The program is closing.");
         return -1;
     }
-    return static_cast<long long>(s);
+    return static_cast<long long>(theirs);   // libssh owns and closes it
 }
-#endif
 
 } // namespace agent

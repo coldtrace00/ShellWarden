@@ -191,6 +191,7 @@ void SshWorker::tryAuth()
         emit status(tr("Authenticating as %1…").arg(m_p.username));
         const int rc = ssh_userauth_none(m_session, nullptr);
         if (rc == SSH_AUTH_SUCCESS) {
+            m_authSteps << tr("no authentication (the server let us in)");
             onAuthenticated();
             return;
         }
@@ -259,6 +260,7 @@ bool SshWorker::tryAgent()
     const int rc = ssh_userauth_agent(m_session, nullptr);
     if (rc == SSH_AUTH_SUCCESS) {
         m_lastMethod = SSH_AUTH_METHOD_PUBLICKEY;
+        m_authSteps << tr("a key from the SSH agent");
         onAuthenticated();
         return false;
     }
@@ -267,6 +269,7 @@ bool SshWorker::tryAgent()
         return false;
     }
     if (rc == SSH_AUTH_PARTIAL) {
+        m_authSteps << tr("a key from the SSH agent");
         m_methods = ssh_userauth_list(m_session, nullptr);
         emit status(tr("Agent key accepted, the server requires another factor."));
         return true;
@@ -350,7 +353,22 @@ bool SshWorker::tryPublicKey()
 
     m_keyTried = true;
     const int rc = ssh_userauth_publickey(m_session, nullptr, key.key);
+    QString keyText;
+    {
+        unsigned char *hash = nullptr;
+        size_t len = 0;
+        if (ssh_get_publickey_hash(key.key, SSH_PUBLICKEY_HASH_SHA256, &hash, &len) == 0) {
+            if (char *fp = ssh_get_fingerprint_hash(SSH_PUBLICKEY_HASH_SHA256, hash, len)) {
+                keyText = QString::fromLatin1(fp);
+                ssh_string_free_char(fp);
+            }
+            ssh_clean_pubkey_hash(&hash);
+        }
+        keyText = m_p.keyName.isEmpty() ? tr("key %1").arg(keyText)
+                                         : tr("key \"%1\" (%2)").arg(m_p.keyName, keyText);
+    }
     if (rc == SSH_AUTH_SUCCESS) {
+        m_authSteps << keyText;
         onAuthenticated();
         return false;
     }
@@ -359,6 +377,7 @@ bool SshWorker::tryPublicKey()
         return false;
     }
     if (rc == SSH_AUTH_PARTIAL) {
+        m_authSteps << keyText;
         m_methods = ssh_userauth_list(m_session, nullptr);
         emit status(tr("Key accepted, the server requires another factor."));
         return true;
@@ -400,6 +419,9 @@ void SshWorker::kbdStep(int rc)
 void SshWorker::handleAuthResult(int rc, int method)
 {
     m_lastMethod = method;
+    if (rc == SSH_AUTH_SUCCESS || rc == SSH_AUTH_PARTIAL)
+        m_authSteps << (method == SSH_AUTH_METHOD_PASSWORD ? tr("password")
+                                                          : tr("keyboard-interactive (password or one-time code)"));
     switch (rc) {
     case SSH_AUTH_SUCCESS:
         if (m_passwordFromUser && !m_p.password.isEmpty())
@@ -465,6 +487,7 @@ void SshWorker::answerSecret(const QString &secret, bool cancelled)
 
 void SshWorker::onAuthenticated()
 {
+    emit authenticatedWith(m_authSteps.join(QStringLiteral(" + ")));
     secure::wipe(m_p.password);
     secure::wipe(m_p.keyPassphrase);
     secure::wipe(m_p.privateKey);

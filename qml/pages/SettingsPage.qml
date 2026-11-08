@@ -432,6 +432,8 @@ Item {
                 Rectangle { Layout.fillWidth: true; height: 1; color: Theme.border }
 
                 Text { textFormat: Text.PlainText; text: qsTr("Change master password"); color: Theme.text; font.pixelSize: 13; font.weight: Font.Medium }
+                Text { textFormat: Text.PlainText; Layout.fillWidth: true; wrapMode: Text.WordWrap; color: Theme.textFaint; font.pixelSize: 11
+                       text: qsTr("The vault backups are re-encrypted with the new password too, so the old one opens nothing. Copies you saved elsewhere yourself stay as they are.") }
                 AppField { id: oldPw; Layout.fillWidth: true; label: qsTr("Current master password"); secret: true; enabled: App.vaultUnlocked }
                 PasswordField {
                     lengthSlider: true
@@ -450,8 +452,12 @@ Item {
                         onClicked: {
                             const e = App.changeMasterPassword(oldPw.text, newPw.text, newPw.confirmText)
                             pwMsg.color = e === "" ? Theme.ok : Theme.danger
-                            pwMsg.text = e === "" ? qsTr("Master password changed.") : e
-                            if (e === "") { oldPw.text = ""; newPw.clear() }
+                            if (e !== "") { pwMsg.text = e; return }
+                            oldPw.text = ""; newPw.clear()
+                            const r = App.passwordChangeReport()
+                            pwMsg.text = qsTr("Master password changed.") + " "
+                                       + qsTr("%n backup(s) re-encrypted.", "", r.reencrypted || 0)
+                            if (r.stale && r.stale.length > 0) { staleDlg.files = r.stale; staleDlg.open() }
                         }
                     }
                 }
@@ -662,6 +668,34 @@ Item {
                 onClicked: { App.setSetting("hostProbe", true); probeSwitch.checked = true; probeInfo.close() }
             }
         }
+    }
+
+    // After a password change: backups the old password did not open
+    Modal {
+        id: staleDlg
+        property var files: []
+        title: qsTr("Older backups")
+        subtitle: qsTr("%n backup(s) were made with an even older master password (or cannot be read), so they could not be re-encrypted. Whoever knows that password can still open them. Delete them?", "", files.length)
+        Repeater {
+            model: staleDlg.files
+            delegate: Text { textFormat: Text.PlainText; text: modelData; color: Theme.textDim; font.pixelSize: 11; font.family: Theme.monoFont }
+        }
+        Text { textFormat: Text.PlainText; id: staleErr; visible: text !== ""; color: Theme.danger; font.pixelSize: 12; Layout.fillWidth: true; wrapMode: Text.WordWrap }
+        RowLayout {
+            Layout.fillWidth: true
+            Item { Layout.fillWidth: true }
+            AppButton { text: qsTr("Keep them"); variant: "ghost"; onClicked: staleDlg.close() }
+            AppButton {
+                text: qsTr("Delete"); variant: "danger"
+                onClicked: {
+                    const e = App.deleteBackups(staleDlg.files)
+                    if (e !== "") { staleErr.text = e; return }
+                    staleDlg.close()
+                    pwMsg.text += " " + qsTr("Older backups deleted.")
+                }
+            }
+        }
+        onOpened: staleErr.text = ""
     }
 
     Modal {

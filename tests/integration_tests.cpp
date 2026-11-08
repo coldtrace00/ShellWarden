@@ -8,6 +8,7 @@
 #include "core/KeyTools.h"
 #include "core/KnownHosts.h"
 #include "core/ProxyTunnel.h"
+#include "core/HttpsOverSocket.h"
 #include "core/SshWorker.h"
 #include "core/AgentClient.h"
 #include "core/Vault.h"
@@ -25,6 +26,11 @@
 #include <QDir>
 #include <QEventLoop>
 #include <QFile>
+#include <QFileInfo>
+#include <QJsonObject>
+#include <QJsonDocument>
+#include <QSslCertificate>
+#include <QtEndian>
 #include <QJsonArray>
 #include <QProcess>
 #include <QTemporaryDir>
@@ -53,6 +59,7 @@ struct Outcome
     bool connected = false;
     QString seenIp;
     QByteArray output;
+    QString authWith;
     QString finishReason;
     bool finishError = false;
 };
@@ -85,6 +92,7 @@ static Outcome connectOnce(const ConnectParams &p, const QByteArray &commands,
             QMetaObject::invokeMethod(w, [w, commands] { w->write(commands); }, Qt::QueuedConnection);
         });
     });
+    QObject::connect(w, &SshWorker::authenticatedWith, &ctx, [&](const QString &m) { o.authWith = m; });
     QObject::connect(w, &SshWorker::clientAddressSeen, &ctx, [&](const QString &ip, const QString &, const QString &) { o.seenIp = ip; });
     QObject::connect(w, &SshWorker::dataReceived, &ctx, [&](const QByteArray &d) { o.output += d; });
     QObject::connect(w, &SshWorker::finished, &ctx, [&](const QString &r, bool e) {
@@ -130,7 +138,13 @@ static void runLive(const ConnectParams &p, std::function<void(Live &)> script, 
     QObject::connect(w, &SshWorker::secretRequired, &ctx, [w](int, const QString &, bool, bool) {
         QMetaObject::invokeMethod(w, [w] { w->answerSecret(QString(), true); }, Qt::QueuedConnection);
     });
-    QObject::connect(w, &SshWorker::connected, &ctx, [&] { L.connected = true; script(L); });
+    // The script runs from the main loop, not inside this slot: a nested wait in a
+    // slot does not get signals posted after delivery began (Qt's posted-event
+    // queue), so a list updated a moment later would never arrive.
+    QObject::connect(w, &SshWorker::connected, &ctx, [&] {
+        L.connected = true;
+        QTimer::singleShot(0, &ctx, [&] { script(L); });
+    });
     QObject::connect(w, &SshWorker::sftpListed, &ctx, [&](int, const QString &path, const QVariantList &e, const QString &err) {
         L.listed = e; L.listedPath = path; L.lastError = err; L.log << "listed";
     });
@@ -283,6 +297,7 @@ int main(int argc, char **argv)
         CHECK(o.hostKeyPrompts.isEmpty(), "known host: no prompt second time");
         CHECK(o.secretPrompts == (QList<int>{SshWorker::SecretPassword, SshWorker::SecretPassword}), "asks password, re-asks after wrong one");
         CHECK(o.connected && o.output.contains("MARK42"), "connects after correct password");
+        CHECK(o.authWith == "password", qPrintable("journal: signed in with a password (" + o.authWith + ")"));
     }
     {
         // Public key auth with encrypted key; passphrase asked interactively
@@ -298,9 +313,20 @@ int main(int argc, char **argv)
         CHECK(o.secretPrompts == (QList<int>{SshWorker::SecretKeyPassphrase, SshWorker::SecretKeyPassphrase}), "asks key passphrase, re-asks after wrong one");
         CHECK(o.connected && o.output.contains("MARK42"), "public-key auth with encrypted key works");
 
-        ConnectParams p2 = base; p2.privateKey = edKey.privateKey; p2.keyPassphrase = "pa ss-фраза";
+        ConnectParams p2 = base; p2.privateKey = edKey.privateKey; p2.keyPassphrase = "pa ss-фраза"; p2.keyName = "Test key";
         Outcome o2 = connectOnce(p2, cmd);
         CHECK(o2.secretPrompts.isEmpty() && o2.connected, "saved passphrase: no prompt at all");
+        CHECK(o2.authWith.contains("Test key") && o2.authWith.contains(edKey.fingerprint),
+              qPrintable("journal: signed in with the key, its name and fingerprint (" + o2.authWith + ")"));
+
+        // a new passphrase on the same key: the server still takes it, nothing to change there
+        QByteArray rekeyed;
+        QString perr;
+        CHECK(keytools::changePassphrase(edKey.privateKey, "pa ss-фраза", "новий пароль 2", &rekeyed, &perr)
+                  == keytools::PassphraseChange::Ok, "passphrase of the key changed");
+        ConnectParams p3 = base; p3.privateKey = rekeyed; p3.keyPassphrase = "новий пароль 2";
+        Outcome o3 = connectOnce(p3, cmd);
+        CHECK(o3.connected && o3.output.contains("MARK42"), "the same server takes the key with its new passphrase");
     }
     {
         std::printf("[agent]\n");
@@ -315,9 +341,38 @@ int main(int argc, char **argv)
         int code = -1; run("ssh-add", {kf}, &code);
         CHECK(code == 0, "test agent holds the key");
         CHECK(agent::available() == "ssh-agent" && agent::identityCount() == 1, "AgentClient sees 1 key in the agent");
+        {   // the socket libssh gets on Windows: a private pair, no listening port left behind
+            auto listening = [] {
+                int n = 0;
+                for (const char *f : {"/proc/net/tcp", "/proc/net/tcp6"}) {
+                    QFile t(f);
+                    if (t.open(QIODevice::ReadOnly))
+                        for (const QByteArray &l : t.readAll().split('\n'))
+                            if (l.split(' ').contains("0A")) ++n;   // state LISTEN
+                }
+                return n;
+            };
+            const int before = listening();
+            QString berr;
+            const long long fd = agent::bridgeSocket(&berr);
+            CHECK(fd >= 0, qPrintable("bridge socket made " + berr));
+            CHECK(listening() == before, "no port is left listening for the agent");
+            QByteArray req("\0\0\0\1\x0b", 5);   // REQUEST_IDENTITIES
+            CHECK(fd >= 0 && proxytunnel::writeAll(sw_socket_t(fd), req, 3000), "request sent through the bridge");
+            QByteArray answer;
+            char buf[4096];
+            for (int i = 0; i < 20 && answer.size() < 9; ++i) {
+                const int n = proxytunnel::readSome(sw_socket_t(fd), buf, sizeof buf, 250);
+                if (n > 0) answer.append(buf, n);
+            }
+            CHECK(answer.size() >= 9 && answer.at(4) == 12 && qFromBigEndian<quint32>(answer.constData() + 5) == 1,
+                  "the agent answers through the bridge: 1 key");
+            if (fd >= 0) proxytunnel::closeSocket(sw_socket_t(fd));
+        }
         ConnectParams p = base; p.useAgent = true; p.agentForward = true;
         Outcome o = connectOnce(p, "echo AG$(ssh-add -l 2>/dev/null | grep -c ED25519)X; exit\n");
         CHECK(o.secretPrompts.isEmpty() && o.connected, "logs in with the agent's key, nothing asked");
+        CHECK(o.authWith.contains("agent"), qPrintable("journal: signed in with the agent (" + o.authWith + ")"));
         CHECK(o.output.contains("AG1X"), "agent forwarding: the server sees the key through ssh -A");
         ConnectParams p2 = base; p2.useAgent = true;
         Outcome o2 = connectOnce(p2, "echo AG$(ssh-add -l >/dev/null 2>&1; echo $?)X; exit\n");
@@ -536,7 +591,11 @@ int main(int argc, char **argv)
             // the list appears before the listeners are up (slow under sanitizers)
             waitUntil([&] { return activeCount() == 3; }, 15000);
             const int active = activeCount();
-            CHECK(active == 3, qPrintable(QString("all 3 tunnels active (%1)").arg(active)));
+            QStringList states;
+            for (const QVariant &f : Lv.forwards)
+                states << f.toMap().value("id").toString() + ":" + f.toMap().value("state").toString()
+                              + (f.toMap().value("error").toString().isEmpty() ? QString() : "(" + f.toMap().value("error").toString() + ")");
+            CHECK(active == 3, qPrintable(QString("all 3 tunnels active (%1: %2)").arg(active).arg(states.join(", "))));
             CHECK(roundTrip(18080, {}, "hello-L") == "pong:hello-L", "local forward -L carries data");
             QByteArray req("\x05\x01\x00\x03", 4); req.append(char(9)); req.append("localhost");
             req.append(char(tport >> 8)); req.append(char(tport & 0xff));
@@ -634,6 +693,31 @@ int main(int argc, char **argv)
             QFile f(www + "/big.bin"); f.open(QIODevice::ReadOnly);
             CHECK(body > 0 && resp.mid(body + 4) == f.readAll(),
                   qPrintable(QStringLiteral("2 MB over HTTP through %1 (%2 bytes) %3").arg(c->method).arg(resp.size()).arg(err)));
+        }
+        {   // the IP check: HTTPS inside the tunnel, certificate checked
+            const QString tlsDir = QFileInfo(www).absolutePath() + "/tls";
+            const QList<QSslCertificate> testCa = QSslCertificate::fromPath(tlsDir + "/cert.pem");
+            CHECK(testCa.size() == 1, "test certificate for the HTTPS IP service");
+            ProxyConfig pc; pc.type = ProxyConfig::Shadowsocks; pc.host = "127.0.0.1"; pc.port = cs[3].port;
+            pc.method = cs[3].method; pc.password = cs[3].key;
+            QString err, why;
+            sw_socket_t s = shadowsocks::open(pc, "127.0.0.1", 8767, 5000, false, &err);
+            const QByteArray body = s == kInvalidSocket ? QByteArray()
+                                                        : https::get(static_cast<long long>(s), "localhost", "/json", 8000, &why, testCa);
+            CHECK(QJsonDocument::fromJson(body).object().value("ip").toString() == "203.0.113.7",
+                  qPrintable("IP answer over HTTPS through Shadowsocks 2022 " + err + why));
+            // a certificate that is not for this name: refused (the tunnel cannot fake the answer)
+            s = shadowsocks::open(pc, "127.0.0.1", 8767, 5000, false, &err);
+            why.clear();
+            const QByteArray bad = s == kInvalidSocket ? QByteArray()
+                                                       : https::get(static_cast<long long>(s), "ipinfo.io", "/json", 8000, &why, testCa);
+            CHECK(bad.isEmpty() && why.contains("TLS"), qPrintable("a certificate for another name is refused: " + why));
+            // and an untrusted one (no test CA): refused too
+            s = shadowsocks::open(pc, "127.0.0.1", 8767, 5000, false, &err);
+            why.clear();
+            const QByteArray untrusted = s == kInvalidSocket ? QByteArray()
+                                                             : https::get(static_cast<long long>(s), "localhost", "/json", 8000, &why);
+            CHECK(untrusted.isEmpty() && why.contains("TLS"), qPrintable("an untrusted certificate is refused: " + why));
         }
     }
     {

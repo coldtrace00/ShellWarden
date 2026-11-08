@@ -42,7 +42,7 @@
         <translation>Les nouveaux mots de passe ne correspondent pas.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="778" />
+        <location filename="../src/app/AppController.cpp" line="892" />
         <location filename="../src/app/AppControllerHosts.cpp" line="75" />
         <location filename="../src/app/AppControllerHosts.cpp" line="252" />
         <location filename="../src/app/AppControllerKeys.cpp" line="66" />
@@ -71,14 +71,15 @@
         <translation>Le port doit être compris entre 1 et 65535.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="588" />
-        <location filename="../src/app/AppController.cpp" line="784" />
+        <location filename="../src/app/AppController.cpp" line="702" />
+        <location filename="../src/app/AppController.cpp" line="898" />
         <location filename="../src/app/AppControllerProtect.cpp" line="310" />
         <location filename="../src/app/AppControllerHosts.cpp" line="89" />
         <location filename="../src/app/AppControllerHosts.cpp" line="156" />
         <location filename="../src/app/AppControllerKeys.cpp" line="97" />
         <location filename="../src/app/AppControllerKeys.cpp" line="155" />
         <location filename="../src/app/AppControllerKeys.cpp" line="251" />
+        <location filename="../src/app/AppControllerKeys.cpp" line="344" />
         <location filename="../src/app/AppControllerProxies.cpp" line="188" />
         <location filename="../src/app/AppControllerBatch.cpp" line="429" />
         <source>Could not save the vault.</source>
@@ -156,6 +157,7 @@
     <message>
         <location filename="../src/app/AppController.cpp" line="509" />
         <location filename="../src/app/AppControllerProtect.cpp" line="213" />
+        <location filename="../src/app/AppControllerKeys.cpp" line="292" />
         <source>Not enough secure memory.</source>
         <translation>Pas assez de mémoire sécurisée.</translation>
     </message>
@@ -171,102 +173,122 @@
         <translation>Un secret protégé n'a pas pu être déchiffré ; rien n'a été modifié.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="557" />
+        <location filename="../src/app/AppController.cpp" line="560" />
         <source>Master password changed</source>
         <translation>Mot de passe maître modifié</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../src/app/AppController.cpp" line="561" />
+        <source>%n backup(s) re-encrypted with the new password</source>
+        <translation><numerusform>%n sauvegarde rechiffrée avec le nouveau mot de passe</numerusform><numerusform>%n sauvegardes rechiffrées avec le nouveau mot de passe</numerusform></translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../src/app/AppController.cpp" line="564" />
+        <source>%n older backup(s) not opened by the old password</source>
+        <translation><numerusform>%n sauvegarde plus ancienne non ouverte par l'ancien mot de passe</numerusform><numerusform>%n sauvegardes plus anciennes non ouvertes par l'ancien mot de passe</numerusform></translation>
+    </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="663" />
+        <location filename="../src/app/AppController.cpp" line="670" />
+        <source>Old backups deleted</source>
+        <translation>Anciennes sauvegardes supprimées</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="672" />
+        <source>Could not delete: %1</source>
+        <translation>Suppression impossible : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppController.cpp" line="777" />
         <source>Choose a file.</source>
         <translation>Choisissez un fichier.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="666" />
+        <location filename="../src/app/AppController.cpp" line="780" />
         <source>Cannot write %1</source>
         <translation>Impossible d'écrire %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="667" />
+        <location filename="../src/app/AppController.cpp" line="781" />
         <source>Vault backup saved</source>
         <translation>Sauvegarde du coffre enregistrée</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="674" />
+        <location filename="../src/app/AppController.cpp" line="788" />
         <source>Lock the vault first.</source>
         <translation>Verrouillez d'abord le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="681" />
+        <location filename="../src/app/AppController.cpp" line="795" />
         <source>Cannot move the old vault: %1</source>
         <translation>Impossible de déplacer l'ancien coffre : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="686" />
+        <location filename="../src/app/AppController.cpp" line="800" />
         <source>Started over with a new vault</source>
         <translation>Nouveau départ avec un nouveau coffre</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="687" />
+        <location filename="../src/app/AppController.cpp" line="801" />
         <source>Old vault kept as %1</source>
         <translation>Ancien coffre conservé sous %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="709" />
+        <location filename="../src/app/AppController.cpp" line="823" />
         <source>Cannot replace the vault file.</source>
         <translation>Impossible de remplacer le fichier du coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="717" />
+        <location filename="../src/app/AppController.cpp" line="831" />
         <source>Vault restored from backup</source>
         <translation>Coffre restauré depuis une sauvegarde</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="736" />
+        <location filename="../src/app/AppController.cpp" line="850" />
         <source>shorter than 19 characters</source>
         <translation>moins de 19 caractères</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="737" />
+        <location filename="../src/app/AppController.cpp" line="851" />
         <source>contains a very common password</source>
         <translation>contient un mot de passe très courant</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="738" />
+        <location filename="../src/app/AppController.cpp" line="852" />
         <source>keyboard or alphabet sequence</source>
         <translation>suite de touches ou de lettres</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="739" />
+        <location filename="../src/app/AppController.cpp" line="853" />
         <source>too many repeated characters</source>
         <translation>trop de caractères répétés</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="740" />
+        <location filename="../src/app/AppController.cpp" line="854" />
         <source>mix upper/lower case, digits and symbols</source>
         <translation>mélangez majuscules, minuscules, chiffres et symboles</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="742" />
+        <location filename="../src/app/AppController.cpp" line="856" />
         <source>Very weak</source>
         <translation>Très faible</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="742" />
+        <location filename="../src/app/AppController.cpp" line="856" />
         <source>Weak</source>
         <translation>Faible</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="742" />
+        <location filename="../src/app/AppController.cpp" line="856" />
         <source>Fair</source>
         <translation>Moyen</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="743" />
+        <location filename="../src/app/AppController.cpp" line="857" />
         <source>Good</source>
         <translation>Bon</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="743" />
+        <location filename="../src/app/AppController.cpp" line="857" />
         <source>Strong</source>
         <translation>Fort</translation>
     </message>
@@ -388,52 +410,52 @@
         <translation>%1 se connecte désormais : %2</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="346" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="347" />
         <source>Kill switch is on: proxy "%1" is turned off and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch actif : le proxy « %1 » est désactivé et aucun proxy par défaut n'est défini. Connexion directe bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="362" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="363" />
         <source>The Shadowsocks route is for SSH hosts.</source>
         <translation>La route Shadowsocks est réservée aux hôtes SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="434" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="435" />
         <source>This host asks for the master password.</source>
         <translation>Cet hôte demande le mot de passe maître.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="463" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="464" />
         <source>Direct · proxy "%1" is off</source>
         <translation>Direct · le proxy « %1 » est désactivé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="894" />
+        <location filename="../src/app/AppController.cpp" line="1008" />
         <source>Behind a jump host: checked only when you connect.</source>
         <translation>Derrière un hôte de rebond : vérifié seulement à la connexion.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="907" />
+        <location filename="../src/app/AppController.cpp" line="1021" />
         <source>Kill switch is on: not checked directly.</source>
         <translation>Kill switch actif : pas de vérification directe.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="914" />
+        <location filename="../src/app/AppController.cpp" line="1028" />
         <source>Via Tor: not checked in the background.</source>
         <translation>Via Tor : pas de vérification en arrière-plan.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="915" />
+        <location filename="../src/app/AppController.cpp" line="1029" />
         <source>Via Cloudflare Tunnel: checked only when you connect.</source>
         <translation>Via Cloudflare Tunnel : vérifié seulement à la connexion.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="920" />
+        <location filename="../src/app/AppController.cpp" line="1034" />
         <source>The proxy of this host is not complete.</source>
         <translation>Le proxy de cet hôte est incomplet.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="945" />
+        <location filename="../src/app/AppController.cpp" line="1059" />
         <source>The port is open, but no SSH server answered.</source>
         <translation>Le port est ouvert, mais aucun serveur SSH n'a répondu.</translation>
     </message>
@@ -530,6 +552,7 @@
         <location filename="../src/app/AppControllerKeys.cpp" line="199" />
         <location filename="../src/app/AppControllerKeys.cpp" line="210" />
         <location filename="../src/app/AppControllerKeys.cpp" line="253" />
+        <location filename="../src/app/AppControllerKeys.cpp" line="278" />
         <source>Key not found.</source>
         <translation>Clé introuvable.</translation>
     </message>
@@ -548,7 +571,42 @@
         <translation>Cette clé est protégée par le mot de passe maître (un hôte qui l'utilise le demande). Sa phrase de passe enregistrée est protégée de la même façon.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerKeys.cpp" line="295" />
+        <location filename="../src/app/AppControllerKeys.cpp" line="271" />
+        <source>The new passphrases do not match.</source>
+        <translation>Les nouvelles phrases de passe ne correspondent pas.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="281" />
+        <source>Only the public key of "%1" is stored, so there is no private key to protect.</source>
+        <translation>Seule la clé publique de « %1 » est enregistrée : il n'y a pas de clé privée à protéger.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="322" />
+        <source>Enter the current passphrase of the key.</source>
+        <translation>Saisissez la phrase de passe actuelle de la clé.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="337" />
+        <source>Could not protect the key with the master password; nothing was changed.</source>
+        <translation>Impossible de protéger la clé par le mot de passe maître ; rien n'a été modifié.</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="346" />
+        <source>Key passphrase removed</source>
+        <translation>Phrase de passe de la clé supprimée</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="347" />
+        <source>Key passphrase changed</source>
+        <translation>Phrase de passe de la clé modifiée</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="347" />
+        <source>Key passphrase added</source>
+        <translation>Phrase de passe ajoutée à la clé</translation>
+    </message>
+    <message>
+        <location filename="../src/app/AppControllerKeys.cpp" line="392" />
         <source>Key deleted</source>
         <translation>Clé supprimée</translation>
     </message>
@@ -629,13 +687,13 @@
         <translation>Verrouillage pare-feu retiré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="781" />
+        <location filename="../src/app/AppController.cpp" line="895" />
         <location filename="../src/app/AppControllerBatch.cpp" line="67" />
         <source>Enter a command.</source>
         <translation>Saisissez une commande.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/app/AppController.cpp" line="843" />
+        <location filename="../src/app/AppController.cpp" line="957" />
         <source>Snippet sent to %n session(s)</source>
         <translation><numerusform>Extrait envoyé à %n session</numerusform><numerusform>Extrait envoyé à %n sessions</numerusform></translation>
     </message>
@@ -667,6 +725,7 @@
         <location filename="../src/app/AppControllerProtect.cpp" line="220" />
         <location filename="../src/app/AppControllerProtect.cpp" line="235" />
         <location filename="../src/app/AppControllerKeys.cpp" line="221" />
+        <location filename="../src/app/AppControllerKeys.cpp" line="307" />
         <location filename="../src/app/AppControllerSessions.cpp" line="106" />
         <location filename="../src/app/AppControllerBatch.cpp" line="240" />
         <source>Wrong master password.</source>
@@ -709,58 +768,58 @@
         <translation>Port invalide.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="326" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="327" />
         <source>Serial</source>
         <translation>Série</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="344" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="345" />
         <source>Blocked by kill switch</source>
         <translation>Bloqué par le kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="349" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="350" />
         <source>Kill switch is on: this host has no proxy and no default proxy is set. Direct connection blocked.</source>
         <translation>Kill switch actif : cet hôte n'a pas de proxy et aucun proxy par défaut n'est défini. Connexion directe bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="358" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="359" />
         <source>The Cloudflare Tunnel route is for SSH hosts.</source>
         <translation>La route Cloudflare Tunnel est pour les hôtes SSH.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="368" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="369" />
         <source>Tor is starting — press Reconnect in a moment.</source>
         <translation>Tor démarre — appuyez sur Reconnecter dans un instant.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="372" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="373" />
         <source>Telnet · direct · not encrypted</source>
         <translation>Telnet · direct · non chiffré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="373" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="374" />
         <source>Telnet · %1 · not encrypted</source>
         <translation>Telnet · %1 · non chiffré</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="385" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="386" />
         <source>Starting Tor…</source>
         <translation>Démarrage de Tor…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="392" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="393" />
         <source>Tor: %1</source>
         <translation>Tor : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="406" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="407" />
         <source>Starting cloudflared… (the first time a browser window may ask you to log in to Cloudflare Access)</source>
         <translation>Démarrage de cloudflared… (la première fois, le navigateur peut demander une connexion à Cloudflare Access)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="419" />
-        <location filename="../src/app/AppControllerSessions.cpp" line="425" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="420" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="426" />
         <source>Cloudflare Tunnel: %1</source>
         <translation>Cloudflare Tunnel : %1</translation>
     </message>
@@ -769,98 +828,98 @@
         <translation>La clé SSH est protégée par OpenPGP : appuyez sur Reconnecter et saisissez votre PIN.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="458" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="459" />
         <source> → jump %1</source>
         <translation> → rebond %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="464" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="465" />
         <source>Direct</source>
         <translation>Direct</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="466" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="467" />
         <source>Connecting…</source>
         <translation>Connexion…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="467" />
-        <location filename="../src/app/AppControllerSessions.cpp" line="503" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="468" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="504" />
         <source>checking…</source>
         <translation>vérification…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="475" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="476" />
         <source>unknown</source>
         <translation>inconnue</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="486" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="487" />
         <source>Cloudflare Tunnel: cloudflared is not running. Press Reconnect.</source>
         <translation>Cloudflare Tunnel : cloudflared ne tourne pas. Cliquez sur Reconnecter.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="493" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="494" />
         <source>Connecting through Cloudflare…</source>
         <translation>Connexion via Cloudflare…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="502" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="503" />
         <source>Checking proxy…</source>
         <translation>Vérification du proxy…</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="529" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="530" />
         <source>Kill switch: the proxy exits from your real IP (%1). Connection blocked.</source>
         <translation>Kill switch : le proxy sort par votre IP réelle (%1). Connexion bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="533" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="534" />
         <source>Kill switch: proxy check failed (%1). Connection blocked.</source>
         <translation>Kill switch : échec de la vérification du proxy (%1). Connexion bloquée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppControllerSessions.cpp" line="537" />
+        <location filename="../src/app/AppControllerSessions.cpp" line="538" />
         <source>proxy check failed: %1</source>
         <translation>échec de la vérification du proxy : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1062" />
+        <location filename="../src/app/AppController.cpp" line="1176" />
         <source>Password saved to the vault.</source>
         <translation>Mot de passe enregistré dans le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1078" />
+        <location filename="../src/app/AppController.cpp" line="1192" />
         <source>Key passphrase saved to the vault.</source>
         <translation>Phrase secrète de la clé enregistrée dans le coffre.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1253" />
+        <location filename="../src/app/AppController.cpp" line="1367" />
         <source>Kill switch enabled</source>
         <translation>Kill switch activé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1253" />
+        <location filename="../src/app/AppController.cpp" line="1367" />
         <source>Kill switch disabled</source>
         <translation>Kill switch désactivé</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1260" />
+        <location filename="../src/app/AppController.cpp" line="1374" />
         <source>Kill switch enabled: direct session closed.</source>
         <translation>Kill switch activé : session directe fermée.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1265" />
+        <location filename="../src/app/AppController.cpp" line="1379" />
         <source>Kill switch closed %1 direct session(s).</source>
         <translation>Le kill switch a fermé %1 session(s) directe(s).</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1368" />
+        <location filename="../src/app/AppController.cpp" line="1482" />
         <source>Tor: new identity</source>
         <translation>Tor : nouvelle identité</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1371" />
+        <location filename="../src/app/AppController.cpp" line="1485" />
         <source>New Tor identity: new connections use a different exit. Open sessions keep their route until reconnect.</source>
         <translation>Nouvelle identité Tor : les nouvelles connexions utilisent une autre sortie. Les sessions ouvertes gardent leur route jusqu'à la reconnexion.</translation>
     </message>
@@ -998,27 +1057,27 @@
         <translation>Choisissez deux hôtes.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1390" />
+        <location filename="../src/app/AppController.cpp" line="1504" />
         <source>Command Prompt (cmd)</source>
         <translation>Invite de commandes (cmd)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1399" />
+        <location filename="../src/app/AppController.cpp" line="1513" />
         <source>Default shell (%1)</source>
         <translation>Shell par défaut (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1413" />
+        <location filename="../src/app/AppController.cpp" line="1527" />
         <source>No shell found on this computer.</source>
         <translation>Aucun shell trouvé sur cet ordinateur.</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1425" />
+        <location filename="../src/app/AppController.cpp" line="1539" />
         <source>this computer</source>
         <translation>cet ordinateur</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1428" />
+        <location filename="../src/app/AppController.cpp" line="1542" />
         <source>Local terminal opened</source>
         <translation>Terminal local ouvert</translation>
     </message>
@@ -1035,7 +1094,7 @@
         <translation>Clé SSH déverrouillée avec OpenPGP</translation>
     </message>
     <message>
-        <location filename="../src/app/AppController.cpp" line="1442" />
+        <location filename="../src/app/AppController.cpp" line="1556" />
         <source>The agent did not answer.</source>
         <translation>L'agent n'a pas répondu.</translation>
     </message>
@@ -2786,13 +2845,13 @@
     </message>
     <message>
         <location filename="../qml/pages/KeychainPage.qml" line="39" />
-        <location filename="../qml/pages/KeychainPage.qml" line="223" />
+        <location filename="../qml/pages/KeychainPage.qml" line="225" />
         <source>Import</source>
         <translation>Importer</translation>
     </message>
     <message>
         <location filename="../qml/pages/KeychainPage.qml" line="40" />
-        <location filename="../qml/pages/KeychainPage.qml" line="224" />
+        <location filename="../qml/pages/KeychainPage.qml" line="226" />
         <source>Generate key</source>
         <translation>Générer une clé</translation>
     </message>
@@ -2818,16 +2877,21 @@
     </message>
     <message>
         <location filename="../qml/pages/KeychainPage.qml" line="132" />
+        <source>Only the public key</source>
+        <translation>Clé publique seule</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="133" />
         <source>No passphrase</source>
         <translation>Sans phrase secrète</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="133" />
+        <location filename="../qml/pages/KeychainPage.qml" line="134" />
         <source>Passphrase saved</source>
         <translation>Phrase secrète enregistrée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="133" />
+        <location filename="../qml/pages/KeychainPage.qml" line="134" />
         <source>Passphrase asked on connect</source>
         <translation>Phrase secrète demandée à la connexion</translation>
     </message>
@@ -2840,27 +2904,27 @@
         <translation>Verrouillée par votre clé OpenPGP %1 : chaque connexion demande d'abord son PIN (Kleopatra / GnuPG).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="166" />
+        <location filename="../qml/pages/KeychainPage.qml" line="167" />
         <source>Copy public key</source>
         <translation>Copier la clé publique</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="167" />
+        <location filename="../qml/pages/KeychainPage.qml" line="168" />
         <source>Public key copied</source>
         <translation>Clé publique copiée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="170" />
+        <location filename="../qml/pages/KeychainPage.qml" line="171" />
         <source>Save .pub</source>
         <translation>Enregistrer .pub</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="219" />
+        <location filename="../qml/pages/KeychainPage.qml" line="221" />
         <source>No keys yet</source>
         <translation>Aucune clé pour l'instant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="220" />
+        <location filename="../qml/pages/KeychainPage.qml" line="222" />
         <source>Generate an Ed25519 key protected by a passphrase, or import an existing one.</source>
         <translation>Générez une clé Ed25519 protégée par une phrase secrète ou importez-en une existante.</translation>
     </message>
@@ -2881,151 +2945,243 @@
         <translation>Exporter la clé privée (OpenSSH)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="146" />
+        <location filename="../qml/pages/KeychainPage.qml" line="147" />
+        <location filename="../qml/pages/KeychainPage.qml" line="363" />
         <source>Master password</source>
         <translation>Mot de passe maître</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="151" />
+        <location filename="../qml/pages/KeychainPage.qml" line="152" />
         <source>Used by a host that asks for the master password: the key stays encrypted with it and is opened only to connect. Every host that uses this key asks for the master password.</source>
         <translation>Utilisée par un hôte qui demande le mot de passe maître : la clé reste chiffrée avec celui-ci et n'est ouverte que pour se connecter. Tout hôte qui utilise cette clé demande le mot de passe maître.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="238" />
+        <location filename="../qml/pages/KeychainPage.qml" line="241" />
         <source>Save public key (SSH2 format)…</source>
         <translation>Enregistrer la clé publique (SSH2)…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="247" />
+        <location filename="../qml/pages/KeychainPage.qml" line="250" />
         <source>Install on servers…</source>
         <translation>Sur les serveurs…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="252" />
+        <location filename="../qml/pages/KeychainPage.qml" line="256" />
         <source>Save private key…</source>
         <translation>Enregistrer la clé privée…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="262" />
+        <location filename="../qml/pages/KeychainPage.qml" line="266" />
+        <source>Change or remove the key passphrase…</source>
+        <translation>Modifier ou supprimer la phrase de passe…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="266" />
+        <source>Add a passphrase to the key…</source>
+        <translation>Ajouter une phrase de passe à la clé…</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="271" />
         <source>Change saved passphrase…</source>
         <translation>Modifier la phrase secrète enregistrée…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="262" />
+        <location filename="../qml/pages/KeychainPage.qml" line="271" />
         <source>Save passphrase in vault…</source>
         <translation>Enregistrer la phrase secrète dans le coffre…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="267" />
+        <location filename="../qml/pages/KeychainPage.qml" line="276" />
         <source>Forget saved passphrase</source>
         <translation>Oublier la phrase secrète enregistrée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="270" />
+        <location filename="../qml/pages/KeychainPage.qml" line="279" />
         <source>Rename…</source>
         <translation>Renommer…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="272" />
-        <location filename="../qml/pages/KeychainPage.qml" line="351" />
+        <location filename="../qml/pages/KeychainPage.qml" line="281" />
+        <location filename="../qml/pages/KeychainPage.qml" line="415" />
         <source>Delete</source>
         <translation>Supprimer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="280" />
+        <location filename="../qml/pages/KeychainPage.qml" line="289" />
         <source>Save private key</source>
         <translation>Enregistrer la clé privée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="280" />
+        <location filename="../qml/pages/KeychainPage.qml" line="289" />
         <source>Save public key</source>
         <translation>Enregistrer la clé publique</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="281" />
+        <location filename="../qml/pages/KeychainPage.qml" line="290" />
         <source>Private key (*)</source>
         <translation>Clé privée (*)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="281" />
+        <location filename="../qml/pages/KeychainPage.qml" line="290" />
         <source>Public key (*.pub)</source>
         <translation>Clé publique (*.pub)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="281" />
+        <location filename="../qml/pages/KeychainPage.qml" line="290" />
         <source>All files (*)</source>
         <translation>Tous les fichiers (*)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="288" />
+        <location filename="../qml/pages/KeychainPage.qml" line="297" />
         <source>Export a protected key</source>
         <translation>Exporter une clé protégée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="289" />
+        <location filename="../qml/pages/KeychainPage.qml" line="298" />
         <source>This key belongs to a host that asks for the master password, so it is kept encrypted with it. Enter the master password to export it.</source>
         <translation>Cette clé appartient à un hôte qui demande le mot de passe maître ; elle est donc chiffrée avec celui-ci. Saisissez-le pour l'exporter.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="290" />
+        <location filename="../qml/pages/KeychainPage.qml" line="299" />
         <source>Export</source>
         <translation>Exporter</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="291" />
-        <location filename="../qml/pages/KeychainPage.qml" line="294" />
+        <location filename="../qml/pages/KeychainPage.qml" line="300" />
+        <location filename="../qml/pages/KeychainPage.qml" line="303" />
         <source>Saved</source>
         <translation>Enregistré</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="306" />
+        <location filename="../qml/pages/KeychainPage.qml" line="315" />
         <source>Save key passphrase</source>
         <translation>Enregistrer la phrase secrète</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="307" />
+        <location filename="../qml/pages/KeychainPage.qml" line="316" />
         <source>Stored encrypted in the vault so you are not asked on every connection.</source>
         <translation>Stockée chiffrée dans le coffre pour ne pas être demandée à chaque connexion.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="309" />
+        <location filename="../qml/pages/KeychainPage.qml" line="318" />
         <source>Passphrase</source>
         <translation>Phrase secrète</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="314" />
-        <location filename="../qml/pages/KeychainPage.qml" line="336" />
-        <location filename="../qml/pages/KeychainPage.qml" line="350" />
+        <location filename="../qml/pages/KeychainPage.qml" line="323" />
+        <location filename="../qml/pages/KeychainPage.qml" line="371" />
+        <location filename="../qml/pages/KeychainPage.qml" line="400" />
+        <location filename="../qml/pages/KeychainPage.qml" line="414" />
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="317" />
+        <location filename="../qml/pages/KeychainPage.qml" line="326" />
         <source>Verify &amp; save</source>
         <translation>Vérifier et enregistrer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="331" />
+        <location filename="../qml/pages/KeychainPage.qml" line="343" />
+        <source>Key passphrase</source>
+        <translation>Phrase secrète de la clé</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="343" />
+        <source>Add a passphrase to the key</source>
+        <translation>Ajouter une phrase de passe à la clé</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="344" />
+        <source>Change the passphrase of "%1", or leave the new one empty to remove it.</source>
+        <translation>Modifiez la phrase de passe de « %1 », ou laissez la nouvelle vide pour la supprimer.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="345" />
+        <source>"%1" has no passphrase. With one, a copy of the key file is useless without it.</source>
+        <translation>« %1 » n'a pas de phrase de passe. Avec une, une copie du fichier de clé est inutile sans elle.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="355" />
+        <source>Current passphrase</source>
+        <translation>Phrase de passe actuelle</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="356" />
+        <source>New passphrase</source>
+        <translation>Nouvelle phrase de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="357" />
+        <source>Empty = no passphrase</source>
+        <translation>Vide = sans phrase de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="359" />
+        <source>Repeat the new passphrase</source>
+        <translation>Répétez la nouvelle phrase de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="361" />
+        <source>Save it in the vault (not asked on every connection)</source>
+        <translation>L'enregistrer dans le coffre (pas demandée à chaque connexion)</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="363" />
+        <source>This key is protected by the master password.</source>
+        <translation>Cette clé est protégée par le mot de passe maître.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="366" />
+        <source>The key itself stays the same, so nothing changes on the servers. Copies saved earlier (exported files) keep their old passphrase.</source>
+        <translation>La clé elle-même ne change pas : rien à modifier sur les serveurs. Les copies enregistrées avant (fichiers exportés) gardent l'ancienne phrase de passe.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="374" />
+        <source>Remove passphrase</source>
+        <translation>Supprimer la phrase de passe</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="374" />
+        <source>Save</source>
+        <translation>Enregistrer</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="382" />
+        <source>Passphrase removed</source>
+        <translation>Phrase de passe supprimée</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="382" />
+        <source>Passphrase changed</source>
+        <translation>Phrase de passe modifiée</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="382" />
+        <source>Passphrase added</source>
+        <translation>Phrase de passe ajoutée</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/KeychainPage.qml" line="395" />
         <source>Rename key</source>
         <translation>Renommer la clé</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="332" />
+        <location filename="../qml/pages/KeychainPage.qml" line="396" />
         <source>Name</source>
         <translation>Nom</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="337" />
+        <location filename="../qml/pages/KeychainPage.qml" line="401" />
         <source>Rename</source>
         <translation>Renommer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="345" />
+        <location filename="../qml/pages/KeychainPage.qml" line="409" />
         <source>Delete "%1"?</source>
         <translation>Supprimer « %1 » ?</translation>
     </message>
     <message>
-        <location filename="../qml/pages/KeychainPage.qml" line="346" />
+        <location filename="../qml/pages/KeychainPage.qml" line="410" />
         <source>The private key is removed from the vault. Export it first if you still need it. Hosts using it will fall back to password login.</source>
         <translation>La clé privée sera supprimée du coffre. Exportez-la d'abord si vous en avez encore besoin. Les hôtes qui l'utilisent passeront à la connexion par mot de passe.</translation>
     </message>
@@ -4088,47 +4244,47 @@
         <translation>aucun service IP n'a répondu (%1)</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="172" />
+        <location filename="../src/app/ProxyChecker.cpp" line="161" />
         <source>unexpected answer</source>
         <translation>réponse inattendue</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="173" />
+        <location filename="../src/app/ProxyChecker.cpp" line="162" />
         <source>name not found (DNS)</source>
         <translation>nom introuvable (DNS)</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="175" />
+        <location filename="../src/app/ProxyChecker.cpp" line="164" />
         <source>no answer (timeout)</source>
         <translation>pas de réponse (délai dépassé)</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="176" />
+        <location filename="../src/app/ProxyChecker.cpp" line="165" />
         <source>connection refused</source>
         <translation>connexion refusée</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="177" />
+        <location filename="../src/app/ProxyChecker.cpp" line="166" />
         <source>connection closed</source>
         <translation>connexion fermée</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="178" />
+        <location filename="../src/app/ProxyChecker.cpp" line="167" />
         <source>TLS error — something on the network intercepts HTTPS</source>
         <translation>erreur TLS — quelque chose sur le réseau intercepte le HTTPS</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="190" />
+        <location filename="../src/app/ProxyChecker.cpp" line="179" />
         <source>No IP service answered</source>
         <translation>Aucun service IP n'a répondu</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="191" />
+        <location filename="../src/app/ProxyChecker.cpp" line="180" />
         <source>The proxy may have no internet access, or it blocks these services.</source>
         <translation>Le proxy n'a peut-être pas accès à Internet, ou il bloque ces services.</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="192" />
+        <location filename="../src/app/ProxyChecker.cpp" line="181" />
         <source>No internet connection, or your network blocks these services.</source>
         <translation>Pas de connexion Internet, ou votre réseau bloque ces services.</translation>
     </message>
@@ -4495,16 +4651,23 @@
     </message>
     <message>
         <location filename="../src/core/Vault.cpp" line="179" />
-        <location filename="../src/core/Vault.cpp" line="222" />
-        <location filename="../src/core/Vault.cpp" line="254" />
+        <location filename="../src/core/Vault.cpp" line="225" />
+        <location filename="../src/core/Vault.cpp" line="257" />
+        <location filename="../src/core/Vault.cpp" line="299" />
+        <location filename="../src/core/Vault.cpp" line="338" />
         <source>The vault is locked.</source>
         <translation>Le coffre est verrouillé.</translation>
     </message>
     <message>
-        <location filename="../src/core/Vault.cpp" line="304" />
-        <location filename="../src/core/Vault.cpp" line="311" />
+        <location filename="../src/core/Vault.cpp" line="321" />
+        <location filename="../src/core/Vault.cpp" line="327" />
         <source>Cannot write vault: %1</source>
         <translation>Impossible d'écrire le coffre : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/core/Vault.cpp" line="344" />
+        <source>Cannot write %1</source>
+        <translation>Impossible d'écrire %1</translation>
     </message>
     <message>
         <location filename="../src/core/KeyTools.cpp" line="107" />
@@ -4514,6 +4677,7 @@
     <message>
         <location filename="../src/core/KeyTools.cpp" line="121" />
         <location filename="../src/core/KeyTools.cpp" line="526" />
+        <location filename="../src/core/KeyTools.cpp" line="599" />
         <source>Cannot export the private key.</source>
         <translation>Impossible d'exporter la clé privée.</translation>
     </message>
@@ -4522,6 +4686,7 @@
         <location filename="../src/core/KeyTools.cpp" line="163" />
         <location filename="../src/core/KeyTools.cpp" line="495" />
         <location filename="../src/core/KeyTools.cpp" line="533" />
+        <location filename="../src/core/KeyTools.cpp" line="592" />
         <source>Cannot derive the public key.</source>
         <translation>Impossible de dériver la clé publique.</translation>
     </message>
@@ -4569,6 +4734,21 @@
         <location filename="../src/core/KeyTools.cpp" line="508" />
         <source>Unsupported PuTTY key type: %1</source>
         <translation>Type de clé PuTTY non pris en charge : %1</translation>
+    </message>
+    <message>
+        <location filename="../src/core/KeyTools.cpp" line="586" />
+        <source>Wrong passphrase.</source>
+        <translation>Phrase secrète incorrecte.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/KeyTools.cpp" line="586" />
+        <source>This is not a private key ShellWarden can read.</source>
+        <translation>Ce n'est pas une clé privée que ShellWarden sait lire.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/KeyTools.cpp" line="613" />
+        <source>The key could not be written again safely; nothing was changed.</source>
+        <translation>La clé n'a pas pu être réécrite sans risque ; rien n'a été modifié.</translation>
     </message>
     <message>
         <source>This is a PuTTY .ppk key. Convert it in PuTTYgen via Conversions → Export OpenSSH key, then import that file.</source>
@@ -4765,32 +4945,35 @@
         <translation>gpg n'a pas pu déchiffrer la clé.</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="116" />
+        <location filename="../src/core/AgentClient.cpp" line="117" />
         <source>No SSH agent is running (Pageant or the OpenSSH Authentication Agent service).</source>
         <translation>Aucun agent SSH ne tourne (Pageant ou le service OpenSSH Authentication Agent).</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="121" />
+        <location filename="../src/core/AgentClient.cpp" line="122" />
         <source>No SSH agent: SSH_AUTH_SOCK is not set.</source>
         <translation>Pas d'agent SSH : SSH_AUTH_SOCK n'est pas défini.</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="127" />
+        <location filename="../src/core/AgentClient.cpp" line="128" />
         <source>Cannot reach the SSH agent: %1</source>
         <translation>Impossible de joindre l'agent SSH : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="141" />
+        <location filename="../src/core/AgentClient.cpp" line="142" />
         <source>The SSH agent did not answer.</source>
         <translation>L'agent SSH n'a pas répondu.</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="246" />
+        <location filename="../src/core/AgentClient.cpp" line="226" />
+        <source>Cannot connect libssh to the SSH agent: %1</source>
+        <translation>Impossible de relier libssh à l'agent SSH : %1</translation>
+    </message>
+    <message>
         <source>Cannot start the agent bridge.</source>
         <translation>Impossible de démarrer le pont vers l'agent.</translation>
     </message>
     <message>
-        <location filename="../src/core/AgentClient.cpp" line="256" />
         <source>Cannot reach the agent bridge.</source>
         <translation>Impossible de joindre le pont vers l'agent.</translation>
     </message>
@@ -4873,6 +5056,7 @@
     </message>
     <message>
         <location filename="../src/core/Shadowsocks.cpp" line="604" />
+        <location filename="../src/core/AgentClient.cpp" line="234" />
         <source>The program is closing.</source>
         <translation>Le programme se ferme.</translation>
     </message>
@@ -4916,22 +5100,44 @@
         <translation>Réponse inattendue du service IP</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="83" />
+        <location filename="../src/core/HttpsOverSocket.cpp" line="22" />
+        <source>TLS: cannot use the tunnel socket.</source>
+        <translation>TLS : impossible d'utiliser le socket du tunnel.</translation>
+    </message>
+    <message>
+        <location filename="../src/core/HttpsOverSocket.cpp" line="39" />
+        <source>TLS: no answer</source>
+        <translation>TLS : pas de réponse</translation>
+    </message>
+    <message>
+        <location filename="../src/core/HttpsOverSocket.cpp" line="43" />
+        <source>TLS: connection closed</source>
+        <translation>TLS : connexion fermée</translation>
+    </message>
+    <message>
+        <location filename="../src/core/HttpsOverSocket.cpp" line="44" />
+        <source>TLS: %1 — something on the way intercepts HTTPS</source>
+        <translation>TLS : %1 — quelque chose sur le chemin intercepte HTTPS</translation>
+    </message>
+    <message>
+        <location filename="../src/core/HttpsOverSocket.cpp" line="69" />
         <source>no answer</source>
         <translation>pas de réponse</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="83" />
+        <location filename="../src/core/HttpsOverSocket.cpp" line="69" />
+        <location filename="../src/core/HttpsOverSocket.cpp" line="72" />
+        <location filename="../src/app/ProxyChecker.cpp" line="72" />
         <source>unexpected answer</source>
         <translation>réponse inattendue</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="88" />
+        <location filename="../src/app/ProxyChecker.cpp" line="77" />
         <source>No IP service answered through the Shadowsocks server</source>
         <translation>Aucun service IP n'a répondu via le serveur Shadowsocks</translation>
     </message>
     <message>
-        <location filename="../src/app/ProxyChecker.cpp" line="89" />
+        <location filename="../src/app/ProxyChecker.cpp" line="78" />
         <source>Wrong password or cipher, or the Shadowsocks server has no internet access.</source>
         <translation>Mauvais mot de passe ou chiffrement, ou le serveur Shadowsocks n'a pas accès à Internet.</translation>
     </message>
@@ -5422,7 +5628,7 @@ Installez le paquet ShellWarden actuel ou mettez-les à jour.</translation>
     </message>
     <message>
         <location filename="../qml/pages/SettingsPage.qml" line="358" />
-        <location filename="../qml/pages/SettingsPage.qml" line="682" />
+        <location filename="../qml/pages/SettingsPage.qml" line="716" />
         <source>Restore</source>
         <translation>Restaurer</translation>
     </message>
@@ -5482,142 +5688,152 @@ Installez le paquet ShellWarden actuel ou mettez-les à jour.</translation>
         <translation>Quand vous verrouillez Windows (Win+L) ou que l'ordinateur se met en veille, le coffre se verrouille aussi.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="435" />
+        <location filename="../qml/pages/SettingsPage.qml" line="436" />
+        <source>The vault backups are re-encrypted with the new password too, so the old one opens nothing. Copies you saved elsewhere yourself stay as they are.</source>
+        <translation>Les sauvegardes du coffre sont aussi rechiffrées avec le nouveau mot de passe : l'ancien n'ouvre plus rien. Les copies que vous avez enregistrées ailleurs vous-même restent telles quelles.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="437" />
         <source>Current master password</source>
         <translation>Mot de passe maître actuel</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="441" />
+        <location filename="../qml/pages/SettingsPage.qml" line="443" />
         <source>New master password</source>
         <translation>Nouveau mot de passe maître</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="442" />
+        <location filename="../qml/pages/SettingsPage.qml" line="444" />
         <source>19+ characters, or press Generate</source>
         <translation>19+ caractères, ou appuyez sur Générer</translation>
     </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SettingsPage.qml" line="459" />
+        <source>%n backup(s) re-encrypted.</source>
+        <translation><numerusform>%n sauvegarde rechiffrée.</numerusform><numerusform>%n sauvegardes rechiffrées.</numerusform></translation>
+    </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="465" />
+        <location filename="../qml/pages/SettingsPage.qml" line="471" />
         <source>Connections, routes, IP seen by servers, vault and key changes, kill switch events. Never passwords or keys. Encrypted: it can only be read while the vault is open.</source>
         <translation>Connexions, routes, IP vue par les serveurs, modifications du coffre et des clés, événements du kill switch. Jamais de mots de passe ni de clés. Chiffré : lisible seulement quand le coffre est ouvert.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="470" />
+        <location filename="../qml/pages/SettingsPage.qml" line="476" />
         <source>Keep entries for</source>
         <translation>Conserver les entrées</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="470" />
+        <location filename="../qml/pages/SettingsPage.qml" line="476" />
         <source>Older entries are deleted.</source>
         <translation>Les entrées plus anciennes sont supprimées.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="476" />
+        <location filename="../qml/pages/SettingsPage.qml" line="482" />
         <source>7 days</source>
         <translation>7 jours</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="476" />
+        <location filename="../qml/pages/SettingsPage.qml" line="482" />
         <source>30 days</source>
         <translation>30 jours</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="476" />
+        <location filename="../qml/pages/SettingsPage.qml" line="482" />
         <source>90 days</source>
         <translation>90 jours</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="476" />
+        <location filename="../qml/pages/SettingsPage.qml" line="482" />
         <source>1 year</source>
         <translation>1 an</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="543" />
+        <location filename="../qml/pages/SettingsPage.qml" line="549" />
         <source>What's new</source>
         <translation>Nouveautés</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="555" />
+        <location filename="../qml/pages/SettingsPage.qml" line="561" />
         <source>Keyboard shortcuts</source>
         <translation>Raccourcis clavier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="563" />
+        <location filename="../qml/pages/SettingsPage.qml" line="569" />
         <source>They use Ctrl+Shift, so plain Ctrl+C, Ctrl+K and the like still go to the server.</source>
         <translation>Ils utilisent Ctrl+Maj, donc Ctrl+C, Ctrl+K, etc. vont toujours au serveur.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="573" />
+        <location filename="../qml/pages/SettingsPage.qml" line="579" />
         <source>Quick search: hosts, tabs, snippets, pages</source>
         <translation>Recherche rapide : hôtes, onglets, extraits, pages</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="574" />
+        <location filename="../qml/pages/SettingsPage.qml" line="580" />
         <source>Find text in the terminal</source>
         <translation>Chercher du texte dans le terminal</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="575" />
+        <location filename="../qml/pages/SettingsPage.qml" line="581" />
         <source>Next tab</source>
         <translation>Onglet suivant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="576" />
+        <location filename="../qml/pages/SettingsPage.qml" line="582" />
         <source>Previous tab</source>
         <translation>Onglet précédent</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="577" />
+        <location filename="../qml/pages/SettingsPage.qml" line="583" />
         <source>Close the tab</source>
         <translation>Fermer l'onglet</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="578" />
+        <location filename="../qml/pages/SettingsPage.qml" line="584" />
         <source>Back to the vault (hosts)</source>
         <translation>Retour au coffre (hôtes)</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="579" />
+        <location filename="../qml/pages/SettingsPage.qml" line="585" />
         <source>Split view</source>
         <translation>Vue partagée</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="580" />
+        <location filename="../qml/pages/SettingsPage.qml" line="586" />
         <source>Command history of this host</source>
         <translation>Historique des commandes de cet hôte</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="581" />
+        <location filename="../qml/pages/SettingsPage.qml" line="587" />
         <source>Collapse / expand the side menu</source>
         <translation>Réduire / déplier le menu latéral</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="582" />
+        <location filename="../qml/pages/SettingsPage.qml" line="588" />
         <source>Copy</source>
         <translation>Copier</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="583" />
+        <location filename="../qml/pages/SettingsPage.qml" line="589" />
         <source>Paste</source>
         <translation>Coller</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="584" />
+        <location filename="../qml/pages/SettingsPage.qml" line="590" />
         <source>Scroll up</source>
         <translation>Défiler vers le haut</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="585" />
+        <location filename="../qml/pages/SettingsPage.qml" line="591" />
         <source>Scroll down</source>
         <translation>Défiler vers le bas</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="586" />
+        <location filename="../qml/pages/SettingsPage.qml" line="592" />
         <source>Lock the vault</source>
         <translation>Verrouiller le coffre</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="629" />
+        <location filename="../qml/pages/SettingsPage.qml" line="635" />
         <source>Open-source SSH client · MIT licence</source>
         <translation>Client SSH open source · licence MIT</translation>
     </message>
@@ -5626,63 +5842,88 @@ Installez le paquet ShellWarden actuel ou mettez-les à jour.</translation>
         <translation>Raccourcis : Ctrl+Shift+T coffre, Ctrl+Tab onglet suivant, Ctrl+Shift+W fermer l'onglet, Ctrl+Shift+D écran partagé, Ctrl+Shift+B menu latéral, Ctrl+Shift+C / Ctrl+Shift+V copier / coller, Shift+PgUp/PgDn défiler, Ctrl+Shift+L verrouiller le coffre.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="670" />
+        <location filename="../qml/pages/SettingsPage.qml" line="704" />
         <source>Restore vault from backup</source>
         <translation>Restaurer le coffre depuis une sauvegarde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="671" />
+        <location filename="../qml/pages/SettingsPage.qml" line="705" />
         <source>The current vault is kept in the backups folder first. Enter the master password of the backup.</source>
         <translation>Le coffre actuel est d'abord conservé dans le dossier des sauvegardes. Saisissez le mot de passe maître de la sauvegarde.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="674" />
+        <location filename="../qml/pages/SettingsPage.qml" line="708" />
         <source>Master password of the backup</source>
         <translation>Mot de passe maître de la sauvegarde</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="659" />
-        <location filename="../qml/pages/SettingsPage.qml" line="679" />
+        <location filename="../qml/pages/SettingsPage.qml" line="665" />
+        <location filename="../qml/pages/SettingsPage.qml" line="713" />
         <source>Cancel</source>
         <translation>Annuler</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="642" />
+        <location filename="../qml/pages/SettingsPage.qml" line="648" />
         <source>Show which hosts are online?</source>
         <translation>Afficher les hôtes en ligne ?</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="650" />
+        <location filename="../qml/pages/SettingsPage.qml" line="656" />
         <source>&lt;b&gt;This is not a ping.&lt;/b&gt; While the host list is open, every 5 minutes ShellWarden opens one short TCP connection to the SSH port of each host, waits for the server's greeting ("SSH-2.0-…") and closes it right away.</source>
         <translation>&lt;b&gt;Ce n'est pas un ping.&lt;/b&gt; Tant que la liste des hôtes est ouverte, toutes les 5 minutes ShellWarden ouvre une courte connexion TCP vers le port SSH de chaque hôte, attend le message d'accueil du serveur (« SSH-2.0-… ») et la ferme aussitôt.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="651" />
+        <location filename="../qml/pages/SettingsPage.qml" line="657" />
         <source>• &lt;b&gt;No login:&lt;/b&gt; no password, key or user name is sent, so it works without saved credentials and never counts as a failed login.</source>
         <translation>• &lt;b&gt;Sans connexion :&lt;/b&gt; aucun mot de passe, clé ni nom d'utilisateur n'est envoyé, donc aucun identifiant enregistré n'est nécessaire et cela ne compte jamais comme un échec de connexion.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="652" />
+        <location filename="../qml/pages/SettingsPage.qml" line="658" />
         <source>• &lt;b&gt;The server sees it:&lt;/b&gt; each check is one line in its log ("Connection closed … [preauth]"). 12 per hour is far below what fail2ban treats as an attack, but very strict setups may still notice it.</source>
         <translation>• &lt;b&gt;Le serveur le voit :&lt;/b&gt; chaque vérification ajoute une ligne à son journal (« Connection closed … [preauth] »). 12 par heure, c'est bien moins que ce que fail2ban considère comme une attaque, mais des réglages très stricts peuvent le remarquer.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="653" />
+        <location filename="../qml/pages/SettingsPage.qml" line="659" />
         <source>• &lt;b&gt;Same route as a real connection:&lt;/b&gt; through the host's proxy, never directly while the kill switch is on. Hosts via Tor, Cloudflare Tunnel or a jump host are not checked.</source>
         <translation>• &lt;b&gt;Même route qu'une vraie connexion :&lt;/b&gt; par le proxy de l'hôte, jamais en direct quand le kill switch est actif. Les hôtes via Tor, Cloudflare Tunnel ou un hôte de rebond ne sont pas vérifiés.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="654" />
+        <location filename="../qml/pages/SettingsPage.qml" line="660" />
         <source>• &lt;b&gt;Green&lt;/b&gt; = the SSH server answered (with the response time); &lt;b&gt;red&lt;/b&gt; = no answer or not SSH.</source>
         <translation>• &lt;b&gt;Vert&lt;/b&gt; = le serveur SSH a répondu (avec le temps de réponse) ; &lt;b&gt;rouge&lt;/b&gt; = pas de réponse ou pas du SSH.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="661" />
+        <location filename="../qml/pages/SettingsPage.qml" line="667" />
         <source>Turn on</source>
         <translation>Activer</translation>
     </message>
     <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="677" />
+        <source>Older backups</source>
+        <translation>Sauvegardes plus anciennes</translation>
+    </message>
+    <message numerus="yes">
+        <location filename="../qml/pages/SettingsPage.qml" line="678" />
+        <source>%n backup(s) were made with an even older master password (or cannot be read), so they could not be re-encrypted. Whoever knows that password can still open them. Delete them?</source>
+        <translation><numerusform>%n sauvegarde a été faite avec un mot de passe maître encore plus ancien (ou est illisible) : elle n'a pas pu être rechiffrée. Qui connaît ce mot de passe peut encore l'ouvrir. La supprimer ?</numerusform><numerusform>%n sauvegardes ont été faites avec un mot de passe maître encore plus ancien (ou sont illisibles) : elles n'ont pas pu être rechiffrées. Qui connaît ce mot de passe peut encore les ouvrir. Les supprimer ?</numerusform></translation>
+    </message>
+    <message>
         <location filename="../qml/pages/SettingsPage.qml" line="687" />
+        <source>Keep them</source>
+        <translation>Les garder</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="689" />
+        <source>Delete</source>
+        <translation>Supprimer</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="694" />
+        <source>Older backups deleted.</source>
+        <translation>Sauvegardes plus anciennes supprimées.</translation>
+    </message>
+    <message>
+        <location filename="../qml/pages/SettingsPage.qml" line="721" />
         <source>Vault restored.</source>
         <translation>Coffre restauré.</translation>
     </message>
@@ -5716,22 +5957,22 @@ Installez le paquet ShellWarden actuel ou mettez-les à jour.</translation>
         <translation>Répétez le nouveau</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="448" />
+        <location filename="../qml/pages/SettingsPage.qml" line="450" />
         <source>Change password</source>
         <translation>Changer le mot de passe</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="453" />
+        <location filename="../qml/pages/SettingsPage.qml" line="458" />
         <source>Master password changed.</source>
         <translation>Mot de passe maître modifié.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="462" />
+        <location filename="../qml/pages/SettingsPage.qml" line="468" />
         <source>Activity log</source>
         <translation>Journal d'activité</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="465" />
+        <location filename="../qml/pages/SettingsPage.qml" line="471" />
         <source>Keep an activity log</source>
         <translation>Tenir un journal d'activité</translation>
     </message>
@@ -5740,77 +5981,77 @@ Installez le paquet ShellWarden actuel ou mettez-les à jour.</translation>
         <translation>Connexions, itinéraires, IP vue par les serveurs, modifications du coffre et des clés, événements du kill switch. Jamais de mots de passe ni de clés. 12 mois conservés.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="485" />
+        <location filename="../qml/pages/SettingsPage.qml" line="491" />
         <source>Updates</source>
         <translation>Mises à jour</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="489" />
+        <location filename="../qml/pages/SettingsPage.qml" line="495" />
         <source>GitHub repository</source>
         <translation>Dépôt GitHub</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="489" />
+        <location filename="../qml/pages/SettingsPage.qml" line="495" />
         <source>owner/name of the project. Releases must contain SHA256SUMS — downloads are verified before installing.</source>
         <translation>propriétaire/nom du projet. Les versions doivent contenir SHA256SUMS : les téléchargements sont vérifiés avant l'installation.</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="502" />
+        <location filename="../qml/pages/SettingsPage.qml" line="508" />
         <source>Check for updates on start</source>
         <translation>Vérifier les mises à jour au démarrage</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="528" />
+        <location filename="../qml/pages/SettingsPage.qml" line="534" />
         <source>Checking…</source>
         <translation>Vérification…</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="529" />
+        <location filename="../qml/pages/SettingsPage.qml" line="535" />
         <source>You have the latest version (%1).</source>
         <translation>Vous avez la dernière version (%1).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="530" />
+        <location filename="../qml/pages/SettingsPage.qml" line="536" />
         <source>Version %1 is available (you have %2).</source>
         <translation>La version %1 est disponible (vous avez la %2).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="531" />
+        <location filename="../qml/pages/SettingsPage.qml" line="537" />
         <source>Downloading… %1%</source>
         <translation>Téléchargement… %1 %</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="532" />
+        <location filename="../qml/pages/SettingsPage.qml" line="538" />
         <source>Downloaded and verified (SHA-256 matches).</source>
         <translation>Téléchargé et vérifié (SHA-256 correct).</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="534" />
+        <location filename="../qml/pages/SettingsPage.qml" line="540" />
         <source>Current version: %1</source>
         <translation>Version actuelle : %1</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="538" />
+        <location filename="../qml/pages/SettingsPage.qml" line="544" />
         <source>Check now</source>
         <translation>Vérifier maintenant</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="539" />
+        <location filename="../qml/pages/SettingsPage.qml" line="545" />
         <source>Download</source>
         <translation>Télécharger</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="540" />
+        <location filename="../qml/pages/SettingsPage.qml" line="546" />
         <source>Install</source>
         <translation>Installer</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="546" />
+        <location filename="../qml/pages/SettingsPage.qml" line="552" />
         <source>Release page</source>
         <translation>Page de la version</translation>
     </message>
     <message>
-        <location filename="../qml/pages/SettingsPage.qml" line="621" />
+        <location filename="../qml/pages/SettingsPage.qml" line="627" />
         <source>About</source>
         <translation>À propos</translation>
     </message>
@@ -6295,158 +6536,189 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Authentification en tant que %1…</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="219" />
+        <location filename="../src/core/SshWorker.cpp" line="194" />
+        <source>no authentication (the server let us in)</source>
+        <translation>sans authentification (le serveur a laissé entrer)</translation>
+    </message>
+    <message>
+        <location filename="../src/core/SshWorker.cpp" line="220" />
         <source>Access denied. Password for %1@%2</source>
         <translation>Accès refusé. Mot de passe pour %1@%2</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="221" />
+        <location filename="../src/core/SshWorker.cpp" line="222" />
         <source>Password for %1@%2</source>
         <translation>Mot de passe pour %1@%2</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="240" />
+        <location filename="../src/core/SshWorker.cpp" line="241" />
         <source>No usable authentication method. Server offers: %1</source>
         <translation>Aucune méthode d'authentification utilisable. Le serveur propose : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="247" />
+        <location filename="../src/core/SshWorker.cpp" line="248" />
         <source>No SSH agent is running on this computer; skipping it.</source>
         <translation>Aucun agent SSH sur cet ordinateur ; ignoré.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="254" />
+        <location filename="../src/core/SshWorker.cpp" line="255" />
         <source>This libssh build cannot use an SSH agent.</source>
         <translation>Cette version de libssh ne sait pas utiliser un agent SSH.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="258" />
+        <location filename="../src/core/SshWorker.cpp" line="259" />
         <source>Trying the keys from the SSH agent…</source>
         <translation>Essai des clés de l'agent SSH…</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="271" />
+        <location filename="../src/core/SshWorker.cpp" line="263" />
+        <location filename="../src/core/SshWorker.cpp" line="272" />
+        <source>a key from the SSH agent</source>
+        <translation>une clé de l'agent SSH</translation>
+    </message>
+    <message>
+        <location filename="../src/core/SshWorker.cpp" line="274" />
         <source>Agent key accepted, the server requires another factor.</source>
         <translation>Clé de l'agent acceptée, le serveur demande un autre facteur.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="274" />
+        <location filename="../src/core/SshWorker.cpp" line="277" />
         <source>The server accepted none of the agent's keys.</source>
         <translation>Le serveur n'a accepté aucune clé de l'agent.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="325" />
+        <location filename="../src/core/SshWorker.cpp" line="328" />
         <source>Passphrase for the private key</source>
         <translation>Phrase secrète de la clé privée</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="337" />
+        <location filename="../src/core/SshWorker.cpp" line="340" />
         <source>Wrong passphrase. Passphrase for the private key</source>
         <translation>Phrase secrète incorrecte. Phrase secrète de la clé privée</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="340" />
+        <location filename="../src/core/SshWorker.cpp" line="343" />
         <source>The stored private key could not be read; skipping it.</source>
         <translation>La clé privée enregistrée est illisible ; elle est ignorée.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="363" />
+        <location filename="../src/core/SshWorker.cpp" line="367" />
+        <source>key %1</source>
+        <translation>clé %1</translation>
+    </message>
+    <message>
+        <location filename="../src/core/SshWorker.cpp" line="368" />
+        <source>key "%1" (%2)</source>
+        <translation>clé « %1 » (%2)</translation>
+    </message>
+    <message>
+        <location filename="../src/core/SshWorker.cpp" line="382" />
         <source>Key accepted, the server requires another factor.</source>
         <translation>Clé acceptée, le serveur exige un autre facteur.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="366" />
+        <location filename="../src/core/SshWorker.cpp" line="385" />
         <source>The server rejected the key.</source>
         <translation>Le serveur a refusé la clé.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="411" />
+        <location filename="../src/core/SshWorker.cpp" line="423" />
+        <source>password</source>
+        <translation>mot de passe</translation>
+    </message>
+    <message>
+        <location filename="../src/core/SshWorker.cpp" line="424" />
+        <source>keyboard-interactive (password or one-time code)</source>
+        <translation>keyboard-interactive (mot de passe ou code à usage unique)</translation>
+    </message>
+    <message>
+        <location filename="../src/core/SshWorker.cpp" line="433" />
         <source>Partial success, the server requires another factor.</source>
         <translation>Succès partiel, le serveur exige un autre facteur.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="416" />
+        <location filename="../src/core/SshWorker.cpp" line="438" />
         <source>Access denied.</source>
         <translation>Accès refusé.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="440" />
+        <location filename="../src/core/SshWorker.cpp" line="462" />
         <source>Authentication cancelled.</source>
         <translation>Authentification annulée.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="557" />
-        <location filename="../src/core/SshWorker.cpp" line="656" />
+        <location filename="../src/core/SshWorker.cpp" line="580" />
+        <location filename="../src/core/SshWorker.cpp" line="679" />
         <source>Cannot open a session channel: %1</source>
         <translation>Impossible d'ouvrir un canal de session : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="661" />
+        <location filename="../src/core/SshWorker.cpp" line="684" />
         <source>The server refused a terminal: %1</source>
         <translation>Le serveur a refusé un terminal : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="673" />
+        <location filename="../src/core/SshWorker.cpp" line="696" />
         <source>Agent forwarding is on, but no SSH agent is running on this computer.</source>
         <translation>Le transfert d'agent est activé, mais aucun agent SSH ne tourne sur cet ordinateur.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="675" />
+        <location filename="../src/core/SshWorker.cpp" line="698" />
         <source>The server refused agent forwarding.</source>
         <translation>Le serveur a refusé le transfert d'agent.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="678" />
+        <location filename="../src/core/SshWorker.cpp" line="701" />
         <source>The server refused a shell: %1</source>
         <translation>Le serveur a refusé un shell : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="697" />
+        <location filename="../src/core/SshWorker.cpp" line="720" />
         <source>Connection lost (keepalive failed).</source>
         <translation>Connexion perdue (échec du keepalive).</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="704" />
+        <location filename="../src/core/SshWorker.cpp" line="727" />
         <source>Connected</source>
         <translation>Connecté</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="729" />
+        <location filename="../src/core/SshWorker.cpp" line="752" />
         <source>Connection lost: %1</source>
         <translation>Connexion perdue : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="752" />
+        <location filename="../src/core/SshWorker.cpp" line="775" />
         <source>Session ended (exit code %1).</source>
         <translation>Session terminée (code de sortie %1).</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="752" />
+        <location filename="../src/core/SshWorker.cpp" line="775" />
         <source>Session ended.</source>
         <translation>Session terminée.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="764" />
+        <location filename="../src/core/SshWorker.cpp" line="787" />
         <source>Write failed: %1</source>
         <translation>Échec de l'écriture : %1</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="785" />
+        <location filename="../src/core/SshWorker.cpp" line="808" />
         <source>Disconnected.</source>
         <translation>Déconnecté.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="949" />
+        <location filename="../src/core/SshWorker.cpp" line="972" />
         <source>The monitor stopped on the server.</source>
         <translation>Le moniteur s'est arrêté sur le serveur.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="959" />
+        <location filename="../src/core/SshWorker.cpp" line="982" />
         <source>Cannot open a channel.</source>
         <translation>Impossible d'ouvrir un canal.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="981" />
+        <location filename="../src/core/SshWorker.cpp" line="1004" />
         <source>No answer in %1 s.</source>
         <translation>Pas de réponse en %1 s.</translation>
     </message>
@@ -6486,7 +6758,7 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Le fichier dépasse 5 Mo : téléchargez-le.</translation>
     </message>
     <message>
-        <location filename="../src/core/SshWorker.cpp" line="881" />
+        <location filename="../src/core/SshWorker.cpp" line="904" />
         <location filename="../src/core/SshSftp.cpp" line="38" />
         <source>Not connected.</source>
         <translation>Non connecté.</translation>
@@ -7005,251 +7277,256 @@ Raccourcis : Ctrl+Maj+T coffre, Ctrl+Tab onglet suivant, Ctrl+Maj+W fermer l'ong
         <translation>Authentification refusée, nouvelle demande</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="204" />
-        <location filename="../src/app/TerminalSession.cpp" line="209" />
-        <location filename="../src/app/TerminalSession.cpp" line="391" />
-        <location filename="../src/app/TerminalSession.cpp" line="1027" />
-        <location filename="../src/app/TerminalSession.cpp" line="1216" />
+        <location filename="../src/app/TerminalSession.cpp" line="205" />
+        <location filename="../src/app/TerminalSession.cpp" line="210" />
+        <location filename="../src/app/TerminalSession.cpp" line="393" />
+        <location filename="../src/app/TerminalSession.cpp" line="1029" />
+        <location filename="../src/app/TerminalSession.cpp" line="1218" />
         <source>Connected</source>
         <translation>Connecté</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="233" />
+        <location filename="../src/app/TerminalSession.cpp" line="211" />
+        <source>%1 · signed in with %2</source>
+        <translation>%1 · connexion par %2</translation>
+    </message>
+    <message>
+        <location filename="../src/app/TerminalSession.cpp" line="235" />
         <source>Server sees the client as %1</source>
         <translation>Le serveur voit le client comme %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="234" />
+        <location filename="../src/app/TerminalSession.cpp" line="236" />
         <source>port %1 → server %2</source>
         <translation>port %1 → serveur %2</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="253" />
-        <location filename="../src/app/TerminalSession.cpp" line="1042" />
+        <location filename="../src/app/TerminalSession.cpp" line="255" />
+        <location filename="../src/app/TerminalSession.cpp" line="1044" />
         <source>Connection failed / lost</source>
         <translation>Connexion échouée / perdue</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="253" />
-        <location filename="../src/app/TerminalSession.cpp" line="1042" />
+        <location filename="../src/app/TerminalSession.cpp" line="255" />
+        <location filename="../src/app/TerminalSession.cpp" line="1044" />
         <source>Disconnected</source>
         <translation>Déconnecté</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="274" />
+        <location filename="../src/app/TerminalSession.cpp" line="276" />
         <source>Reconnecting (attempt %1 of %2)</source>
         <translation>Reconnexion (tentative %1 sur %2)</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="315" />
+        <location filename="../src/app/TerminalSession.cpp" line="317" />
         <source>Uploaded %1</source>
         <translation>Envoyé : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="315" />
+        <location filename="../src/app/TerminalSession.cpp" line="317" />
         <source>Downloaded %1</source>
         <translation>Téléchargé : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="319" />
+        <location filename="../src/app/TerminalSession.cpp" line="321" />
         <source>Transfer failed: %1</source>
         <translation>Échec du transfert : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="335" />
+        <location filename="../src/app/TerminalSession.cpp" line="337" />
         <source>Tunnel opened</source>
         <translation>Tunnel ouvert</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="335" />
+        <location filename="../src/app/TerminalSession.cpp" line="337" />
         <source>Tunnel error</source>
         <translation>Erreur de tunnel</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="339" />
+        <location filename="../src/app/TerminalSession.cpp" line="341" />
         <source>Connecting…</source>
         <translation>Connexion…</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="340" />
+        <location filename="../src/app/TerminalSession.cpp" line="342" />
         <source>Connecting to %1</source>
         <translation>Connexion à %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="368" />
+        <location filename="../src/app/TerminalSession.cpp" line="370" />
         <source>Serial · %1 · %2 baud</source>
         <translation>Série · %1 · %2 bauds</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="373" />
+        <location filename="../src/app/TerminalSession.cpp" line="375" />
         <source>Cannot open %1: %2</source>
         <translation>Impossible d'ouvrir %1 : %2</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="374" />
+        <location filename="../src/app/TerminalSession.cpp" line="376" />
         <source>Serial port error</source>
         <translation>Erreur du port série</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="388" />
+        <location filename="../src/app/TerminalSession.cpp" line="390" />
         <source>Serial port closed: %1</source>
         <translation>Port série fermé : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="392" />
+        <location filename="../src/app/TerminalSession.cpp" line="394" />
         <source>Serial port opened</source>
         <translation>Port série ouvert</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="396" />
+        <location filename="../src/app/TerminalSession.cpp" line="398" />
         <source>This build has no serial port support.</source>
         <translation>Cette version ne prend pas en charge les ports série.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="454" />
+        <location filename="../src/app/TerminalSession.cpp" line="456" />
         <source>Connection blocked</source>
         <translation>Connexion bloquée</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="468" />
+        <location filename="../src/app/TerminalSession.cpp" line="470" />
         <source>Session closed by the kill switch</source>
         <translation>Session fermée par le kill switch</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="548" />
+        <location filename="../src/app/TerminalSession.cpp" line="550" />
         <source>Host key accepted</source>
         <translation>Clé d'hôte acceptée</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="548" />
-        <location filename="../src/app/TerminalSession.cpp" line="551" />
+        <location filename="../src/app/TerminalSession.cpp" line="550" />
+        <location filename="../src/app/TerminalSession.cpp" line="553" />
         <source>Host key rejected</source>
         <translation>Clé d'hôte refusée</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="550" />
+        <location filename="../src/app/TerminalSession.cpp" line="552" />
         <source>New host key trusted</source>
         <translation>Nouvelle clé d'hôte approuvée</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="550" />
+        <location filename="../src/app/TerminalSession.cpp" line="552" />
         <source>Changed host key accepted</source>
         <translation>Clé d'hôte modifiée acceptée</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="562" />
+        <location filename="../src/app/TerminalSession.cpp" line="564" />
         <source>Authenticating…</source>
         <translation>Authentification…</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="627" />
+        <location filename="../src/app/TerminalSession.cpp" line="629" />
         <source>Disconnected.</source>
         <translation>Déconnecté.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="630" />
+        <location filename="../src/app/TerminalSession.cpp" line="632" />
         <source>Disconnected by user</source>
         <translation>Déconnecté par l'utilisateur</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="646" />
-        <location filename="../src/app/TerminalSession.cpp" line="657" />
-        <location filename="../src/app/TerminalSession.cpp" line="669" />
+        <location filename="../src/app/TerminalSession.cpp" line="648" />
+        <location filename="../src/app/TerminalSession.cpp" line="659" />
+        <location filename="../src/app/TerminalSession.cpp" line="671" />
         <source>Not connected.</source>
         <translation>Non connecté.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="680" />
+        <location filename="../src/app/TerminalSession.cpp" line="682" />
         <source>Created folder</source>
         <translation>Dossier créé</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="688" />
+        <location filename="../src/app/TerminalSession.cpp" line="690" />
         <source>Deleted on server</source>
         <translation>Supprimé sur le serveur</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="696" />
+        <location filename="../src/app/TerminalSession.cpp" line="698" />
         <source>Renamed</source>
         <translation>Renommé</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="715" />
+        <location filename="../src/app/TerminalSession.cpp" line="717" />
         <source>Download refused: unsafe file name</source>
         <translation>Téléchargement refusé : nom de fichier dangereux</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="846" />
+        <location filename="../src/app/TerminalSession.cpp" line="848" />
         <source>Cannot write %1: %2</source>
         <translation>Impossible d'écrire %1 : %2</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="853" />
+        <location filename="../src/app/TerminalSession.cpp" line="855" />
         <source>Session log started</source>
         <translation>Journal de session démarré</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="866" />
+        <location filename="../src/app/TerminalSession.cpp" line="868" />
         <source>Session log saved</source>
         <translation>Journal de session enregistré</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="887" />
+        <location filename="../src/app/TerminalSession.cpp" line="889" />
         <source>Tunnel closed</source>
         <translation>Tunnel fermé</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="988" />
+        <location filename="../src/app/TerminalSession.cpp" line="990" />
         <source>This server does not report its load (Linux /proc is needed).</source>
         <translation>Ce serveur ne donne pas sa charge (Linux /proc requis).</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1024" />
+        <location filename="../src/app/TerminalSession.cpp" line="1026" />
         <source>Connecting to %1:%2…</source>
         <translation>Connexion à %1:%2…</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1028" />
+        <location filename="../src/app/TerminalSession.cpp" line="1030" />
         <source>Telnet connected (not encrypted)</source>
         <translation>Telnet connecté (non chiffré)</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1039" />
+        <location filename="../src/app/TerminalSession.cpp" line="1041" />
         <source>Session ended.</source>
         <translation>Session terminée.</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1040" />
+        <location filename="../src/app/TerminalSession.cpp" line="1042" />
         <source>Connection lost: %1</source>
         <translation>Connexion perdue : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1040" />
+        <location filename="../src/app/TerminalSession.cpp" line="1042" />
         <source>Cannot connect: %1</source>
         <translation>Connexion impossible : %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1176" />
+        <location filename="../src/app/TerminalSession.cpp" line="1178" />
         <source>SSHFP: the host key matches DNS</source>
         <translation>SSHFP : la clé correspond au DNS</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1176" />
+        <location filename="../src/app/TerminalSession.cpp" line="1178" />
         <source>SSHFP: the host key does NOT match DNS</source>
         <translation>SSHFP : la clé ne correspond PAS au DNS</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1176" />
+        <location filename="../src/app/TerminalSession.cpp" line="1178" />
         <source>SSHFP: no records in DNS</source>
         <translation>SSHFP : aucun enregistrement dans le DNS</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1196" />
+        <location filename="../src/app/TerminalSession.cpp" line="1198" />
         <source>This computer · %1</source>
         <translation>Cet ordinateur · %1</translation>
     </message>
     <message>
-        <location filename="../src/app/TerminalSession.cpp" line="1213" />
+        <location filename="../src/app/TerminalSession.cpp" line="1215" />
         <source>The shell ended (exit code %1).</source>
         <translation>Le shell s'est terminé (code %1).</translation>
     </message>

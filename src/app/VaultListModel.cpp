@@ -62,7 +62,8 @@ void VaultListModel::reset(const QJsonArray &items)
             if (!o.value(f).toString().isEmpty() || sealed.contains(f))
                 o.insert(f, QStringLiteral("x"));
         }
-        o.remove(QStringLiteral("privateKey"));
+        if (!m_secretFields.contains(QStringLiteral("privateKey")))
+            o.remove(QStringLiteral("privateKey"));   // never the key itself; "x" when it is a secret field
         safe.append(o);
     }
     m_items = safe;

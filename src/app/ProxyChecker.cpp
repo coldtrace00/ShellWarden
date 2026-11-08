@@ -1,5 +1,6 @@
 #include "ProxyChecker.h"
 #include "core/BackgroundThreads.h"
+#include "core/HttpsOverSocket.h"
 
 #include <QDateTime>
 #include <QJsonDocument>
@@ -46,29 +47,17 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
                 return;
             const qint64 t0 = QDateTime::currentMSecsSinceEpoch();
             QString err;
-            const sw_socket_t s = shadowsocks::open(proxy, QString::fromLatin1(svc.host), 80, timeoutMs, false, &err);
+            // HTTPS inside the tunnel: the Shadowsocks server carries the bytes but
+            // cannot read or change the answer (country, city, IP)
+            const sw_socket_t s = shadowsocks::open(proxy, QString::fromLatin1(svc.host), 443, timeoutMs, false, &err);
             if (s == kInvalidSocket) {
                 lastError = err;
                 break;   // the server itself is not reachable: the second service will not help
             }
-            bgthreads::watch(static_cast<long long>(s));
-            const QByteArray req = QByteArray("GET ") + svc.path + " HTTP/1.0\r\nHost: " + svc.host
-                                   + "\r\nUser-Agent: ShellWarden-SSH-Client\r\nAccept: application/json\r\nConnection: close\r\n\r\n";
-            QByteArray resp;
-            if (proxytunnel::writeAll(s, req, timeoutMs)) {
-                char buf[4096];
-                const qint64 until = QDateTime::currentMSecsSinceEpoch() + timeoutMs;
-                while (resp.size() < 65536 && QDateTime::currentMSecsSinceEpoch() < until && !bgthreads::stopping()) {
-                    const int n = proxytunnel::readSome(s, buf, sizeof buf, 500);
-                    if (n < 0 || (n == 0 && !resp.isEmpty()))
-                        break;   // error, or the service closed the connection after its answer
-                    resp.append(buf, n);
-                }
-            }
-            bgthreads::unwatch(static_cast<long long>(s));
-            proxytunnel::closeSocket(s);
-            const int body = int(resp.indexOf("\r\n\r\n"));
-            const QJsonObject o = body > 0 ? QJsonDocument::fromJson(resp.mid(body + 4)).object() : QJsonObject();
+            QString why;   // https::get closes s; it waits in short steps and stops on exit
+            const QByteArray bodyJson = https::get(static_cast<long long>(s), QString::fromLatin1(svc.host), svc.path,
+                                                   timeoutMs, &why);
+            const QJsonObject o = QJsonDocument::fromJson(bodyJson).object();
             const QString ip = o.value(QStringLiteral("ip")).toString();
             if (!ip.isEmpty()) {
                 r.insert(QStringLiteral("ok"), true);
@@ -80,7 +69,7 @@ void ProxyChecker::checkShadowsocks(const ProxyConfig &proxy, Callback done, int
                 break;
             }
             tried << QVariantMap{{QStringLiteral("service"), QString::fromLatin1(svc.host)},
-                                 {QStringLiteral("error"), resp.isEmpty() ? QObject::tr("no answer") : QObject::tr("unexpected answer")}};
+                                 {QStringLiteral("error"), why.isEmpty() ? QObject::tr("unexpected answer") : why}};
         }
         if (r.isEmpty()) {
             r.insert(QStringLiteral("ok"), false);

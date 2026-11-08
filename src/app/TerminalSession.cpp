@@ -200,13 +200,15 @@ void TerminalSession::begin(const ConnectParams &params)
             emit saveSecretRequested(m_hostId, kind, secret);
         }
     });
+    connect(worker, &SshWorker::authenticatedWith, this, [this](const QString &m) { m_authWith = m; });
     connect(worker, &SshWorker::connected, this, [this] {
         setState(Connected, tr("Connected"));
         m_wasConnected = true;
         if (m_monOn)
             QTimer::singleShot(1500, this, [this] { setMonitorConfig(m_monOn, m_monInterval); });
         if (m_retry) { m_retry = 0; emit reconnectChanged(); }
-        emit logEvent(ActivityLog::Success, QStringLiteral("session"), tr("Connected"), m_route);
+        emit logEvent(ActivityLog::Success, QStringLiteral("session"), tr("Connected"),
+                      m_authWith.isEmpty() ? m_route : tr("%1 · signed in with %2").arg(m_route, m_authWith));
         // Own theme with "input colour" set to apply automatically (bash prompt).
         QTimer::singleShot(900, this, [this] {
             const TerminalTheme &t = m_emu.theme();

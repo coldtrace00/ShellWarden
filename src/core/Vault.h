@@ -40,6 +40,29 @@ public:
     bool deriveWithVaultCost(const QString &password, const QByteArray &salt16, unsigned char *out32,
                              QString *error) const;
 
+    // Keys made from ONE password for several files (one cache per password):
+    // backups usually share a salt, so re-encrypting 14 of them costs one or two
+    // Argon2 runs, not 14.
+    class KeyCache
+    {
+    public:
+        KeyCache() = default;
+        ~KeyCache();
+        KeyCache(const KeyCache &) = delete;
+        KeyCache &operator=(const KeyCache &) = delete;
+    private:
+        friend class Vault;
+        struct Entry { QByteArray salt; quint64 ops = 0; quint64 mem = 0; unsigned char *key = nullptr; };
+        QList<Entry> m_entries;
+    };
+    enum class ReadResult { Ok, WrongPassword, Damaged };
+    // Reads another vault file (a backup) with `password`, without touching this one.
+    static ReadResult readFile(const QString &path, const QString &password, KeyCache *cache, QJsonObject *data);
+    // Writes `data` to `path`, encrypted with this vault's current key (its
+    // current master password and cost), atomically and without a .bak.
+    // Used to re-encrypt backups after the master password changed.
+    bool writeCopy(const QString &path, const QJsonObject &data, QString *error) const;
+
     QJsonObject &data() { return m_data; }
     const QJsonObject &data() const { return m_data; }
     bool save(QString *error);
@@ -48,6 +71,7 @@ private:
     bool deriveKey(const QString &password, const unsigned char *salt,
                    unsigned long long ops, size_t mem, unsigned char *out, QString *error) const;
     bool writeFile(QString *error);
+    bool encrypt(const QJsonObject &data, QByteArray *out) const;   // header + ciphertext with m_key
 
     QString m_path;
     unsigned char *m_key = nullptr;         // crypto_aead_xchacha20poly1305_ietf_KEYBYTES

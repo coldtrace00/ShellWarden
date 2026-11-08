@@ -287,6 +287,7 @@ ConnectParams AppController::paramsFor(const QJsonObject &host, const QJsonObjec
     const QJsonObject key = findIn(kKeys, host.value(QStringLiteral("keyId")).toString());
     if (!key.isEmpty()) {
         p.privateKey = secretOf(key, QStringLiteral("privateKey"), opened).toUtf8();
+        p.keyName = key.value(QStringLiteral("name")).toString();
         p.keyPassphrase = host.value(QStringLiteral("alwaysAskPassphrase")).toBool()
                               ? QString() : secretOf(key, QStringLiteral("passphrase"), opened);
     }

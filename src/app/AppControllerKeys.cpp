@@ -253,6 +253,103 @@ QString AppController::setKeyPassphrase(const QString &id, const QString &passph
     return tr("Key not found.");
 }
 
+QVariantMap AppController::keyPassphraseState(const QString &id) const
+{
+    const QJsonObject k = findIn(kKeys, id);
+    const bool sealedPass = isSealed(k, QStringLiteral("passphrase"));
+    return {
+        {QStringLiteral("encrypted"), k.value(QStringLiteral("encrypted")).toBool()},
+        {QStringLiteral("saved"), sealedPass || !k.value(QStringLiteral("passphrase")).toString().isEmpty()},
+        {QStringLiteral("protected"), isSealed(k, QStringLiteral("privateKey"))},
+    };
+}
+
+QString AppController::changeKeyPassphrase(const QString &id, const QString &current, const QString &newPassphrase,
+                                           const QString &confirm, bool saveNew, const QString &masterPassword)
+{
+    if (newPassphrase != confirm)
+        return tr("The new passphrases do not match.");
+    QJsonArray keys = section(kKeys);
+    int index = -1;
+    for (int i = 0; i < keys.size(); ++i)
+        if (keys.at(i).toObject().value(QStringLiteral("id")).toString() == id)
+            index = i;
+    if (index < 0)
+        return tr("Key not found.");
+    QJsonObject o = keys.at(index).toObject();
+    if (o.value(QStringLiteral("privateKey")).toString().isEmpty() && !isSealed(o, QStringLiteral("privateKey")))
+        return tr("Only the public key of \"%1\" is stored, so there is no private key to protect.")
+            .arg(o.value(QStringLiteral("name")).toString());
+    const bool wasEncrypted = o.value(QStringLiteral("encrypted")).toBool();
+    const bool isProtected = isSealed(o, QStringLiteral("privateKey"));
+
+    // the key text and its saved passphrase, opened with the master password if protected
+    QString keyText = o.value(QStringLiteral("privateKey")).toString();
+    QString savedPass = o.value(QStringLiteral("passphrase")).toString();
+    if (isSealed(o)) {
+        auto *sk = static_cast<unsigned char *>(sodium_malloc(protect::kSecretLen));
+        if (!sk)
+            return tr("Not enough secure memory.");
+        bool ok = deriveProtectSecret(masterPassword, sk);
+        const QJsonObject sealed = o.value(QStringLiteral("sealed")).toObject();
+        for (const QString &f : {QStringLiteral("privateKey"), QStringLiteral("passphrase")}) {
+            if (!ok || !sealed.contains(f))
+                continue;
+            QByteArray plain;
+            ok = protect::open(sealed.value(f).toString().toLatin1(), protectPublicKey(), sk, &plain);
+            (f == QLatin1String("privateKey") ? keyText : savedPass) = QString::fromUtf8(plain);
+            secure::wipe(plain);
+        }
+        sodium_free(sk);
+        if (!ok) {
+            secure::wipe(keyText);
+            secure::wipe(savedPass);
+            return tr("Wrong master password.");
+        }
+    }
+    QByteArray text = keyText.toUtf8();
+    secure::wipe(keyText);
+    secure::ByteGuard textGuard(text);
+    QString oldPass = (current.isEmpty() && wasEncrypted) ? savedPass : current;
+    secure::wipe(savedPass);
+
+    QByteArray newText;
+    QString err;
+    const auto rc = keytools::changePassphrase(text, oldPass, newPassphrase, &newText, &err);
+    secure::wipe(oldPass);
+    if (rc != keytools::PassphraseChange::Ok)
+        return (rc == keytools::PassphraseChange::WrongPassphrase && current.isEmpty())
+                   ? tr("Enter the current passphrase of the key.") : err;
+    secure::ByteGuard newGuard(newText);
+
+    const bool nowEncrypted = !newPassphrase.isEmpty();
+    o.insert(QStringLiteral("privateKey"), QString::fromUtf8(newText));
+    o.insert(QStringLiteral("encrypted"), nowEncrypted);
+    o.insert(QStringLiteral("passphrase"), (nowEncrypted && saveNew) ? newPassphrase : QString());
+    QJsonObject sealed = o.value(QStringLiteral("sealed")).toObject();
+    sealed.remove(QStringLiteral("privateKey"));
+    sealed.remove(QStringLiteral("passphrase"));
+    if (sealed.isEmpty())
+        o.remove(QStringLiteral("sealed"));
+    else
+        o.insert(QStringLiteral("sealed"), sealed);
+    if (isProtected && !sealObject(o, {QStringLiteral("privateKey"), QStringLiteral("passphrase")}))
+        return tr("Could not protect the key with the master password; nothing was changed.");
+
+    const QJsonArray before = keys;
+    keys.replace(index, o);
+    setSection(kKeys, keys);
+    if (!persist()) {
+        setSection(kKeys, before);
+        return tr("Could not save the vault.");
+    }
+    const QString what = !nowEncrypted ? tr("Key passphrase removed")
+                         : wasEncrypted ? tr("Key passphrase changed") : tr("Key passphrase added");
+    logEvent(ActivityLog::Security, QStringLiteral("key"), what, o.value(QStringLiteral("fingerprint")).toString(),
+             o.value(QStringLiteral("name")).toString());
+    return {};
+}
+
 void AppController::forgetKeyPassphrase(const QString &id)
 {
     QJsonArray keys = section(kKeys);

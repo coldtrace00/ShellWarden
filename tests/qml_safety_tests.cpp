@@ -120,11 +120,6 @@ int main(int argc, char **argv)
             "Image { y: 120; source: '%4' }\n"
             "Image { y: 160; source: 'file://127.0.0.1/share/x.png' }\n"
             "Image { y: 200; source: 'file:////127.0.0.1/share/z.png' }\n")
-            // Not tested here on purpose: an <img src='file://server/…'> inside rich
-            // text is read by Qt as a local file without asking the interceptor
-            // (on Windows: a UNC path). That is why every text in qml/ is plain
-            // text (tests/check_qml_text.py) and the shared tooltip is switched to
-            // plain text (below).
                 .arg(canary.url("auto.png"), canary.url("rich.png"), canary.url("styled.png"), canary.url("image.png")));
         CHECK(w != nullptr, "window created");
         CHECK(canary.hits == 0, qPrintable(QStringLiteral("no network loads from rich text or Image (%1)").arg(canary.hits)));
@@ -140,6 +135,35 @@ int main(int argc, char **argv)
         QObject *local = w2 ? w2->findChild<QObject *>(QStringLiteral("local")) : nullptr;
         CHECK(local && local->property("status").toInt() == 1, "local images still load");
     }
+
+    // A known LIMIT, kept here so it is not forgotten: an <img src='file://server/…'>
+    // inside RichText or StyledText is read by Qt as a local file without asking
+    // the URL interceptor (StyledText passes only its base URL to it, RichText
+    // gives local files to QTextDocument directly — also in current Qt). On
+    // Windows that path is a UNC share. Only plain text protects there: every text
+    // in qml/ is plain (tests/check_qml_text.py) and so is the shared tooltip.
+    // This check expects the load to HAPPEN; if a future Qt starts to block it, it
+    // fails and the documentation can say more. Not run on Windows, where it
+    // would really open an SMB connection.
+#ifndef _WIN32
+    std::printf("[known limit: rich text reads file://server/… past the interceptor]\n");
+    {
+        static QStringList warnings;
+        warnings.clear();
+        const QtMessageHandler prev = qInstallMessageHandler([](QtMsgType, const QMessageLogContext &, const QString &m) {
+            warnings << m;
+        });
+        QQmlEngine engine;
+        qmlsafety::install(&engine);
+        auto w = show(engine, QStringLiteral(
+            "Text { textFormat: Text.RichText; text: \"<img src='file://127.0.0.1/share/rich-unc.png'>\" }\n"
+            "Text { y: 40; textFormat: Text.StyledText; text: \"<img src='file://127.0.0.1/share/styled-unc.png'>\" }\n"));
+        qInstallMessageHandler(prev);
+        const QString all = warnings.join(QLatin1Char('\n'));
+        CHECK(w && all.contains(QLatin1String("rich-unc.png")) && all.contains(QLatin1String("styled-unc.png")),
+              "still true: RichText and StyledText try to open it (so plain text everywhere is required)");
+    }
+#endif
 
     std::printf("[tooltips]\n");
     {

@@ -41,14 +41,14 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - PuTTY-style: selecting copies, right click pastes.
 
 **Keys (Keychain)**
-- Generate Ed25519 / ECDSA / RSA keys with a passphrase.
+- Generate Ed25519 / ECDSA / RSA keys with a passphrase; add, change or remove a key's passphrase later (the key and its fingerprint stay the same, nothing to redo on the servers).
 - Import OpenSSH, PEM and **PuTTY .ppk v2/v3**.
 - In the host editor a key is picked from a list; you can also create or import one from there.
 - `.pub` is stored as **one OpenSSH line** (`ssh-ed25519 AAAA… comment`). RFC 4716 is available as a separate export.
 - Private keys are exported in OpenSSH format with permissions for the current user only.
 - **Deploy to servers**: public keys are added to `~/.ssh/authorized_keys` on many servers at once — one key for all or one per server; afterwards the host logs in with the key.
 - **Replace a key on servers** (Keychain → On servers → *Replace an old key*): three safe steps per server — log in as now and add the new key; log in with **only** the new key and remove the old one; log in with only the new key once more and check that the old key is really gone. Where the new key does not work, the old one stays, so you cannot lock yourself out. Only servers that passed all three steps are switched to the new key.
-- **SSH agent**: Pageant, the Windows "OpenSSH Authentication Agent" service, ssh-agent, KeePassXC, YubiKey. Agent key login and **agent forwarding** (`ssh -A`) are enabled per host.
+- **SSH agent**: Pageant, the Windows "OpenSSH Authentication Agent" service, ssh-agent, KeePassXC, YubiKey. Agent key login and **agent forwarding** (`ssh -A`) are enabled per host. On Windows libssh reaches the agent through a private socket pair made for each login — no port that other programs or other Windows users could use.
 
 **Security**
 - **Vault**: Argon2id (256 MiB, 3 passes) → XChaCha20-Poly1305. Authenticated header, daily backups (14 days).
@@ -58,7 +58,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 - **Known hosts**: fingerprint check, red warning when a host key changes; optional SSHFP (DNS) lookup. Host names in the file are **hashed** like OpenSSH's `HashKnownHosts`, so the file does not list where you connect (the Known hosts page shows the names of your own hosts while the vault is open).
 - **Pasting**: control characters (ESC…) are always removed from pasted text, so copied text cannot end bracketed paste early and run commands; text with line breaks (or very long) is shown first and pasted only after you confirm, like Windows Terminal.
 - **SFTP downloads**: file names from the server are made safe (no `..\`, `/`, `\`, `:`, control or bidi characters, no `CON`/`NUL`…), so a hostile server cannot write outside the folder you chose.
-- **Text from servers is shown as plain text** (file names, messages, banners, tooltips, proxy replies): never as rich text. On top of that, the interface itself cannot load anything from the network or from another computer (`http`, `file://server/…`, `\\server\share`): every address it would open is checked, so even text that slipped through could not reveal your IP or send a Windows (NTLM) login to a share. A test (`qml_safety_tests`) and a CI check (`tests/check_qml_text.py`) keep it so.
+- **Text from servers is shown as plain text** (file names, messages, banners, tooltips, proxy replies): never as rich text — this is what keeps a server or proxy from making the program open a web address or a Windows share (`\\server\share`, which would reveal your IP and send an NTLM login). A CI check (`tests/check_qml_text.py`) makes sure every text in the interface stays plain. Text from the other side is also cleaned and cut short. As an extra layer, addresses the interface loads by themselves (images, `http`, `file://server/…`) are checked and refused — but Qt does not ask about images *inside* rich text from `file://server/…`, so for that case only the plain text protects (`qml_safety_tests` checks both the protection and this limit).
 - **Host notes**: encrypted in the vault like passwords.
 - **Routes**: SOCKS5 / HTTP CONNECT / **Shadowsocks** / Tor / **Cloudflare Tunnel** (ShellWarden starts `cloudflared access tcp` itself, so port 22 can be closed on the server). DNS is resolved by the proxy. The check shows latency, exit IP and country.
   - **Shadowsocks** (built in, no extra program). Everything up to the Shadowsocks server is encrypted and looks like random bytes, so the network in between sees neither the target server nor that it is SSH — useful where SSH or proxies are blocked. Paste an `ss://` link (Outline and others) or fill in the fields. Links that need a plugin (`plugin=`) are not supported.
@@ -73,7 +73,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
   - if the proxy dies, sessions are closed within those 3 s; if it starts exiting from your real IP, they are closed at the next exit-IP check — **up to a minute later**;
   - the program never falls back to a direct connection.
 - **Firewall lock** (Windows): a Windows Defender Firewall rule lets ShellWarden.exe connect only to the proxy and localhost, so a mistake in the program itself cannot send SSH traffic past the proxy. Limits: the rule is for ShellWarden.exe only — `tor.exe` and `cloudflared.exe` are separate programs, and when a proxy is given by **name**, Windows' DNS service (not ShellWarden) looks that name up. For the strictest setup give the proxy as an IP address.
-- **Activity log**: connections, route, the IP the server saw, vault / key / host changes, kill-switch events. No passwords or keys. Filters, search, CSV export. **Encrypted on disk**: every entry is a sealed box for the journal's public key, so it is written even while the vault is locked (e.g. a failed unlock attempt) but can only be read with the vault open; nothing about where you connected is on disk in the clear. Kept 30 days by default (7 / 30 / 90 / 365, Settings), or turned off. A plain journal of an older version is encrypted and removed on the first unlock.
+- **Activity log**: connections, route, how you signed in (which key with its fingerprint, agent, password, keyboard-interactive), the IP the server saw, vault / key / host changes, kill-switch events. No passwords or keys. Filters, search, CSV export. **Encrypted on disk**: every entry is a sealed box for the journal's public key, so it is written even while the vault is locked (e.g. a failed unlock attempt) but can only be read with the vault open; nothing about where you connected is on disk in the clear. Kept 30 days by default (7 / 30 / 90 / 365, Settings), or turned off. A plain journal of an older version is encrypted and removed on the first unlock.
 - **Data folder is private**: on Linux the folder is `0700` and its files `0600`; on Windows it gets its own access list (you, SYSTEM, Administrators) — the installer sets it, and the program checks it at every start.
 
 **Other**
@@ -87,7 +87,7 @@ An open-source SSH client built with Qt 6 / QML: PuTTY's features, a Termius-sty
 What ShellWarden protects against, and what it does not.
 
 **Protects**
-- **A stolen or copied disk / backup**: the vault, its backups and the journal are encrypted (Argon2id + XChaCha20-Poly1305; sealed boxes for the journal); `known_hosts` lists no host names. Without the master password they say nothing about your servers.
+- **A stolen or copied disk / backup**: the vault, its backups (re-encrypted when you change the master password, so an old password opens nothing) and the journal are encrypted (Argon2id + XChaCha20-Poly1305; sealed boxes for the journal); `known_hosts` lists no host names. Without the master password they say nothing about your servers.
 - **Another user account on the same computer**: the data folder is closed to them (Linux `0700`/`0600`, Windows access list).
 - **The network between you and the server** (ISP, Wi-Fi, a censor): SSH itself, plus proxies, Tor or Shadowsocks so it does not see where you connect; the kill switch never connects directly.
 - **A hostile or compromised server, or the owner of an HTTP proxy** (and anyone between you and that proxy — its connection is not encrypted): it cannot write outside the folder you download into, cannot make the program load anything from the network or a Windows share by sending text, and a changed host key is shown in red.
@@ -105,7 +105,7 @@ What ShellWarden protects against, and what it does not.
 
 `cmake -DSHELLWARDEN_BUILD_TESTS=ON`, then:
 - `tests/unit_tests` — no network: vault (wrong password, damaged file, forged KDF settings, a failed password change), protected secrets, the encrypted journal, file names from servers, pasting, command history filters, hashed known_hosts, minisign and the update checks (incl. downgrade), Shadowsocks key derivation, BLAKE3 and ss:// links, text from proxies and servers, stopping background threads on exit;
-- `tests/qml_safety_tests` — offscreen: the interface loads nothing from the network or a Windows share, not even from rich text, images or tooltips; `tests/check_qml_text.py` checks that every text in `qml/` is plain text;
+- `tests/qml_safety_tests` — offscreen: images, `http` in rich text and tooltips load nothing from the network or a Windows share, and the known limit (images inside rich text from `file://server/…`) is still where the docs say; `tests/check_qml_text.py` checks that every text in `qml/` is plain text;
 - `tests/integration_tests` — against real OpenSSH, ssh-keygen, puttygen, ssh-agent, SOCKS5 / HTTP proxies, shadowsocks-libev and shadowsocks-rust (`sudo tests/integration/setup.sh` starts them): keys, SSH, agent, proxies, host key change, .ppk import, SFTP, tunnels, jump host, all six Shadowsocks ciphers;
 - `tests/fuzz/` — libFuzzer targets for everything that reads outside input (`.ppk`/OpenSSH keys, `ss://`, `~/.ssh/config`, vault file, signatures, known_hosts, journal lines, the Shadowsocks stream).
 
@@ -124,7 +124,7 @@ ShellWarden has **no telemetry, analytics or crash reports**. Besides your own s
 | **dns.google** (`https://dns.google/resolve`, DNS over HTTPS) | Look up SSHFP records for a server's host key. | Only if *Check new host keys in DNS (SSHFP)* is on in Settings, and only when a host key is new or has changed. Goes through the host's proxy. | The server's host name. |
 | **api.github.com** and GitHub release downloads | Check for and download updates of ShellWarden (`coldtrace00/ShellWarden`). | 4 s after start if *Check for updates on start* is on (default), and when you press *Check now*. A download is verified with SHA-256 and the minisign signature before anything is installed. | Your IP and that you use ShellWarden. Turn the automatic check off in Settings if you do not want this. |
 
-Through a **Shadowsocks** proxy the IP check goes over plain HTTP (port 80): from your computer to the Shadowsocks server it is encrypted by Shadowsocks; only the short hop from that server to the IP service is unencrypted, and it carries nothing but the request "what is my IP".
+Through a **Shadowsocks** proxy the IP check is HTTPS inside the tunnel (port 443, the certificate checked against your system's trusted CAs): the Shadowsocks server carries the bytes but can neither read nor change the answer, so it cannot fake the country or IP it shows.
 
 **Other connections, all to things you set up yourself:**
 - your servers (SSH, Telnet), the proxies you added, jump hosts;
